@@ -1,4 +1,6 @@
 ---
+import WeatherWidget from './WeatherWidget.astro';
+
 interface Props {
   currentPath: string;
 }
@@ -28,7 +30,7 @@ function isActive(href: string, currentPath: string): boolean {
       <!-- Logo -->
       <a href="./" class="flex items-center gap-3 touch-target" aria-label="CNC Caldè - Torna alla home">
         <img 
-          src="images/logo-small.png" 
+          src="images/logo.png" 
           alt="CNC Caldè" 
           class="h-10 lg:h-12 w-auto"
         />
@@ -39,7 +41,7 @@ function isActive(href: string, currentPath: string): boolean {
       </a>
       
       <!-- Desktop Navigation -->
-      <nav aria-label="Navigazione principale">
+      <nav aria-label="Navigazione principale" class="flex items-center gap-4">
         <ul class="flex items-center gap-1 lg:gap-2">
           {navItems.map((item) => (
             <li>
@@ -60,22 +62,30 @@ function isActive(href: string, currentPath: string): boolean {
             </li>
           ))}
         </ul>
+        
+        <!-- Weather Widget (Desktop) -->
+        <div class="pl-4 border-l border-gray-200 dark:border-gray-700">
+          <WeatherWidget />
+        </div>
       </nav>
     </div>
   </div>
 </header>
 
-<!-- Mobile Header (logo only) -->
+<!-- Mobile Header (logo left, weather right) -->
 <header class="md:hidden bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
-  <div class="px-4 py-3 flex items-center justify-center">
+  <div class="px-4 py-3 flex items-center justify-between">
     <a href="./" class="flex items-center gap-2" aria-label="CNC Caldè - Torna alla home">
       <img 
-        src="images/logo-small.png" 
+        src="images/logo.png" 
         alt="CNC Caldè" 
         class="h-8 w-auto"
       />
-      <span class="font-bold">Circolo Nautico Caldè</span>
+      <span class="font-bold text-sm">CNC Caldè</span>
     </a>
+    
+    <!-- Weather Widget (Mobile) -->
+    <WeatherWidget />
   </div>
 </header>
 
