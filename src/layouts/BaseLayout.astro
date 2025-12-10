@@ -7,11 +7,65 @@ import BottomNav from '../components/BottomNav.astro';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = "Circolo Nautico Caldè - Scuola Vela e Regate sul Lago Maggiore" } = Astro.props;
+const { 
+  title, 
+  description = "Circolo Nautico Caldè - Scuola Vela e Regate sul Lago Maggiore",
+  image = "images/logo-square.png"
+} = Astro.props;
 const currentPath = Astro.url.pathname;
 const base = import.meta.env.BASE_URL;
+
+// Get site URL from Astro config (configured in astro.config.mjs)
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || '';
+const baseUrl = base.replace(/\/$/, '');
+const fullSiteUrl = `${siteUrl}${baseUrl}`;
+
+// Build canonical URL
+const pagePath = currentPath.replace(baseUrl, '').replace(/^\/+/, '');
+const canonicalUrl = pagePath ? `${fullSiteUrl}/${pagePath}` : fullSiteUrl;
+
+const fullTitle = `${title} | CNC Caldè`;
+const ogImage = `${fullSiteUrl}/${image}`;
+
+// JSON-LD Structured Data for the organization
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  "name": "Circolo Nautico Caldè A.S.D.",
+  "alternateName": "CNC Caldè",
+  "description": "Scuola vela FIV e regate sul Lago Maggiore dal 1970. Corsi di vela per giovani e adulti.",
+  "url": fullSiteUrl || "https://www.cncvela.it",
+  "logo": `${fullSiteUrl}/images/logo-square.png`,
+  "image": `${fullSiteUrl}/images/logo.png`,
+  "telephone": "+39 333 9769317",
+  "email": "segreteria@cncvela.it",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Maggiore 36",
+    "addressLocality": "Castelveccana",
+    "postalCode": "21010",
+    "addressRegion": "VA",
+    "addressCountry": "IT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 45.9667,
+    "longitude": 8.6667
+  },
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=100039811966520"
+  ],
+  "sport": "Sailing",
+  "foundingDate": "1970",
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Federazione Italiana Vela",
+    "alternateName": "FIV"
+  }
+};
 ---
 
 <!doctype html>
@@ -20,12 +74,48 @@ const base = import.meta.env.BASE_URL;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Circolo Nautico Caldè" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Circolo Nautico Caldè A.S.D." />
+    <meta name="geo.region" content="IT-VA" />
+    <meta name="geo.placename" content="Castelveccana" />
+    <meta name="geo.position" content="45.9667;8.6667" />
+    <meta name="ICBM" content="45.9667, 8.6667" />
+    
+    <!-- Favicon and Apple Touch Icon -->
     <base href={base.endsWith('/') ? base : base + '/'} />
     <link rel="icon" type="image/png" href="images/logo-square.png" />
+    <link rel="apple-touch-icon" href="images/logo-square.png" />
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
-    <title>{title} | CNC Caldè</title>
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    
+    <title>{fullTitle}</title>
   </head>
   <body class="min-h-screen flex flex-col bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:bg-[var(--color-bg-primary-dark)] dark:text-[var(--color-text-primary-dark)]">
     <!-- Skip Link for Accessibility -->
