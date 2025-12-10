@@ -110,8 +110,82 @@ const upcomingEvents = events.events
     </div>
   </section>
   
-  <!-- Quick Info Section -->
+  <!-- Facilities Highlight Section -->
   <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-black mb-3" style="font-size: var(--text-2xl);">
+          Le Nostre Strutture Esclusive
+        </h2>
+        <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto">
+          Un accesso privilegiato al Lago Maggiore con spiaggia e pontile privati
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <!-- Beach Card -->
+        <a href="circolo#strutture" class="group relative overflow-hidden rounded-2xl hover:shadow-xl transition-all">
+          <!-- Background Image -->
+          <div class="absolute inset-0">
+            <img 
+              src="images/spiaggia.png" 
+              alt="Spiaggia privata del Circolo Nautico Caldè" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-accent-primary)] via-[var(--color-accent-primary)]/60 to-transparent"></div>
+          </div>
+          <!-- Placeholder badge -->
+          <div class="absolute top-3 right-3 bg-[var(--color-accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded z-10">
+            PLACEHOLDER
+          </div>
+          <div class="relative p-8 pt-32 text-white">
+            <h3 class="text-xl font-bold mb-2">Spiaggia Privata</h3>
+            <p class="text-white/90 text-sm mb-4">
+              Accesso diretto al lago riservato ai soci. Ideale per il varo delle derive e per godersi il panorama unico del Verbano.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold group-hover:underline">
+              Scopri di più
+              <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+        
+        <!-- Pontile Card -->
+        <a href="circolo#strutture" class="group relative overflow-hidden rounded-2xl hover:shadow-xl transition-all">
+          <!-- Background Image -->
+          <div class="absolute inset-0">
+            <img 
+              src="images/pontile.png" 
+              alt="Pontile privato del Circolo Nautico Caldè" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-accent-secondary)] via-[var(--color-accent-secondary)]/60 to-transparent"></div>
+          </div>
+          <!-- Placeholder badge -->
+          <div class="absolute top-3 right-3 bg-[var(--color-accent-primary)] text-white text-xs font-bold px-2 py-1 rounded z-10">
+            PLACEHOLDER
+          </div>
+          <div class="relative p-8 pt-32 text-white">
+            <h3 class="text-xl font-bold mb-2">Pontile Privato</h3>
+            <p class="text-white/90 text-sm mb-4">
+              Imbarco e sbarco in totale comodità. Operazioni di varo e alaggio facilitate per tutte le imbarcazioni.
+            </p>
+            <span class="inline-flex items-center text-sm font-semibold group-hover:underline">
+              Scopri di più
+              <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Quick Info Section -->
+  <section class="py-12 md:py-16">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Card 1 - Scuola Vela -->

@@ -43,9 +43,150 @@ const { board: boardMembers, contact, documents } = board;
   <!-- Chi Siamo (Markdown Content) -->
   <section id="chi-siamo" class="py-12 md:py-16">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+        Chi Siamo
+      </h2>
       <article class="markdown-content">
         <Content />
       </article>
+    </div>
+  </section>
+
+  <!-- Facilities Gallery -->
+  <section id="strutture" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8 text-center" style="font-size: var(--text-2xl);">
+        Le Nostre Strutture
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Beach -->
+        <div class="group relative overflow-hidden rounded-xl aspect-[4/3]">
+          <img 
+            src="images/spiaggia.png" 
+            alt="Spiaggia privata del Circolo Nautico Caldè" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <h3 class="font-bold text-lg">Spiaggia Privata</h3>
+            <p class="text-sm text-white/80">Accesso diretto al Lago Maggiore</p>
+          </div>
+          <!-- Placeholder badge -->
+          <div class="absolute top-3 right-3 bg-[var(--color-accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded">
+            PLACEHOLDER
+          </div>
+        </div>
+        
+        <!-- Pontile -->
+        <div class="group relative overflow-hidden rounded-xl aspect-[4/3]">
+          <img 
+            src="images/pontile.png" 
+            alt="Pontile del Circolo Nautico Caldè" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <h3 class="font-bold text-lg">Pontile Privato</h3>
+            <p class="text-sm text-white/80">Imbarco e sbarco comodo</p>
+          </div>
+          <!-- Placeholder badge -->
+          <div class="absolute top-3 right-3 bg-[var(--color-accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded">
+            PLACEHOLDER
+          </div>
+        </div>
+        
+        <!-- Sede -->
+        <div class="group relative overflow-hidden rounded-xl aspect-[4/3]">
+          <img 
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=450&fit=crop" 
+            alt="Sede del Circolo Nautico Caldè" 
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <h3 class="font-bold text-lg">Sede Sociale</h3>
+            <p class="text-sm text-white/80">Sale attività e alloggi istruttori</p>
+          </div>
+          <!-- Placeholder badge -->
+          <div class="absolute top-3 right-3 bg-[var(--color-accent-secondary)] text-white text-xs font-bold px-2 py-1 rounded">
+            PLACEHOLDER
+          </div>
+        </div>
+      </div>
+      
+      <p class="text-center text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mt-6 italic">
+        Le immagini mostrate sono indicative. Foto reali delle strutture in arrivo.
+      </p>
+      
+      <!-- Facility Details -->
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+          <h3 class="font-bold text-lg mb-2">Spiaggia Privata</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Un accesso diretto al lago con spiaggia riservata ai soci, ideale per il varo delle derive, il relax tra una regata e l'altra, e per godersi il panorama unico del Lago Maggiore.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-2">Pontile Privato</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Il nostro pontile permette l'imbarco e lo sbarco passeggeri in totale comodità, facilitando le operazioni di varo e alaggio delle imbarcazioni.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-2">Sede Sociale</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Il cuore pulsante della nostra comunità: sale per attività e corsi teorici, alloggi per istruttori, cucina e bagni per tutte le esigenze del circolo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Diventa Socio -->
+  <section id="diventa-socio" class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+        Diventa Socio
+      </h2>
+      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-6">
+        Entra a far parte della nostra comunità velica. L'iscrizione al circolo ti dà accesso a:
+      </p>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Utilizzo della spiaggia privata e del pontile</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Partecipazione alle attività sociali e regate</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Tariffe agevolate sui corsi di vela</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Utilizzo delle strutture del circolo</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          <span>Possibilità di ormeggio per la tua imbarcazione</span>
+        </li>
+      </ul>
+      <a href="circolo#quote" class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target">
+        Vedi Quote Associative
+      </a>
     </div>
   </section>
 
