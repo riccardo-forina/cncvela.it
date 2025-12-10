@@ -182,3 +182,135 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ----------------------------------------
+   MARKDOWN/PROSE CONTENT STYLES
+   ---------------------------------------- */
+.markdown-content h2 {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-content h3 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content p {
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+}
+
+.markdown-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.markdown-content strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.markdown-content a {
+  color: var(--color-accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdown-content a:hover {
+  opacity: 0.8;
+}
+
+.markdown-content table {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  border-collapse: collapse;
+}
+
+.markdown-content th {
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.markdown-content td {
+  padding: 0.5rem 1rem 0.5rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  color: var(--color-text-secondary);
+}
+
+.markdown-content em {
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.markdown-content hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 2rem 0;
+}
+
+/* First h2 should not have top margin */
+.markdown-content > h2:first-child {
+  margin-top: 0;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content strong {
+    color: var(--color-text-primary-dark);
+  }
+  
+  .markdown-content p,
+  .markdown-content ul,
+  .markdown-content ol,
+  .markdown-content li,
+  .markdown-content td,
+  .markdown-content em {
+    color: var(--color-text-secondary-dark);
+  }
+  
+  .markdown-content th {
+    color: var(--color-text-primary-dark);
+    border-color: #4a5568;
+  }
+  
+  .markdown-content td {
+    border-color: #4a5568;
+  }
+  
+  .markdown-content a {
+    color: var(--color-accent-primary-dark);
+  }
+  
+  .markdown-content hr {
+    border-color: #4a5568;
+  }
+}

@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const page = await getEntry('pages', 'privacy');
+const { Content } = await page.render();
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <!-- Hero -->
+  <section class="relative bg-[var(--color-accent-primary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
+    <!-- Wave pattern -->
+    <div class="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-50" aria-hidden="true">
+      <img src="images/wave-pattern.jpg" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="inline-block bg-[var(--color-accent-primary)] px-6 py-4 rounded-lg">
+        <h1 class="text-3xl md:text-4xl font-black text-white" style="font-size: var(--text-3xl);">
+          {page.data.title}
+        </h1>
+      </div>
+    </div>
+    <!-- Wave Divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none" class="w-full h-12 md:h-16">
+        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="var(--color-bg-primary)" class="dark:fill-[var(--color-bg-primary-dark)]"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Subtitle -->
+  <section class="py-6 md:py-8 text-center">
+    <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto px-4 lg:px-6">
+      Ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003 e s.m.i.
+    </p>
+  </section>
+
+  <!-- Content -->
+  <section class="py-8 md:py-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <article class="markdown-content">
+        <Content />
+      </article>
+
+      <!-- Last Updated -->
+      {page.data.lastUpdated && (
+        <div class="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            <strong>Ultimo aggiornamento:</strong> {page.data.lastUpdated}
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

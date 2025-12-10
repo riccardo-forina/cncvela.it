@@ -1,19 +1,30 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
-import courses from '../data/courses.json';
-import pricing from '../data/pricing.json';
+import { getEntry, getCollection } from 'astro:content';
+import pricingData from '../data/pricing.json';
 import events from '../data/events.json';
 import board from '../data/board.json';
 
-// Get upcoming courses
+// Get page content
+const page = await getEntry('pages', 'corsi');
+
+// Get all courses from content collection, sorted by order
+const allCourses = await getCollection('courses');
+const courses = allCourses.sort((a, b) => a.data.order - b.data.order);
+
+// Get pricing cards from content collection, sorted by order
+const allPricing = await getCollection('pricing');
+const pricingCards = allPricing.sort((a, b) => a.data.order - b.data.order);
+
+// Get upcoming courses from events
 const now = new Date();
 const upcomingCourses = events.events
   .filter(event => event.type === 'corso' && new Date(event.date) >= now)
   .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 ---
 
-<BaseLayout title="Corsi di Vela" description="Corsi di vela FIV per giovani e adulti sul Lago Maggiore. Derive, cabinati, settimane intensive e weekend.">
+<BaseLayout title={page.data.title} description={page.data.description}>
   <!-- Hero -->
   <section class="relative bg-[var(--color-accent-primary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
     <!-- Wave pattern -->
@@ -23,7 +34,7 @@ const upcomingCourses = events.events
     <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
       <div class="inline-block bg-[var(--color-accent-primary)] px-6 py-4 rounded-lg">
         <h1 class="text-3xl md:text-4xl font-black text-white" style="font-size: var(--text-3xl);">
-          Corsi di Vela
+          {page.data.title}
         </h1>
       </div>
     </div>
@@ -35,14 +46,14 @@ const upcomingCourses = events.events
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="py-8 border-b border-gray-200 dark:border-gray-800">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-3xl">
-        Scuola vela FIV certificata per giovani e adulti. Impara a navigare sul Lago Maggiore con istruttori qualificati.
+  <!-- Subtitle -->
+  {page.data.subtitle && (
+    <section class="py-6 md:py-8 text-center border-b border-gray-200 dark:border-gray-800">
+      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto px-4 lg:px-6">
+        {page.data.subtitle}
       </p>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Course Types -->
   <section class="py-12 md:py-16">
@@ -52,52 +63,55 @@ const upcomingCourses = events.events
       </h2>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {courses.courses.map((course) => (
-          <article class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-            <div class="w-14 h-14 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex items-center justify-center mb-4">
-              <span class="text-2xl">{course.icon === 'yacht' ? '🛥️' : '⛵'}</span>
-            </div>
-            
-            <h3 class="text-xl font-bold mb-1">{course.title}</h3>
-            <p class="text-sm text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] font-semibold mb-3">
-              {course.subtitle}
-            </p>
-            
-            <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">
-              {course.description}
-            </p>
-            
-            <ul class="text-sm space-y-2 mb-4">
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-[var(--color-accent-success)] dark:text-[var(--color-accent-success-dark)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span><strong>Durata:</strong> {course.duration}</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-[var(--color-accent-success)] dark:text-[var(--color-accent-success-dark)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span><strong>Periodo:</strong> {course.period}</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-[var(--color-accent-success)] dark:text-[var(--color-accent-success-dark)]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span><strong>Imbarcazione:</strong> {course.boatType}</span>
-              </li>
-            </ul>
-            
-            <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-              <p class="text-2xl font-black text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
-                €{course.price.toFixed(2)}
-                <span class="text-xs font-normal text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
-                  {course.priceNote}
-                </span>
+        {courses.map(async (course) => {
+          const { Content } = await course.render();
+          return (
+            <article class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+              <div class="w-14 h-14 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex items-center justify-center mb-4">
+                <span class="text-2xl">{course.data.icon === 'yacht' ? '🛥️' : '⛵'}</span>
+              </div>
+              
+              <h3 class="text-xl font-bold mb-1">{course.data.title}</h3>
+              <p class="text-sm text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] font-semibold mb-3">
+                {course.data.subtitle}
               </p>
-            </div>
-          </article>
-        ))}
+              
+              <div class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4 markdown-content">
+                <Content />
+              </div>
+              
+              <ul class="text-sm space-y-2 mb-4">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span><strong>Durata:</strong> {course.data.duration}</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span><strong>Periodo:</strong> {course.data.period}</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span><strong>Imbarcazione:</strong> {course.data.boatType}</span>
+                </li>
+              </ul>
+              
+              <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                <p class="text-2xl font-black text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+                  €{course.data.price.toFixed(2)}
+                  <span class="text-xs font-normal text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                    {course.data.priceNote}
+                  </span>
+                </p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -127,51 +141,36 @@ const upcomingCourses = events.events
       </h2>
       
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Course Fees -->
-        <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <h3 class="font-bold text-lg mb-4">{pricing.courses.title}</h3>
-          <ul class="space-y-3">
-            {pricing.courses.items.map((item) => (
-              <li class="flex justify-between items-start">
-                <div>
-                  <p class="font-medium">{item.name}</p>
-                  {item.note && (
-                    <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{item.note}</p>
-                  )}
-                </div>
-                <p class="font-bold text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
-                  €{item.price.toFixed(2)}
+        {pricingCards.map((card) => (
+          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-lg mb-1">{card.data.title}</h3>
+            {card.data.note && (
+              <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">{card.data.note}</p>
+            )}
+            <ul class="space-y-3">
+              {card.data.items.map((item) => (
+                <li class="flex justify-between items-start">
+                  <div>
+                    <p class="font-medium">{item.name}</p>
+                    {item.note && (
+                      <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{item.note}</p>
+                    )}
+                  </div>
+                  <p class="font-bold text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+                    €{item.price.toFixed(2)}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            {card.data.discounts && card.data.discounts.length > 0 && (
+              <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <p class="text-sm text-green-600 dark:text-green-400 font-medium">
+                  💡 {card.data.discounts[0].description}: {card.data.discounts[0].discount}
                 </p>
-              </li>
-            ))}
-          </ul>
-          {pricing.courses.discounts && (
-            <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <p class="text-sm text-[var(--color-accent-success)] dark:text-[var(--color-accent-success-dark)] font-medium">
-                💡 {pricing.courses.discounts[0].description}: {pricing.courses.discounts[0].discount}
-              </p>
-            </div>
-          )}
-        </div>
-        
-        <!-- FIV Card Fees -->
-        <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <h3 class="font-bold text-lg mb-1">{pricing.fivCard.title}</h3>
-          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">{pricing.fivCard.note}</p>
-          <ul class="space-y-3">
-            {pricing.fivCard.items.map((item) => (
-              <li class="flex justify-between items-start">
-                <div>
-                  <p class="font-medium">{item.name}</p>
-                  {item.note && (
-                    <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{item.note}</p>
-                  )}
-                </div>
-                <p class="font-bold">€{item.price.toFixed(2)}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -211,15 +210,15 @@ const upcomingCourses = events.events
         <dl class="space-y-2 text-sm">
           <div class="flex flex-col sm:flex-row sm:gap-4">
             <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Intestatario:</dt>
-            <dd>{pricing.bankDetails.accountHolder}</dd>
+            <dd>{pricingData.bankDetails.accountHolder}</dd>
           </div>
           <div class="flex flex-col sm:flex-row sm:gap-4">
             <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Banca:</dt>
-            <dd>{pricing.bankDetails.bankName} - {pricing.bankDetails.branch}</dd>
+            <dd>{pricingData.bankDetails.bankName} - {pricingData.bankDetails.branch}</dd>
           </div>
           <div class="flex flex-col sm:flex-row sm:gap-4">
             <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">IBAN:</dt>
-            <dd class="font-mono text-sm break-all">{pricing.bankDetails.iban}</dd>
+            <dd class="font-mono text-sm break-all">{pricingData.bankDetails.iban}</dd>
           </div>
         </dl>
       </div>
@@ -248,4 +247,3 @@ const upcomingCourses = events.events
     </div>
   </section>
 </BaseLayout>
-

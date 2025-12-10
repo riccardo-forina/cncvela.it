@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
 import events from '../data/events.json';
 import pricing from '../data/pricing.json';
 
+// Get page content
+const page = await getEntry('pages', 'regate');
 
 // Get regattas
 const now = new Date();
@@ -34,7 +37,7 @@ function formatShortDate(dateStr: string): string {
 }
 ---
 
-<BaseLayout title="Regate" description="Regate veliche sul Lago Maggiore organizzate dal Circolo Nautico Caldè. Calendario, bandi, iscrizioni e classifiche.">
+<BaseLayout title={page.data.title} description={page.data.description}>
   <!-- Hero -->
   <section class="relative bg-[var(--color-accent-secondary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
     <!-- Wave pattern -->
@@ -44,7 +47,7 @@ function formatShortDate(dateStr: string): string {
     <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
       <div class="inline-block bg-[var(--color-accent-secondary)] px-6 py-4 rounded-lg">
         <h1 class="text-3xl md:text-4xl font-black text-white" style="font-size: var(--text-3xl);">
-          Regate
+          {page.data.title}
         </h1>
       </div>
     </div>
@@ -60,7 +63,7 @@ function formatShortDate(dateStr: string): string {
   <section class="py-8 border-b border-gray-200 dark:border-gray-800">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-3xl">
-        Calendario delle regate organizzate dal CNC sul Lago Maggiore. Scopri le prossime competizioni e scarica i documenti.
+        {page.data.subtitle}
       </p>
     </div>
   </section>

@@ -1,11 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
 import board from '../data/board.json';
 
-const { safeguarding, contact } = board;
+const page = await getEntry('pages', 'safeguarding');
+const { Content } = await page.render();
+const { safeguarding } = board;
 ---
 
-<BaseLayout title="Safeguarding" description="Tutela dei minori e prevenzione della violenza di genere - Circolo Nautico Caldè">
+<BaseLayout title={page.data.title} description={page.data.description}>
   <!-- Hero -->
   <section class="relative bg-[var(--color-accent-primary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
     <!-- Wave pattern -->
@@ -15,7 +18,7 @@ const { safeguarding, contact } = board;
     <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
       <div class="inline-block bg-[var(--color-accent-primary)] px-6 py-4 rounded-lg">
         <h1 class="text-3xl md:text-4xl font-black text-white" style="font-size: var(--text-3xl);">
-          {safeguarding.title}
+          {page.data.title}
         </h1>
       </div>
     </div>
@@ -27,26 +30,25 @@ const { safeguarding, contact } = board;
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="py-8 border-b border-gray-200 dark:border-gray-800">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-3xl">
-        Tutela dei minori e prevenzione della violenza di genere
+  <!-- Subtitle -->
+  {page.data.subtitle && (
+    <section class="py-6 md:py-8 text-center border-b border-gray-200 dark:border-gray-800">
+      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto px-4 lg:px-6">
+        {page.data.subtitle}
       </p>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Content -->
   <section class="py-12 md:py-16">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
-      <!-- Introduction -->
-      <div class="prose prose-lg max-w-none mb-12">
-        <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] leading-relaxed">
-          {safeguarding.description}
-        </p>
-      </div>
+      
+      <!-- Markdown Content (intro) -->
+      <article class="markdown-content mb-12">
+        <Content />
+      </article>
 
-      <!-- Responsabile -->
+      <!-- Responsabile (from JSON) -->
       <div class="bg-[var(--color-accent-primary)]/5 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-xl p-6 md:p-8 border border-[var(--color-accent-primary)]/20 dark:border-[var(--color-accent-primary-dark)]/20 mb-12">
         <div class="flex items-start gap-4">
           <div class="w-12 h-12 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex items-center justify-center flex-shrink-0">
@@ -70,7 +72,7 @@ const { safeguarding, contact } = board;
         </div>
       </div>
 
-      <!-- Documents -->
+      <!-- Documents (from JSON) -->
       <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
         Documenti
       </h2>
@@ -98,23 +100,12 @@ const { safeguarding, contact } = board;
         ))}
       </div>
 
-      <!-- Legal Note -->
-      <div class="mt-12 p-6 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700">
-        <h3 class="font-bold mb-2">Riferimenti Normativi</h3>
-        <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
-          Questo modello è stato redatto come previsto dall'Art.16 comma 2 del decreto legislativo n.39 del 28 Febbraio 2021 e rispecchia le linee guida pubblicate dalla Federazione Italiana Vela.
-        </p>
-      </div>
     </div>
   </section>
 
   <!-- Contact CTA -->
   <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
     <div class="max-w-4xl mx-auto px-4 lg:px-6 text-center">
-      <h2 class="text-xl font-bold mb-4">Hai domande o segnalazioni?</h2>
-      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-6">
-        Contatta il nostro Responsabile Safeguarding per qualsiasi informazione.
-      </p>
       <a
         href={`mailto:${safeguarding.officer.email}`}
         class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
@@ -124,4 +115,3 @@ const { safeguarding, contact } = board;
     </div>
   </section>
 </BaseLayout>
-

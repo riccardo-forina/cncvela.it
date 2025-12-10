@@ -77,6 +77,11 @@ const { contact, safeguarding } = board;
               Come Raggiungerci
             </a>
           </li>
+          <li>
+            <a href="privacy" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+              Privacy Policy
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -104,7 +109,11 @@ const { contact, safeguarding } = board;
     <!-- Bottom Bar -->
     <div class="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
       <p>© {new Date().getFullYear()} {contact.legalName}. Tutti i diritti riservati.</p>
-      <p>C.F. {contact.fiscalCode} - P.IVA {contact.vatNumber}</p>
+      <div class="flex items-center gap-4">
+        <a href="privacy" class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">Privacy Policy</a>
+        <span>•</span>
+        <span>C.F. {contact.fiscalCode}</span>
+      </div>
     </div>
   </div>
 </footer>

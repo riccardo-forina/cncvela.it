@@ -8,6 +8,7 @@ const pages = [
   { path: 'circolo', changefreq: 'monthly', priority: '0.8' },
   { path: 'meteo', changefreq: 'daily', priority: '0.7' },
   { path: 'safeguarding', changefreq: 'yearly', priority: '0.5' },
+  { path: 'privacy', changefreq: 'yearly', priority: '0.3' },
 ];
 
 export const GET: APIRoute = ({ site }) => {

@@ -1,12 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
 import board from '../data/board.json';
 import pricing from '../data/pricing.json';
 
+const page = await getEntry('pages', 'circolo');
+const { Content } = await page.render();
 const { board: boardMembers, contact, documents } = board;
 ---
 
-<BaseLayout title="Il Circolo" description="Scopri il Circolo Nautico Caldè: storia, consiglio direttivo, quote associative e come raggiungerci.">
+<BaseLayout title={page.data.title} description={page.data.description}>
   <!-- Hero -->
   <section class="relative bg-[var(--color-accent-primary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
     <!-- Wave pattern -->
@@ -16,7 +19,7 @@ const { board: boardMembers, contact, documents } = board;
     <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
       <div class="inline-block bg-[var(--color-accent-primary)] px-6 py-4 rounded-lg">
         <h1 class="text-3xl md:text-4xl font-black text-white" style="font-size: var(--text-3xl);">
-          Il Circolo
+          {page.data.title}
         </h1>
       </div>
     </div>
@@ -28,37 +31,25 @@ const { board: boardMembers, contact, documents } = board;
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="py-8 border-b border-gray-200 dark:border-gray-800">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-3xl">
-        Dal 1970 sul Lago Maggiore, una comunità di appassionati di vela.
+  <!-- Subtitle -->
+  {page.data.subtitle && (
+    <section class="py-6 md:py-8 text-center border-b border-gray-200 dark:border-gray-800">
+      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto px-4 lg:px-6">
+        {page.data.subtitle}
       </p>
-    </div>
-  </section>
+    </section>
+  )}
 
-  <!-- Chi Siamo -->
+  <!-- Chi Siamo (Markdown Content) -->
   <section id="chi-siamo" class="py-12 md:py-16">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
-      <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
-        Chi Siamo
-      </h2>
-      
-      <div class="prose prose-lg max-w-none text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
-        <p>
-          Il <strong>Circolo Nautico Caldè</strong> è un'Associazione Sportiva Dilettantistica situata sulla sponda lombarda del Lago Maggiore, nel comune di Castelveccana (VA).
-        </p>
-        <p>
-          Fondato nel 1970, il circolo promuove la pratica della vela attraverso corsi certificati FIV per giovani e adulti, l'organizzazione di regate e la partecipazione ai campionati del Verbano.
-        </p>
-        <p>
-          Il nostro obiettivo è diffondere la passione per la vela e creare una comunità accogliente dove condividere la bellezza della navigazione sul lago.
-        </p>
-      </div>
+      <article class="markdown-content">
+        <Content />
+      </article>
     </div>
   </section>
 
-  <!-- Consiglio Direttivo -->
+  <!-- Consiglio Direttivo (from JSON) -->
   <section id="consiglio" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
@@ -93,15 +84,12 @@ const { board: boardMembers, contact, documents } = board;
     </div>
   </section>
 
-  <!-- Quote Associative -->
+  <!-- Quote Associative (from JSON) -->
   <section id="quote" class="py-12 md:py-16">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-4" style="font-size: var(--text-2xl);">
-        Diventa Socio
+        Quote Associative {new Date().getFullYear()}
       </h2>
-      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-8">
-        Entra a far parte della nostra comunità. Ecco le quote associative per il {new Date().getFullYear()}.
-      </p>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Membership Fees -->
@@ -174,7 +162,7 @@ const { board: boardMembers, contact, documents } = board;
     </div>
   </section>
 
-  <!-- Documenti -->
+  <!-- Documenti (from JSON) -->
   <section id="documenti" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
@@ -286,20 +274,3 @@ const { board: boardMembers, contact, documents } = board;
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .prose p {
-    margin-bottom: 1rem;
-  }
-  
-  .prose strong {
-    color: var(--color-text-primary);
-  }
-  
-  @media (prefers-color-scheme: dark) {
-    .prose strong {
-      color: var(--color-text-primary-dark);
-    }
-  }
-</style>
-
