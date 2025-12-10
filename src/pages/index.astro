@@ -13,15 +13,10 @@ const upcomingEvents = events.events
 
 <BaseLayout title="Home" description="Circolo Nautico Caldè - Scuola Vela FIV e Regate sul Lago Maggiore. Corsi di vela per giovani e adulti.">
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-[#1E3A5F] via-[#152A45] to-[#0D1B2A] dark:from-[#0D1B2A] dark:to-[#1E3A5F] overflow-hidden">
-    <!-- Background Pattern - Wave motif -->
-    <div class="absolute inset-0 opacity-10">
-      <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <pattern id="waves" patternUnits="userSpaceOnUse" width="40" height="20">
-          <path d="M0 10 Q10 0 20 10 T40 10" fill="none" stroke="#D4A84B" stroke-width="0.5"/>
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#waves)"/>
-      </svg>
+  <section class="relative bg-[var(--color-accent-primary)] dark:bg-[#0D1B2A] overflow-hidden">
+    <!-- Wave pattern background -->
+    <div class="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-50" aria-hidden="true">
+      <img src="images/wave-pattern.jpg" alt="" class="w-full h-full object-cover" />
     </div>
     
     <div class="relative max-w-6xl mx-auto px-4 lg:px-6 py-16 md:py-24 lg:py-32">
@@ -46,21 +41,18 @@ const upcomingEvents = events.events
             href="corsi"
             class="inline-flex items-center justify-center px-8 py-4 bg-[var(--color-accent-secondary)] hover:bg-[var(--color-accent-secondary)]/90 text-white font-bold text-lg uppercase tracking-wide rounded-xl shadow-lg hover:shadow-xl transition-all touch-target"
           >
-            <span class="mr-2">⛵</span>
             Impara a Veleggiare
           </a>
           <a
             href="regate"
             class="inline-flex items-center justify-center px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold text-lg uppercase tracking-wide rounded-xl border-2 border-white/50 transition-all touch-target"
           >
-            <span class="mr-2">🏆</span>
             Prossime Regate
           </a>
           <a
             href="circolo#quote"
             class="inline-flex items-center justify-center px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold text-lg uppercase tracking-wide rounded-xl border-2 border-white/50 transition-all touch-target"
           >
-            <span class="mr-2">🤝</span>
             Diventa Socio
           </a>
         </div>

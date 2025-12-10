@@ -7,17 +7,30 @@ const { safeguarding, contact } = board;
 
 <BaseLayout title="Safeguarding" description="Tutela dei minori e prevenzione della violenza di genere - Circolo Nautico Caldè">
   <!-- Hero -->
-  <section class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] py-12 md:py-16">
-    <div class="max-w-4xl mx-auto px-4 lg:px-6 text-center">
-      <div class="w-16 h-16 mx-auto mb-6 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-2xl flex items-center justify-center">
-        <svg class="w-8 h-8 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-        </svg>
+  <section class="relative bg-[var(--color-accent-primary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
+    <!-- Wave pattern -->
+    <div class="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-50" aria-hidden="true">
+      <img src="images/wave-pattern.jpg" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="inline-block bg-[var(--color-accent-primary)] px-6 py-4 rounded-lg">
+        <h1 class="text-3xl md:text-4xl font-black text-white" style="font-size: var(--text-3xl);">
+          {safeguarding.title}
+        </h1>
       </div>
-      <h1 class="text-3xl md:text-4xl font-black mb-4" style="font-size: var(--text-3xl);">
-        {safeguarding.title}
-      </h1>
-      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto">
+    </div>
+    <!-- Wave Divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none" class="w-full h-12 md:h-16">
+        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="var(--color-bg-primary)" class="dark:fill-[var(--color-bg-primary-dark)]"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-8 border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-3xl">
         Tutela dei minori e prevenzione della violenza di genere
       </p>
     </div>
