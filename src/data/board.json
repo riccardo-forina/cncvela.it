@@ -1,0 +1,106 @@
+{
+  "board": {
+    "title": "Consiglio Direttivo",
+    "members": [
+      {
+        "name": "Fabio Mazzoni",
+        "role": "Presidente"
+      },
+      {
+        "name": "Graziano Della Rossa",
+        "role": "Vice Presidente"
+      },
+      {
+        "name": "Marco Fizzotti",
+        "role": "Vice Presidente"
+      },
+      {
+        "name": "Paolo Fizzotti",
+        "role": "Tesoriere"
+      },
+      {
+        "name": "Lucia Piccinini",
+        "role": "Segretario"
+      },
+      {
+        "name": "Carlo Parola",
+        "role": "Direttore Sportivo"
+      },
+      {
+        "name": "Ezio de Bortoli",
+        "role": "Consigliere"
+      },
+      {
+        "name": "Marco Massarenti",
+        "role": "Consigliere"
+      },
+      {
+        "name": "Enrico Cigolotti",
+        "role": "Consigliere"
+      }
+    ]
+  },
+  "safeguarding": {
+    "title": "Safeguarding",
+    "officer": {
+      "name": "Dott.ssa Faustina Lalatta",
+      "role": "Responsabile Safeguarding",
+      "email": "safeguarding@cncvela.it",
+      "appointmentDate": "2024-06-29"
+    },
+    "description": "L'ASD Circolo Nautico Caldè ha implementato un modello organizzativo e di controllo dell'attività sportiva ed un codice di condotta a tutela dei minori e per la prevenzione della violenza di genere e delle discriminazioni. Questo modello è stato redatto come previsto dall'Art.16 comma 2 del decreto legislativo n.39 del 28 Febbraio 2021 e rispecchia le linee guida pubblicate dalla Federazione Italiana Vela.",
+    "documents": [
+      {
+        "name": "Verbale Nomina Responsabile",
+        "url": "documenti/verbale-nomina-responsabile.pdf"
+      },
+      {
+        "name": "Verbale Adozione MOG/CDC",
+        "url": "documenti/verbale-adozione-mog-cdc.pdf"
+      },
+      {
+        "name": "Modello Organizzativo",
+        "url": "documenti/mog.pdf"
+      },
+      {
+        "name": "Codice di Condotta",
+        "url": "documenti/codice-di-condotta-cnc.pdf"
+      }
+    ]
+  },
+  "contact": {
+    "clubName": "Circolo Nautico Caldè",
+    "legalName": "CNC - Circolo Nautico Caldè A.S.D.",
+    "address": {
+      "street": "Via Maggiore 36",
+      "city": "Castelveccana",
+      "province": "VA",
+      "postalCode": "21010",
+      "country": "Italia"
+    },
+    "phone": "333 9769317",
+    "fax": "0332-1642038",
+    "email": "segreteria@cncvela.it",
+    "website": "www.cncvela.it",
+    "fiscalCode": "93010700123",
+    "vatNumber": "03818050126"
+  },
+  "documents": [
+    {
+      "name": "Statuto",
+      "url": "documenti/statuto.pdf",
+      "icon": "document"
+    },
+    {
+      "name": "Regolamento",
+      "url": "documenti/regolamento.pdf",
+      "icon": "document"
+    },
+    {
+      "name": "Regolamento Ospiti",
+      "url": "documenti/moduloospiti.pdf",
+      "icon": "users"
+    }
+  ]
+}
+

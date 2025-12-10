@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import board from '../data/board.json';
+import pricing from '../data/pricing.json';
+
+const { board: boardMembers, contact, documents } = board;
+---
+
+<BaseLayout title="Il Circolo" description="Scopri il Circolo Nautico Caldè: storia, consiglio direttivo, quote associative e come raggiungerci.">
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-[var(--color-bg-secondary)] to-[var(--color-bg-accent)] dark:from-[var(--color-bg-secondary-dark)] dark:to-[var(--color-bg-primary-dark)] py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6 text-center">
+      <h1 class="text-3xl md:text-4xl font-black mb-4" style="font-size: var(--text-3xl);">
+        Il Circolo
+      </h1>
+      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto">
+        Dal 1970 sul Lago Maggiore, una comunità di appassionati di vela.
+      </p>
+    </div>
+  </section>
+
+  <!-- Chi Siamo -->
+  <section id="chi-siamo" class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+        Chi Siamo
+      </h2>
+      
+      <div class="prose prose-lg max-w-none text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+        <p>
+          Il <strong>Circolo Nautico Caldè</strong> è un'Associazione Sportiva Dilettantistica situata sulla sponda lombarda del Lago Maggiore, nel comune di Castelveccana (VA).
+        </p>
+        <p>
+          Fondato nel 1970, il circolo promuove la pratica della vela attraverso corsi certificati FIV per giovani e adulti, l'organizzazione di regate e la partecipazione ai campionati del Verbano.
+        </p>
+        <p>
+          Il nostro obiettivo è diffondere la passione per la vela e creare una comunità accogliente dove condividere la bellezza della navigazione sul lago.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consiglio Direttivo -->
+  <section id="consiglio" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+        {boardMembers.title}
+      </h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {boardMembers.members.map((member, index) => (
+          <div class:list={[
+            "bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700",
+            { "sm:col-span-2 lg:col-span-1": index === 0 }
+          ]}>
+            <div class="flex items-center gap-4">
+              <div class:list={[
+                "w-12 h-12 rounded-full flex items-center justify-center text-white font-bold",
+                index === 0 
+                  ? "bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)]" 
+                  : "bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)]"
+              ]}>
+                {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+              </div>
+              <div>
+                <p class="font-bold">{member.name}</p>
+                <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                  {member.role}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Associative -->
+  <section id="quote" class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-4" style="font-size: var(--text-2xl);">
+        Diventa Socio
+      </h2>
+      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-8">
+        Entra a far parte della nostra comunità. Ecco le quote associative per il {new Date().getFullYear()}.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Membership Fees -->
+        <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <h3 class="font-bold text-lg mb-4">{pricing.membership.title}</h3>
+          <ul class="space-y-4">
+            {pricing.membership.items.map((item) => (
+              <li class="flex justify-between items-start pb-3 border-b border-gray-200 dark:border-gray-700 last:border-0 last:pb-0">
+                <div>
+                  <p class="font-medium">{item.name}</p>
+                  {item.note && (
+                    <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{item.note}</p>
+                  )}
+                </div>
+                <p class="font-bold text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+                  €{item.price.toFixed(2)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Boat Storage Fees -->
+        <div class="space-y-6">
+          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-lg mb-1">{pricing.boatStorage.title}</h3>
+            <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">{pricing.boatStorage.note}</p>
+            <ul class="space-y-3">
+              {pricing.boatStorage.items.map((item) => (
+                <li class="flex justify-between items-center text-sm">
+                  <span>{item.name}</span>
+                  <span class="font-bold">€{item.price.toFixed(2)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-lg mb-4">{pricing.dinghyStorage.title}</h3>
+            <ul class="space-y-3">
+              {pricing.dinghyStorage.items.map((item) => (
+                <li class="flex justify-between items-center text-sm">
+                  <span>{item.name}</span>
+                  <span class="font-bold">€{item.price.toFixed(2)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bank Details -->
+      <div class="mt-8 p-6 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-xl border border-[var(--color-accent-primary)]/20 dark:border-[var(--color-accent-primary-dark)]/20">
+        <h3 class="font-bold mb-4">Coordinate Bancarie</h3>
+        <dl class="space-y-2 text-sm">
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Intestatario:</dt>
+            <dd>{pricing.bankDetails.accountHolder}</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Banca:</dt>
+            <dd>{pricing.bankDetails.bankName} - {pricing.bankDetails.branch}</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">IBAN:</dt>
+            <dd class="font-mono break-all">{pricing.bankDetails.iban}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Documenti -->
+  <section id="documenti" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+        Documenti
+      </h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {documents.map((doc) => (
+          <a
+            href={doc.url}
+            class="flex flex-col items-center gap-3 p-6 bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-primary)] dark:hover:border-[var(--color-accent-primary-dark)] hover:shadow-lg transition-all touch-target text-center"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="w-14 h-14 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-xl flex items-center justify-center">
+              {doc.icon === 'users' ? (
+                <svg class="w-7 h-7 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+              ) : (
+                <svg class="w-7 h-7 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              )}
+            </div>
+            <span class="font-bold">{doc.name}</span>
+            <span class="text-xs text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+              Scarica PDF →
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contatti -->
+  <section id="contatti" class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+        Contatti e Come Raggiungerci
+      </h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Contact Info -->
+        <div class="space-y-6">
+          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-lg mb-4">Sede del Circolo</h3>
+            <address class="not-italic space-y-3">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <div>
+                  <p class="font-medium">{contact.clubName}</p>
+                  <p>{contact.address.street}</p>
+                  <p>{contact.address.postalCode} {contact.address.city} ({contact.address.province})</p>
+                </div>
+              </div>
+              
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                </svg>
+                <a href={`tel:${contact.phone.replace(/\s/g, '')}`} class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+                  {contact.phone}
+                </a>
+              </div>
+              
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                <a href={`mailto:${contact.email}`} class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+                  {contact.email}
+                </a>
+              </div>
+            </address>
+          </div>
+          
+          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-lg mb-2">Dati Fiscali</h3>
+            <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+              {contact.legalName}
+            </p>
+            <p class="text-sm mt-2">
+              <span class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">C.F.:</span> {contact.fiscalCode}
+            </p>
+            <p class="text-sm">
+              <span class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">P.IVA:</span> {contact.vatNumber}
+            </p>
+          </div>
+        </div>
+        
+        <!-- Map -->
+        <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 min-h-[300px] lg:min-h-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2779.6!2d8.6967!3d45.9467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786794e7d8a0001%3A0x1!2sVia%20Maggiore%2036%2C%2021010%20Castelveccana%20VA!5e0!3m2!1sit!2sit!4v1234567890"
+            width="100%"
+            height="100%"
+            style="border:0; min-height: 300px;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mappa del Circolo Nautico Caldè"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose p {
+    margin-bottom: 1rem;
+  }
+  
+  .prose strong {
+    color: var(--color-text-primary);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .prose strong {
+      color: var(--color-text-primary-dark);
+    }
+  }
+</style>
+

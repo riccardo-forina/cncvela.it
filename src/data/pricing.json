@@ -1,0 +1,136 @@
+{
+  "membership": {
+    "title": "Quote Soci 2025",
+    "items": [
+      {
+        "id": "socio-ordinario",
+        "name": "Socio Ordinario Seniores",
+        "price": 124.00,
+        "note": null
+      },
+      {
+        "id": "socio-cadetto",
+        "name": "Socio Cadetto/Juniores",
+        "price": 50.00,
+        "note": "da 7 a 17 anni"
+      },
+      {
+        "id": "socio-baby",
+        "name": "Socio Baby",
+        "price": 5.00,
+        "note": "figlio di socio, fino a 6 anni"
+      }
+    ]
+  },
+  "boatStorage": {
+    "title": "Quota Boa",
+    "note": "Attribuibile a non meno di due soci Ordinari Senior",
+    "items": [
+      {
+        "id": "boa-16",
+        "name": "Boa per imbarcazioni fino a 16 mq",
+        "price": 1100.00
+      },
+      {
+        "id": "boa-20",
+        "name": "Boa per imbarcazioni da 16 mq a 20 mq",
+        "price": 1300.00
+      },
+      {
+        "id": "boa-oltre",
+        "name": "Boa per imbarcazioni oltre 20 mq",
+        "price": 1600.00
+      }
+    ]
+  },
+  "dinghyStorage": {
+    "title": "Quota Deriva - Canoa",
+    "items": [
+      {
+        "id": "deriva-prato",
+        "name": "Posto Deriva nel prato",
+        "price": 150.00
+      },
+      {
+        "id": "canoa-rastrelliera",
+        "name": "Posto Canoa nel prato / Deriva nella rastrelliera",
+        "price": 125.00
+      }
+    ]
+  },
+  "fivCard": {
+    "title": "Tessera FIV",
+    "note": "Obbligatoria",
+    "items": [
+      {
+        "id": "fiv-ordinario",
+        "name": "Socio Ordinario",
+        "price": 26.00
+      },
+      {
+        "id": "fiv-juniores",
+        "name": "Socio Juniores",
+        "price": 21.00,
+        "note": "dall'anno in cui compie i 12 anni all'anno in cui compie i 18"
+      },
+      {
+        "id": "fiv-cadetto",
+        "name": "Socio Cadetto",
+        "price": 16.00,
+        "note": "dal compimento del 6° anno all'anno in cui compie gli 11"
+      },
+      {
+        "id": "fiv-scuola-seniores",
+        "name": "Scuola Vela Seniores",
+        "price": 15.00
+      },
+      {
+        "id": "fiv-scuola-cadetto",
+        "name": "Scuola Vela Cadetto/Juniores",
+        "price": 10.00
+      },
+      {
+        "id": "fiv-plus",
+        "name": "Tessera Plus (assicurazione barca)",
+        "price": 30.00,
+        "note": "aggiuntiva"
+      }
+    ]
+  },
+  "courses": {
+    "title": "Quote Scuola Vela",
+    "items": [
+      {
+        "id": "corso-derive-settimana",
+        "name": "Derive - Settimana diurno",
+        "price": 150.00,
+        "note": "+ quota ass. + FIV"
+      },
+      {
+        "id": "corso-derive-weekend",
+        "name": "Derive - Corso breve (2 weekend)",
+        "price": 125.00,
+        "note": "+ quota ass. + FIV"
+      },
+      {
+        "id": "corso-cabinati",
+        "name": "Cabinati - Corso breve (2 weekend)",
+        "price": 150.00,
+        "note": "+ quota ass. + FIV"
+      }
+    ],
+    "discounts": [
+      {
+        "description": "Corsi successivi al secondo nella stessa stagione",
+        "discount": "15%"
+      }
+    ]
+  },
+  "bankDetails": {
+    "bankName": "INTESA SAN PAOLO",
+    "branch": "Filiale di MILANO 55000",
+    "accountHolder": "Circolo Nautico Caldè A.S.D.",
+    "iban": "IT40J0306909606100000019281"
+  }
+}
+

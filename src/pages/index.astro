@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import events from '../data/events.json';
+
+// Get upcoming events (sorted by date, limited to 4)
+const now = new Date();
+const upcomingEvents = events.events
+  .filter(event => new Date(event.date) >= now)
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  .slice(0, 4);
+---
+
+<BaseLayout title="Home" description="Circolo Nautico Caldè - Scuola Vela FIV e Regate sul Lago Maggiore. Corsi di vela per giovani e adulti.">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-[#1E3A5F] via-[#152A45] to-[#0D1B2A] dark:from-[#0D1B2A] dark:to-[#1E3A5F] overflow-hidden">
+    <!-- Background Pattern - Wave motif -->
+    <div class="absolute inset-0 opacity-10">
+      <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <pattern id="waves" patternUnits="userSpaceOnUse" width="40" height="20">
+          <path d="M0 10 Q10 0 20 10 T40 10" fill="none" stroke="#D4A84B" stroke-width="0.5"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#waves)"/>
+      </svg>
+    </div>
+    
+    <div class="relative max-w-6xl mx-auto px-4 lg:px-6 py-16 md:py-24 lg:py-32">
+      <div class="text-center text-white">
+        <!-- Badge -->
+        <p class="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+          Lago Maggiore • Dal 1970
+        </p>
+        
+        <!-- Headline -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4 text-balance" style="font-size: var(--text-4xl);">
+          Impara a Navigare<br class="hidden md:inline" /> con Noi
+        </h1>
+        
+        <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8 text-pretty">
+          Scuola vela FIV per giovani e adulti, regate e una comunità di appassionati sul Lago Maggiore.
+        </p>
+        
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+          <a
+            href="corsi"
+            class="inline-flex items-center justify-center px-8 py-4 bg-[var(--color-accent-secondary)] hover:bg-[var(--color-accent-secondary)]/90 text-white font-bold text-lg uppercase tracking-wide rounded-xl shadow-lg hover:shadow-xl transition-all touch-target"
+          >
+            <span class="mr-2">⛵</span>
+            Impara a Veleggiare
+          </a>
+          <a
+            href="regate"
+            class="inline-flex items-center justify-center px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold text-lg uppercase tracking-wide rounded-xl border-2 border-white/50 transition-all touch-target"
+          >
+            <span class="mr-2">🏆</span>
+            Prossime Regate
+          </a>
+          <a
+            href="circolo#quote"
+            class="inline-flex items-center justify-center px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold text-lg uppercase tracking-wide rounded-xl border-2 border-white/50 transition-all touch-target"
+          >
+            <span class="mr-2">🤝</span>
+            Diventa Socio
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Wave Divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none" class="w-full h-16 md:h-24">
+        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="var(--color-bg-primary)" class="dark:fill-[var(--color-bg-primary-dark)]"/>
+      </svg>
+    </div>
+  </section>
+  
+  <!-- Upcoming Events Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-black text-[var(--color-text-primary)] dark:text-[var(--color-text-primary-dark)]" style="font-size: var(--text-2xl);">
+            Prossimi Appuntamenti
+          </h2>
+          <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mt-1">
+            Corsi, regate ed eventi del circolo
+          </p>
+        </div>
+        <a
+          href="bacheca"
+          class="inline-flex items-center text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] font-semibold hover:underline"
+        >
+          Vedi tutti
+          <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Events Grid -->
+      {upcomingEvents.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+          {upcomingEvents.map((event) => (
+            <EventCard event={event} />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl">
+          <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Nessun evento in programma al momento.
+          </p>
+          <a href="bacheca" class="inline-block mt-4 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] font-semibold hover:underline">
+            Vai alla bacheca
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+  
+  <!-- Quick Info Section -->
+  <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 - Scuola Vela -->
+        <a href="corsi" class="text-center group">
+          <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+            <span class="text-3xl">⛵</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2 group-hover:text-[var(--color-accent-primary)] dark:group-hover:text-[var(--color-accent-primary-dark)] transition-colors">Scuola Vela FIV</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Corsi certificati FIV per giovani dai 6 ai 18 anni e adulti. Istruttori qualificati e attrezzatura professionale.
+          </p>
+        </a>
+        
+        <!-- Card 2 - Regate -->
+        <a href="regate" class="text-center group">
+          <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+            <span class="text-3xl">🏆</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2 group-hover:text-[var(--color-accent-secondary)] dark:group-hover:text-[var(--color-accent-secondary-dark)] transition-colors">Regate</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Organizziamo regate sul Lago Maggiore e partecipiamo ai campionati del Verbano.
+          </p>
+        </a>
+        
+        <!-- Card 3 - Vita di Circolo -->
+        <a href="bacheca" class="text-center group">
+          <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-accent-tertiary)] dark:bg-[var(--color-accent-tertiary-dark)] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+            <span class="text-3xl">🥂</span>
+          </div>
+          <h3 class="font-bold text-lg mb-2 group-hover:text-[var(--color-accent-tertiary)] dark:group-hover:text-[var(--color-accent-tertiary-dark)] transition-colors">Vita di Circolo</h3>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Cene sociali, eventi e una comunità di appassionati di vela. Unisciti a noi!
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl font-black mb-4" style="font-size: var(--text-2xl);">
+        Pronto a Salpare?
+      </h2>
+      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-8 max-w-2xl mx-auto">
+        Scopri i nostri corsi di vela o vieni a trovarci al circolo. Ti aspettiamo sul Lago Maggiore!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="corsi"
+          class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
+        >
+          Scopri i Corsi
+        </a>
+        <a
+          href="circolo#contatti"
+          class="inline-flex items-center justify-center px-6 py-3 border-2 border-[var(--color-accent-primary)] dark:border-[var(--color-accent-primary-dark)] text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] font-bold uppercase tracking-wide rounded-lg hover:bg-[var(--color-accent-primary)]/10 transition-colors touch-target"
+        >
+          Contattaci
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

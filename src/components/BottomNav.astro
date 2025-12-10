@@ -1,0 +1,84 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const navItems = [
+  { href: './', label: 'Home', icon: 'home' },
+  { href: 'corsi', label: 'Corsi', icon: 'sailboat' },
+  { href: 'regate', label: 'Regate', icon: 'trophy' },
+  { href: 'bacheca', label: 'Bacheca', icon: 'calendar' },
+  { href: 'circolo', label: 'Info', icon: 'info' },
+];
+
+function isActive(href: string, currentPath: string): boolean {
+  if (href === './') {
+    return currentPath === '/' || currentPath.endsWith('/');
+  }
+  const normalizedPath = currentPath.split('/').filter(Boolean).pop() || '';
+  return normalizedPath === href || currentPath.includes(`/${href}`);
+}
+---
+
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] border-t border-gray-200 dark:border-gray-800 z-50 safe-area-bottom" aria-label="Navigazione principale">
+  <ul class="flex items-center justify-around px-2 py-1">
+    {navItems.map((item) => (
+      <li class="flex-1">
+        <a
+          href={item.href}
+          class:list={[
+            "flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors touch-target",
+            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-primary)]",
+            {
+              "text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]": isActive(item.href, currentPath),
+              "text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]": !isActive(item.href, currentPath),
+            }
+          ]}
+          aria-current={isActive(item.href, currentPath) ? "page" : undefined}
+        >
+          <!-- Icons -->
+          {item.icon === 'home' && (
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          )}
+          {item.icon === 'sailboat' && (
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18M5 21l7-18 7 18M5 21h14" />
+            </svg>
+          )}
+          {item.icon === 'trophy' && (
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3h14M5 3v4a7 7 0 007 7v0a7 7 0 007-7V3M5 3H3m16 0h2M12 14v4m-4 4h8" />
+            </svg>
+          )}
+          {item.icon === 'calendar' && (
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          )}
+          {item.icon === 'info' && (
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          )}
+          <span class:list={[
+            "text-xs mt-1 font-medium",
+            { "font-bold": isActive(item.href, currentPath) }
+          ]}>
+            {item.label}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+</style>
+

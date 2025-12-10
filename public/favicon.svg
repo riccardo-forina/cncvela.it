@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- CNC Caldè Pennant Logo -->
+  <defs>
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#152A45"/>
+    </linearGradient>
+  </defs>
+  <!-- Pennant shape -->
+  <polygon points="5,10 5,90 95,50" fill="url(#blueGradient)" stroke="#D4A84B" stroke-width="2"/>
+  <!-- Yellow spear line -->
+  <line x1="5" y1="50" x2="90" y2="50" stroke="#D4A84B" stroke-width="2"/>
+  <!-- CNC Letters -->
+  <text x="25" y="45" font-family="serif" font-size="16" font-weight="bold" fill="#D4A84B">C</text>
+  <text x="30" y="58" font-family="serif" font-size="14" font-weight="bold" fill="#D4A84B">N</text>
+  <text x="25" y="70" font-family="serif" font-size="16" font-weight="bold" fill="#D4A84B">C</text>
+</svg>

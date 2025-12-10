@@ -1,0 +1,316 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import events from '../data/events.json';
+import pricing from '../data/pricing.json';
+
+
+// Get regattas
+const now = new Date();
+const upcomingRegattas = events.events
+  .filter(event => event.type === 'regata' && new Date(event.date) >= now)
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+const pastRegattas = events.events
+  .filter(event => event.type === 'regata' && new Date(event.date) < now)
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 5);
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('it-IT', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+function formatShortDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('it-IT', {
+    day: 'numeric',
+    month: 'short',
+  });
+}
+---
+
+<BaseLayout title="Regate" description="Regate veliche sul Lago Maggiore organizzate dal Circolo Nautico Caldè. Calendario, bandi, iscrizioni e classifiche.">
+  <!-- Hero -->
+  <section class="bg-[var(--color-accent-secondary)] dark:bg-[var(--color-bg-secondary-dark)] py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6 text-center text-white dark:text-[var(--color-text-primary-dark)]">
+      <h1 class="text-3xl md:text-4xl font-black mb-4" style="font-size: var(--text-3xl);">
+        Regate
+      </h1>
+      <p class="text-lg text-white/90 dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto">
+        Calendario delle regate organizzate dal CNC sul Lago Maggiore. Scopri le prossime competizioni e scarica i documenti.
+      </p>
+    </div>
+  </section>
+
+  <!-- Upcoming Regattas -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+        Calendario Regate 2025
+      </h2>
+      
+      {upcomingRegattas.length > 0 ? (
+        <div class="space-y-6">
+          {upcomingRegattas.map((regata) => (
+            <article class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div class="p-6">
+                <div class="flex flex-col md:flex-row md:items-start gap-6">
+                  <!-- Date Badge -->
+                  <div class="flex-shrink-0">
+                    <div class="w-20 h-20 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] rounded-xl flex flex-col items-center justify-center text-white">
+                      <span class="text-2xl" aria-hidden="true">🏆</span>
+                      <span class="text-sm font-bold mt-1">{formatShortDate(regata.date)}</span>
+                    </div>
+                  </div>
+                  
+                  <!-- Content -->
+                  <div class="flex-1">
+                    <span class="inline-block px-3 py-1 bg-[var(--color-accent-secondary)]/10 dark:bg-[var(--color-accent-secondary-dark)]/20 text-[var(--color-accent-secondary)] dark:text-[var(--color-accent-secondary-dark)] text-xs font-bold uppercase tracking-wide rounded-full mb-2">
+                      Regata
+                    </span>
+                    
+                    <h3 class="text-xl font-bold mb-1">{regata.title}</h3>
+                    {regata.subtitle && (
+                      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-2">
+                        {regata.subtitle}
+                      </p>
+                    )}
+                    
+                    <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                      <time datetime={regata.date}>{formatDate(regata.date)}</time>
+                      {regata.time && ` • Partenza ore ${regata.time}`}
+                    </p>
+                    
+                    <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mt-2">
+                      {regata.description}
+                    </p>
+                  </div>
+                </div>
+                
+                <!-- Documents -->
+                {regata.documents && (
+                  <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <h4 class="text-sm font-bold mb-3">Documenti</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      <a
+                        href={regata.documents.bando || '#'}
+                        class:list={[
+                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
+                          regata.documents.bando 
+                            ? "border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
+                            : "border-gray-200 dark:border-gray-700 opacity-50 cursor-not-allowed"
+                        ]}
+                        target={regata.documents.bando ? "_blank" : undefined}
+                        rel={regata.documents.bando ? "noopener noreferrer" : undefined}
+                        aria-disabled={!regata.documents.bando}
+                      >
+                        <span class="text-2xl">📋</span>
+                        <span class="text-sm font-medium">Bando</span>
+                        <span class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                          {regata.documents.bando ? 'Scarica' : 'Non disponibile'}
+                        </span>
+                      </a>
+                      
+                      <a
+                        href={regata.documents.iscrizione || '#'}
+                        class:list={[
+                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
+                          regata.documents.iscrizione 
+                            ? "border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
+                            : "border-gray-200 dark:border-gray-700 opacity-50 cursor-not-allowed"
+                        ]}
+                        target={regata.documents.iscrizione ? "_blank" : undefined}
+                        rel={regata.documents.iscrizione ? "noopener noreferrer" : undefined}
+                        aria-disabled={!regata.documents.iscrizione}
+                      >
+                        <span class="text-2xl">📝</span>
+                        <span class="text-sm font-medium">Iscrizione</span>
+                        <span class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                          {regata.documents.iscrizione ? 'Scarica' : 'Non disponibile'}
+                        </span>
+                      </a>
+                      
+                      <a
+                        href={regata.documents.istruzioni || '#'}
+                        class:list={[
+                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
+                          regata.documents.istruzioni 
+                            ? "border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
+                            : "border-gray-200 dark:border-gray-700 opacity-50 cursor-not-allowed"
+                        ]}
+                        target={regata.documents.istruzioni ? "_blank" : undefined}
+                        rel={regata.documents.istruzioni ? "noopener noreferrer" : undefined}
+                        aria-disabled={!regata.documents.istruzioni}
+                      >
+                        <span class="text-2xl">📖</span>
+                        <span class="text-sm font-medium">Istruzioni</span>
+                        <span class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                          {regata.documents.istruzioni ? 'Scarica' : 'Non disponibile'}
+                        </span>
+                      </a>
+                      
+                      <a
+                        href={regata.documents.classifica || '#'}
+                        class:list={[
+                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
+                          regata.documents.classifica 
+                            ? "border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
+                            : "border-gray-200 dark:border-gray-700 opacity-50 cursor-not-allowed"
+                        ]}
+                        target={regata.documents.classifica ? "_blank" : undefined}
+                        rel={regata.documents.classifica ? "noopener noreferrer" : undefined}
+                        aria-disabled={!regata.documents.classifica}
+                      >
+                        <span class="text-2xl">🏅</span>
+                        <span class="text-sm font-medium">Classifica</span>
+                        <span class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                          {regata.documents.classifica ? 'Scarica' : 'Dopo la gara'}
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl">
+          <span class="text-4xl mb-4 block">🏆</span>
+          <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Nessuna regata in programma al momento.
+          </p>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mt-2">
+            Torna a trovarci per il prossimo calendario!
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Bank Details -->
+  <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-4" style="font-size: var(--text-2xl);">
+        Pagamento Iscrizione
+      </h2>
+      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-6">
+        Per completare l'iscrizione alla regata, effettuare il bonifico alle seguenti coordinate bancarie.
+      </p>
+      
+      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+        <dl class="space-y-3">
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Intestatario:</dt>
+            <dd class="font-semibold">{pricing.bankDetails.accountHolder}</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Banca:</dt>
+            <dd>{pricing.bankDetails.bankName} - {pricing.bankDetails.branch}</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">IBAN:</dt>
+            <dd class="font-mono text-sm break-all bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] px-3 py-2 rounded-lg">
+              {pricing.bankDetails.iban}
+            </dd>
+          </div>
+        </dl>
+        
+        <p class="mt-4 text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+          Indicare nella causale: <em>"Iscrizione regata [nome regata] - [nome partecipante]"</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Past Results -->
+  {pastRegattas.length > 0 && (
+    <section class="py-12 md:py-16">
+      <div class="max-w-6xl mx-auto px-4 lg:px-6">
+        <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+          Classifiche Passate
+        </h2>
+        
+        <div class="space-y-8">
+          {pastRegattas.map((regata) => (
+            <article class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div class="p-4 md:p-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                      {formatDate(regata.date)}
+                    </p>
+                    <h3 class="text-lg font-bold mt-1">{regata.title}</h3>
+                    {regata.subtitle && (
+                      <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                        {regata.subtitle}
+                      </p>
+                    )}
+                  </div>
+                  {regata.documents?.classifica && (
+                    <a
+                      href={regata.documents.classifica}
+                      class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] text-white text-sm font-bold rounded-lg hover:opacity-90 transition-opacity"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      📄 Scarica PDF
+                    </a>
+                  )}
+                </div>
+              </div>
+              
+              {/* Results Table */}
+              {regata.results && regata.results.length > 0 && (
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)]">
+                      <tr>
+                        <th class="px-4 py-3 text-left font-bold">Pos</th>
+                        <th class="px-4 py-3 text-left font-bold">Barca</th>
+                        <th class="px-4 py-3 text-left font-bold hidden sm:table-cell">Skipper</th>
+                        <th class="px-4 py-3 text-left font-bold hidden md:table-cell">Circolo</th>
+                        <th class="px-4 py-3 text-left font-bold hidden lg:table-cell">Modello</th>
+                        <th class="px-4 py-3 text-left font-bold">Tempo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {regata.results.map((result, idx) => (
+                        <tr class:list={[
+                          "border-t border-gray-200 dark:border-gray-700",
+                          { "bg-[var(--color-accent-secondary)]/10": idx === 0 }
+                        ]}>
+                          <td class="px-4 py-3">
+                            {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : result.pos}
+                          </td>
+                          <td class="px-4 py-3 font-semibold">{result.boat}</td>
+                          <td class="px-4 py-3 hidden sm:table-cell">{result.skipper}</td>
+                          <td class="px-4 py-3 hidden md:table-cell">{result.club}</td>
+                          <td class="px-4 py-3 hidden lg:table-cell text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{result.model}</td>
+                          <td class="px-4 py-3 font-mono">{result.time}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              
+              {/* No results yet */}
+              {(!regata.results || regata.results.length === 0) && !regata.documents?.classifica && (
+                <div class="p-4 text-center text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                  Classifica non ancora disponibile
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+

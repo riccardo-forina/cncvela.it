@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import events from '../data/events.json';
+
+// Get all events sorted by date
+const now = new Date();
+const allEvents = events.events
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+const upcomingEvents = allEvents.filter(event => new Date(event.date) >= now);
+const pastEvents = allEvents.filter(event => new Date(event.date) < now).reverse().slice(0, 6);
+
+// Count by type
+const counts = {
+  all: upcomingEvents.length,
+  corso: upcomingEvents.filter(e => e.type === 'corso').length,
+  regata: upcomingEvents.filter(e => e.type === 'regata').length,
+  evento_sociale: upcomingEvents.filter(e => e.type === 'evento_sociale').length,
+};
+---
+
+<BaseLayout title="Bacheca" description="Tutti gli eventi del Circolo Nautico Caldè: corsi di vela, regate e eventi sociali.">
+  <!-- Hero -->
+  <section class="bg-[var(--color-accent-tertiary)] dark:bg-[var(--color-bg-secondary-dark)] py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6 text-center text-white dark:text-[var(--color-text-primary-dark)]">
+      <h1 class="text-3xl md:text-4xl font-black mb-4" style="font-size: var(--text-3xl);">
+        Bacheca Eventi
+      </h1>
+      <p class="text-lg text-white/90 dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto">
+        Tutti gli appuntamenti del circolo: corsi, regate e momenti conviviali.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filter Tabs & Events -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <!-- Filter Tabs -->
+      <div class="mb-8">
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtra per tipo di evento">
+          <button
+            data-filter="all"
+            class="filter-tab active px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="true"
+            aria-controls="events-list"
+          >
+            Tutto ({counts.all})
+          </button>
+          <button
+            data-filter="corso"
+            class="filter-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+            aria-controls="events-list"
+          >
+            ⛵ Corsi ({counts.corso})
+          </button>
+          <button
+            data-filter="regata"
+            class="filter-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+            aria-controls="events-list"
+          >
+            🏆 Regate ({counts.regata})
+          </button>
+          <button
+            data-filter="evento_sociale"
+            class="filter-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+            aria-controls="events-list"
+          >
+            🥂 Eventi ({counts.evento_sociale})
+          </button>
+        </div>
+      </div>
+
+      <!-- Events List -->
+      <div id="events-list" role="tabpanel">
+        {upcomingEvents.length > 0 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+            {upcomingEvents.map((event) => (
+              <div class="event-card" data-type={event.type}>
+                <EventCard event={event} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-12 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl">
+            <span class="text-4xl mb-4 block">📅</span>
+            <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+              Nessun evento in programma al momento.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <!-- Empty State (shown when filter has no results) -->
+      <div id="empty-state" class="hidden text-center py-12 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl">
+        <span class="text-4xl mb-4 block">🔍</span>
+        <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+          Nessun evento di questo tipo in programma.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Past Events -->
+  {pastEvents.length > 0 && (
+    <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+      <div class="max-w-6xl mx-auto px-4 lg:px-6">
+        <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+          Eventi Passati
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {pastEvents.map((event) => (
+            <EventCard event={event} compact />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Info Section -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6 text-center">
+      <h2 class="text-2xl font-black mb-4" style="font-size: var(--text-2xl);">
+        Non Perdere Nessun Evento
+      </h2>
+      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-6">
+        Resta aggiornato sulle attività del circolo. Contattaci per ricevere informazioni sui prossimi eventi.
+      </p>
+      <a
+        href="circolo#contatti"
+        class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
+      >
+        Contattaci
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-tab {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+  }
+  
+  .filter-tab:hover {
+    background: var(--color-bg-accent);
+  }
+  
+  .filter-tab.active {
+    background: var(--color-accent-primary);
+    color: white;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .filter-tab {
+      background: var(--color-bg-secondary-dark);
+      color: var(--color-text-secondary-dark);
+    }
+    
+    .filter-tab:hover {
+      background: var(--color-bg-accent-dark);
+    }
+    
+    .filter-tab.active {
+      background: var(--color-accent-primary-dark);
+      color: white;
+    }
+  }
+  
+  .event-card {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .event-card.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  // Filter functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const eventCards = document.querySelectorAll('.event-card');
+    const emptyState = document.getElementById('empty-state');
+    const eventsList = document.getElementById('events-list');
+    
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.getAttribute('data-filter');
+        
+        // Update active tab
+        filterTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        
+        // Filter events
+        let visibleCount = 0;
+        eventCards.forEach(card => {
+          const cardType = card.getAttribute('data-type');
+          if (filter === 'all' || cardType === filter) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        
+        // Show/hide empty state
+        if (visibleCount === 0) {
+          emptyState?.classList.remove('hidden');
+          eventsList?.classList.add('hidden');
+        } else {
+          emptyState?.classList.add('hidden');
+          eventsList?.classList.remove('hidden');
+        }
+      });
+    });
+  });
+</script>
+

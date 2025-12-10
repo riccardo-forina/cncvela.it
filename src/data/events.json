@@ -1,0 +1,136 @@
+{
+  "events": [
+    {
+      "id": "festa-nuovo-sito-2025",
+      "type": "evento_sociale",
+      "title": "Festa Inaugurazione Nuovo Sito Web",
+      "date": "2025-12-20",
+      "time": "19:30",
+      "description": "Grande festa per celebrare il lancio del nuovo sito web del Circolo Nautico Caldè! Aperitivo, brindisi e tante sorprese. Tutti i soci sono invitati!",
+      "registrationUrl": "mailto:segreteria@cncvela.it?subject=Partecipazione Festa Nuovo Sito",
+      "status": "open"
+    },
+    {
+      "id": "corso-giovani-2025-1",
+      "type": "corso",
+      "title": "Corso Giovani FIV - 1° Turno",
+      "date": "2025-06-24",
+      "endDate": "2025-06-28",
+      "time": "09:00",
+      "description": "Corso di vela su derive per giovani dai 6 ai 18 anni. Settimana intensiva dal lunedì al venerdì.",
+      "registrationUrl": "#iscrizione",
+      "status": "open"
+    },
+    {
+      "id": "corso-giovani-2025-2",
+      "type": "corso",
+      "title": "Corso Giovani FIV - 2° Turno",
+      "date": "2025-07-15",
+      "endDate": "2025-07-19",
+      "time": "09:00",
+      "description": "Corso di vela su derive per giovani dai 6 ai 18 anni. Settimana intensiva dal lunedì al venerdì.",
+      "registrationUrl": "#iscrizione",
+      "status": "open"
+    },
+    {
+      "id": "corso-giovani-2025-3",
+      "type": "corso",
+      "title": "Corso Giovani FIV - 3° Turno",
+      "date": "2025-08-05",
+      "endDate": "2025-08-09",
+      "time": "09:00",
+      "description": "Corso di vela su derive per giovani dai 6 ai 18 anni. Settimana intensiva dal lunedì al venerdì.",
+      "registrationUrl": "#iscrizione",
+      "status": "open"
+    },
+    {
+      "id": "regata-nuovo-sito-2025",
+      "type": "regata",
+      "title": "Regata del Nuovo Sito",
+      "subtitle": "Regata celebrativa",
+      "date": "2025-12-21",
+      "time": "10:00",
+      "description": "Regata speciale per celebrare il lancio del nuovo sito web del Circolo. Aperta a tutti i soci!",
+      "documents": {
+        "bando": null,
+        "iscrizione": null,
+        "istruzioni": null,
+        "classifica": null
+      },
+      "status": "open"
+    },
+    {
+      "id": "regata-sass-gallet-2025",
+      "type": "regata",
+      "title": "Coppa Sass Gallet",
+      "subtitle": "Act 3 Campionato del Verbano Derive",
+      "date": "2025-06-15",
+      "time": "10:00",
+      "description": "Regata velica sul Lago Maggiore organizzata dal CNC.",
+      "documents": {
+        "bando": "regate/bando_2025-1697.pdf",
+        "iscrizione": "regate/modulo-iscrizione.pdf",
+        "istruzioni": null,
+        "classifica": null
+      },
+      "status": "open"
+    },
+    {
+      "id": "cena-sociale-estate-2025",
+      "type": "evento_sociale",
+      "title": "Cena Sociale di Inizio Estate",
+      "date": "2025-06-21",
+      "time": "20:00",
+      "description": "Cena conviviale per tutti i soci del circolo. Un'occasione per ritrovarsi e festeggiare l'inizio della stagione estiva.",
+      "registrationUrl": "mailto:segreteria@cncvela.it?subject=Prenotazione Cena Sociale",
+      "status": "open"
+    },
+    {
+      "id": "corso-adulti-weekend-2025-1",
+      "type": "corso",
+      "title": "Corso Adulti Weekend - Derive",
+      "date": "2025-05-24",
+      "endDate": "2025-06-01",
+      "time": "09:00",
+      "description": "Corso di vela su derive per adulti (18+). Due fine settimana: 24-25 Maggio e 31 Maggio - 1 Giugno.",
+      "registrationUrl": "#iscrizione",
+      "status": "open"
+    },
+    {
+      "id": "corso-cabinati-2025-1",
+      "type": "corso",
+      "title": "Corso Cabinati",
+      "date": "2025-06-07",
+      "endDate": "2025-06-15",
+      "time": "09:00",
+      "description": "Corso di vela su cabinati per adulti (18+). Due fine settimana da concordare con gli interessati.",
+      "registrationUrl": "#iscrizione",
+      "status": "open"
+    },
+    {
+      "id": "regata-xl-crociera-2019",
+      "type": "regata",
+      "title": "XL Crociera del Verbano",
+      "subtitle": "Act 7 Campionato del Verbano 2019",
+      "date": "2019-08-31",
+      "time": "10:00",
+      "description": "Regata d'altura sul Lago Maggiore - Caldè, 31 Agosto 2019. Classi ORC e Crociera con Rating FIV.",
+      "documents": {
+        "bando": null,
+        "iscrizione": null,
+        "istruzioni": null,
+        "classifica": "regate/classifica-xl-2019-4.pdf"
+      },
+      "results": [
+        { "pos": 1, "boat": "PAOLA", "skipper": "Rivolta Aldo", "club": "AVAV", "model": "Melges 30 Mod.", "class": "ORC A", "time": "4:40:13" },
+        { "pos": 2, "boat": "VIRUS", "skipper": "Mettifogo Gianluca", "club": "LNI Arona", "model": "Rivetto", "class": "ORC B", "time": "5:28:37" },
+        { "pos": 3, "boat": "VIZIO", "skipper": "Mazzoni Fabio", "club": "CNC", "model": "D772 Crociera", "class": "ORC B", "time": "5:33:23" },
+        { "pos": 4, "boat": "BIG BANG", "skipper": "Mazzanti Arturo", "club": "CN Andora", "model": "Melges 32", "class": "ORC A", "time": "5:38:51" },
+        { "pos": 5, "boat": "OLD FOX 35", "skipper": "Catalani Maurizio", "club": "AVM", "model": "X-35 OD", "class": "ORC A", "time": "5:45:15" },
+        { "pos": 6, "boat": "JUMANJI", "skipper": "Bottini Valentino", "club": "LNI Meina", "model": "Surprise", "class": "ORC B", "time": "5:51:44" }
+      ],
+      "status": "completed"
+    }
+  ]
+}
+

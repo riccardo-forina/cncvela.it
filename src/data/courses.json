@@ -1,0 +1,65 @@
+{
+  "courses": [
+    {
+      "id": "giovani-fiv",
+      "title": "Corsi Giovani FIV",
+      "subtitle": "6-18 anni",
+      "icon": "sailboat",
+      "description": "Corsi di vela su derive per giovani dai 6 ai 18 anni. Una settimana intensiva dal lunedì al venerdì per imparare le basi della vela in sicurezza.",
+      "duration": "5 giorni",
+      "schedule": "Lunedì - Venerdì",
+      "period": "Giugno - Agosto",
+      "ageRange": "6-18 anni",
+      "boatType": "Derive",
+      "includes": [
+        "Istruttori FIV qualificati",
+        "Attrezzatura completa",
+        "Assicurazione",
+        "Tessera FIV"
+      ],
+      "price": 150.00,
+      "priceNote": "+ quota ass. + FIV"
+    },
+    {
+      "id": "adulti-weekend",
+      "title": "Corsi Adulti Weekend",
+      "subtitle": "18+ anni",
+      "icon": "sailboat",
+      "description": "Corso di vela su derive per adulti. Due fine settimana per apprendere le tecniche di base della navigazione a vela.",
+      "duration": "2 weekend",
+      "schedule": "Sabato e Domenica",
+      "period": "Maggio - Settembre",
+      "ageRange": "18+ anni",
+      "boatType": "Derive",
+      "includes": [
+        "Istruttori qualificati",
+        "Attrezzatura completa",
+        "Assicurazione",
+        "Tessera FIV"
+      ],
+      "price": 125.00,
+      "priceNote": "+ quota ass. + FIV"
+    },
+    {
+      "id": "cabinati",
+      "title": "Corsi Cabinati",
+      "subtitle": "18+ anni",
+      "icon": "yacht",
+      "description": "Corso di vela su cabinati per adulti. Due fine settimana in date da concordare con gli interessati per imparare la navigazione su barche più grandi.",
+      "duration": "2 weekend",
+      "schedule": "Date da concordare",
+      "period": "Maggio - Settembre",
+      "ageRange": "18+ anni",
+      "boatType": "Cabinati",
+      "includes": [
+        "Istruttori qualificati",
+        "Attrezzatura completa",
+        "Assicurazione",
+        "Tessera FIV"
+      ],
+      "price": 150.00,
+      "priceNote": "+ quota ass. + FIV"
+    }
+  ]
+}
+

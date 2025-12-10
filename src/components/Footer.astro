@@ -1,0 +1,97 @@
+---
+import board from '../data/board.json';
+
+const { contact, safeguarding } = board;
+---
+
+<footer class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] border-t border-gray-200 dark:border-gray-800 mt-auto">
+  <div class="max-w-6xl mx-auto px-4 lg:px-6 py-8 lg:py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Club Info -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img 
+            src="images/logo-small.png" 
+            alt="CNC Caldè" 
+            class="h-10 w-auto"
+          />
+          <div>
+            <p class="font-bold">{contact.clubName}</p>
+            <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">A.S.D.</p>
+          </div>
+        </div>
+        <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+          Scuola vela FIV e regate sul Lago Maggiore dal 1970.
+        </p>
+      </div>
+      
+      <!-- Contact -->
+      <div>
+        <h3 class="font-bold mb-4">Contatti</h3>
+        <address class="not-italic text-sm space-y-2 text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+          <p>{contact.address.street}</p>
+          <p>{contact.address.postalCode} {contact.address.city} ({contact.address.province})</p>
+          <p class="pt-2">
+            <a href={`tel:${contact.phone.replace(/\s/g, '')}`} class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+              Tel: {contact.phone}
+            </a>
+          </p>
+          <p>
+            <a href={`mailto:${contact.email}`} class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+              {contact.email}
+            </a>
+          </p>
+        </address>
+      </div>
+      
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-bold mb-4">Link Utili</h3>
+        <ul class="text-sm space-y-2">
+          <li>
+            <a href="corsi#iscrizione" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+              Iscrizione Corsi
+            </a>
+          </li>
+          <li>
+            <a href="circolo#documenti" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+              Documenti
+            </a>
+          </li>
+          <li>
+            <a href="circolo#contatti" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
+              Come Raggiungerci
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Safeguarding Banner -->
+    <div class="mt-8 pt-6 border-t border-gray-300 dark:border-gray-700">
+      <a href="safeguarding" class="flex items-center gap-3 p-4 bg-[var(--color-accent-primary)]/5 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-lg border border-[var(--color-accent-primary)]/20 dark:border-[var(--color-accent-primary-dark)]/20 hover:border-[var(--color-accent-primary)] dark:hover:border-[var(--color-accent-primary-dark)] transition-colors group">
+        <div class="w-10 h-10 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-bold text-sm">Safeguarding</p>
+          <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            Tutela minori e prevenzione violenza • Resp. {safeguarding.officer.name}
+          </p>
+        </div>
+        <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Bottom Bar -->
+    <div class="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+      <p>© {new Date().getFullYear()} {contact.legalName}. Tutti i diritti riservati.</p>
+      <p>C.F. {contact.fiscalCode} - P.IVA {contact.vatNumber}</p>
+    </div>
+  </div>
+</footer>
+

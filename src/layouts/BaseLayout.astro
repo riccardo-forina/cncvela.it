@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BottomNav from '../components/BottomNav.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Circolo Nautico Caldè - Scuola Vela e Regate sul Lago Maggiore" } = Astro.props;
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <base href={base.endsWith('/') ? base : base + '/'} />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+    <title>{title} | CNC Caldè</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:bg-[var(--color-bg-primary-dark)] dark:text-[var(--color-text-primary-dark)]">
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">
+      Vai al contenuto principale
+    </a>
+    
+    <!-- Header (hidden on mobile, visible on tablet+) -->
+    <Header currentPath={currentPath} />
+    
+    <!-- Main Content -->
+    <main id="main-content" class="flex-1 pb-20 md:pb-0">
+      <slot />
+    </main>
+    
+    <!-- Footer -->
+    <Footer />
+    
+    <!-- Bottom Navigation (mobile only) -->
+    <BottomNav currentPath={currentPath} />
+  </body>
+</html>
+
+<style>
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+    }
+  }
+</style>
+

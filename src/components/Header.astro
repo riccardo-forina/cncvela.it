@@ -1,0 +1,81 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const navItems = [
+  { href: './', label: 'Home' },
+  { href: 'corsi', label: 'Corsi' },
+  { href: 'regate', label: 'Regate' },
+  { href: 'bacheca', label: 'Bacheca' },
+  { href: 'circolo', label: 'Il Circolo' },
+];
+
+function isActive(href: string, currentPath: string): boolean {
+  if (href === './') {
+    return currentPath === '/' || currentPath.endsWith('/');
+  }
+  const normalizedPath = currentPath.split('/').filter(Boolean).pop() || '';
+  return normalizedPath === href || currentPath.includes(`/${href}`);
+}
+---
+
+<header class="hidden md:block bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 lg:px-6">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a href="./" class="flex items-center gap-3 touch-target" aria-label="CNC Caldè - Torna alla home">
+        <img 
+          src="images/logo-small.png" 
+          alt="CNC Caldè" 
+          class="h-10 lg:h-12 w-auto"
+        />
+        <div class="hidden lg:block">
+          <p class="font-bold text-lg leading-tight">Circolo Nautico</p>
+          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">Caldè</p>
+        </div>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav aria-label="Navigazione principale">
+        <ul class="flex items-center gap-1 lg:gap-2">
+          {navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  "px-3 lg:px-4 py-2 rounded-lg font-medium transition-colors touch-target inline-flex items-center",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-primary)]",
+                  {
+                    "bg-[var(--color-accent-primary)] text-white hover:bg-[var(--color-accent-primary)]/80 dark:bg-[var(--color-accent-primary-dark)] dark:hover:bg-[var(--color-accent-primary-dark)]/80": isActive(item.href, currentPath),
+                    "text-[var(--color-text-primary)] dark:text-[var(--color-text-primary-dark)] hover:bg-[var(--color-bg-secondary)] dark:hover:bg-[var(--color-bg-secondary-dark)]": !isActive(item.href, currentPath),
+                  }
+                ]}
+                aria-current={isActive(item.href, currentPath) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Header (logo only) -->
+<header class="md:hidden bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
+  <div class="px-4 py-3 flex items-center justify-center">
+    <a href="./" class="flex items-center gap-2" aria-label="CNC Caldè - Torna alla home">
+      <img 
+        src="images/logo-small.png" 
+        alt="CNC Caldè" 
+        class="h-8 w-auto"
+      />
+      <span class="font-bold">Circolo Nautico Caldè</span>
+    </a>
+  </div>
+</header>
+
