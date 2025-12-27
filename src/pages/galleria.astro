@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+import gallery from '../data/gallery.json';
+
+// Get page content
+const page = await getEntry('pages', 'galleria');
+
+// Combine all gallery images for the main grid
+const allImages = [
+  ...gallery.hero,
+  ...gallery.corsi,
+  ...gallery.galleria,
+  ...gallery.regate,
+  ...gallery.atmosfera,
+];
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+  <!-- Hero image -->
+  <section class="relative h-[40vh] min-h-[300px] overflow-hidden">
+    <img 
+      src={gallery.hero[0].src}
+      alt={gallery.hero[0].alt}
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+  </section>
+  
+  <!-- Title bar -->
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[#0D1B2A] py-6 md:py-8">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h1 class="text-2xl md:text-3xl font-black text-white">{page.data.title}</h1>
+      {page.data.subtitle && (
+        <p class="text-sm md:text-base text-white/70 mt-2 max-w-2xl">{page.data.subtitle}</p>
+      )}
+    </div>
+  </section>
+
+  <!-- Category Filter Tabs -->
+  <section class="py-8 md:py-12">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="mb-8">
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtra per categoria">
+          <button
+            data-category="all"
+            class="gallery-tab active px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="true"
+          >
+            Tutte
+          </button>
+          <button
+            data-category="corsi"
+            class="gallery-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+          >
+            Scuola Vela
+          </button>
+          <button
+            data-category="regate"
+            class="gallery-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+          >
+            Regate
+          </button>
+          <button
+            data-category="hero"
+            class="gallery-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+          >
+            Panorami
+          </button>
+        </div>
+      </div>
+      
+      <!-- Scuola Vela -->
+      <div class="gallery-section mb-12" data-section="corsi">
+        <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+          Scuola Vela
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {gallery.corsi.map((img) => (
+            <figure 
+              class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+              data-category="corsi"
+              data-src={img.src}
+              data-alt={img.alt}
+              data-title={img.title}
+              data-description={img.description}
+            >
+              <img 
+                src={img.src} 
+                alt={img.alt}
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                <span class="text-white font-bold">{img.title}</span>
+                <span class="text-white/80 text-sm">{img.description}</span>
+              </figcaption>
+            </figure>
+          ))}
+          {gallery.galleria.map((img) => (
+            <figure 
+              class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+              data-category="corsi"
+              data-src={img.src}
+              data-alt={img.alt}
+              data-title={img.title}
+              data-description={img.description}
+            >
+              <img 
+                src={img.src} 
+                alt={img.alt}
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                <span class="text-white font-bold">{img.title}</span>
+                <span class="text-white/80 text-sm">{img.description}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <!-- Regate -->
+      <div class="gallery-section mb-12" data-section="regate">
+        <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+          Regate e Premiazioni
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {gallery.regate.map((img) => (
+            <figure 
+              class="gallery-item group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
+              data-category="regate"
+              data-src={img.src}
+              data-alt={img.alt}
+              data-title={img.title}
+              data-description={img.description}
+            >
+              <img 
+                src={img.src} 
+                alt={img.alt}
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                <span class="text-white font-bold text-sm">{img.title}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <!-- Panorami -->
+      <div class="gallery-section" data-section="hero">
+        <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+          Panorami e Atmosfere
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[...gallery.hero, ...gallery.atmosfera].map((img) => (
+            <figure 
+              class="gallery-item group relative aspect-video rounded-xl overflow-hidden cursor-pointer"
+              data-category="hero"
+              data-src={img.src}
+              data-alt={img.alt}
+              data-title={img.title}
+              data-description={img.description}
+            >
+              <img 
+                src={img.src} 
+                alt={img.alt}
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                <span class="text-white font-bold">{img.title}</span>
+                <span class="text-white/80 text-sm">{img.description}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-sm">
+    <button 
+      id="lightbox-close"
+      class="absolute top-4 right-4 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white text-3xl z-10"
+      aria-label="Chiudi"
+    >
+      ×
+    </button>
+    <button 
+      id="lightbox-prev"
+      class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white text-3xl z-10"
+      aria-label="Precedente"
+    >
+      ‹
+    </button>
+    <button 
+      id="lightbox-next"
+      class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white text-3xl z-10"
+      aria-label="Successiva"
+    >
+      ›
+    </button>
+    <div class="flex items-center justify-center h-full p-4 md:p-12">
+      <figure class="max-w-full max-h-full flex flex-col items-center">
+        <img 
+          id="lightbox-img"
+          src="" 
+          alt=""
+          class="max-w-full max-h-[80vh] object-contain rounded-lg"
+        />
+        <figcaption class="mt-4 text-center">
+          <span id="lightbox-title" class="text-white font-bold text-lg block"></span>
+          <span id="lightbox-desc" class="text-white/70 text-sm"></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .gallery-tab {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+  }
+  
+  .gallery-tab:hover {
+    background: var(--color-bg-tertiary, #e5e7eb);
+  }
+  
+  .gallery-tab.active {
+    background: var(--color-accent-secondary);
+    color: white;
+  }
+  
+  :global(.dark) .gallery-tab {
+    background: var(--color-bg-secondary-dark);
+    color: var(--color-text-secondary-dark);
+  }
+  
+  :global(.dark) .gallery-tab:hover {
+    background: var(--color-bg-tertiary-dark, #374151);
+  }
+  
+  :global(.dark) .gallery-tab.active {
+    background: var(--color-accent-secondary-dark);
+    color: white;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-section.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  // Tab filtering
+  const tabs = document.querySelectorAll('.gallery-tab');
+  const sections = document.querySelectorAll('.gallery-section');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const category = tab.getAttribute('data-category');
+      
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Show/hide sections
+      if (category === 'all') {
+        sections.forEach(s => s.classList.remove('hidden'));
+      } else {
+        sections.forEach(s => {
+          if (s.getAttribute('data-section') === category) {
+            s.classList.remove('hidden');
+          } else {
+            s.classList.add('hidden');
+          }
+        });
+      }
+    });
+  });
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox') as HTMLDivElement;
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title') as HTMLSpanElement;
+  const lightboxDesc = document.getElementById('lightbox-desc') as HTMLSpanElement;
+  const lightboxClose = document.getElementById('lightbox-close') as HTMLButtonElement;
+  const lightboxPrev = document.getElementById('lightbox-prev') as HTMLButtonElement;
+  const lightboxNext = document.getElementById('lightbox-next') as HTMLButtonElement;
+
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  let currentIndex = 0;
+  let visibleItems: Element[] = [];
+
+  function updateVisibleItems() {
+    visibleItems = Array.from(galleryItems).filter(item => {
+      const section = item.closest('.gallery-section');
+      return section && !section.classList.contains('hidden');
+    });
+  }
+
+  function openLightbox(index: number) {
+    updateVisibleItems();
+    currentIndex = index;
+    const item = visibleItems[currentIndex] as HTMLElement;
+    
+    lightboxImg.src = item.dataset.src || '';
+    lightboxImg.alt = item.dataset.alt || '';
+    lightboxTitle.textContent = item.dataset.title || '';
+    lightboxDesc.textContent = item.dataset.description || '';
+    
+    lightbox.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+    openLightbox(currentIndex);
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % visibleItems.length;
+    openLightbox(currentIndex);
+  }
+
+  galleryItems.forEach((item, idx) => {
+    item.addEventListener('click', () => {
+      updateVisibleItems();
+      const visibleIndex = visibleItems.indexOf(item);
+      if (visibleIndex !== -1) {
+        openLightbox(visibleIndex);
+      }
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', showPrev);
+  lightboxNext.addEventListener('click', showNext);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+    
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+</script>
+

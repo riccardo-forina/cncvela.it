@@ -1,0 +1,110 @@
+{
+  "generated_at": "2025-12-27T15:15:00",
+  "summary": {
+    "total_images_analyzed": 4837,
+    "unique_base_images": 119,
+    "interesting_photos": 104,
+    "excluded_ui_elements": 15,
+    "note": "Le 4837 immagini sono per lo più varianti responsive della stessa foto a diverse risoluzioni. Le 104 foto interessanti sono quelle uniche e rilevanti."
+  },
+  "categories": {
+    "corso_vela": {
+      "count": 6,
+      "description": "Foto dei corsi di vela per giovani - foto di gruppo con magliette gialle CNC",
+      "example_photos": ["scd1-foto-gruppo", "scd2-foto-gruppo", "scd3-foto-gruppo", "scd3-chiusura-corso", "corsagosto"]
+    },
+    "corso_cabinati": {
+      "count": 1,
+      "description": "Corso di vela su imbarcazioni cabinate - adulti su barca a vela",
+      "example_photos": ["cabinati"]
+    },
+    "drone_aeree": {
+      "count": 2,
+      "description": "Bellissime foto aeree del golfo di Caldè scattate con drone",
+      "example_photos": ["dji_0004", "dji"]
+    },
+    "eventi_premiazioni": {
+      "count": 2,
+      "description": "Premiazioni e cerimonie finali regate",
+      "example_photos": ["finale", "finale2"]
+    },
+    "panorami_lago": {
+      "count": 5,
+      "description": "Banner e foto panoramiche del Lago Maggiore, tramonti, paesaggi",
+      "example_photos": ["poster", "banner3-18", "banner10-18", "bannerluglio18", "bello"]
+    },
+    "foto_varie_circolo": {
+      "count": 87,
+      "description": "Altre foto del circolo, barche, attività",
+      "example_photos": ["img_0620", "img_0684", "img_1289"]
+    }
+  },
+  "recommended_photos": [
+    {
+      "file": "dji_0004-3600.jpg",
+      "category": "drone_aeree",
+      "suggested_use": "Hero image homepage, sezione 'Il Circolo'",
+      "description": "Vista aerea mozzafiato del golfo di Caldè con la Rocca, le barche ormeggiate e il borgo. Perfetta per rappresentare il circolo.",
+      "resolution": "3600px"
+    },
+    {
+      "file": "scd3-foto-gruppo-3591.jpg",
+      "category": "corso_vela",
+      "suggested_use": "Pagina corsi, sezione giovani",
+      "description": "Foto di gruppo corso vela giovani con magliette gialle CNC. Mostra l'atmosfera familiare e il successo dei corsi.",
+      "resolution": "3591px"
+    },
+    {
+      "file": "corsagosto-2400.jpg",
+      "category": "corso_vela", 
+      "suggested_use": "Pagina corsi, slider",
+      "description": "Altra foto di gruppo corso agosto davanti alla sede storica del CNC con la targa 'Circolo Nautico Caldè'.",
+      "resolution": "2400px"
+    },
+    {
+      "file": "cabinati-3543-1.jpg",
+      "category": "corso_cabinati",
+      "suggested_use": "Pagina corsi cabinati",
+      "description": "Allievi adulti a bordo di un cabinato durante una lezione pratica. Ottima per promuovere i corsi adulti.",
+      "resolution": "3543px"
+    },
+    {
+      "file": "finale-1482-1.jpg",
+      "category": "eventi_premiazioni",
+      "suggested_use": "Pagina regate, galleria eventi",
+      "description": "Cerimonia di premiazione con consegna coppa. Mostra il lato sociale e competitivo del circolo.",
+      "resolution": "1482px"
+    },
+    {
+      "file": "poster-2400.jpg",
+      "category": "panorami_lago",
+      "suggested_use": "Banner, hero sections",
+      "description": "Tramonto sul Lago Maggiore con barche ormeggiate. Atmosfera suggestiva, ottima per background.",
+      "resolution": "2400px"
+    }
+  ],
+  "usage_notes": {
+    "privacy": "Alcune foto mostrano volti di minori. Verificare consenso privacy prima dell'uso pubblico.",
+    "responsive": "Ogni foto ha già varianti responsive generate da Sparkle. Usare la versione più grande come sorgente.",
+    "quality": "Le foto sono di buona qualità, molte oltre 3000px. Adatte per stampa e web.",
+    "dates": "Le foto con data nel nome (es. 20180827) sono del 2018. Le altre non hanno data certa."
+  },
+  "files_to_copy": [
+    "dji_0004-3600.jpg",
+    "dji-1440.jpg",
+    "scd1-foto-gruppo-3591.jpg",
+    "scd2-foto-gruppo-3591.jpg",
+    "scd3-foto-gruppo-3591.jpg",
+    "scd3-chiusura-corso-3591.jpg",
+    "corsagosto-2400.jpg",
+    "cabinati-3543-1.jpg",
+    "finale-1482-1.jpg",
+    "finale2-1350-1.jpg",
+    "poster-2400.jpg",
+    "banner3-18-3600.jpg",
+    "banner10-18-3600.jpg",
+    "bannerluglio18-2400.jpg"
+  ]
+}
+
+

@@ -25,35 +25,25 @@ const upcomingCourses = events.events
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
-  <!-- Hero -->
-  <section class="relative bg-[var(--color-accent-primary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
-    <!-- Wave pattern -->
-    <div class="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-50" aria-hidden="true">
-      <img src="images/wave-pattern.jpg" alt="" class="w-full h-full object-cover" />
-    </div>
-    <div class="relative max-w-6xl mx-auto px-4 lg:px-6">
-      <div class="inline-block bg-[var(--color-accent-primary)] px-6 py-4 rounded-lg">
-        <h1 class="text-3xl md:text-4xl font-black text-white" style="font-size: var(--text-3xl);">
-          {page.data.title}
-        </h1>
-      </div>
-    </div>
-    <!-- Wave Divider -->
-    <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none" class="w-full h-12 md:h-16">
-        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="var(--color-bg-primary)" class="dark:fill-[var(--color-bg-primary-dark)]"/>
-      </svg>
+  <!-- Hero image -->
+  <section class="relative h-[35vh] min-h-[250px] overflow-hidden">
+    <img 
+      src="images/corsi/scuola-vela-azione.jpg" 
+      alt="Allievi della scuola vela sul Lago Maggiore"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+  </section>
+  
+  <!-- Title bar -->
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[#0D1B2A] py-6 md:py-8">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h1 class="text-2xl md:text-3xl font-black text-white">{page.data.title}</h1>
+      {page.data.subtitle && (
+        <p class="text-sm md:text-base text-white/70 mt-2 max-w-2xl">{page.data.subtitle}</p>
+      )}
     </div>
   </section>
 
-  <!-- Subtitle -->
-  {page.data.subtitle && (
-    <section class="py-6 md:py-8 text-center border-b border-gray-200 dark:border-gray-800">
-      <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto px-4 lg:px-6">
-        {page.data.subtitle}
-      </p>
-    </section>
-  )}
 
   <!-- Course Types -->
   <section class="py-12 md:py-16">
@@ -182,26 +172,51 @@ const upcomingCourses = events.events
         Iscriviti ai Corsi
       </h2>
       <p class="text-center text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-8">
-        Compila il modulo per iscriverti a uno dei nostri corsi di vela.
+        Segui questi semplici passaggi per iscriverti a uno dei nostri corsi.
       </p>
       
-      <!-- Google Form Placeholder -->
-      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-8 border border-gray-200 dark:border-gray-700 text-center">
-        <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-full flex items-center justify-center">
-          <svg class="w-8 h-8 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
+      <!-- Modulo di Iscrizione -->
+      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+        <h3 class="font-bold text-lg mb-4 text-center">Modulo di Iscrizione</h3>
+        
+        <!-- Istruzioni -->
+        <ol class="space-y-4 mb-8 text-sm">
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-accent-primary)] text-white flex items-center justify-center text-xs font-bold">1</span>
+            <span><strong>Scarica</strong> il modulo di iscrizione cliccando il bottone qui sotto</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-accent-primary)] text-white flex items-center justify-center text-xs font-bold">2</span>
+            <span><strong>Compila</strong> tutti i campi richiesti e <strong>firma</strong> il modulo</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-accent-primary)] text-white flex items-center justify-center text-xs font-bold">3</span>
+            <span><strong>Invia</strong> il modulo compilato e firmato via email alla segreteria</span>
+          </li>
+        </ol>
+        
+        <!-- Bottoni -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="documenti/iscrizione-scuola-vela.pdf"
+            download
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Scarica Modulo
+          </a>
+          <a
+            href={`mailto:${board.contact.email}?subject=Iscrizione Corso Vela - Modulo Compilato`}
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            Invia alla Segreteria
+          </a>
         </div>
-        <h3 class="font-bold text-lg mb-2">Modulo di Iscrizione</h3>
-        <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-6">
-          Il modulo di iscrizione Google Form sarà integrato qui.
-        </p>
-        <a
-          href={`mailto:${board.contact.email}?subject=Richiesta iscrizione corso vela`}
-          class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
-        >
-          Contattaci per Iscriverti
-        </a>
       </div>
       
       <!-- Bank Details -->

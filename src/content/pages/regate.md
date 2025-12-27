@@ -4,3 +4,4 @@ description: Regate veliche sul Lago Maggiore organizzate dal Circolo Nautico Ca
 subtitle: Calendario delle regate organizzate dal CNC sul Lago Maggiore. Scopri le prossime competizioni e scarica i documenti.
 ---
 
+

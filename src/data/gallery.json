@@ -1,0 +1,115 @@
+{
+  "hero": [
+    {
+      "src": "images/hero/calde-aerial.jpg",
+      "alt": "Vista aerea di Caldè e della baia con le barche a vela",
+      "title": "Caldè dall'alto",
+      "description": "La nostra baia vista dal drone"
+    }
+  ],
+  "atmosfera": [
+    {
+      "src": "images/atmosfera/tramonto-lago.jpg",
+      "alt": "Tramonto sul Lago Maggiore con barche a vela",
+      "title": "Tramonto sul lago",
+      "description": "I colori del tramonto sulla nostra baia"
+    }
+  ],
+  "corsi": [
+    {
+      "src": "images/corsi/scuola-vela-azione.jpg",
+      "alt": "Allievi della scuola vela in navigazione",
+      "title": "Scuola Vela in azione",
+      "description": "I nostri allievi navigano sul Lago Maggiore"
+    },
+    {
+      "src": "images/corsi/giovane-velista.jpg",
+      "alt": "Giovane velista su deriva",
+      "title": "Giovani velisti",
+      "description": "Corsi FIV per ragazzi"
+    },
+    {
+      "src": "images/corsi/corso-cabinati.jpg",
+      "alt": "Corso di vela su cabinato",
+      "title": "Corso Cabinati",
+      "description": "Lezioni su barche più grandi per adulti"
+    }
+  ],
+  "regate": [
+    {
+      "src": "images/regate/premiazione-ragazza.jpg",
+      "alt": "Premiazione di una giovane velista",
+      "title": "Premiazioni",
+      "description": "Cerimonia di premiazione"
+    },
+    {
+      "src": "images/regate/premiazione-bambino-coppa.jpg",
+      "alt": "Bambino premiato con coppa FIV",
+      "title": "Giovani campioni",
+      "description": "I risultati dei nostri allievi"
+    },
+    {
+      "src": "images/regate/premiazione-bambino-trofeo.jpg",
+      "alt": "Ragazzo con trofeo di vetro",
+      "title": "Trofei",
+      "description": "Riconoscimenti sportivi"
+    },
+    {
+      "src": "images/regate/premiazione-anziano.jpg",
+      "alt": "Premiazione di un socio senior",
+      "title": "Tutti i velisti",
+      "description": "La vela è per tutte le età"
+    },
+    {
+      "src": "images/regate/premiazione-ragazzo-cnc.jpg",
+      "alt": "Ragazzo premiato al tavolo CNC",
+      "title": "Premiazione",
+      "description": "Cerimonia di premiazione al circolo"
+    }
+  ],
+  "galleria": [
+    {
+      "src": "images/galleria/gruppo-scuola-vela-1.jpg",
+      "alt": "Foto di gruppo scuola vela con magliette gialle CNC",
+      "title": "Scuola Vela",
+      "description": "I nostri allievi e istruttori"
+    },
+    {
+      "src": "images/galleria/gruppo-scuola-vela-2.jpg",
+      "alt": "Foto di gruppo allievi scuola vela",
+      "title": "I nostri ragazzi",
+      "description": "Una delle nostre classi"
+    },
+    {
+      "src": "images/galleria/gruppo-scuola-vela-3.jpg",
+      "alt": "Gruppo di giovani velisti",
+      "title": "Giovani velisti",
+      "description": "Pronti per una giornata in acqua"
+    },
+    {
+      "src": "images/galleria/vela-azione-1.jpg",
+      "alt": "Barche a vela in navigazione",
+      "title": "In navigazione",
+      "description": "Le nostre derive sul lago"
+    },
+    {
+      "src": "images/galleria/vela-azione-2.jpg",
+      "alt": "Derive in allenamento",
+      "title": "Allenamento",
+      "description": "Sessione di pratica"
+    },
+    {
+      "src": "images/galleria/vela-azione-4.jpg",
+      "alt": "Vela sul Lago Maggiore",
+      "title": "Vela",
+      "description": "La passione per la vela"
+    },
+    {
+      "src": "images/galleria/chiusura-corso.jpg",
+      "alt": "Chiusura corso di vela",
+      "title": "Fine corso",
+      "description": "Momento di festa a fine stagione"
+    }
+  ]
+}
+

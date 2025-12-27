@@ -1,0 +1,1559 @@
+{
+  "generated_at": "2025-12-27T15:10:59.040290",
+  "total_unique_images": 119,
+  "interesting_images": 104,
+  "excluded_images": 15,
+  "images": [
+    {
+      "base_name": "20180827-5-",
+      "best_file": "20180827-5--1116.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/20180827-5--1116.jpg",
+      "best_size": 1116,
+      "variants_count": 12,
+      "extension": "jpg",
+      "date": "2018-08-27",
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Data: 2018-08-27"
+    },
+    {
+      "base_name": "20180723-4-",
+      "best_file": "20180723-4--768.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/20180723-4--768.jpg",
+      "best_size": 768,
+      "variants_count": 6,
+      "extension": "jpg",
+      "date": "2018-07-23",
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Data: 2018-07-23"
+    },
+    {
+      "base_name": "20180709-2-",
+      "best_file": "20180709-2--1236.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/20180709-2--1236.jpg",
+      "best_size": 1236,
+      "variants_count": 18,
+      "extension": "jpg",
+      "date": "2018-07-09",
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Data: 2018-07-09"
+    },
+    {
+      "base_name": "20180625-1-",
+      "best_file": "20180625-1--768.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/20180625-1--768.jpg",
+      "best_size": 768,
+      "variants_count": 6,
+      "extension": "jpg",
+      "date": "2018-06-25",
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Data: 2018-06-25"
+    },
+    {
+      "base_name": "2015002495",
+      "best_file": "2015002495-960-4.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/2015002495-960-4.jpg",
+      "best_size": 960,
+      "variants_count": 1,
+      "extension": "jpg",
+      "date": "2015-00-24",
+      "categories": [
+        "altro"
+      ],
+      "html_references": [
+        {
+          "html_file": "meteo.html",
+          "page_title": "Meteo",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Data: 2015-00-24 | Pagine: Meteo"
+    },
+    {
+      "base_name": "scd3-foto-gruppo",
+      "best_file": "scd3-foto-gruppo-3591.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/scd3-foto-gruppo-3591.jpg",
+      "best_size": 3591,
+      "variants_count": 42,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "corso_vela"
+      ],
+      "html_references": [
+        {
+          "html_file": "safeguarding.html",
+          "page_title": "Safeguarding",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Tipo: Corso di vela | Pagine: Safeguarding"
+    },
+    {
+      "base_name": "scd3-chiusura-corso",
+      "best_file": "scd3-chiusura-corso-3591.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/scd3-chiusura-corso-3591.jpg",
+      "best_size": 3591,
+      "variants_count": 15,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "corso_vela"
+      ],
+      "html_references": [],
+      "description": "Tipo: Corso di vela"
+    },
+    {
+      "base_name": "scd2-foto-gruppo",
+      "best_file": "scd2-foto-gruppo-3591.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/scd2-foto-gruppo-3591.jpg",
+      "best_size": 3591,
+      "variants_count": 46,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "corso_vela"
+      ],
+      "html_references": [],
+      "description": "Tipo: Corso di vela"
+    },
+    {
+      "base_name": "scd1-foto-gruppo",
+      "best_file": "scd1-foto-gruppo-3591.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/scd1-foto-gruppo-3591.jpg",
+      "best_size": 3591,
+      "variants_count": 36,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "corso_vela"
+      ],
+      "html_references": [],
+      "description": "Tipo: Corso di vela"
+    },
+    {
+      "base_name": "poster",
+      "best_file": "poster-2400.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/poster-2400.jpg",
+      "best_size": 2400,
+      "variants_count": 150,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "galleria"
+      ],
+      "html_references": [
+        {
+          "html_file": "video-e-foto.html",
+          "page_title": "Video e Foto",
+          "alt_text": "Video",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Tipo: Galleria foto | Pagine: Video e Foto"
+    },
+    {
+      "base_name": "img_1289",
+      "best_file": "img_1289-2304-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1289-2304-1.jpg",
+      "best_size": 2304,
+      "variants_count": 11,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [
+        {
+          "html_file": "iscrizione.html",
+          "page_title": "Iscrizione",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Pagine: Iscrizione"
+    },
+    {
+      "base_name": "img_1231",
+      "best_file": "img_1231-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1231-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1228",
+      "best_file": "img_1228-3165-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1228-3165-1.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1214",
+      "best_file": "img_1214-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1214-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1209",
+      "best_file": "img_1209-3165-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1209-3165-1.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1205",
+      "best_file": "img_1205-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1205-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1204",
+      "best_file": "img_1204-960-5.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1204-960-5.jpg",
+      "best_size": 960,
+      "variants_count": 1,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [
+        {
+          "html_file": "documenti.html",
+          "page_title": "Documenti",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Pagine: Documenti"
+    },
+    {
+      "base_name": "img_1196",
+      "best_file": "img_1196-3165-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1196-3165-1.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1191",
+      "best_file": "img_1191-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1191-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1091",
+      "best_file": "img_1091-2880.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1091-2880.jpg",
+      "best_size": 2880,
+      "variants_count": 39,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "corso_vela"
+      ],
+      "html_references": [
+        {
+          "html_file": "scuola-di-vela.html",
+          "page_title": "Scuola di Vela",
+          "alt_text": "",
+          "nearby_text": ""
+        },
+        {
+          "html_file": "scuola-di-vela-adulti-week-end.html",
+          "page_title": "Scuola di Vela Adulti Week-end",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Tipo: Corso di vela | Pagine: Scuola di Vela, Scuola di Vela Adulti Week-end"
+    },
+    {
+      "base_name": "img_1090",
+      "best_file": "img_1090-2250.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1090-2250.jpg",
+      "best_size": 2250,
+      "variants_count": 29,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_1089",
+      "best_file": "img_1089-2250-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_1089-2250-1.jpg",
+      "best_size": 2250,
+      "variants_count": 29,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0785",
+      "best_file": "img_0785-1966.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0785-1966.jpg",
+      "best_size": 1966,
+      "variants_count": 32,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0780",
+      "best_file": "img_0780-1966.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0780-1966.jpg",
+      "best_size": 1966,
+      "variants_count": 32,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0776",
+      "best_file": "img_0776-1966-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0776-1966-1.jpg",
+      "best_size": 1966,
+      "variants_count": 32,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0775",
+      "best_file": "img_0775-1966.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0775-1966.jpg",
+      "best_size": 1966,
+      "variants_count": 32,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0773",
+      "best_file": "img_0773-1966.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0773-1966.jpg",
+      "best_size": 1966,
+      "variants_count": 32,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0767",
+      "best_file": "img_0767-1966-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0767-1966-1.jpg",
+      "best_size": 1966,
+      "variants_count": 32,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0760",
+      "best_file": "img_0760-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0760-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0759",
+      "best_file": "img_0759-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0759-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0756",
+      "best_file": "img_0756-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0756-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0755",
+      "best_file": "img_0755-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0755-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0754",
+      "best_file": "img_0754-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0754-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0753",
+      "best_file": "img_0753-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0753-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 37,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0750",
+      "best_file": "img_0750-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0750-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0749",
+      "best_file": "img_0749-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0749-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0748",
+      "best_file": "img_0748-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0748-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0746",
+      "best_file": "img_0746-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0746-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0745",
+      "best_file": "img_0745-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0745-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0744",
+      "best_file": "img_0744-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0744-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0743",
+      "best_file": "img_0743-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0743-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0741",
+      "best_file": "img_0741-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0741-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0740",
+      "best_file": "img_0740-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0740-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0739",
+      "best_file": "img_0739-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0739-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0737",
+      "best_file": "img_0737-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0737-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0736",
+      "best_file": "img_0736-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0736-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0734",
+      "best_file": "img_0734-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0734-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0733",
+      "best_file": "img_0733-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0733-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0732",
+      "best_file": "img_0732-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0732-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0731",
+      "best_file": "img_0731-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0731-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0730",
+      "best_file": "img_0730-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0730-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0729",
+      "best_file": "img_0729-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0729-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0728",
+      "best_file": "img_0728-1966-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0728-1966-1.jpg",
+      "best_size": 1966,
+      "variants_count": 32,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0725",
+      "best_file": "img_0725-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0725-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0724",
+      "best_file": "img_0724-1572.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0724-1572.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0720",
+      "best_file": "img_0720-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0720-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0719",
+      "best_file": "img_0719-1572-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0719-1572-1.jpg",
+      "best_size": 1572,
+      "variants_count": 28,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0704-2",
+      "best_file": "img_0704-2-2631-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0704-2-2631-1.jpg",
+      "best_size": 2631,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0704",
+      "best_file": "img_0704-2-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0704-2-2640.jpg",
+      "best_size": 2,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0703",
+      "best_file": "img_0703-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0703-2640.jpg",
+      "best_size": 2640,
+      "variants_count": 54,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0701-2",
+      "best_file": "img_0701-2-2631-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0701-2-2631-1.jpg",
+      "best_size": 2631,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0701",
+      "best_file": "img_0701-2-1760.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0701-2-1760.jpg",
+      "best_size": 2,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0696-2",
+      "best_file": "img_0696-2-2631-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0696-2-2631-1.jpg",
+      "best_size": 2631,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0696",
+      "best_file": "img_0696-2-2631.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0696-2-2631.jpg",
+      "best_size": 2,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0695",
+      "best_file": "img_0695-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0695-2640.jpg",
+      "best_size": 2640,
+      "variants_count": 54,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0691",
+      "best_file": "img_0691-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0691-2640.jpg",
+      "best_size": 2640,
+      "variants_count": 53,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0688-2",
+      "best_file": "img_0688-2-2112-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0688-2-2112-1.jpg",
+      "best_size": 2112,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0688",
+      "best_file": "img_0688-2-1760.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0688-2-1760.jpg",
+      "best_size": 2,
+      "variants_count": 26,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0687-2",
+      "best_file": "img_0687-2-2631-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0687-2-2631-1.jpg",
+      "best_size": 2631,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0687",
+      "best_file": "img_0687-2-2631.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0687-2-2631.jpg",
+      "best_size": 2,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0685",
+      "best_file": "img_0685-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0685-2640.jpg",
+      "best_size": 2640,
+      "variants_count": 53,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0684",
+      "best_file": "img_0684-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0684-2640.jpg",
+      "best_size": 2640,
+      "variants_count": 53,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0683-2",
+      "best_file": "img_0683-2-2112-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0683-2-2112-1.jpg",
+      "best_size": 2112,
+      "variants_count": 29,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0683",
+      "best_file": "img_0683-2-352.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0683-2-352.jpg",
+      "best_size": 2,
+      "variants_count": 37,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0682-2",
+      "best_file": "img_0682-2-2112-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0682-2-2112-1.jpg",
+      "best_size": 2112,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0682",
+      "best_file": "img_0682-2-468.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0682-2-468.jpg",
+      "best_size": 2,
+      "variants_count": 26,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0680",
+      "best_file": "img_0680-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0680-2640.jpg",
+      "best_size": 2640,
+      "variants_count": 53,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0674-2",
+      "best_file": "img_0674-2-2112-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0674-2-2112-1.jpg",
+      "best_size": 2112,
+      "variants_count": 27,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0674",
+      "best_file": "img_0674-2-234.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0674-2-234.jpg",
+      "best_size": 2,
+      "variants_count": 26,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0673",
+      "best_file": "img_0673-2640.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0673-2640.jpg",
+      "best_size": 2640,
+      "variants_count": 53,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0638",
+      "best_file": "img_0638-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0638-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0624",
+      "best_file": "img_0624-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0624-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0623",
+      "best_file": "img_0623-3165-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0623-3165-1.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0621",
+      "best_file": "img_0621-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0621-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0620",
+      "best_file": "img_0620-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0620-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0614",
+      "best_file": "img_0614-3165.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0614-3165.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0604",
+      "best_file": "img_0604-3165-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0604-3165-1.jpg",
+      "best_size": 3165,
+      "variants_count": 55,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "img_0180",
+      "best_file": "img_0180-2400-5.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/img_0180-2400-5.jpg",
+      "best_size": 2400,
+      "variants_count": 10,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [
+        {
+          "html_file": "documenti.html",
+          "page_title": "Documenti",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Pagine: Documenti"
+    },
+    {
+      "base_name": "fullsizerender-16",
+      "best_file": "fullsizerender-16-3165-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/fullsizerender-16-3165-1.jpg",
+      "best_size": 3165,
+      "variants_count": 33,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "fullsizerender",
+      "best_file": "fullsizerender-16-949.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/fullsizerender-16-949.jpg",
+      "best_size": 16,
+      "variants_count": 22,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "foto-frattini",
+      "best_file": "foto-frattini-1188.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/foto-frattini-1188.jpg",
+      "best_size": 1188,
+      "variants_count": 7,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "finale2",
+      "best_file": "finale2-1350-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/finale2-1350-1.jpg",
+      "best_size": 1350,
+      "variants_count": 20,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "evento"
+      ],
+      "html_references": [],
+      "description": "Tipo: Evento"
+    },
+    {
+      "base_name": "finale",
+      "best_file": "finale-2400.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/finale-2400.jpg",
+      "best_size": 2400,
+      "variants_count": 40,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "evento"
+      ],
+      "html_references": [
+        {
+          "html_file": "pagina-11.html",
+          "page_title": "Pagina 11",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Tipo: Evento | Pagine: Pagina 11"
+    },
+    {
+      "base_name": "dsc00213",
+      "best_file": "dsc00213-3600.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/dsc00213-3600.jpg",
+      "best_size": 3600,
+      "variants_count": 15,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "dsc00206",
+      "best_file": "dsc00206-2000-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/dsc00206-2000-1.jpg",
+      "best_size": 2000,
+      "variants_count": 9,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "altro"
+      ],
+      "html_references": [],
+      "description": "Foto CNC"
+    },
+    {
+      "base_name": "dji_0004",
+      "best_file": "dji_0004-3600.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/dji_0004-3600.jpg",
+      "best_size": 3600,
+      "variants_count": 15,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "drone"
+      ],
+      "html_references": [],
+      "description": "Tipo: Foto aerea (drone)"
+    },
+    {
+      "base_name": "dji",
+      "best_file": "dji-1920.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/dji-1920.jpg",
+      "best_size": 1920,
+      "variants_count": 12,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "drone"
+      ],
+      "html_references": [],
+      "description": "Tipo: Foto aerea (drone)"
+    },
+    {
+      "base_name": "cabinati",
+      "best_file": "cabinati-3543-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/cabinati-3543-1.jpg",
+      "best_size": 3543,
+      "variants_count": 30,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "corso_cabinati"
+      ],
+      "html_references": [
+        {
+          "html_file": "pagina-11.html",
+          "page_title": "Pagina 11",
+          "alt_text": "",
+          "nearby_text": ""
+        },
+        {
+          "html_file": "informazioni.html",
+          "page_title": "Informazioni",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Tipo: Corso cabinati | Pagine: Informazioni, Pagina 11"
+    },
+    {
+      "base_name": "bannerluglio18",
+      "best_file": "bannerluglio18-2400.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/bannerluglio18-2400.jpg",
+      "best_size": 2400,
+      "variants_count": 13,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "banner"
+      ],
+      "html_references": [],
+      "description": "Tipo: Banner sito"
+    },
+    {
+      "base_name": "banner3-18",
+      "best_file": "banner3-18-3600-2.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/banner3-18-3600-2.jpg",
+      "best_size": 3600,
+      "variants_count": 5,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "banner"
+      ],
+      "html_references": [],
+      "description": "Tipo: Banner sito"
+    },
+    {
+      "base_name": "banner3",
+      "best_file": "banner3-18-1200.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/banner3-18-1200.jpg",
+      "best_size": 18,
+      "variants_count": 13,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "banner"
+      ],
+      "html_references": [],
+      "description": "Tipo: Banner sito"
+    },
+    {
+      "base_name": "banner10-18",
+      "best_file": "banner10-18-960-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/banner10-18-960-1.jpg",
+      "best_size": 960,
+      "variants_count": 1,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "banner"
+      ],
+      "html_references": [],
+      "description": "Tipo: Banner sito"
+    },
+    {
+      "base_name": "banner10",
+      "best_file": "banner10-18-1782.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/banner10-18-1782.jpg",
+      "best_size": 18,
+      "variants_count": 14,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "banner"
+      ],
+      "html_references": [],
+      "description": "Tipo: Banner sito"
+    },
+    {
+      "base_name": "396",
+      "best_file": "396-723-1.jpg",
+      "best_path": "/Users/rforina/Code/cncvela/www.cncvela.it/images/396-723-1.jpg",
+      "best_size": 723,
+      "variants_count": 18,
+      "extension": "jpg",
+      "date": null,
+      "categories": [
+        "corso_vela",
+        "galleria"
+      ],
+      "html_references": [
+        {
+          "html_file": "scuola-di-vela.html",
+          "page_title": "Scuola di Vela",
+          "alt_text": "",
+          "nearby_text": ""
+        },
+        {
+          "html_file": "index.html",
+          "page_title": "home",
+          "alt_text": "",
+          "nearby_text": ""
+        },
+        {
+          "html_file": "squadra-sportiva.html",
+          "page_title": "Squadra Sportiva",
+          "alt_text": "",
+          "nearby_text": ""
+        }
+      ],
+      "description": "Tipo: Corso di vela, Galleria foto | Pagine: Squadra Sportiva, Scuola di Vela, home"
+    }
+  ]
+}

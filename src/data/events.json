@@ -1,16 +1,6 @@
 {
   "events": [
     {
-      "id": "festa-nuovo-sito-2025",
-      "type": "evento_sociale",
-      "title": "Festa Inaugurazione Nuovo Sito Web",
-      "date": "2025-12-20",
-      "time": "19:30",
-      "description": "Grande festa per celebrare il lancio del nuovo sito web del Circolo Nautico Caldè! Aperitivo, brindisi e tante sorprese. Tutti i soci sono invitati!",
-      "registrationUrl": "mailto:segreteria@cncvela.it?subject=Partecipazione Festa Nuovo Sito",
-      "status": "open"
-    },
-    {
       "id": "corso-giovani-2025-1",
       "type": "corso",
       "title": "Corso Giovani FIV - 1° Turno",
@@ -41,22 +31,6 @@
       "time": "09:00",
       "description": "Corso di vela su derive per giovani dai 6 ai 18 anni. Settimana intensiva dal lunedì al venerdì.",
       "registrationUrl": "#iscrizione",
-      "status": "open"
-    },
-    {
-      "id": "regata-nuovo-sito-2025",
-      "type": "regata",
-      "title": "Regata del Nuovo Sito",
-      "subtitle": "Regata celebrativa",
-      "date": "2025-12-21",
-      "time": "10:00",
-      "description": "Regata speciale per celebrare il lancio del nuovo sito web del Circolo. Aperta a tutti i soci!",
-      "documents": {
-        "bando": null,
-        "iscrizione": null,
-        "istruzioni": null,
-        "classifica": null
-      },
       "status": "open"
     },
     {
@@ -133,4 +107,3 @@
     }
   ]
 }
-
