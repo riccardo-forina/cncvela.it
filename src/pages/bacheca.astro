@@ -35,7 +35,7 @@ const counts = {
   </section>
   
   <!-- Title bar -->
-  <section class="bg-[var(--color-accent-primary)] dark:bg-[#0D1B2A] py-6 md:py-8">
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h1 class="text-2xl md:text-3xl font-black text-white">{page.data.title}</h1>
       {page.data.subtitle && (
@@ -100,7 +100,7 @@ const counts = {
             ))}
           </div>
         ) : (
-          <div class="text-center py-12 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl">
+          <div class="text-center py-12 bg-secondary rounded-xl">
             <span class="text-4xl mb-4 block">📅</span>
             <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
               Nessun evento in programma al momento.
@@ -110,7 +110,7 @@ const counts = {
       </div>
 
       <!-- Empty State (shown when filter has no results) -->
-      <div id="empty-state" class="hidden text-center py-12 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl">
+      <div id="empty-state" class="hidden text-center py-12 bg-secondary rounded-xl">
         <span class="text-4xl mb-4 block">🔍</span>
         <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
           Nessun evento di questo tipo in programma.
@@ -121,7 +121,7 @@ const counts = {
 
   <!-- Past Events -->
   {pastEvents.length > 0 && (
-    <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <section class="py-12 md:py-16 bg-secondary">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
           Eventi Passati

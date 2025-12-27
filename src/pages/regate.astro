@@ -48,7 +48,7 @@ function formatShortDate(dateStr: string): string {
   </section>
   
   <!-- Title bar -->
-  <section class="bg-[var(--color-accent-primary)] dark:bg-[#0D1B2A] py-6 md:py-8">
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h1 class="text-2xl md:text-3xl font-black text-white">{page.data.title}</h1>
       {page.data.subtitle && (
@@ -67,7 +67,7 @@ function formatShortDate(dateStr: string): string {
       {upcomingRegattas.length > 0 ? (
         <div class="space-y-6">
           {upcomingRegattas.map((regata) => (
-            <article class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <article class="bg-secondary rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
               <div class="p-6">
                 <div class="flex flex-col md:flex-row md:items-start gap-6">
                   <!-- Date Badge -->
@@ -190,7 +190,7 @@ function formatShortDate(dateStr: string): string {
           ))}
         </div>
       ) : (
-        <div class="text-center py-12 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl">
+        <div class="text-center py-12 bg-secondary rounded-xl">
           <span class="text-4xl mb-4 block">🏆</span>
           <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
             Nessuna regata in programma al momento.
@@ -204,7 +204,7 @@ function formatShortDate(dateStr: string): string {
   </section>
 
   <!-- Bank Details -->
-  <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+  <section class="py-12 md:py-16 bg-secondary">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-4" style="font-size: var(--text-2xl);">
         Pagamento Iscrizione
@@ -225,7 +225,7 @@ function formatShortDate(dateStr: string): string {
           </div>
           <div class="flex flex-col sm:flex-row sm:gap-4">
             <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">IBAN:</dt>
-            <dd class="font-mono text-sm break-all bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] px-3 py-2 rounded-lg">
+            <dd class="font-mono text-sm break-all bg-secondary px-3 py-2 rounded-lg">
               {pricing.bankDetails.iban}
             </dd>
           </div>
@@ -248,7 +248,7 @@ function formatShortDate(dateStr: string): string {
         
         <div class="space-y-8">
           {pastRegattas.map((regata) => (
-            <article class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <article class="bg-secondary rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
               <div class="p-4 md:p-6 border-b border-gray-200 dark:border-gray-700">
                 <div class="flex flex-wrap items-center justify-between gap-4">
                   <div>

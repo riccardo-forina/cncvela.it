@@ -35,7 +35,7 @@ const upcomingCourses = events.events
   </section>
   
   <!-- Title bar -->
-  <section class="bg-[var(--color-accent-primary)] dark:bg-[#0D1B2A] py-6 md:py-8">
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h1 class="text-2xl md:text-3xl font-black text-white">{page.data.title}</h1>
       {page.data.subtitle && (
@@ -56,7 +56,7 @@ const upcomingCourses = events.events
         {courses.map(async (course) => {
           const { Content } = await course.render();
           return (
-            <article class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <article class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
               <div class="w-14 h-14 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex items-center justify-center mb-4">
                 <span class="text-2xl">{course.data.icon === 'yacht' ? '🛥️' : '⛵'}</span>
               </div>
@@ -108,7 +108,7 @@ const upcomingCourses = events.events
 
   <!-- Upcoming Courses -->
   {upcomingCourses.length > 0 && (
-    <section class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+    <section class="py-12 md:py-16 bg-secondary">
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
           Prossimi Corsi
@@ -132,7 +132,7 @@ const upcomingCourses = events.events
       
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {pricingCards.map((card) => (
-          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-1">{card.data.title}</h3>
             {card.data.note && (
               <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">{card.data.note}</p>
@@ -166,7 +166,7 @@ const upcomingCourses = events.events
   </section>
 
   <!-- Registration Form -->
-  <section id="iscrizione" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+  <section id="iscrizione" class="py-12 md:py-16 bg-secondary">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-4 text-center" style="font-size: var(--text-2xl);">
         Iscriviti ai Corsi

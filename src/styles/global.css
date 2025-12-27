@@ -27,7 +27,7 @@
   
   /* Dark Mode Backgrounds */
   --color-bg-primary-dark: #0D1B2A;
-  --color-bg-secondary-dark: #1B2838;
+  --color-bg-secondary-dark: #162A3E;
   --color-bg-accent-dark: #1E3A5F;
   
   /* Dark Mode Text */
@@ -35,7 +35,7 @@
   --color-text-secondary-dark: #A0AEC0;
   
   /* Dark Mode Accents */
-  --color-accent-primary-dark: #4A7AB0;
+  --color-accent-primary-dark: #162D4A;
   --color-accent-secondary-dark: #E8C675;
   --color-accent-tertiary-dark: #E8967F;  /* Coral light - Social events */
   
@@ -112,6 +112,19 @@ body {
   body {
     color: var(--color-text-primary-dark);
     background-color: var(--color-bg-primary-dark);
+  }
+}
+
+/* ----------------------------------------
+   BACKGROUND UTILITY CLASSES
+   ---------------------------------------- */
+.bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-secondary {
+    background-color: var(--color-bg-secondary-dark);
   }
 }
 

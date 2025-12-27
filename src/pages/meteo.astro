@@ -12,7 +12,7 @@ const LON = 8.6667;
 
 <BaseLayout title={page.data.title} description={page.data.description}>
   <!-- Hero -->
-  <section class="relative bg-[var(--color-accent-primary)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
+  <section class="relative bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] pt-10 md:pt-14 pb-16 md:pb-20 overflow-hidden">
     <!-- Wave pattern -->
     <div class="absolute inset-0 pointer-events-none mix-blend-soft-light opacity-50" aria-hidden="true">
       <img src="images/wave-pattern.jpg" alt="" class="w-full h-full object-cover" />
@@ -62,23 +62,23 @@ const LON = 8.6667;
         
         <!-- Weather Stats Grid -->
         <div id="current-weather" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          <div class="text-center p-4 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl">
+          <div class="text-center p-4 bg-secondary rounded-xl">
             <p class="text-3xl md:text-4xl font-black text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
               <span id="current-wind-speed">--</span><span class="text-lg md:text-xl font-bold ml-1">kn</span>
             </p>
             <p class="text-xs md:text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">vento</p>
           </div>
-          <div class="text-center p-4 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl">
+          <div class="text-center p-4 bg-secondary rounded-xl">
             <p class="text-3xl md:text-4xl font-black text-[var(--color-accent-secondary)] dark:text-[var(--color-accent-secondary-dark)]" id="current-wind-dir">--</p>
             <p class="text-xs md:text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">direzione</p>
           </div>
-          <div class="text-center p-4 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl">
+          <div class="text-center p-4 bg-secondary rounded-xl">
             <p class="text-3xl md:text-4xl font-black">
               <span id="current-temp">--</span><span class="text-lg md:text-xl font-bold ml-1">°C</span>
             </p>
             <p class="text-xs md:text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">temperatura</p>
           </div>
-          <div class="text-center p-4 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl">
+          <div class="text-center p-4 bg-secondary rounded-xl">
             <p class="text-3xl md:text-4xl font-black">
               <span id="current-humidity">--</span><span class="text-lg md:text-xl font-bold ml-1">%</span>
             </p>

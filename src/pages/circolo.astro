@@ -13,14 +13,14 @@ const { board: boardMembers, contact, documents } = board;
   <!-- Hero image -->
   <section class="relative h-[35vh] min-h-[250px] overflow-hidden">
     <img 
-      src="images/atmosfera/tramonto-lago.jpg" 
+      src="images/atmosfera/lago-nuvole.jpg" 
       alt="Tramonto sul Lago Maggiore dalla baia di Caldè"
-      class="absolute inset-0 w-full h-full object-cover object-bottom"
+      class="absolute inset-0 w-full h-full object-cover object-center"
     />
   </section>
   
   <!-- Title bar -->
-  <section class="bg-[var(--color-accent-primary)] dark:bg-[#0D1B2A] py-6 md:py-8">
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h1 class="text-2xl md:text-3xl font-black text-white">{page.data.title}</h1>
       {page.data.subtitle && (
@@ -43,7 +43,7 @@ const { board: boardMembers, contact, documents } = board;
   </section>
 
   <!-- Facilities Gallery -->
-  <section id="strutture" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+  <section id="strutture" class="py-12 md:py-16 bg-secondary">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-8 text-center" style="font-size: var(--text-2xl);">
         Le Nostre Strutture
@@ -166,7 +166,7 @@ const { board: boardMembers, contact, documents } = board;
   </section>
 
   <!-- Consiglio Direttivo (from JSON) -->
-  <section id="consiglio" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+  <section id="consiglio" class="py-12 md:py-16 bg-secondary">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
         {boardMembers.title}
@@ -209,7 +209,7 @@ const { board: boardMembers, contact, documents } = board;
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Membership Fees -->
-        <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+        <div class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
           <h3 class="font-bold text-lg mb-4">{pricing.membership.title}</h3>
           <ul class="space-y-4">
             {pricing.membership.items.map((item) => (
@@ -230,7 +230,7 @@ const { board: boardMembers, contact, documents } = board;
         
         <!-- Boat Storage Fees -->
         <div class="space-y-6">
-          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-1">{pricing.boatStorage.title}</h3>
             <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">{pricing.boatStorage.note}</p>
             <ul class="space-y-3">
@@ -243,7 +243,7 @@ const { board: boardMembers, contact, documents } = board;
             </ul>
           </div>
           
-          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-4">{pricing.dinghyStorage.title}</h3>
             <ul class="space-y-3">
               {pricing.dinghyStorage.items.map((item) => (
@@ -279,7 +279,7 @@ const { board: boardMembers, contact, documents } = board;
   </section>
 
   <!-- Documenti (from JSON) -->
-  <section id="documenti" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+  <section id="documenti" class="py-12 md:py-16 bg-secondary">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
         Documenti
@@ -315,7 +315,7 @@ const { board: boardMembers, contact, documents } = board;
   </section>
 
   <!-- Iscrizione al Circolo -->
-  <section id="iscrizione" class="py-12 md:py-16 bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)]">
+  <section id="iscrizione" class="py-12 md:py-16 bg-secondary">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-4 text-center" style="font-size: var(--text-2xl);">
         Diventa Socio
@@ -380,7 +380,7 @@ const { board: boardMembers, contact, documents } = board;
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Contact Info -->
         <div class="space-y-6">
-          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-4">Sede del Circolo</h3>
             <address class="not-italic space-y-3">
               <div class="flex items-start gap-3">
@@ -415,7 +415,7 @@ const { board: boardMembers, contact, documents } = board;
             </address>
           </div>
           
-          <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
             <h3 class="font-bold text-lg mb-2">Dati Fiscali</h3>
             <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
               {contact.legalName}
@@ -430,7 +430,7 @@ const { board: boardMembers, contact, documents } = board;
         </div>
         
         <!-- Map -->
-        <div class="bg-[var(--color-bg-secondary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 min-h-[300px] lg:min-h-full">
+        <div class="bg-secondary rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 min-h-[300px] lg:min-h-full">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2779.6!2d8.6967!3d45.9467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786794e7d8a0001%3A0x1!2sVia%20Maggiore%2036%2C%2021010%20Castelveccana%20VA!5e0!3m2!1sit!2sit!4v1234567890"
             width="100%"
