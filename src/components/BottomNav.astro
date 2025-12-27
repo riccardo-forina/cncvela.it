@@ -14,11 +14,19 @@ const navItems = [
 ];
 
 function isActive(href: string, currentPath: string): boolean {
+  // Normalize: remove trailing slashes and get the last segment
+  const cleanPath = currentPath.replace(/\/$/, '');
+  const segments = cleanPath.split('/').filter(Boolean);
+  const lastSegment = segments[segments.length - 1] || '';
+  
   if (href === './') {
-    return currentPath === '/' || currentPath.endsWith('/');
+    // Home is active only if we're at root or the base path (e.g., /cncvela.it)
+    const isBasePath = lastSegment === '' || lastSegment.endsWith('.it') || lastSegment === 'cncvela';
+    const noPageSegment = !['corsi', 'regate', 'galleria', 'bacheca', 'circolo', 'meteo', 'privacy', 'safeguarding'].includes(lastSegment);
+    return isBasePath || (segments.length <= 1 && noPageSegment);
   }
-  const normalizedPath = currentPath.split('/').filter(Boolean).pop() || '';
-  return normalizedPath === href || currentPath.includes(`/${href}`);
+  
+  return lastSegment === href;
 }
 ---
 
@@ -32,7 +40,7 @@ function isActive(href: string, currentPath: string): boolean {
             "flex flex-col items-center justify-center py-2 px-1 rounded-lg transition-colors touch-target",
             "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-primary)]",
             {
-              "text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]": isActive(item.href, currentPath),
+              "text-[var(--color-accent-primary)] dark:text-[#7CB3F0]": isActive(item.href, currentPath),
               "text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]": !isActive(item.href, currentPath),
             }
           ]}

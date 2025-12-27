@@ -1,5 +1,10 @@
 ---
 import '../styles/global.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/700.css';
+import '@fontsource/dm-sans/800.css';
+import '@fontsource/dm-sans/900.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BottomNav from '../components/BottomNav.astro';
@@ -29,9 +34,18 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') || '';
 const baseUrl = base.replace(/\/$/, '');
 const fullSiteUrl = `${siteUrl}${baseUrl}`;
 
-// Build canonical URL
+// Production URL (always points to the real site)
+const productionUrl = 'https://www.cncvela.it';
+
+// Check if we're on GitHub Pages (staging)
+const isGitHubPages = siteUrl.includes('github.io');
+
+// Build canonical URL - always points to production
 const pagePath = currentPath.replace(baseUrl, '').replace(/^\/+/, '');
-const canonicalUrl = pagePath ? `${fullSiteUrl}/${pagePath}` : fullSiteUrl;
+const canonicalUrl = pagePath ? `${productionUrl}/${pagePath}` : productionUrl;
+
+// Robots directive - noindex on staging, index on production
+const robotsContent = isGitHubPages ? 'noindex, nofollow' : 'index, follow';
 
 const fullTitle = `${title} | CNC Caldè`;
 const ogImage = `${fullSiteUrl}/${image}`;
@@ -101,7 +115,7 @@ const jsonLd = {
     <meta name="twitter:image" content={ogImage} />
     
     <!-- Additional SEO -->
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robotsContent} />
     <meta name="author" content="Circolo Nautico Caldè A.S.D." />
     <meta name="geo.region" content="IT-VA" />
     <meta name="geo.placename" content="Castelveccana" />
@@ -115,10 +129,7 @@ const jsonLd = {
     <link rel="apple-touch-icon" sizes="180x180" href="images/logo-square.png" />
     <link rel="manifest" href="manifest.json" />
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+    <!-- Fonts: Self-hosted via @fontsource for better performance -->
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

@@ -4,32 +4,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getEntry } from 'astro:content';
 import gallery from '../data/gallery.json';
 
-import heroImage from '../assets/images/hero/calde-aerial.jpg';
+// Import all images dynamically for optimization
+const allImageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/**/*.{jpg,jpeg,png}',
+  { eager: true }
+);
+
+// Create a map from public path to optimized image
+function getOptimizedImage(publicPath: string): ImageMetadata | undefined {
+  // Convert "images/galleria/foto.jpg" to "../assets/images/galleria/foto.jpg"
+  const assetPath = `../assets/${publicPath}`;
+  const module = allImageModules[assetPath];
+  return module?.default;
+}
 
 // Get page content
 const page = await getEntry('pages', 'galleria');
 
-// Combine all gallery images for the main grid
-const allImages = [
-  ...gallery.hero,
-  ...gallery.corsi,
-  ...gallery.galleria,
-  ...gallery.regate,
-  ...gallery.atmosfera,
-];
+// Hero image
+const heroImage = getOptimizedImage('images/hero/calde-aerial.jpg');
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
   <!-- Hero image -->
   <section class="relative h-[40vh] min-h-[300px] overflow-hidden">
-    <Image 
-      src={heroImage}
-      alt="Vista aerea della baia di Caldè"
-      class="absolute inset-0 w-full h-full object-cover"
-      widths={[640, 1024, 1536]}
-      sizes="100vw"
-      quality={80}
-    />
+    {heroImage && (
+      <Image 
+        src={heroImage}
+        alt="Vista aerea della baia di Caldè"
+        class="absolute inset-0 w-full h-full object-cover"
+        widths={[640, 1024, 1536]}
+        sizes="100vw"
+        quality={70}
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
   </section>
   
   <!-- Title bar -->
@@ -88,48 +98,66 @@ const allImages = [
           Scuola Vela
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {gallery.corsi.map((img) => (
-            <figure 
-              class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
-              data-category="corsi"
-              data-src={img.src}
-              data-alt={img.alt}
-              data-title={img.title}
-              data-description={img.description}
-            >
-              <img 
-                src={img.src} 
-                alt={img.alt}
-                loading="lazy"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                <span class="text-white font-bold">{img.title}</span>
-                <span class="text-white/80 text-sm">{img.description}</span>
-              </figcaption>
-            </figure>
-          ))}
-          {gallery.galleria.map((img) => (
-            <figure 
-              class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
-              data-category="corsi"
-              data-src={img.src}
-              data-alt={img.alt}
-              data-title={img.title}
-              data-description={img.description}
-            >
-              <img 
-                src={img.src} 
-                alt={img.alt}
-                loading="lazy"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                <span class="text-white font-bold">{img.title}</span>
-                <span class="text-white/80 text-sm">{img.description}</span>
-              </figcaption>
-            </figure>
-          ))}
+          {gallery.corsi.map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                data-category="corsi"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[320, 480, 640]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                  <span class="text-white font-bold">{img.title}</span>
+                  <span class="text-white/80 text-sm">{img.description}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
+          {gallery.galleria.map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                data-category="corsi"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[320, 480, 640]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                  <span class="text-white font-bold">{img.title}</span>
+                  <span class="text-white/80 text-sm">{img.description}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       </div>
 
@@ -139,26 +167,35 @@ const allImages = [
           Regate e Premiazioni
         </h2>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {gallery.regate.map((img) => (
-            <figure 
-              class="gallery-item group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
-              data-category="regate"
-              data-src={img.src}
-              data-alt={img.alt}
-              data-title={img.title}
-              data-description={img.description}
-            >
-              <img 
-                src={img.src} 
-                alt={img.alt}
-                loading="lazy"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
-                <span class="text-white font-bold text-sm">{img.title}</span>
-              </figcaption>
-            </figure>
-          ))}
+          {gallery.regate.map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
+                data-category="regate"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[240, 320, 480]}
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                  <span class="text-white font-bold text-sm">{img.title}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       </div>
 
@@ -168,27 +205,36 @@ const allImages = [
           Panorami e Atmosfere
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[...gallery.hero, ...gallery.atmosfera].map((img) => (
-            <figure 
-              class="gallery-item group relative aspect-video rounded-xl overflow-hidden cursor-pointer"
-              data-category="hero"
-              data-src={img.src}
-              data-alt={img.alt}
-              data-title={img.title}
-              data-description={img.description}
-            >
-              <img 
-                src={img.src} 
-                alt={img.alt}
-                loading="lazy"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                <span class="text-white font-bold">{img.title}</span>
-                <span class="text-white/80 text-sm">{img.description}</span>
-              </figcaption>
-            </figure>
-          ))}
+          {[...gallery.hero, ...gallery.atmosfera].map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-video rounded-xl overflow-hidden cursor-pointer"
+                data-category="hero"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[480, 768, 1024]}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                  <span class="text-white font-bold">{img.title}</span>
+                  <span class="text-white/80 text-sm">{img.description}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       </div>
     </div>

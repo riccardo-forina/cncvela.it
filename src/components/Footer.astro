@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import board from '../data/board.json';
+import logoRound from '../assets/images/logo-round.png';
 
 const { contact, safeguarding } = board;
 ---
@@ -10,10 +12,13 @@ const { contact, safeguarding } = board;
       <!-- Club Info -->
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <img 
-            src="images/logo-square.png" 
+          <Image 
+            src={logoRound}
             alt="CNC Caldè" 
-            class="h-10 w-auto"
+            class="h-10 w-10 rounded-full"
+            width={40}
+            height={40}
+            loading="lazy"
           />
           <div>
             <p class="font-bold">{contact.clubName}</p>
@@ -100,7 +105,7 @@ const { contact, safeguarding } = board;
             Tutela minori e prevenzione violenza • Resp. {safeguarding.officer.name}
           </p>
         </div>
-        <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
       </a>

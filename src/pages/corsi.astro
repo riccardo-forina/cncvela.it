@@ -36,7 +36,9 @@ const upcomingCourses = events.events
       class="absolute inset-0 w-full h-full object-cover"
       widths={[640, 1024, 1536]}
       sizes="100vw"
-      quality={80}
+      quality={70}
+      loading="eager"
+      fetchpriority="high"
     />
   </section>
   
@@ -68,7 +70,7 @@ const upcomingCourses = events.events
               </div>
               
               <h3 class="text-xl font-bold mb-1">{course.data.title}</h3>
-              <p class="text-sm text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] font-semibold mb-3">
+              <p class="text-sm text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] font-semibold mb-3">
                 {course.data.subtitle}
               </p>
               
@@ -98,7 +100,7 @@ const upcomingCourses = events.events
               </ul>
               
               <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-                <p class="text-2xl font-black text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+                <p class="text-2xl font-black text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]">
                   €{course.data.price.toFixed(2)}
                   <span class="text-xs font-normal text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
                     {course.data.priceNote}
@@ -152,7 +154,7 @@ const upcomingCourses = events.events
                       <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{item.note}</p>
                     )}
                   </div>
-                  <p class="font-bold text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+                  <p class="font-bold text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]">
                     €{item.price.toFixed(2)}
                   </p>
                 </li>
@@ -261,7 +263,7 @@ const upcomingCourses = events.events
             Il CNC ha implementato un modello organizzativo a tutela dei minori come previsto dalla legge.
           </p>
         </div>
-        <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)] group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
       </a>

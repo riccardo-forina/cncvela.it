@@ -23,7 +23,7 @@
   /* CNC Official Colors */
   --color-accent-primary: #1E3A5F;    /* CNC Navy Blue (from logo) */
   --color-accent-secondary: #D4A84B;  /* CNC Golden Yellow (from logo) */
-  --color-accent-tertiary: #E07A5F;   /* Coral - Social events */
+  --color-accent-tertiary: #C25A3F;   /* Coral darker - Social events (WCAG contrast) */
   
   /* Dark Mode Backgrounds */
   --color-bg-primary-dark: #0D1B2A;
@@ -38,6 +38,9 @@
   --color-accent-primary-dark: #162D4A;
   --color-accent-secondary-dark: #E8C675;
   --color-accent-tertiary-dark: #E8967F;  /* Coral light - Social events */
+  
+  /* Link/Icon colors (high contrast in dark mode) */
+  --color-link-dark: #7CB3F0;  /* Light blue - accessible links */
   
   /* ----------------------------------------
      TYPOGRAPHY
