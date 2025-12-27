@@ -1,0 +1,22 @@
+{
+  "name": "Circolo Nautico Caldè",
+  "short_name": "CNC Caldè",
+  "description": "Scuola Vela FIV e Regate sul Lago Maggiore dal 1970",
+  "start_url": "/cncvela.it/",
+  "display": "standalone",
+  "background_color": "#1E3A5F",
+  "theme_color": "#1E3A5F",
+  "icons": [
+    {
+      "src": "images/logo-square.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo-square.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+

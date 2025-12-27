@@ -1,6 +1,14 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import gallery from '../data/gallery.json';
+
+// Import images
+import heroImage from '../assets/images/hero/calde-aerial.jpg';
+import giovaneVelista from '../assets/images/corsi/giovane-velista.jpg';
+import scuolaVelaAzione from '../assets/images/corsi/scuola-vela-azione.jpg';
+import corsoCabinati from '../assets/images/corsi/corso-cabinati.jpg';
+import tramontoLago from '../assets/images/atmosfera/tramonto-lago.jpg';
 
 // Get a selection of photos for the preview
 const previewPhotos = [
@@ -10,46 +18,49 @@ const previewPhotos = [
 ];
 ---
 
-<BaseLayout title="Home" description="Circolo Nautico Caldè - Scuola Vela FIV e Regate sul Lago Maggiore dal 1970. Corsi di vela per giovani e adulti a Castelveccana.">
+<BaseLayout title="Scuola Vela FIV sul Lago Maggiore" description="Circolo Nautico Caldè - Scuola Vela FIV e Regate sul Lago Maggiore dal 1970. Corsi di vela per giovani e adulti a Castelveccana." image="images/hero/calde-aerial.jpg">
   
   <!-- HERO + STATS: Full viewport wrapper (account for header + bottom nav) -->
   <div class="h-[calc(100svh-4rem)] md:h-[calc(100svh-5rem)] flex flex-col pb-16 md:pb-0">
     
     <!-- HERO IMAGE with floating card -->
     <section class="hero-section relative flex-1 min-h-0 overflow-hidden flex items-end">
-      <img 
-        src="images/hero/calde-aerial.jpg" 
+      <Image 
+        src={heroImage}
         alt="Vista aerea della baia di Caldè sul Lago Maggiore"
         class="absolute inset-0 w-full h-full object-cover object-bottom"
         loading="eager"
         fetchpriority="high"
+        quality={85}
+        widths={[640, 1024, 1536, 2048]}
+        sizes="100vw"
       />
       
       <!-- Floating glass card - full on mobile, aligned right on desktop to show the lake -->
       <div class="relative z-10 w-full px-4 md:px-6 lg:px-8 pb-4 md:pb-6">
         <div class="max-w-6xl mx-auto flex justify-center md:justify-end">
           <div class="w-full md:w-[50%] lg:w-[40%] backdrop-blur-xl rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-2xl border border-white/15" style="background-color: rgba(30, 58, 95, 0.45);">
-            <!-- Headline -->
+        <!-- Headline -->
             <h1 class="text-xl md:text-2xl lg:text-3xl font-black leading-tight text-white">
               Vivi la Vela<br class="hidden md:inline" /><span class="text-[var(--color-accent-secondary)]"> sul Lago Maggiore</span>
-            </h1>
+        </h1>
             <p class="text-xs md:text-sm text-white/80 mt-1 md:mt-2">
               Scuola Vela FIV dal 1970 · Corsi per tutte le età
-            </p>
+        </p>
             <!-- CTA -->
             <div class="mt-4 flex justify-center">
-              <a
-                href="corsi"
+          <a
+            href="corsi"
                 class="inline-flex items-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-[var(--color-accent-secondary)] hover:bg-[var(--color-accent-secondary)]/90 text-[var(--color-accent-primary)] font-bold text-xs md:text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Scopri i Corsi
                 <svg class="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
-              </a>
-            </div>
-          </div>
+          </a>
         </div>
+      </div>
+    </div>
       </div>
     </section>
     
@@ -70,10 +81,10 @@ const previewPhotos = [
             <div class="text-[10px] md:text-sm text-white/70 mt-0.5 md:mt-1">Anni di età</div>
           </div>
         </div>
-      </div>
-    </section>
+    </div>
+  </section>
   </div>
-
+  
   <!-- GALLERY PREVIEW -->
   <section class="py-16 md:py-24">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
@@ -141,10 +152,12 @@ const previewPhotos = [
         <!-- Giovani -->
         <a href="corsi" class="group bg-white dark:bg-[var(--color-bg-primary-dark)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
           <div class="relative h-48 overflow-hidden">
-            <img 
-              src="images/corsi/giovane-velista.jpg" 
+            <Image 
+              src={giovaneVelista}
               alt="Corso vela giovani"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              widths={[320, 480, 640]}
+              sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div class="absolute top-3 left-3 px-3 py-1 bg-[var(--color-accent-primary)] text-white text-xs font-bold rounded-full">
               6-18 ANNI
@@ -166,10 +179,12 @@ const previewPhotos = [
         <!-- Adulti -->
         <a href="corsi" class="group bg-white dark:bg-[var(--color-bg-primary-dark)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
           <div class="relative h-48 overflow-hidden">
-            <img 
-              src="images/corsi/scuola-vela-azione.jpg" 
+            <Image 
+              src={scuolaVelaAzione}
               alt="Corso vela adulti"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              widths={[320, 480, 640]}
+              sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div class="absolute top-3 left-3 px-3 py-1 bg-[var(--color-accent-secondary)] text-[var(--color-accent-primary)] text-xs font-bold rounded-full">
               ADULTI
@@ -191,10 +206,12 @@ const previewPhotos = [
         <!-- Cabinati -->
         <a href="corsi" class="group bg-white dark:bg-[var(--color-bg-primary-dark)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
           <div class="relative h-48 overflow-hidden">
-            <img 
-              src="images/corsi/corso-cabinati.jpg" 
+            <Image 
+              src={corsoCabinati}
               alt="Corso cabinati"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              widths={[320, 480, 640]}
+              sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div class="absolute top-3 left-3 px-3 py-1 bg-[var(--color-accent-tertiary)] text-white text-xs font-bold rounded-full">
               AVANZATO
@@ -288,10 +305,13 @@ const previewPhotos = [
   <section class="relative py-20 md:py-28 overflow-hidden">
     <!-- Background -->
     <div class="absolute inset-0 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)]">
-      <img 
-        src="images/atmosfera/tramonto-lago.jpg" 
+      <Image 
+        src={tramontoLago}
         alt=""
         class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay"
+        widths={[640, 1024, 1536]}
+        sizes="100vw"
+        quality={70}
       />
     </div>
     
