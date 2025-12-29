@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import gallery from '../data/gallery.json';
 
 // Import images
-import heroImage from '../assets/images/hero/calde-aerial.jpg';
 import giovaneVelista from '../assets/images/corsi/giovane-velista.jpg';
 import scuolaVelaAzione from '../assets/images/corsi/scuola-vela-azione.jpg';
 import corsoCabinati from '../assets/images/corsi/corso-cabinati.jpg';
@@ -29,6 +28,12 @@ const previewPhotos = [
   ...gallery.galleria.filter(img => img.src.includes('gruppo')).slice(0, 1),
   ...gallery.regate.slice(0, 1),
 ];
+
+// Base URL for public assets
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const videoPathDesktop = `${base}/videos/desktop/hero-homepage-loop`;
+const videoPathMobile = `${base}/videos/mobile/hero-homepage-loop`;
+const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
 ---
 
 <BaseLayout title="Scuola Vela FIV sul Lago Maggiore" description="Circolo Nautico Caldè - Scuola Vela FIV e Regate sul Lago Maggiore dal 1970. Corsi di vela per giovani e adulti a Castelveccana." image="images/hero/calde-aerial.jpg">
@@ -36,18 +41,279 @@ const previewPhotos = [
   <!-- HERO + STATS: Full viewport wrapper (account for header + bottom nav) -->
   <div class="h-[calc(100svh-4rem)] md:h-[calc(100svh-5rem)] flex flex-col pb-16 md:pb-0">
     
-    <!-- HERO IMAGE with floating card -->
+    <!-- HERO VIDEO with floating card -->
     <section class="hero-section relative flex-1 min-h-0 overflow-hidden flex items-end">
-      <Image 
-        src={heroImage}
-        alt="Vista aerea della baia di Caldè sul Lago Maggiore"
+      <!-- Video background with fallback image -->
+      <video
+        id="hero-video"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
         class="absolute inset-0 w-full h-full object-cover object-bottom"
-        loading="eager"
-        fetchpriority="high"
-        quality={75}
-        widths={[640, 1024, 1536, 2048]}
-        sizes="100vw"
+        aria-label="Vista aerea della baia di Caldè sul Lago Maggiore"
+        poster={fallbackImagePath}
+      >
+        <!-- Source will be set by JavaScript based on device -->
+        <source id="video-source-mp4" src="" type="video/mp4" />
+      </video>
+      <!-- Fallback image shown when video fails to load or play -->
+      <img
+        id="hero-fallback"
+        src={fallbackImagePath}
+        alt="Vista aerea della baia di Caldè sul Lago Maggiore"
+        class="absolute inset-0 w-full h-full object-cover object-bottom z-[-1] transition-opacity duration-500"
       />
+      
+      <!-- Play button overlay for iOS/mobile when autoplay is blocked -->
+      <div
+        id="hero-play-overlay"
+        class="absolute inset-0 z-10 flex items-center justify-center bg-black/20 backdrop-blur-sm transition-opacity duration-500 cursor-pointer opacity-0 pointer-events-none"
+        aria-label="Riproduci video"
+      >
+        <button
+          id="hero-play-button"
+          class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95"
+          aria-label="Riproduci video"
+        >
+          <svg class="w-8 h-8 md:w-10 md:h-10 text-[var(--color-accent-primary)] ml-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+    </div>
+    
+      <script define:vars={{ videoPathDesktop, videoPathMobile }}>
+        // Select correct video source based on device and handle iOS Safari autoplay
+        document.addEventListener('DOMContentLoaded', () => {
+          const video = document.getElementById('hero-video');
+          const sourceMp4 = document.getElementById('video-source-mp4');
+          const fallback = document.getElementById('hero-fallback');
+          const playOverlay = document.getElementById('hero-play-overlay');
+          const playButton = document.getElementById('hero-play-button');
+          
+          if (!video || !sourceMp4 || !fallback || !playOverlay || !playButton) return;
+          
+          const isMobile = window.innerWidth < 768;
+          
+          // Show fallback initially, hide when video starts playing
+          fallback.style.zIndex = '0';
+          video.style.zIndex = '1';
+          
+          // Hide fallback and overlay when video starts playing
+          const hideFallback = () => {
+            fallback.style.zIndex = '-1';
+            fallback.style.opacity = '0';
+            playOverlay.style.opacity = '0';
+            playOverlay.style.pointerEvents = 'none';
+          };
+          
+          // Show fallback if video fails
+          const showFallback = () => {
+            fallback.style.zIndex = '0';
+            fallback.style.opacity = '1';
+            playOverlay.style.opacity = '1';
+            playOverlay.style.pointerEvents = 'auto';
+          };
+          
+          // Set source based on device
+          const mp4Src = isMobile
+            ? `${videoPathMobile}.mp4`
+            : `${videoPathDesktop}.mp4`;
+          
+          // Set MP4 source
+          sourceMp4.src = mp4Src;
+          
+          console.log('Video setup:', { isMobile, mp4Src });
+          
+          // Verify source is set
+          console.log('Source set:', { mp4: sourceMp4.src });
+          
+          // Function to play video
+          const playVideo = async () => {
+            if (video.paused) {
+              try {
+                await video.play();
+                hideFallback();
+                return true;
+              } catch (error) {
+                // Autoplay blocked - show play button
+                playOverlay.style.opacity = '1';
+                playOverlay.style.pointerEvents = 'auto';
+                return false;
+              }
+            }
+            return true;
+          };
+          
+          // Play button click handler
+          const handlePlayClick = async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Play button clicked, video readyState:', video.readyState);
+            console.log('Video source:', sourceMp4.src);
+            console.log('Video networkState:', video.networkState);
+            console.log('Video error:', video.error);
+            
+            // Force reload if needed
+            if (video.readyState < 2 || video.networkState === 3) {
+              console.log('Reloading video...');
+              video.load();
+              // Wait for video to be ready
+              await new Promise((resolve, reject) => {
+                const timeout = setTimeout(() => {
+                  reject(new Error('Video load timeout'));
+                }, 5000);
+                
+                const onCanPlay = () => {
+                  clearTimeout(timeout);
+                  video.removeEventListener('canplay', onCanPlay);
+                  video.removeEventListener('error', onError);
+                  resolve();
+                };
+                
+                const onError = () => {
+                  clearTimeout(timeout);
+                  video.removeEventListener('canplay', onCanPlay);
+                  video.removeEventListener('error', onError);
+                  reject(video.error);
+                };
+                
+                video.addEventListener('canplay', onCanPlay);
+                video.addEventListener('error', onError);
+              }).catch((error) => {
+                console.error('Video load failed:', error);
+                showFallback();
+                return;
+              });
+            }
+            
+            console.log('Attempting to play, readyState:', video.readyState);
+            const played = await playVideo();
+            if (played) {
+              playOverlay.style.opacity = '0';
+              playOverlay.style.pointerEvents = 'none';
+            } else {
+              console.error('Failed to play video');
+            }
+          };
+          
+          playButton.addEventListener('click', handlePlayClick);
+          playOverlay.addEventListener('click', handlePlayClick);
+          
+          // Hide play button when video starts playing automatically
+          const hidePlayButton = () => {
+            playOverlay.style.opacity = '0';
+            playOverlay.style.pointerEvents = 'none';
+          };
+          
+          video.addEventListener('playing', () => {
+            hideFallback();
+            hidePlayButton();
+          });
+          video.addEventListener('error', showFallback);
+          video.addEventListener('loadstart', () => {
+            // Keep fallback visible until video actually plays
+            fallback.style.zIndex = '0';
+          });
+          
+          // Add comprehensive event listeners for debugging
+          video.addEventListener('loadstart', () => {
+            console.log('Video loadstart, readyState:', video.readyState);
+          });
+          
+          video.addEventListener('loadedmetadata', () => {
+            console.log('Video metadata loaded, readyState:', video.readyState);
+          });
+          
+          video.addEventListener('loadeddata', () => {
+            console.log('Video data loaded, readyState:', video.readyState);
+          });
+          
+          video.addEventListener('progress', () => {
+            console.log('Video progress, readyState:', video.readyState, 'buffered:', video.buffered.length);
+          });
+          
+          video.addEventListener('canplay', () => {
+            console.log('Video can play, readyState:', video.readyState);
+            // Try to play immediately (works on most browsers)
+            playVideo().then((played) => {
+              // If autoplay failed, show play button
+              if (!played) {
+                playOverlay.style.opacity = '1';
+                playOverlay.style.pointerEvents = 'auto';
+              }
+            });
+          });
+          
+          video.addEventListener('canplaythrough', () => {
+            console.log('Video can play through, readyState:', video.readyState);
+          });
+          
+          video.addEventListener('error', (e) => {
+            console.error('Video error:', e);
+            console.error('Video error details:', video.error);
+            console.error('Video error code:', video.error?.code, 'message:', video.error?.message);
+            showFallback();
+          });
+          
+          video.addEventListener('stalled', () => {
+            console.warn('Video stalled');
+          });
+          
+          video.addEventListener('suspend', () => {
+            console.warn('Video suspended');
+          });
+          
+          // Reload video to use correct source
+          console.log('Calling video.load()');
+          video.load();
+          
+          // Ensure video plays if paused (after user interaction)
+          let hasUserInteracted = false;
+          video.addEventListener('pause', () => {
+            if (hasUserInteracted) {
+              playVideo();
+            }
+          });
+          
+          // Track user interaction
+          const markInteraction = () => {
+            hasUserInteracted = true;
+          };
+          
+          ['touchstart', 'click', 'scroll'].forEach(event => {
+            document.addEventListener(event, markInteraction, { once: true, passive: true });
+          });
+          
+          // Handle visibility changes
+          document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && video.paused && hasUserInteracted) {
+              playVideo();
+            }
+          });
+        });
+      </script>
+      
+      <script>
+        // Ensure video loops properly on all devices
+        document.addEventListener('DOMContentLoaded', () => {
+          const video = document.getElementById('hero-video') as HTMLVideoElement;
+          if (!video) return;
+          
+          // Ensure video plays if paused (some browsers pause autoplay videos)
+          video.addEventListener('pause', () => {
+            video.play().catch(() => {});
+          });
+          
+          // Handle visibility changes (browser might pause when tab is not visible)
+          document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && video.paused) {
+              video.play().catch(() => {});
+            }
+          });
+        });
+      </script>
       
       <!-- Floating glass card - full on mobile, aligned right on desktop to show the lake -->
       <div class="relative z-10 w-full px-4 md:px-6 lg:px-8 pb-4 md:pb-6">
