@@ -1,209 +1,123 @@
-import { config, fields, collection, singleton } from '@keystatic/core';
-
-// Helper per creare link a Google Translate
-const googleTranslateUrl = (text: string, targetLang: string) => 
-  `https://translate.google.com/?sl=it&tl=${targetLang}&text=${encodeURIComponent(text)}`;
-
-// Lingue supportate
-const locales = ['it', 'en', 'de'] as const;
-const localeLabels = {
-  it: '🇮🇹 Italiano',
-  en: '🇬🇧 English', 
-  de: '🇩🇪 Deutsch'
-};
-
-// Detect environment
-const isServer = typeof window === 'undefined';
-const isVercel = isServer && !!process.env.VERCEL;
+import { config, fields, singleton } from '@keystatic/core';
 
 export default config({
-  storage: isVercel 
-    ? {
-        // Produzione: usa GitHub con OAuth
-        kind: 'github',
-        repo: {
-          owner: 'riccardo-forina',
-          name: 'cncvela.it',
+  storage: 
+    process.env.NODE_ENV === 'development'
+      ? { kind: 'local' }
+      : {
+          kind: 'github',
+          repo: {
+            owner: 'riccardo-forina',
+            name: 'cncvela.it',
+          },
         },
-      }
-    : {
-        // Sviluppo locale: salva su file system
-        kind: 'local',
-      },
   
   ui: {
     brand: {
       name: 'CNC Caldè',
     },
     navigation: {
-      'Contenuti': ['events', 'courses', 'pages'],
-      'Configurazione': ['siteSettings', 'board', 'pricing'],
+      'Contenuti': ['events', 'siteContent'],
+      'Configurazione': ['board', 'pricing'],
     },
   },
 
-  collections: {
-    // ===== EVENTI =====
-    events: collection({
-      label: 'Eventi',
-      slugField: 'id',
-      path: 'src/data/events/*',
-      format: { data: 'json' },
-      schema: {
-        id: fields.text({ 
-          label: 'ID (slug)',
-          description: 'Identificativo unico, es: regata-sass-gallet-2026',
-          validation: { isRequired: true }
-        }),
-        title: fields.object({
-          it: fields.text({ label: '🇮🇹 Titolo', validation: { isRequired: true } }),
-          en: fields.text({ label: '🇬🇧 Title' }),
-          de: fields.text({ label: '🇩🇪 Titel' }),
-        }, { label: 'Titolo' }),
-        date: fields.date({ 
-          label: 'Data evento',
-          validation: { isRequired: true }
-        }),
-        endDate: fields.date({ 
-          label: 'Data fine (opzionale)',
-          description: 'Per eventi multi-giorno'
-        }),
-        type: fields.select({
-          label: 'Tipo evento',
-          options: [
-            { label: 'Regata', value: 'regata' },
-            { label: 'Corso', value: 'corso' },
-            { label: 'Evento sociale', value: 'sociale' },
-          ],
-          defaultValue: 'regata'
-        }),
-        description: fields.object({
-          it: fields.text({ label: '🇮🇹 Descrizione', multiline: true }),
-          en: fields.text({ label: '🇬🇧 Description', multiline: true }),
-          de: fields.text({ label: '🇩🇪 Beschreibung', multiline: true }),
-        }, { label: 'Descrizione' }),
-        featured: fields.checkbox({ 
-          label: 'In evidenza',
-          description: 'Mostra in homepage'
-        }),
-        documents: fields.array(
-          fields.object({
-            name: fields.text({ label: 'Nome documento' }),
-            url: fields.text({ label: 'URL file' }),
-          }),
-          { 
-            label: 'Documenti allegati',
-            itemLabel: (props) => props.fields.name.value || 'Documento'
-          }
-        ),
-        results: fields.array(
-          fields.object({
-            name: fields.text({ label: 'Nome classifica' }),
-            url: fields.text({ label: 'URL file PDF' }),
-          }),
-          { 
-            label: 'Risultati/Classifiche',
-            itemLabel: (props) => props.fields.name.value || 'Classifica'
-          }
-        ),
-      },
-    }),
-
-    // ===== CORSI =====
-    courses: collection({
-      label: 'Corsi',
-      slugField: 'id',
-      path: 'src/content/courses/*',
-      format: { contentField: 'content' },
-      schema: {
-        id: fields.text({ 
-          label: 'ID (slug)',
-          validation: { isRequired: true }
-        }),
-        title: fields.object({
-          it: fields.text({ label: '🇮🇹 Titolo', validation: { isRequired: true } }),
-          en: fields.text({ label: '🇬🇧 Title' }),
-          de: fields.text({ label: '🇩🇪 Titel' }),
-        }, { label: 'Titolo' }),
-        subtitle: fields.object({
-          it: fields.text({ label: '🇮🇹 Sottotitolo' }),
-          en: fields.text({ label: '🇬🇧 Subtitle' }),
-          de: fields.text({ label: '🇩🇪 Untertitel' }),
-        }, { label: 'Sottotitolo' }),
-        icon: fields.text({ 
-          label: 'Icona',
-          description: 'Nome icona: sailboat, users, anchor'
-        }),
-        ageRange: fields.text({ 
-          label: 'Fascia età',
-          description: 'Es: 6-14, 14-99'
-        }),
-        duration: fields.object({
-          it: fields.text({ label: '🇮🇹 Durata' }),
-          en: fields.text({ label: '🇬🇧 Duration' }),
-          de: fields.text({ label: '🇩🇪 Dauer' }),
-        }, { label: 'Durata' }),
-        order: fields.integer({ 
-          label: 'Ordine visualizzazione',
-          defaultValue: 0
-        }),
-        content: fields.mdx({ 
-          label: 'Contenuto dettagliato',
-          description: 'Descrizione completa del corso'
-        }),
-      },
-    }),
-
-    // ===== PAGINE =====
-    pages: collection({
-      label: 'Pagine',
-      slugField: 'slug',
-      path: 'src/content/pages/*',
-      format: { contentField: 'content' },
-      schema: {
-        slug: fields.text({ 
-          label: 'Slug',
-          validation: { isRequired: true }
-        }),
-        title: fields.object({
-          it: fields.text({ label: '🇮🇹 Titolo', validation: { isRequired: true } }),
-          en: fields.text({ label: '🇬🇧 Title' }),
-          de: fields.text({ label: '🇩🇪 Titel' }),
-        }, { label: 'Titolo' }),
-        description: fields.object({
-          it: fields.text({ label: '🇮🇹 Descrizione SEO' }),
-          en: fields.text({ label: '🇬🇧 SEO Description' }),
-          de: fields.text({ label: '🇩🇪 SEO Beschreibung' }),
-        }, { label: 'Descrizione SEO' }),
-        content: fields.mdx({ 
-          label: 'Contenuto',
-        }),
-      },
-    }),
-  },
-
   singletons: {
-    // ===== IMPOSTAZIONI SITO =====
-    siteSettings: singleton({
-      label: 'Impostazioni Sito',
-      path: 'src/data/settings',
+    // ===== EVENTI =====
+    events: singleton({
+      label: 'Eventi e Regate',
+      path: 'src/data/events',
       format: { data: 'json' },
       schema: {
-        heroTitle: fields.object({
-          it: fields.text({ label: '🇮🇹 Titolo Hero' }),
-          en: fields.text({ label: '🇬🇧 Hero Title' }),
-          de: fields.text({ label: '🇩🇪 Hero Titel' }),
-        }, { label: 'Titolo Homepage Hero' }),
-        heroSubtitle: fields.object({
-          it: fields.text({ label: '🇮🇹 Sottotitolo Hero' }),
-          en: fields.text({ label: '🇬🇧 Hero Subtitle' }),
-          de: fields.text({ label: '🇩🇪 Hero Untertitel' }),
-        }, { label: 'Sottotitolo Homepage Hero' }),
+        events: fields.array(
+          fields.object({
+            id: fields.text({ 
+              label: 'ID (slug)',
+              description: 'Identificativo unico, es: regata-sass-gallet-2026',
+              validation: { isRequired: true }
+            }),
+            type: fields.select({
+              label: 'Tipo evento',
+              options: [
+                { label: 'Regata', value: 'regata' },
+                { label: 'Corso', value: 'corso' },
+                { label: 'Evento sociale', value: 'sociale' },
+              ],
+              defaultValue: 'regata'
+            }),
+            title: fields.text({ 
+              label: 'Titolo',
+              validation: { isRequired: true }
+            }),
+            subtitle: fields.text({ label: 'Sottotitolo' }),
+            date: fields.text({ 
+              label: 'Data (YYYY-MM-DD)',
+              validation: { isRequired: true }
+            }),
+            endDate: fields.text({ 
+              label: 'Data fine (YYYY-MM-DD)',
+              description: 'Per eventi multi-giorno'
+            }),
+            time: fields.text({ label: 'Orario (HH:MM)' }),
+            description: fields.text({ 
+              label: 'Descrizione',
+              multiline: true 
+            }),
+            featured: fields.checkbox({ 
+              label: 'In evidenza',
+              description: 'Mostra in homepage'
+            }),
+            status: fields.select({
+              label: 'Stato',
+              options: [
+                { label: 'Aperto', value: 'open' },
+                { label: 'Chiuso', value: 'closed' },
+                { label: 'Completato', value: 'completed' },
+              ],
+              defaultValue: 'open'
+            }),
+            documents: fields.object({
+              bando: fields.text({ label: 'URL Bando' }),
+              iscrizione: fields.text({ label: 'URL Modulo Iscrizione' }),
+              istruzioni: fields.text({ label: 'URL Istruzioni di Regata' }),
+              classifica: fields.text({ label: 'URL Classifica' }),
+            }, { label: 'Documenti' }),
+          }),
+          { 
+            label: 'Eventi',
+            itemLabel: (props) => {
+              const title = props.fields.title.value || 'Nuovo evento';
+              const date = props.fields.date.value || '';
+              return `${title} (${date})`;
+            }
+          }
+        ),
+      },
+    }),
+
+    // ===== CONTENUTI SITO =====
+    siteContent: singleton({
+      label: 'Contenuti Homepage',
+      path: 'src/data/site-content',
+      format: { data: 'json' },
+      schema: {
+        hero: fields.object({
+          title: fields.text({ label: 'Titolo Hero' }),
+          subtitle: fields.text({ label: 'Sottotitolo Hero' }),
+        }, { label: 'Hero Homepage' }),
+        stats: fields.array(
+          fields.object({
+            value: fields.text({ label: 'Valore' }),
+            label: fields.text({ label: 'Etichetta' }),
+          }),
+          { label: 'Statistiche' }
+        ),
       },
     }),
 
     // ===== CONSIGLIO DIRETTIVO =====
     board: singleton({
-      label: 'Consiglio Direttivo',
+      label: 'Info Circolo',
       path: 'src/data/board',
       format: { data: 'json' },
       schema: {
@@ -211,7 +125,9 @@ export default config({
           clubName: fields.text({ label: 'Nome club' }),
           legalName: fields.text({ label: 'Ragione sociale' }),
           phone: fields.text({ label: 'Telefono' }),
+          fax: fields.text({ label: 'Fax' }),
           email: fields.text({ label: 'Email' }),
+          website: fields.text({ label: 'Sito web' }),
           fiscalCode: fields.text({ label: 'Codice fiscale' }),
           vatNumber: fields.text({ label: 'P.IVA' }),
           address: fields.object({
@@ -219,8 +135,10 @@ export default config({
             city: fields.text({ label: 'Città' }),
             province: fields.text({ label: 'Provincia' }),
             postalCode: fields.text({ label: 'CAP' }),
-          }),
+            country: fields.text({ label: 'Paese' }),
+          }, { label: 'Indirizzo' }),
         }, { label: 'Contatti' }),
+        
         board: fields.object({
           members: fields.array(
             fields.object({
@@ -233,12 +151,41 @@ export default config({
             }
           ),
         }, { label: 'Consiglio Direttivo' }),
+        
+        auditor: fields.object({
+          role: fields.text({ label: 'Ruolo' }),
+          name: fields.text({ label: 'Nome' }),
+        }, { label: 'Revisore dei Conti' }),
+        
+        probiviri: fields.array(
+          fields.object({
+            role: fields.text({ label: 'Ruolo' }),
+            name: fields.text({ label: 'Nome' }),
+          }),
+          { label: 'Collegio dei Probiviri' }
+        ),
+        
         safeguarding: fields.object({
           officer: fields.object({
             name: fields.text({ label: 'Nome responsabile' }),
             email: fields.text({ label: 'Email' }),
           }),
+          policy: fields.text({ label: 'URL Policy' }),
+          model: fields.text({ label: 'URL Modello Organizzativo' }),
+          code: fields.text({ label: 'URL Codice di Condotta' }),
         }, { label: 'Safeguarding' }),
+        
+        documents: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Nome documento' }),
+            url: fields.text({ label: 'URL file' }),
+            icon: fields.text({ label: 'Icona (document/users/certificate)' }),
+          }),
+          { 
+            label: 'Documenti',
+            itemLabel: (props) => props.fields.name.value || 'Documento'
+          }
+        ),
       },
     }),
 
@@ -250,38 +197,72 @@ export default config({
       schema: {
         year: fields.integer({ label: 'Anno tariffe' }),
         membership: fields.object({
-          adult: fields.integer({ label: 'Quota socio adulto (€)' }),
-          family: fields.integer({ label: 'Quota famiglia (€)' }),
-          junior: fields.integer({ label: 'Quota junior (€)' }),
-        }, { label: 'Quote associative' }),
-        courses: fields.array(
-          fields.object({
-            id: fields.text({ label: 'ID corso' }),
-            name: fields.object({
-              it: fields.text({ label: '🇮🇹 Nome' }),
-              en: fields.text({ label: '🇬🇧 Name' }),
-              de: fields.text({ label: '🇩🇪 Name' }),
-            }),
+          ordinario: fields.object({
             price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
           }),
-          { 
-            label: 'Prezzi corsi',
-            itemLabel: (props) => props.fields.name.value?.it || 'Corso'
-          }
-        ),
-        discounts: fields.array(
-          fields.object({
-            description: fields.object({
-              it: fields.text({ label: '🇮🇹 Descrizione' }),
-              en: fields.text({ label: '🇬🇧 Description' }),
-              de: fields.text({ label: '🇩🇪 Beschreibung' }),
+          familiare: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+          juniores: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+        }, { label: 'Quote associative' }),
+        
+        fivCards: fields.object({
+          allievo: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+          unico: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+          baseTesseramento: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+        }, { label: 'Tessere FIV' }),
+        
+        boatStorage: fields.object({
+          dpiccole: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+          dmedie: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+          cabinati: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            description: fields.text({ label: 'Descrizione' }),
+          }),
+        }, { label: 'Ricovero barche' }),
+        
+        courses: fields.object({
+          deriveSettimanale: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            name: fields.text({ label: 'Nome' }),
+          }),
+          deriveWeekend: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            name: fields.text({ label: 'Nome' }),
+          }),
+          cabinati: fields.object({
+            price: fields.integer({ label: 'Prezzo (€)' }),
+            name: fields.text({ label: 'Nome' }),
+          }),
+          discounts: fields.array(
+            fields.object({
+              description: fields.text({ label: 'Descrizione' }),
+              amount: fields.text({ label: 'Sconto' }),
             }),
-            amount: fields.text({ label: 'Sconto (es: -50€, -10%)' }),
-          }),
-          { label: 'Sconti' }
-        ),
+            { label: 'Sconti' }
+          ),
+        }, { label: 'Corsi' }),
       },
     }),
   },
 });
-
