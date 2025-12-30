@@ -7,10 +7,10 @@ const { currentPath } = Astro.props;
 
 const navItems = [
   { href: './', label: 'Home', icon: 'home' },
+  { href: 'circolo', label: 'Circolo', icon: 'info' },
   { href: 'corsi', label: 'Corsi', icon: 'sailboat' },
   { href: 'regate', label: 'Regate', icon: 'trophy' },
   { href: 'bacheca', label: 'Bacheca', icon: 'calendar' },
-  { href: 'circolo', label: 'Info', icon: 'info' },
 ];
 
 function isActive(href: string, currentPath: string): boolean {

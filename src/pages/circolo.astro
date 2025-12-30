@@ -13,6 +13,7 @@ import pontileImage from '../assets/images/pontile.jpg';
 const page = await getEntry('pages', 'circolo');
 const { Content } = await page.render();
 const { board: boardMembers, contact, documents } = board;
+const { auditor, probiviri } = boardMembers;
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
@@ -65,14 +66,14 @@ const { board: boardMembers, contact, documents } = board;
         <div class="group relative overflow-hidden rounded-xl aspect-[4/3]">
           <Image 
             src={spiaggiaImage}
-            alt="Spiaggia privata del Circolo Nautico Caldè" 
+            alt="Spiaggia in concessione del Circolo Nautico Caldè" 
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             widths={[320, 480, 640]}
             sizes="(max-width: 768px) 100vw, 33vw"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
           <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-            <h3 class="font-bold text-lg">Spiaggia Privata</h3>
+            <h3 class="font-bold text-lg">Spiaggia in Concessione</h3>
             <p class="text-sm text-white/80">Accesso diretto al Lago Maggiore</p>
           </div>
         </div>
@@ -114,7 +115,7 @@ const { board: boardMembers, contact, documents } = board;
       <!-- Facility Details -->
       <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
         <div>
-          <h3 class="font-bold text-lg mb-2">Spiaggia Privata</h3>
+          <h3 class="font-bold text-lg mb-2">Spiaggia in Concessione</h3>
           <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
             Un accesso diretto al lago con spiaggia riservata ai soci, ideale per il varo delle derive, il relax tra una regata e l'altra, e per godersi il panorama unico del Lago Maggiore.
           </p>
@@ -128,8 +129,43 @@ const { board: boardMembers, contact, documents } = board;
         <div>
           <h3 class="font-bold text-lg mb-2">Sede Sociale</h3>
           <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
-            Il cuore pulsante della nostra comunità: sale per attività e corsi teorici, alloggi per istruttori, cucina e bagni per tutte le esigenze del circolo.
+            Il cuore pulsante della nostra comunità: sale per attività e corsi teorici, foresteria per allievi e istruttori, cucina e bagni per tutte le esigenze del circolo.
           </p>
+        </div>
+      </div>
+      
+      <!-- Additional Facilities -->
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-1">Ricovero Imbarcazioni</h3>
+              <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                Spazio nel prato per il ricovero di derive e canoe, con rastrelliera dedicata. I soci possono lasciare le proprie imbarcazioni in sicurezza presso il circolo.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-1">Boe per i Soci</h3>
+              <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                Campo boe antistante il circolo per l'ormeggio delle imbarcazioni dei soci, con diverse tipologie in base alle dimensioni della barca.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -149,7 +185,7 @@ const { board: boardMembers, contact, documents } = board;
           <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
           </svg>
-          <span>Utilizzo della spiaggia privata e del pontile</span>
+          <span>Utilizzo della spiaggia in concessione e del pontile</span>
         </li>
         <li class="flex items-start gap-3">
           <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -161,7 +197,7 @@ const { board: boardMembers, contact, documents } = board;
           <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
           </svg>
-          <span>Tariffe agevolate sui corsi di vela</span>
+          <span>Partecipazione ai corsi di vela</span>
         </li>
         <li class="flex items-start gap-3">
           <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -213,6 +249,39 @@ const { board: boardMembers, contact, documents } = board;
             </div>
           </div>
         ))}
+      </div>
+      
+      <!-- Revisore e Probiviri -->
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Revisore dei Conti -->
+        {auditor && (
+          <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] uppercase tracking-wide mb-3">Revisore dei Conti</h3>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-sm font-bold">
+                {auditor.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+              </div>
+              <span class="font-medium">{auditor.name}</span>
+            </div>
+          </div>
+        )}
+        
+        <!-- Collegio dei Probiviri -->
+        {probiviri && probiviri.length > 0 && (
+          <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h3 class="font-bold text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] uppercase tracking-wide mb-3">Collegio dei Probiviri</h3>
+            <div class="flex flex-wrap gap-3">
+              {probiviri.map((p) => (
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xs font-bold">
+                    {p.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  </div>
+                  <span class="text-sm">{p.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   </section>
@@ -314,6 +383,10 @@ const { board: boardMembers, contact, documents } = board;
               {doc.icon === 'users' ? (
                 <svg class="w-7 h-7 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+              ) : doc.icon === 'certificate' ? (
+                <svg class="w-7 h-7 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                 </svg>
               ) : (
                 <svg class="w-7 h-7 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

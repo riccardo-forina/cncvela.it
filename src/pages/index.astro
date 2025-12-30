@@ -2,6 +2,9 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import gallery from '../data/gallery.json';
+import board from '../data/board.json';
+
+const { contact } = board;
 
 // Import images
 import giovaneVelista from '../assets/images/corsi/giovane-velista.jpg';
@@ -324,15 +327,15 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
               Vivi la Vela<br class="hidden md:inline" /><span class="text-[var(--color-accent-secondary)]"> sul Lago Maggiore</span>
         </h1>
             <p class="text-xs md:text-sm text-white/80 mt-1 md:mt-2">
-              Scuola Vela FIV dal 1970 · Corsi per tutte le età
+              Associazione Sportiva dal 1965 · Passione per la vela
         </p>
             <!-- CTA -->
             <div class="mt-4 flex justify-center">
           <a
-            href="corsi"
+            href="circolo"
                 class="inline-flex items-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-3 bg-[var(--color-accent-secondary)] hover:bg-[var(--color-accent-secondary)]/90 text-[var(--color-accent-primary)] font-bold text-xs md:text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                Scopri i Corsi
+                Unisciti a Noi
                 <svg class="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
@@ -348,16 +351,16 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
       <div class="max-w-6xl mx-auto px-4 lg:px-6">
         <div class="grid grid-cols-3 text-center text-white divide-x divide-white/20">
           <div class="px-4 md:px-8">
-            <div class="text-2xl md:text-3xl font-black text-[var(--color-accent-secondary)]">54</div>
-            <div class="text-[10px] md:text-sm text-white/70 mt-0.5 md:mt-1">Anni di attività</div>
+            <div class="text-2xl md:text-3xl font-black text-[var(--color-accent-secondary)]">60</div>
+            <div class="text-[10px] md:text-sm text-white/70 mt-0.5 md:mt-1">Anni di storia</div>
           </div>
           <div class="px-4 md:px-8">
             <div class="text-2xl md:text-3xl font-black text-[var(--color-accent-secondary)]">FIV</div>
-            <div class="text-[10px] md:text-sm text-white/70 mt-0.5 md:mt-1">Scuola certificata</div>
+            <div class="text-[10px] md:text-sm text-white/70 mt-0.5 md:mt-1">Affiliati dal 1975</div>
           </div>
           <div class="px-4 md:px-8">
-            <div class="text-2xl md:text-3xl font-black text-[var(--color-accent-secondary)]">6-99</div>
-            <div class="text-[10px] md:text-sm text-white/70 mt-0.5 md:mt-1">Anni di età</div>
+            <div class="text-2xl md:text-3xl font-black text-[var(--color-accent-secondary)]">0-99</div>
+            <div class="text-[10px] md:text-sm text-white/70 mt-0.5 md:mt-1">Soci di ogni età</div>
           </div>
         </div>
     </div>
@@ -428,35 +431,35 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
       <!-- Header -->
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-black mb-4" style="font-size: var(--text-3xl);">
-          I Nostri Corsi
+          Corsi per i Soci
         </h2>
         <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto">
-          Programmi FIV per ogni livello, dai principianti ai regatanti
+          Scuola Vela riconosciuta FIV. Tre tipologie di corso per tutte le esigenze.
         </p>
       </div>
       
       <!-- Course Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Giovani -->
+        <!-- Derive Settimanale -->
         <a href="corsi" class="group bg-white dark:bg-[var(--color-bg-primary-dark)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
           <div class="relative h-48 overflow-hidden">
             <Image 
               src={giovaneVelista}
-              alt="Corso vela giovani"
+              alt="Corso derive settimanale"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               widths={[320, 480, 640]}
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div class="absolute top-3 left-3 px-3 py-1 bg-[var(--color-accent-primary)] text-white text-xs font-bold rounded-full">
-              6-18 ANNI
+              5 GIORNI
             </div>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
-              Scuola Vela Giovani
+              Derive Settimanale
             </h3>
             <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] text-sm mb-4">
-              Corsi settimanali estivi con brevetto FIV. Impara le basi della vela divertendoti.
+              Corso intensivo dal lunedì al venerdì. Aperto a tutti, dai 6 ai 99 anni.
             </p>
             <span class="inline-flex items-center text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] font-semibold text-sm">
               Scopri di più →
@@ -464,26 +467,26 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
           </div>
         </a>
         
-        <!-- Adulti -->
+        <!-- Derive Weekend -->
         <a href="corsi" class="group bg-white dark:bg-[var(--color-bg-primary-dark)] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
           <div class="relative h-48 overflow-hidden">
             <Image 
               src={scuolaVelaAzione}
-              alt="Corso vela adulti"
+              alt="Corso derive weekend"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               widths={[320, 480, 640]}
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div class="absolute top-3 left-3 px-3 py-1 bg-[var(--color-accent-secondary)] text-[var(--color-accent-primary)] text-xs font-bold rounded-full">
-              ADULTI
+              2 WEEKEND
             </div>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
-              Corsi Weekend
+              Derive Weekend
             </h3>
             <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] text-sm mb-4">
-              Non è mai troppo tardi per imparare. Corsi nel weekend per chi lavora.
+              Due fine settimana per chi non può frequentare il corso settimanale. Età 6-99.
             </p>
             <span class="inline-flex items-center text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] font-semibold text-sm">
               Scopri di più →
@@ -502,15 +505,15 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             <div class="absolute top-3 left-3 px-3 py-1 bg-[var(--color-accent-tertiary)] text-white text-xs font-bold rounded-full">
-              AVANZATO
-          </div>
+              2 WEEKEND
+            </div>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-bold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">
-              Corso Cabinati
+              Cabinati
             </h3>
             <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] text-sm mb-4">
-              Patente nautica e navigazione su barche più grandi per chi vuole fare il salto.
+              Navigazione su barche più grandi. Date da concordare. Età 6-99.
             </p>
             <span class="inline-flex items-center text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] font-semibold text-sm">
               Scopri di più →
@@ -563,7 +566,7 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
               </div>
               <div>
                 <div class="font-semibold">Indirizzo</div>
-                <div class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">Via Maggiore 36, 21010 Caldè (VA)</div>
+                <div class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{contact.address.street}, {contact.address.postalCode} {contact.address.city} ({contact.address.province})</div>
               </div>
             </div>
             
@@ -575,7 +578,7 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
               </div>
               <div>
                 <div class="font-semibold">Telefono</div>
-                <a href="tel:+393339769317" class="text-[var(--color-accent-primary)] dark:text-[#7CB3F0] hover:underline dark:hover:text-white">333 976 9317</a>
+                <a href={`tel:${contact.phone.replace(/\s/g, '')}`} class="text-[var(--color-accent-primary)] dark:text-[#7CB3F0] hover:underline dark:hover:text-white">{contact.phone}</a>
               </div>
             </div>
             
@@ -587,7 +590,7 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
               </div>
               <div>
                 <div class="font-semibold">Email</div>
-                <a href="mailto:segreteria@cncvela.it" class="text-[var(--color-accent-primary)] dark:text-[#7CB3F0] hover:underline dark:hover:text-white">segreteria@cncvela.it</a>
+                <a href={`mailto:${contact.email}`} class="text-[var(--color-accent-primary)] dark:text-[#7CB3F0] hover:underline dark:hover:text-white">{contact.email}</a>
               </div>
             </div>
           </div>
@@ -612,20 +615,20 @@ const fallbackImagePath = `${base}/images/hero/hero-loop-fallback.jpg`;
     
     <div class="relative z-10 max-w-3xl mx-auto px-4 lg:px-6 text-center text-white">
       <h2 class="text-3xl md:text-4xl font-black mb-6" style="font-size: var(--text-3xl);">
-        Pronto a Salpare?
+        Unisciti a Noi
       </h2>
       <p class="text-lg text-white/80 mb-10 max-w-xl mx-auto">
-        Contattaci per informazioni sui corsi o vieni a trovarci al circolo. La baia di Caldè ti aspetta.
+        Entra a far parte della nostra comunità velica. La baia di Caldè ti aspetta.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href="corsi"
+          href="circolo#diventa-socio"
           class="inline-flex items-center justify-center px-8 py-4 bg-[var(--color-accent-secondary)] text-[var(--color-accent-primary)] font-bold rounded-full hover:bg-[var(--color-accent-secondary)]/90 transition-colors"
         >
-          Vedi i Corsi
+          Diventa Socio
         </a>
         <a
-          href="mailto:segreteria@cncvela.it"
+          href={`mailto:${contact.email}`}
           class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-full border-2 border-white/30 hover:bg-white/20 transition-colors"
         >
           Scrivici

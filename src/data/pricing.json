@@ -1,17 +1,17 @@
 {
   "membership": {
-    "title": "Quote Soci 2025",
+    "title": "Quote Soci 2026",
     "items": [
       {
         "id": "socio-ordinario",
         "name": "Socio Ordinario Seniores",
-        "price": 124.00,
+        "price": 200.00,
         "note": null
       },
       {
         "id": "socio-cadetto",
         "name": "Socio Cadetto/Juniores",
-        "price": 50.00,
+        "price": 70.00,
         "note": "da 7 a 17 anni"
       },
       {
@@ -29,17 +29,17 @@
       {
         "id": "boa-16",
         "name": "Boa per imbarcazioni fino a 16 mq",
-        "price": 1100.00
+        "price": 1200.00
       },
       {
         "id": "boa-20",
         "name": "Boa per imbarcazioni da 16 mq a 20 mq",
-        "price": 1300.00
+        "price": 1400.00
       },
       {
         "id": "boa-oltre",
         "name": "Boa per imbarcazioni oltre 20 mq",
-        "price": 1600.00
+        "price": 1750.00
       }
     ]
   },
@@ -49,12 +49,12 @@
       {
         "id": "deriva-prato",
         "name": "Posto Deriva nel prato",
-        "price": 150.00
+        "price": 175.00
       },
       {
         "id": "canoa-rastrelliera",
         "name": "Posto Canoa nel prato / Deriva nella rastrelliera",
-        "price": 125.00
+        "price": 140.00
       }
     ]
   },
@@ -103,26 +103,30 @@
       {
         "id": "corso-derive-settimana",
         "name": "Derive - Settimana diurno",
-        "price": 150.00,
+        "price": 175.00,
         "note": "+ quota ass. + FIV"
       },
       {
         "id": "corso-derive-weekend",
         "name": "Derive - Corso breve (2 weekend)",
-        "price": 125.00,
+        "price": 150.00,
         "note": "+ quota ass. + FIV"
       },
       {
         "id": "corso-cabinati",
         "name": "Cabinati - Corso breve (2 weekend)",
-        "price": 150.00,
+        "price": 200.00,
         "note": "+ quota ass. + FIV"
       }
     ],
     "discounts": [
       {
-        "description": "Corsi successivi al secondo nella stessa stagione",
+        "description": "Corsi successivi al primo nella stessa stagione",
         "discount": "15%"
+      },
+      {
+        "description": "Iscrizione contemporanea di più allievi dello stesso stato di famiglia",
+        "discount": "10% ciascuno"
       }
     ]
   },
@@ -133,5 +137,3 @@
     "iban": "IT40J0306909606100000019281"
   }
 }
-
-

@@ -7,37 +7,38 @@
         "role": "Presidente"
       },
       {
-        "name": "Graziano Della Rossa",
-        "role": "Vice Presidente"
-      },
-      {
-        "name": "Marco Fizzotti",
+        "name": "Lucia Piccinini",
         "role": "Vice Presidente"
       },
       {
         "name": "Paolo Fizzotti",
-        "role": "Tesoriere"
+        "role": "Segretario e Tesoriere"
       },
       {
-        "name": "Lucia Piccinini",
-        "role": "Segretario"
-      },
-      {
-        "name": "Carlo Parola",
+        "name": "Marco Fizzotti",
         "role": "Direttore Sportivo"
       },
       {
-        "name": "Ezio de Bortoli",
-        "role": "Consigliere"
-      },
-      {
-        "name": "Marco Massarenti",
-        "role": "Consigliere"
+        "name": "Paolo Bottani",
+        "role": "Responsabile Scuole Vela"
       },
       {
         "name": "Enrico Cigolotti",
         "role": "Consigliere"
+      },
+      {
+        "name": "Faustina Lalatta",
+        "role": "Consigliere"
       }
+    ],
+    "auditor": {
+      "name": "Clemente Bottani",
+      "role": "Revisore dei Conti"
+    },
+    "probiviri": [
+      { "name": "Marco Engel" },
+      { "name": "Alessandra Nicoletti" },
+      { "name": "Paolo Moroni" }
     ]
   },
   "safeguarding": {
@@ -72,7 +73,7 @@
     "clubName": "Circolo Nautico Caldè",
     "legalName": "CNC - Circolo Nautico Caldè A.S.D.",
     "address": {
-      "street": "Via Maggiore 36",
+      "street": "Via Maggiore 18",
       "city": "Castelveccana",
       "province": "VA",
       "postalCode": "21010",
@@ -97,9 +98,14 @@
       "icon": "document"
     },
     {
-      "name": "Regolamento Ospiti",
+      "name": "Modulo Ospiti",
       "url": "documenti/moduloospiti.pdf",
       "icon": "users"
+    },
+    {
+      "name": "Attestato FIV",
+      "url": "documenti/attestato-fiv.pdf",
+      "icon": "certificate"
     }
   ]
 }

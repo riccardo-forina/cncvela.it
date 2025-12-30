@@ -1,16 +1,16 @@
 ---
-title: Corso Cabinati
+title: Corso Derive Weekend
 subtitle: Età 6-99
-icon: yacht
+icon: sailboat
 duration: 2 weekend
 period: Maggio - Settembre
-boatType: Cabinati
-price: 200.00
+boatType: Derive
+price: 150.00
 priceNote: "+ quota ass. + FIV"
-order: 3
+order: 2
 ---
 
-Corso di vela su cabinati. Due fine settimana in date da concordare per imparare la navigazione su barche più grandi.
+Corso di vela su derive distribuito su due fine settimana. Ideale per chi non può frequentare il corso settimanale.
 
 **Cosa include:**
 - Istruttori FIV qualificati
@@ -18,3 +18,4 @@ Corso di vela su cabinati. Due fine settimana in date da concordare per imparare
 - Assicurazione
 
 **Foresteria:** È possibile pernottare presso la foresteria del Circolo, prezzo da concordare.
+

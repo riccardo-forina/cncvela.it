@@ -11,11 +11,11 @@ const { currentPath } = Astro.props;
 
 const navItems = [
   { href: './', label: 'Home' },
+  { href: 'circolo', label: 'Il Circolo' },
   { href: 'corsi', label: 'Corsi' },
   { href: 'regate', label: 'Regate' },
   { href: 'galleria', label: 'Galleria' },
   { href: 'bacheca', label: 'Bacheca' },
-  { href: 'circolo', label: 'Il Circolo' },
 ];
 
 function isActive(href: string, currentPath: string): boolean {
