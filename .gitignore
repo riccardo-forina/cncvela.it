@@ -1,5 +1,7 @@
 # build output
 dist/
+.vercel/
+
 # generated types
 .astro/
 
@@ -24,3 +26,4 @@ pnpm-debug.log*
 
 # Old website backup (not needed in repo)
 www.cncvela.it/
+scripts
