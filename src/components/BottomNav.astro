@@ -1,30 +1,25 @@
 ---
+import { t, getLocaleFromUrl, type Locale } from '../i18n';
+
 interface Props {
   currentPath: string;
 }
 
 const { currentPath } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
 
 const navItems = [
-  { href: './', label: 'Home', icon: 'home' },
-  { href: 'circolo', label: 'Circolo', icon: 'info' },
-  { href: 'corsi', label: 'Corsi', icon: 'sailboat' },
-  { href: 'regate', label: 'Regate', icon: 'trophy' },
-  { href: 'bacheca', label: 'Bacheca', icon: 'calendar' },
+  { href: 'circolo', labelKey: 'nav.club', icon: 'info' },
+  { href: 'corsi', labelKey: 'nav.courses', icon: 'sailboat' },
+  { href: 'regate', labelKey: 'nav.regattas', icon: 'trophy' },
+  { href: 'bacheca', labelKey: 'nav.events', icon: 'calendar' },
+  { href: 'meteo', labelKey: 'nav.weather', icon: 'weather' },
 ];
 
 function isActive(href: string, currentPath: string): boolean {
-  // Normalize: remove trailing slashes and get the last segment
   const cleanPath = currentPath.replace(/\/$/, '');
   const segments = cleanPath.split('/').filter(Boolean);
   const lastSegment = segments[segments.length - 1] || '';
-  
-  if (href === './') {
-    // Home is active only if we're at root or the base path (e.g., /cncvela.it)
-    const isBasePath = lastSegment === '' || lastSegment.endsWith('.it') || lastSegment === 'cncvela';
-    const noPageSegment = !['corsi', 'regate', 'galleria', 'bacheca', 'circolo', 'meteo', 'privacy', 'safeguarding'].includes(lastSegment);
-    return isBasePath || (segments.length <= 1 && noPageSegment);
-  }
   
   return lastSegment === href;
 }
@@ -47,11 +42,6 @@ function isActive(href: string, currentPath: string): boolean {
           aria-current={isActive(item.href, currentPath) ? "page" : undefined}
         >
           <!-- Icons -->
-          {item.icon === 'home' && (
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-          )}
           {item.icon === 'sailboat' && (
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18M5 21l7-18 7 18M5 21h14" />
@@ -72,11 +62,16 @@ function isActive(href: string, currentPath: string): boolean {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           )}
+          {item.icon === 'weather' && (
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            </svg>
+          )}
           <span class:list={[
             "text-xs mt-1 font-medium",
             { "font-bold": isActive(item.href, currentPath) }
           ]}>
-            {item.label}
+            {t(item.labelKey, locale)}
           </span>
         </a>
       </li>

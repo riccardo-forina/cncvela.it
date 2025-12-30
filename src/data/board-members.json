@@ -1,0 +1,86 @@
+{
+  "title": {
+    "it": "Consiglio Direttivo",
+    "en": "Board of Directors",
+    "de": "Vorstand"
+  },
+  "members": [
+    {
+      "name": "Fabio Mazzoni",
+      "role": {
+        "it": "Presidente",
+        "en": "President",
+        "de": "Präsident"
+      }
+    },
+    {
+      "name": "Lucia Piccinini",
+      "role": {
+        "it": "Vice Presidente",
+        "en": "Vice President",
+        "de": "Vizepräsident"
+      }
+    },
+    {
+      "name": "Paolo Fizzotti",
+      "role": {
+        "it": "Segretario e Tesoriere",
+        "en": "Secretary and Treasurer",
+        "de": "Sekretär und Schatzmeister"
+      }
+    },
+    {
+      "name": "Marco Fizzotti",
+      "role": {
+        "it": "Direttore Sportivo",
+        "en": "Sports Director",
+        "de": "Sportdirektor"
+      }
+    },
+    {
+      "name": "Paolo Bottani",
+      "role": {
+        "it": "Responsabile Scuole Vela",
+        "en": "Sailing School Director",
+        "de": "Leiter Segelschule"
+      }
+    },
+    {
+      "name": "Enrico Cigolotti",
+      "role": {
+        "it": "Consigliere",
+        "en": "Board Member",
+        "de": "Vorstandsmitglied"
+      }
+    },
+    {
+      "name": "Faustina Lalatta",
+      "role": {
+        "it": "Consigliere",
+        "en": "Board Member",
+        "de": "Vorstandsmitglied"
+      }
+    }
+  ],
+  "auditor": {
+    "name": "Clemente Bottani",
+    "role": {
+      "it": "Revisore dei Conti",
+      "en": "Auditor",
+      "de": "Rechnungsprüfer"
+    }
+  },
+  "probiviri": {
+    "title": {
+      "it": "Collegio dei Probiviri",
+      "en": "Board of Arbitrators",
+      "de": "Schiedsgericht"
+    },
+    "members": [
+      { "name": "Marco Engel" },
+      { "name": "Alessandra Nicoletti" },
+      { "name": "Paolo Moroni" }
+    ]
+  }
+}
+

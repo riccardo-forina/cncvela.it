@@ -1,0 +1,76 @@
+{
+  "page": {
+    "title": {
+      "it": "Galleria",
+      "en": "Gallery",
+      "de": "Galerie"
+    },
+    "description": {
+      "it": "Le foto del Circolo Nautico Caldè - Scuola Vela, Regate e momenti di vita del nostro circolo",
+      "en": "Photos of Circolo Nautico Caldè - Sailing School, Regattas and moments from our club",
+      "de": "Fotos des Circolo Nautico Caldè - Segelschule, Regatten und Momente aus unserem Club"
+    },
+    "subtitle": {
+      "it": "Immagini delle nostre attività sul Lago Maggiore",
+      "en": "Images of our activities on Lake Maggiore",
+      "de": "Bilder unserer Aktivitäten am Lago Maggiore"
+    }
+  },
+  "categories": {
+    "all": {
+      "it": "Tutte",
+      "en": "All",
+      "de": "Alle"
+    },
+    "corsi": {
+      "it": "Scuola Vela",
+      "en": "Sailing School",
+      "de": "Segelschule"
+    },
+    "regate": {
+      "it": "Regate",
+      "en": "Regattas",
+      "de": "Regatten"
+    },
+    "hero": {
+      "it": "Panorami",
+      "en": "Panoramas",
+      "de": "Panoramen"
+    }
+  },
+  "sections": {
+    "scuolaVela": {
+      "it": "Scuola Vela",
+      "en": "Sailing School",
+      "de": "Segelschule"
+    },
+    "regate": {
+      "it": "Regate e Premiazioni",
+      "en": "Regattas and Awards",
+      "de": "Regatten und Preisverleihungen"
+    },
+    "panorami": {
+      "it": "Panorami e Atmosfere",
+      "en": "Panoramas and Atmospheres",
+      "de": "Panoramen und Atmosphären"
+    }
+  },
+  "lightbox": {
+    "close": {
+      "it": "Chiudi",
+      "en": "Close",
+      "de": "Schließen"
+    },
+    "prev": {
+      "it": "Precedente",
+      "en": "Previous",
+      "de": "Zurück"
+    },
+    "next": {
+      "it": "Successiva",
+      "en": "Next",
+      "de": "Weiter"
+    }
+  }
+}
+

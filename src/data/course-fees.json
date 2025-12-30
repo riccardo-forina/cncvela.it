@@ -1,0 +1,71 @@
+{
+  "title": {
+    "it": "Quote Scuola Vela 2026",
+    "en": "Sailing School Fees 2026",
+    "de": "Segelschulgebühren 2026"
+  },
+  "items": [
+    {
+      "name": {
+        "it": "Derive - Settimana diurno",
+        "en": "Dinghies - Day Week",
+        "de": "Jollen - Tageskurs Woche"
+      },
+      "price": 175.00,
+      "note": {
+        "it": "+ quota ass. + FIV",
+        "en": "+ membership + FIV",
+        "de": "+ Mitgliedschaft + FIV"
+      }
+    },
+    {
+      "name": {
+        "it": "Derive - Corso breve (2 weekend)",
+        "en": "Dinghies - Short Course (2 weekends)",
+        "de": "Jollen - Kurzkurs (2 Wochenenden)"
+      },
+      "price": 150.00,
+      "note": {
+        "it": "+ quota ass. + FIV",
+        "en": "+ membership + FIV",
+        "de": "+ Mitgliedschaft + FIV"
+      }
+    },
+    {
+      "name": {
+        "it": "Cabinati - Corso breve (2 weekend)",
+        "en": "Keelboats - Short Course (2 weekends)",
+        "de": "Kielboote - Kurzkurs (2 Wochenenden)"
+      },
+      "price": 200.00,
+      "note": {
+        "it": "+ quota ass. + FIV",
+        "en": "+ membership + FIV",
+        "de": "+ Mitgliedschaft + FIV"
+      }
+    }
+  ],
+  "discounts": [
+    {
+      "description": {
+        "it": "Corsi successivi al primo nella stessa stagione",
+        "en": "Subsequent courses in the same season",
+        "de": "Folgekurse in der gleichen Saison"
+      },
+      "discount": "15%"
+    },
+    {
+      "description": {
+        "it": "Iscrizione contemporanea di più allievi dello stesso stato di famiglia",
+        "en": "Simultaneous registration of multiple students from the same family",
+        "de": "Gleichzeitige Anmeldung mehrerer Schüler aus derselben Familie"
+      },
+      "discount": {
+        "it": "10% ciascuno",
+        "en": "10% each",
+        "de": "je 10%"
+      }
+    }
+  ]
+}
+

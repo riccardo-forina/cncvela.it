@@ -1,0 +1,70 @@
+{
+  "buoy": {
+    "title": {
+      "it": "Quota Boa",
+      "en": "Buoy Fee",
+      "de": "Bojengebühr"
+    },
+    "note": {
+      "it": "Attribuibile a non meno di due soci Ordinari Senior",
+      "en": "Assignable to at least two Senior Regular Members",
+      "de": "Mindestens zwei ordentlichen Seniormitgliedern zuzuordnen"
+    },
+    "items": [
+      {
+        "id": "boa-16",
+        "name": {
+          "it": "Boa per imbarcazioni fino a 16 mq",
+          "en": "Buoy for boats up to 16 sqm",
+          "de": "Boje für Boote bis 16 qm"
+        },
+        "price": 1200.00
+      },
+      {
+        "id": "boa-20",
+        "name": {
+          "it": "Boa per imbarcazioni da 16 mq a 20 mq",
+          "en": "Buoy for boats from 16 sqm to 20 sqm",
+          "de": "Boje für Boote von 16 qm bis 20 qm"
+        },
+        "price": 1400.00
+      },
+      {
+        "id": "boa-oltre",
+        "name": {
+          "it": "Boa per imbarcazioni oltre 20 mq",
+          "en": "Buoy for boats over 20 sqm",
+          "de": "Boje für Boote über 20 qm"
+        },
+        "price": 1750.00
+      }
+    ]
+  },
+  "dinghy": {
+    "title": {
+      "it": "Quota Deriva - Canoa",
+      "en": "Dinghy - Canoe Fee",
+      "de": "Jolle - Kanugebühr"
+    },
+    "items": [
+      {
+        "id": "deriva-prato",
+        "name": {
+          "it": "Posto Deriva nel prato",
+          "en": "Dinghy spot on the lawn",
+          "de": "Jollenplatz auf der Wiese"
+        },
+        "price": 175.00
+      },
+      {
+        "id": "canoa-rastrelliera",
+        "name": {
+          "it": "Posto Canoa nel prato / Deriva nella rastrelliera",
+          "en": "Canoe spot on lawn / Dinghy in rack",
+          "de": "Kanuplatz auf Wiese / Jolle im Gestell"
+        },
+        "price": 140.00
+      }
+    ]
+  }
+}

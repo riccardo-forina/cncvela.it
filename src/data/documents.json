@@ -1,0 +1,41 @@
+{
+  "items": [
+    {
+      "name": {
+        "it": "Statuto",
+        "en": "Statute",
+        "de": "Satzung"
+      },
+      "url": "documenti/statuto.pdf",
+      "icon": "document"
+    },
+    {
+      "name": {
+        "it": "Regolamento",
+        "en": "Regulations",
+        "de": "Ordnung"
+      },
+      "url": "documenti/regolamento.pdf",
+      "icon": "document"
+    },
+    {
+      "name": {
+        "it": "Modulo Ospiti",
+        "en": "Guest Form",
+        "de": "Gästeformular"
+      },
+      "url": "documenti/moduloospiti.pdf",
+      "icon": "users"
+    },
+    {
+      "name": {
+        "it": "Attestato FIV",
+        "en": "FIV Certificate",
+        "de": "FIV-Zertifikat"
+      },
+      "url": "documenti/attestato-fiv.pdf",
+      "icon": "certificate"
+    }
+  ]
+}
+

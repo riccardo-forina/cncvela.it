@@ -1,0 +1,327 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import type { Locale } from '../i18n';
+import type { Event } from '../types/event';
+
+// Import data
+import content from '../data/corsi-content.json';
+import coursesData from '../data/courses.json';
+import courseFees from '../data/course-fees.json';
+import fivFees from '../data/fiv-fees.json';
+import eventsData from '../data/events.json';
+import contact from '../data/contact.json';
+import bankDetails from '../data/bank-details.json';
+
+// Import image
+import heroImage from '../assets/images/corsi/scuola-vela-azione.jpg';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+// Helper to get localized text
+const t = (obj: { it: string; en?: string; de?: string } | string | undefined, fallback = ''): string => {
+  if (!obj) return fallback;
+  if (typeof obj === 'string') return obj;
+  return obj[locale] || obj.it || fallback;
+};
+
+// Get courses sorted by order
+const courses = coursesData.courses.sort((a, b) => a.order - b.order);
+
+// Get upcoming courses from events
+const now = new Date();
+const upcomingCourses = (eventsData.events as Event[])
+  .filter(event => event.type === 'corso' && new Date(event.date) >= now)
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+---
+
+<BaseLayout title={t(content.page.title)} description={t(content.page.description)} locale={locale}>
+  <!-- Hero image -->
+  <section class="relative h-[35vh] min-h-[250px] overflow-hidden">
+    <Image 
+      src={heroImage}
+      alt="Allievi della scuola vela sul Lago Maggiore"
+      class="absolute inset-0 w-full h-full object-cover"
+      widths={[640, 1024, 1536]}
+      sizes="100vw"
+      quality={70}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </section>
+  
+  <!-- Title bar -->
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h1 class="text-2xl md:text-3xl font-black text-white">{t(content.page.title)}</h1>
+      <p class="text-sm md:text-base text-white/70 mt-2 max-w-2xl">{t(content.page.subtitle)}</p>
+    </div>
+  </section>
+
+  <!-- Important Note -->
+  <section class="py-6 md:py-8">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 border border-[var(--color-accent-primary)]/20 dark:border-[var(--color-accent-primary-dark)]/20 rounded-xl p-4 md:p-6">
+        <div class="flex items-start gap-3">
+          <svg class="w-6 h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <div>
+            <p class="font-bold mb-1">{t(content.note.title)}</p>
+            <p class="text-sm text-muted">
+              {t(content.note.description)} 
+              <a href="circolo#diventa-socio" class="text-accent hover:underline font-medium">{t(content.note.link)}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course Types -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+        {t(content.ourCourses)}
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {courses.map((course) => (
+          <article class="bg-secondary rounded-xl p-6 border border-muted">
+            <div class="w-14 h-14 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex items-center justify-center mb-4">
+              <span class="text-2xl">{course.icon === 'yacht' ? '🛥️' : '⛵'}</span>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-1">{t(course.title)}</h3>
+            <p class="text-sm text-accent font-semibold mb-3">
+              {t(course.subtitle)}
+            </p>
+            
+            <p class="text-sm text-muted mb-4">
+              {t(course.description)}
+            </p>
+            
+            <ul class="text-sm space-y-2 mb-4">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong>{t(content.labels.duration)}:</strong> {t(course.duration)}</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong>{t(content.labels.period)}:</strong> {t(course.period)}</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span><strong>{t(content.labels.boat)}:</strong> {t(course.boatType)}</span>
+              </li>
+            </ul>
+            
+            <div class="pt-4 border-t border-muted">
+              <p class="text-2xl font-black text-accent">
+                €{course.price.toFixed(2)}
+                <span class="text-xs font-normal text-muted">
+                  {t(course.priceNote)}
+                </span>
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Courses -->
+  <section class="py-12 md:py-16 bg-secondary">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+        {t(content.upcomingCourses.title)}
+      </h2>
+      
+      {upcomingCourses.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+          {upcomingCourses.map((event) => (
+            <EventCard event={event} locale={locale} />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-8">
+          <p class="text-muted mb-4">
+            {t(content.upcomingCourses.empty)}
+          </p>
+          <a 
+            href="bacheca" 
+            class="inline-flex items-center gap-2 text-accent font-semibold hover:underline"
+          >
+            {t(content.upcomingCourses.goToEvents)}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="quote" class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
+        {t(content.pricing.title)}
+      </h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Course Fees -->
+        <div class="bg-secondary rounded-xl p-6 border border-muted">
+          <h3 class="font-bold text-lg mb-1">{t(courseFees.title)}</h3>
+          <ul class="space-y-3 mt-4">
+            {courseFees.items.map((item) => (
+              <li class="flex justify-between items-start">
+                <div>
+                  <p class="font-medium">{t(item.name)}</p>
+                  {item.note && (
+                    <p class="text-xs text-muted">{t(item.note)}</p>
+                  )}
+                </div>
+                <p class="font-bold text-accent">
+                  €{item.price.toFixed(2)}
+                </p>
+              </li>
+            ))}
+          </ul>
+          {courseFees.discounts && courseFees.discounts.length > 0 && (
+            <div class="mt-4 pt-4 border-t border-muted space-y-1">
+              {courseFees.discounts.map((discount) => (
+                <p class="text-sm text-green-600 dark:text-green-400 font-medium">
+                  {t(discount.description)}: <strong>{t(discount.discount)}</strong>
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+        
+        <!-- FIV Fees -->
+        <div class="bg-secondary rounded-xl p-6 border border-muted">
+          <h3 class="font-bold text-lg mb-1">{t(fivFees.title)}</h3>
+          {fivFees.note && (
+            <p class="text-sm text-muted mb-4">{t(fivFees.note)}</p>
+          )}
+          <ul class="space-y-3">
+            {fivFees.items.map((item) => (
+              <li class="flex justify-between items-start">
+                <div>
+                  <p class="font-medium">{t(item.name)}</p>
+                  {item.note && (
+                    <p class="text-xs text-muted">{t(item.note)}</p>
+                  )}
+                </div>
+                <p class="font-bold text-accent">
+                  €{item.price.toFixed(2)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form -->
+  <section id="iscrizione" class="py-12 md:py-16 bg-secondary">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h2 class="text-2xl font-black mb-4 text-center" style="font-size: var(--text-2xl);">
+        {t(content.registration.title)}
+      </h2>
+      <p class="text-center text-muted mb-8">
+        {t(content.registration.subtitle)}
+      </p>
+      
+      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-8 border border-muted">
+        <h3 class="font-bold text-lg mb-4 text-center">{t(content.registration.formTitle)}</h3>
+        
+        <ol class="space-y-4 mb-8 text-sm">
+          {content.registration.steps.map((step, idx) => (
+            <li class="flex gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--color-accent-primary)] text-white flex items-center justify-center text-xs font-bold">{idx + 1}</span>
+              <span set:html={t(step)} />
+            </li>
+          ))}
+        </ol>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="documenti/iscrizione-scuola-vela.pdf"
+            download
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            {t(content.registration.downloadButton)}
+          </a>
+          <a
+            href={`mailto:${contact.email}?subject=Iscrizione Corso Vela - Modulo Compilato`}
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            {t(content.registration.sendButton)}
+          </a>
+        </div>
+      </div>
+      
+      <!-- Bank Details -->
+      <div class="mt-8 p-6 bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl border border-muted">
+        <h3 class="font-bold mb-4">{t(content.bankDetails.title)}</h3>
+        <dl class="space-y-2 text-sm">
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-muted sm:w-32">{t(content.bankDetails.accountHolder)}:</dt>
+            <dd>{bankDetails.accountHolder}</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-muted sm:w-32">{t(content.bankDetails.bank)}:</dt>
+            <dd>{bankDetails.bankName} - {bankDetails.branch}</dd>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:gap-4">
+            <dt class="font-medium text-muted sm:w-32">IBAN:</dt>
+            <dd class="font-mono text-sm break-all">{bankDetails.iban}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safeguarding Note -->
+  <section class="py-8 md:py-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <a href="safeguarding" class="flex items-center gap-4 p-5 bg-[var(--color-accent-primary)]/5 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-xl border border-[var(--color-accent-primary)]/20 dark:border-[var(--color-accent-primary-dark)]/20 hover:border-[var(--color-accent-primary)] dark:hover:border-[var(--color-accent-primary-dark)] transition-colors group">
+        <div class="w-12 h-12 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex items-center justify-center flex-shrink-0">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <p class="font-bold">{t(content.safeguarding.title)}</p>
+          <p class="text-sm text-muted">
+            {t(content.safeguarding.description)}
+          </p>
+        </div>
+        <svg class="w-5 h-5 text-accent group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+

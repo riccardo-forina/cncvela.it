@@ -5,8 +5,11 @@
   "description": "Circolo Nautico Caldè - Sailing Club Website",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
+    "build:skip-check": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
+    "check:links": "npm run build:skip-check && linkinator ./dist --recurse --skip 'maps.google.com|maps.app.goo.gl|open-meteo.com|garanteprivacy.it'",
     "astro": "astro"
   },
   "dependencies": {
@@ -15,11 +18,18 @@
     "@fontsource/dm-sans": "^5.2.8",
     "@keystatic/astro": "^5.0.6",
     "@keystatic/core": "^0.5.48",
+    "@react-aria/live-announcer": "^3.4.4",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.4",
+    "is-hotkey": "^0.2.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "tailwindcss": "^4.1.17",
     "vanilla-cookieconsent": "^3.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "linkinator": "^7.5.3",
+    "typescript": "^5.9.3"
   }
 }

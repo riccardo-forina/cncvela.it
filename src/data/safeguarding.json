@@ -1,0 +1,57 @@
+{
+  "title": {
+    "it": "Safeguarding",
+    "en": "Safeguarding",
+    "de": "Safeguarding"
+  },
+  "officer": {
+    "name": "Dott.ssa Faustina Lalatta",
+    "role": {
+      "it": "Responsabile Safeguarding",
+      "en": "Safeguarding Officer",
+      "de": "Safeguarding-Beauftragter"
+    },
+    "email": "safeguarding@cncvela.it",
+    "appointmentDate": "2024-06-29"
+  },
+  "description": {
+    "it": "L'ASD Circolo Nautico Caldè ha implementato un modello organizzativo e di controllo dell'attività sportiva ed un codice di condotta a tutela dei minori e per la prevenzione della violenza di genere e delle discriminazioni. Questo modello è stato redatto come previsto dall'Art.16 comma 2 del decreto legislativo n.39 del 28 Febbraio 2021 e rispecchia le linee guida pubblicate dalla Federazione Italiana Vela.",
+    "en": "ASD Circolo Nautico Caldè has implemented an organizational model and control system for sports activities and a code of conduct for the protection of minors and the prevention of gender-based violence and discrimination. This model was drafted as required by Art.16 paragraph 2 of Legislative Decree no.39 of February 28, 2021 and reflects the guidelines published by the Italian Sailing Federation.",
+    "de": "Der ASD Circolo Nautico Caldè hat ein Organisationsmodell und Kontrollsystem für sportliche Aktivitäten sowie einen Verhaltenskodex zum Schutz von Minderjährigen und zur Prävention von geschlechtsspezifischer Gewalt und Diskriminierung implementiert. Dieses Modell wurde gemäß Art.16 Absatz 2 des Gesetzesdekrets Nr.39 vom 28. Februar 2021 erstellt und entspricht den vom Italienischen Segelverband veröffentlichten Richtlinien."
+  },
+  "documents": [
+    {
+      "name": {
+        "it": "Verbale Nomina Responsabile",
+        "en": "Officer Appointment Minutes",
+        "de": "Protokoll Ernennung Beauftragter"
+      },
+      "url": "documenti/verbale-nomina-responsabile.pdf"
+    },
+    {
+      "name": {
+        "it": "Verbale Adozione MOG/CDC",
+        "en": "MOG/CDC Adoption Minutes",
+        "de": "Protokoll Annahme MOG/CDC"
+      },
+      "url": "documenti/verbale-adozione-mog-cdc.pdf"
+    },
+    {
+      "name": {
+        "it": "Modello Organizzativo",
+        "en": "Organizational Model",
+        "de": "Organisationsmodell"
+      },
+      "url": "documenti/mog.pdf"
+    },
+    {
+      "name": {
+        "it": "Codice di Condotta",
+        "en": "Code of Conduct",
+        "de": "Verhaltenskodex"
+      },
+      "url": "documenti/codice-di-condotta-cnc.pdf"
+    }
+  ]
+}
+

@@ -1,36 +1,28 @@
 ---
 import { Image } from 'astro:assets';
-import WeatherWidget from './WeatherWidget.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 import logoImage from '../assets/images/logo.png';
+import { t, getLocaleFromUrl, type Locale } from '../i18n';
 
 interface Props {
   currentPath: string;
 }
 
 const { currentPath } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
 
 const navItems = [
-  { href: './', label: 'Home' },
-  { href: 'circolo', label: 'Il Circolo' },
-  { href: 'corsi', label: 'Corsi' },
-  { href: 'regate', label: 'Regate' },
-  { href: 'galleria', label: 'Galleria' },
-  { href: 'bacheca', label: 'Bacheca' },
+  { href: 'circolo', labelKey: 'nav.club' },
+  { href: 'corsi', labelKey: 'nav.courses' },
+  { href: 'regate', labelKey: 'nav.regattas' },
+  { href: 'bacheca', labelKey: 'nav.events' },
+  { href: 'meteo', labelKey: 'nav.weather' },
 ];
 
 function isActive(href: string, currentPath: string): boolean {
-  // Normalize: remove trailing slashes and get the last segment
   const cleanPath = currentPath.replace(/\/$/, '');
   const segments = cleanPath.split('/').filter(Boolean);
   const lastSegment = segments[segments.length - 1] || '';
-  
-  if (href === './') {
-    // Home is active only if we're at root or the base path (e.g., /cncvela.it)
-    // Check if lastSegment is empty or is the base folder name (not a page)
-    const isBasePath = lastSegment === '' || lastSegment.endsWith('.it') || lastSegment === 'cncvela';
-    const noPageSegment = !['corsi', 'regate', 'galleria', 'bacheca', 'circolo', 'meteo', 'privacy', 'safeguarding'].includes(lastSegment);
-    return isBasePath || (segments.length <= 1 && noPageSegment);
-  }
   
   return lastSegment === href;
 }
@@ -72,15 +64,15 @@ function isActive(href: string, currentPath: string): boolean {
                 ]}
                 aria-current={isActive(item.href, currentPath) ? "page" : undefined}
               >
-                {item.label}
+                {t(item.labelKey, locale)}
               </a>
             </li>
           ))}
         </ul>
         
-        <!-- Weather Widget (Desktop) -->
+        <!-- Language Switcher (Desktop) -->
         <div class="pl-4 border-l border-muted">
-          <WeatherWidget />
+          <LanguageSwitcher />
         </div>
       </nav>
     </div>
@@ -102,8 +94,8 @@ function isActive(href: string, currentPath: string): boolean {
       <span class="font-bold text-sm">Circolo Nautico Caldè</span>
     </a>
     
-    <!-- Weather Widget (Mobile) -->
-    <WeatherWidget />
+    <!-- Language Switcher (Mobile) -->
+    <LanguageSwitcher />
   </div>
 </header>
 

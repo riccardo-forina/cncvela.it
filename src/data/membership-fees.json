@@ -1,0 +1,47 @@
+{
+  "title": {
+    "it": "Quote Soci 2026",
+    "en": "Membership Fees 2026",
+    "de": "Mitgliedsbeiträge 2026"
+  },
+  "items": [
+    {
+      "id": "socio-ordinario",
+      "name": {
+        "it": "Socio Ordinario Seniores",
+        "en": "Senior Regular Member",
+        "de": "Ordentliches Mitglied Senioren"
+      },
+      "price": 200.00,
+      "note": null
+    },
+    {
+      "id": "socio-cadetto",
+      "name": {
+        "it": "Socio Cadetto/Juniores",
+        "en": "Cadet/Junior Member",
+        "de": "Kadett/Junior Mitglied"
+      },
+      "price": 70.00,
+      "note": {
+        "it": "da 7 a 17 anni",
+        "en": "ages 7 to 17",
+        "de": "7 bis 17 Jahre"
+      }
+    },
+    {
+      "id": "socio-baby",
+      "name": {
+        "it": "Socio Baby",
+        "en": "Baby Member",
+        "de": "Baby Mitglied"
+      },
+      "price": 5.00,
+      "note": {
+        "it": "figlio di socio, fino a 6 anni",
+        "en": "child of member, up to 6 years",
+        "de": "Kind eines Mitglieds, bis 6 Jahre"
+      }
+    }
+  ]
+}

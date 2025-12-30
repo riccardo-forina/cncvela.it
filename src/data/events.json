@@ -3,98 +3,140 @@
     {
       "id": "veleggiata-sociale-giugno-2026",
       "type": "regata",
-      "title": "Veleggiata Sociale",
-      "subtitle": "Derive tutte, Veleggiate",
+      "title": {
+        "it": "Veleggiata Sociale",
+        "en": "Social Sailing",
+        "de": "Gesellschaftssegeln"
+      },
+      "subtitle": {
+        "it": "Derive tutte, Veleggiate",
+        "en": "All dinghies, Cruising",
+        "de": "Alle Jollen, Fahrtensegeln"
+      },
       "date": "2026-06-27",
       "time": "10:00",
-      "description": "Veleggiata sociale aperta a tutte le derive. Zona XV - Veleggiata/Diporto.",
-      "documents": {
-        "bando": null,
-        "iscrizione": null,
-        "istruzioni": null,
-        "classifica": null
+      "description": {
+        "it": "Veleggiata sociale aperta a tutte le derive. Zona XV - Veleggiata/Diporto.",
+        "en": "Social sailing open to all dinghies. Zone XV - Cruising.",
+        "de": "Gesellschaftssegeln offen für alle Jollen. Zone XV - Fahrtensegeln."
       },
-      "status": "open"
+      "status": "open",
+      "documents": {}
     },
     {
       "id": "trofeo-sass-gallet-2026",
       "type": "regata",
-      "title": "Trofeo Sass Gallet",
-      "subtitle": "Memorial Eraldo Capra - Derive tutte",
+      "title": {
+        "it": "Trofeo Sass Gallet",
+        "en": "Sass Gallet Trophy",
+        "de": "Sass Gallet Trophäe"
+      },
+      "subtitle": {
+        "it": "Memorial Eraldo Capra - Derive tutte",
+        "en": "Eraldo Capra Memorial - All dinghies",
+        "de": "Eraldo Capra Gedenkregatta - Alle Jollen"
+      },
       "date": "2026-06-28",
       "time": "10:00",
-      "description": "Regata zonale aperta a tutte le derive. Zona XV - Altre Regate.",
-      "documents": {
-        "bando": null,
-        "iscrizione": null,
-        "istruzioni": null,
-        "classifica": null
+      "description": {
+        "it": "Regata zonale aperta a tutte le derive. Zona XV - Altre Regate.",
+        "en": "Zonal regatta open to all dinghies. Zone XV - Other Regattas.",
+        "de": "Zonenregatta offen für alle Jollen. Zone XV - Andere Regatten."
       },
-      "status": "open"
+      "status": "open",
+      "documents": {}
     },
     {
       "id": "veleggiata-sociale-luglio-2026",
       "type": "regata",
-      "title": "Veleggiata Sociale",
-      "subtitle": "Derive tutte, Veleggiate",
+      "title": {
+        "it": "Veleggiata Sociale",
+        "en": "Social Sailing",
+        "de": "Gesellschaftssegeln"
+      },
+      "subtitle": {
+        "it": "Derive tutte, Veleggiate",
+        "en": "All dinghies, Cruising",
+        "de": "Alle Jollen, Fahrtensegeln"
+      },
       "date": "2026-07-25",
       "time": "10:00",
-      "description": "Veleggiata sociale aperta a tutte le derive. Zona XV - Veleggiata/Diporto.",
-      "documents": {
-        "bando": null,
-        "iscrizione": null,
-        "istruzioni": null,
-        "classifica": null
+      "description": {
+        "it": "Veleggiata sociale aperta a tutte le derive. Zona XV - Veleggiata/Diporto.",
+        "en": "Social sailing open to all dinghies. Zone XV - Cruising.",
+        "de": "Gesellschaftssegeln offen für alle Jollen. Zone XV - Fahrtensegeln."
       },
-      "status": "open"
+      "status": "open",
+      "documents": {}
     },
     {
       "id": "regata-iom-2026",
       "type": "regata",
-      "title": "Regata IOM",
-      "subtitle": "Classe IOM Modelvela",
+      "title": {
+        "it": "Regata IOM",
+        "en": "IOM Regatta",
+        "de": "IOM Regatta"
+      },
+      "subtitle": {
+        "it": "Classe IOM Modelvela",
+        "en": "IOM Model Sailing Class",
+        "de": "IOM Modellsegelklasse"
+      },
       "date": "2026-10-25",
       "time": "10:00",
-      "description": "Regata zonale per la classe IOM Modelvela. Zona XV - Altre Regate. Luogo: Porto Valtravaglia - Lido.",
-      "documents": {
-        "bando": null,
-        "iscrizione": null,
-        "istruzioni": null,
-        "classifica": null
+      "description": {
+        "it": "Regata zonale per la classe IOM Modelvela. Zona XV - Altre Regate. Luogo: Porto Valtravaglia - Lido.",
+        "en": "Zonal regatta for IOM Model Sailing class. Zone XV - Other Regattas. Location: Porto Valtravaglia - Lido.",
+        "de": "Zonenregatta für die IOM Modellsegelklasse. Zone XV - Andere Regatten. Ort: Porto Valtravaglia - Lido."
       },
-      "status": "open"
+      "status": "open",
+      "documents": {}
     },
     {
       "id": "regata-derive-2025",
       "type": "regata",
-      "title": "Regata Derive 2025",
-      "subtitle": "Regate organizzate 2025",
+      "title": {
+        "it": "Regata Derive 2025",
+        "en": "Dinghy Regatta 2025",
+        "de": "Jollenregatta 2025"
+      },
+      "subtitle": {
+        "it": "Regate organizzate 2025",
+        "en": "2025 Organized Regattas",
+        "de": "Organisierte Regatten 2025"
+      },
       "date": "2025-06-15",
       "time": "10:00",
-      "description": "Regate derive organizzate dal CNC nel 2025.",
-      "documents": {
-        "bando": null,
-        "iscrizione": null,
-        "istruzioni": null,
-        "classifica": "regate/classifica-derive-2025.pdf"
+      "description": {
+        "it": "Regate derive organizzate dal CNC nel 2025.",
+        "en": "Dinghy regattas organized by CNC in 2025.",
+        "de": "Vom CNC organisierte Jollenregatten 2025."
       },
-      "status": "completed"
+      "status": "completed",
+      "documents": {}
     },
     {
       "id": "regata-iom-2025",
       "type": "regata",
-      "title": "Regata IOM 2025",
-      "subtitle": "HMS 2022 Scoring IOM",
+      "title": {
+        "it": "Regata IOM 2025",
+        "en": "IOM Regatta 2025",
+        "de": "IOM Regatta 2025"
+      },
+      "subtitle": {
+        "it": "HMS 2022 Scoring IOM",
+        "en": "HMS 2022 Scoring IOM",
+        "de": "HMS 2022 Scoring IOM"
+      },
       "date": "2025-10-18",
       "time": "10:00",
-      "description": "Regata IOM organizzata a Porto Valtravaglia nel 2025.",
-      "documents": {
-        "bando": null,
-        "iscrizione": null,
-        "istruzioni": null,
-        "classifica": "regate/classifica-iom-2025.pdf"
+      "description": {
+        "it": "Regata IOM organizzata a Porto Valtravaglia nel 2025.",
+        "en": "IOM regatta organized in Porto Valtravaglia in 2025.",
+        "de": "IOM-Regatta organisiert in Porto Valtravaglia 2025."
       },
-      "status": "completed"
+      "status": "completed",
+      "documents": {}
     }
   ]
 }

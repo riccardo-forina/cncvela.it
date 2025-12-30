@@ -2,7 +2,6 @@ import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = ({ site }) => {
   const siteUrl = site?.toString().replace(/\/$/, '') || 'https://www.cncvela.it';
-  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const productionUrl = 'https://www.cncvela.it';
   
   // Check if we're on GitHub Pages (staging)

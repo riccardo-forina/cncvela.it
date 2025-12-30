@@ -1,0 +1,93 @@
+{
+  "page": {
+    "title": {
+      "it": "Meteo Caldè",
+      "en": "Caldè Weather",
+      "de": "Wetter Caldè"
+    },
+    "description": {
+      "it": "Previsioni meteo per Caldè, Lago Maggiore. Vento, temperatura e condizioni per la vela.",
+      "en": "Weather forecast for Caldè, Lake Maggiore. Wind, temperature and sailing conditions.",
+      "de": "Wettervorhersage für Caldè, Lago Maggiore. Wind, Temperatur und Segelbedingungen."
+    },
+    "subtitle": {
+      "it": "Previsioni per il Lago Maggiore",
+      "en": "Forecast for Lake Maggiore",
+      "de": "Vorhersage für den Lago Maggiore"
+    }
+  },
+  "legend": {
+    "title": {
+      "it": "Legenda intensità vento",
+      "en": "Wind intensity legend",
+      "de": "Windstärke-Legende"
+    },
+    "description": {
+      "it": "Il colore indica lo sfondo usato nelle previsioni",
+      "en": "The color indicates the background used in forecasts",
+      "de": "Die Farbe zeigt den Hintergrund in den Vorhersagen"
+    },
+    "levels": {
+      "calm": { "it": "<3 kn Bonaccia", "en": "<3 kn Calm", "de": "<3 kn Flaute" },
+      "light": { "it": "3-7 kn Leggero", "en": "3-7 kn Light", "de": "3-7 kn Leicht" },
+      "moderate": { "it": "7-11 kn Moderato", "en": "7-11 kn Moderate", "de": "7-11 kn Mäßig" },
+      "strong": { "it": "11-16 kn Forte", "en": "11-16 kn Strong", "de": "11-16 kn Stark" },
+      "veryStrong": { "it": ">16 kn Molto forte", "en": ">16 kn Very strong", "de": ">16 kn Sehr stark" }
+    }
+  },
+  "source": {
+    "title": { "it": "Fonte dati", "en": "Data source", "de": "Datenquelle" },
+    "position": { "it": "Posizione", "en": "Position", "de": "Position" },
+    "model": { "it": "Modello", "en": "Model", "de": "Modell" }
+  },
+  "sailing": {
+    "title": { "it": "Condizioni per la Vela", "en": "Sailing Conditions", "de": "Segelbedingungen" },
+    "recommendedFor": { "it": "Consigliato per", "en": "Recommended for", "de": "Empfohlen für" }
+  },
+  "current": {
+    "wind": { "it": "vento", "en": "wind", "de": "Wind" },
+    "direction": { "it": "direzione", "en": "direction", "de": "Richtung" },
+    "temperature": { "it": "temperatura", "en": "temperature", "de": "Temperatur" },
+    "humidity": { "it": "umidità", "en": "humidity", "de": "Luftfeuchtigkeit" },
+    "updated": { "it": "Aggiornato", "en": "Updated", "de": "Aktualisiert" }
+  },
+  "forecast": {
+    "hourly": { "it": "Previsione Vento Oggi", "en": "Today's Wind Forecast", "de": "Windvorhersage heute" },
+    "daily": { "it": "Previsioni Prossimi Giorni", "en": "Next Days Forecast", "de": "Vorhersage nächste Tage" },
+    "disclaimer": { "it": "Indicazioni generali. Verifica sempre le condizioni reali prima di uscire.", "en": "General indications. Always check real conditions before going out.", "de": "Allgemeine Hinweise. Überprüfen Sie immer die tatsächlichen Bedingungen, bevor Sie losfahren." },
+    "loading": { "it": "Caricamento...", "en": "Loading...", "de": "Wird geladen..." },
+    "error": { "it": "Errore nel caricamento dei dati meteo", "en": "Error loading weather data", "de": "Fehler beim Laden der Wetterdaten" }
+  },
+  "windStatus": {
+    "calm": { "it": "Bonaccia", "en": "Calm", "de": "Flaute" },
+    "light": { "it": "Vento Leggero", "en": "Light Wind", "de": "Leichter Wind" },
+    "moderate": { "it": "Vento Moderato", "en": "Moderate Wind", "de": "Mäßiger Wind" },
+    "strong": { "it": "Vento Forte", "en": "Strong Wind", "de": "Starker Wind" },
+    "veryStrong": { "it": "Vento Molto Forte", "en": "Very Strong Wind", "de": "Sehr starker Wind" }
+  },
+  "recommendations": {
+    "calm": { "it": "Principianti, SUP", "en": "Beginners, SUP", "de": "Anfänger, SUP" },
+    "light": { "it": "Tutti i livelli", "en": "All levels", "de": "Alle Niveaus" },
+    "moderate": { "it": "Velisti esperti", "en": "Experienced sailors", "de": "Erfahrene Segler" },
+    "strong": { "it": "Solo esperti", "en": "Experts only", "de": "Nur Experten" },
+    "veryStrong": { "it": "Sconsigliato uscire", "en": "Not recommended", "de": "Nicht empfohlen" }
+  },
+  "days": {
+    "today": { "it": "Oggi", "en": "Today", "de": "Heute" },
+    "tomorrow": { "it": "Domani", "en": "Tomorrow", "de": "Morgen" }
+  },
+  "weather": {
+    "clear": { "it": "Sereno", "en": "Clear", "de": "Klar" },
+    "partlyCloudy": { "it": "Poco nuvoloso", "en": "Partly cloudy", "de": "Teilweise bewölkt" },
+    "cloudy": { "it": "Nuvoloso", "en": "Cloudy", "de": "Bewölkt" },
+    "fog": { "it": "Nebbia", "en": "Fog", "de": "Nebel" },
+    "drizzle": { "it": "Pioggerella", "en": "Drizzle", "de": "Nieselregen" },
+    "lightRain": { "it": "Pioggia leggera", "en": "Light rain", "de": "Leichter Regen" },
+    "rain": { "it": "Pioggia", "en": "Rain", "de": "Regen" },
+    "heavyRain": { "it": "Pioggia forte", "en": "Heavy rain", "de": "Starker Regen" },
+    "snow": { "it": "Neve", "en": "Snow", "de": "Schnee" },
+    "showers": { "it": "Rovesci", "en": "Showers", "de": "Schauer" },
+    "thunderstorm": { "it": "Temporale", "en": "Thunderstorm", "de": "Gewitter" }
+  }
+}
+

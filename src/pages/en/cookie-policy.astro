@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import contact from '../../data/contact.json';
+
+const locale = 'en';
+---
+
+<BaseLayout title="Cookie Policy" description="Information about cookies used by the Circolo Nautico Caldè website" locale={locale}>
+  <!-- Header Section -->
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white py-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h1 class="text-3xl md:text-4xl font-black mb-2">Cookie Policy</h1>
+      <p class="text-white/80">Last updated: December 2024</p>
+    </div>
+  </section>
+
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        
+        <h2>What are Cookies</h2>
+        <p>
+          Cookies are small text files that websites send to the user's browser, 
+          where they are stored to be retransmitted to the same sites on subsequent visits. 
+          Cookies are used for different purposes, have different characteristics, and can be 
+          used by both the owner of the site you are visiting and by third parties.
+        </p>
+
+        <h2>Data Controller</h2>
+        <p>
+          The data controller is:<br>
+          <strong>{contact.legalName}</strong><br>
+          {contact.address.street}, {contact.address.postalCode} {contact.address.city} ({contact.address.province})<br>
+          Email: <a href={`mailto:${contact.email}`}>{contact.email}</a><br>
+          Tax Code: {contact.fiscalCode}
+        </p>
+
+        <h2>Types of Cookies Used</h2>
+        
+        <h3>Technical Cookies (Necessary)</h3>
+        <p>
+          These cookies are essential for the proper functioning of the website. 
+          They include cookies that store preferences related to cookie consent.
+          They do not require user consent.
+        </p>
+        <table class="w-full text-sm">
+          <thead>
+            <tr>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Name</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Purpose</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border-b dark:border-gray-700">cc_cookie</td>
+              <td class="p-2 border-b dark:border-gray-700">Stores cookie preferences</td>
+              <td class="p-2 border-b dark:border-gray-700">6 months</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Analytics Cookies</h3>
+        <p>
+          These cookies allow us to count visits and traffic sources, 
+          so we can measure and improve the performance of our site. 
+          They help us understand which pages are most or least popular and how 
+          visitors navigate the site. All information collected by these cookies 
+          is aggregated and therefore anonymous.
+        </p>
+        <table class="w-full text-sm">
+          <thead>
+            <tr>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Name</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Provider</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Purpose</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border-b dark:border-gray-700">_ga</td>
+              <td class="p-2 border-b dark:border-gray-700">Google Analytics</td>
+              <td class="p-2 border-b dark:border-gray-700">Distinguishes users</td>
+              <td class="p-2 border-b dark:border-gray-700">2 years</td>
+            </tr>
+            <tr>
+              <td class="p-2 border-b dark:border-gray-700">_gid</td>
+              <td class="p-2 border-b dark:border-gray-700">Google Analytics</td>
+              <td class="p-2 border-b dark:border-gray-700">Distinguishes users</td>
+              <td class="p-2 border-b dark:border-gray-700">24 hours</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          For more information about Google Analytics: 
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            Google Privacy Policy
+          </a>
+        </p>
+
+        <h3>Third-Party Cookies</h3>
+        <p>
+          Our website embeds content from third parties that may install their own cookies:
+        </p>
+        <ul>
+          <li>
+            <strong>Google Maps</strong>: we use Google Maps to show the club's location. 
+            Google may install cookies for functionality and statistics. 
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+              Google Privacy Policy
+            </a>
+          </li>
+        </ul>
+
+        <h2>Managing Preferences</h2>
+        <p>
+          You can manage your cookie preferences at any time by clicking the button below:
+        </p>
+        <button 
+          id="open-cookie-settings"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary-hover)] text-white rounded-lg font-semibold transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Manage Cookie Preferences
+        </button>
+
+        <h2>Your Rights</h2>
+        <p>
+          Under GDPR (EU Regulation 2016/679), you have the right to:
+        </p>
+        <ul>
+          <li>Access your personal data</li>
+          <li>Rectify inaccurate data</li>
+          <li>Delete your data ("right to be forgotten")</li>
+          <li>Restrict processing</li>
+          <li>Object to processing</li>
+          <li>Data portability</li>
+          <li>Withdraw consent at any time</li>
+          <li>Lodge a complaint with the Data Protection Authority</li>
+        </ul>
+        <p>
+          To exercise your rights, contact us at: 
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.getElementById('open-cookie-settings')?.addEventListener('click', () => {
+    if ((window as any).CookieConsent) {
+      (window as any).CookieConsent.showPreferences();
+    }
+  });
+</script>
+
+<style>
+  .prose h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+  }
+  .prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+  }
+  .prose p {
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+  }
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+  .prose a {
+    color: var(--color-accent-primary);
+  }
+  .prose a:hover {
+    text-decoration: underline;
+  }
+  .prose table {
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .prose h2,
+    .prose h3 {
+      color: var(--color-text-primary-dark);
+    }
+    .prose p,
+    .prose ul {
+      color: var(--color-text-secondary-dark);
+    }
+    .prose a {
+      color: var(--color-link-dark);
+    }
+  }
+</style>
+

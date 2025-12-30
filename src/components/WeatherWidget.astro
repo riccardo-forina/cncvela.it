@@ -7,33 +7,83 @@
   <!-- Wind Icon -->
   <span class="text-base" aria-hidden="true">💨</span>
   
-  <!-- Loading state -->
-  <span class="weather-loading text-muted">
-    --
-  </span>
-  
-  <!-- Weather data (hidden until loaded) -->
-  <span class="weather-data hidden font-medium">
-    <span class="wind-speed">--</span>
+  <!-- Fixed width container to prevent layout shift -->
+  <span class="inline-block w-[4rem] tabular-nums">
+    <span class="wind-speed font-medium">--</span>
     <span class="text-muted text-xs">kn</span>
-    <span class="wind-direction ml-1 text-xs text-muted"></span>
+    <span class="wind-direction text-xs text-muted"></span>
   </span>
 </a>
 
 <script>
+  // Extend Window interface for our global flag
+  declare global {
+    interface Window {
+      weatherWidgetInitialized?: boolean;
+    }
+  }
+  
   // Only run once, even if component is included multiple times
   if (!window.weatherWidgetInitialized) {
     window.weatherWidgetInitialized = true;
     
-    // Caldè coordinates (CNC - Via Maggiore 36)
+    // Caldè coordinates (CNC - Via Maggiore 18)
     const LAT = 45.9448;
     const LON = 8.6612;
+    
+    // Cache config
+    const CACHE_KEY = 'cnc_weather_cache';
+    const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in ms
     
     // Wind direction to compass
     function degToCompass(deg: number): string {
       const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
       const index = Math.round(deg / 45) % 8;
       return directions[index];
+    }
+    
+    // Update all widgets on the page
+    function updateWidgets(windSpeed: number, windDir: string) {
+      document.querySelectorAll('.weather-widget').forEach(widget => {
+        const speedEl = widget.querySelector('.wind-speed');
+        const dirEl = widget.querySelector('.wind-direction');
+        
+        if (speedEl && dirEl) {
+          speedEl.textContent = windSpeed.toString();
+          dirEl.textContent = ` ${windDir}`;
+        }
+      });
+    }
+    
+    // Get cached data if still valid
+    function getCachedWeather(): { windSpeed: number; windDir: string } | null {
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (!cached) return null;
+        
+        const { windSpeed, windDir, timestamp } = JSON.parse(cached);
+        const age = Date.now() - timestamp;
+        
+        if (age < CACHE_TTL) {
+          return { windSpeed, windDir };
+        }
+        return null;
+      } catch {
+        return null;
+      }
+    }
+    
+    // Save to cache
+    function cacheWeather(windSpeed: number, windDir: string) {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+          windSpeed,
+          windDir,
+          timestamp: Date.now()
+        }));
+      } catch {
+        // localStorage might not be available
+      }
     }
     
     async function fetchWeather() {
@@ -48,31 +98,27 @@
         const windSpeed = Math.round(data.current.wind_speed_10m);
         const windDir = degToCompass(data.current.wind_direction_10m);
         
-        // Update ALL weather widgets on the page
-        document.querySelectorAll('.weather-widget').forEach(widget => {
-          const loadingEl = widget.querySelector('.weather-loading');
-          const dataEl = widget.querySelector('.weather-data');
-          const speedEl = widget.querySelector('.wind-speed');
-          const dirEl = widget.querySelector('.wind-direction');
-          
-          if (loadingEl && dataEl && speedEl && dirEl) {
-            loadingEl.classList.add('hidden');
-            dataEl.classList.remove('hidden');
-            speedEl.textContent = windSpeed.toString();
-            dirEl.textContent = windDir;
-          }
-        });
+        // Cache the result
+        cacheWeather(windSpeed, windDir);
+        
+        // Update widgets
+        updateWidgets(windSpeed, windDir);
       } catch (error) {
         console.error('Weather fetch error:', error);
         // Keep showing "--" on error
       }
     }
     
-    // Fetch on load
-    fetchWeather();
+    // Try cache first, then fetch if needed
+    const cached = getCachedWeather();
+    if (cached) {
+      updateWidgets(cached.windSpeed, cached.windDir);
+    } else {
+      fetchWeather();
+    }
     
-    // Refresh every 10 minutes
-    setInterval(fetchWeather, 10 * 60 * 1000);
+    // Refresh every 5 minutes (aligned with cache TTL)
+    setInterval(fetchWeather, CACHE_TTL);
   }
 </script>
 

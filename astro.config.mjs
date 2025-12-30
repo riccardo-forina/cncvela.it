@@ -5,23 +5,15 @@ import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import vercel from '@astrojs/vercel';
 
-// ============================================
-// SITE CONFIGURATION
-// ============================================
-// Vercel: base = '/', site = cncvela.it or preview URL
-// GitHub Pages: base = '/cncvela.it'
-// ============================================
-
-const isVercel = !!process.env.VERCEL;
 const isVercelProduction = process.env.VERCEL_ENV === 'production';
 
 export default defineConfig({
   site: isVercelProduction 
     ? 'https://www.cncvela.it' 
-    : isVercel 
+    : process.env.VERCEL_URL 
       ? `https://${process.env.VERCEL_URL}` 
-      : 'https://riccardo-forina.github.io',
-  base: isVercel ? '/' : '/cncvela.it',
+      : 'http://localhost:4321',
+  base: '/',
   
   // Keystatic needs server mode for the admin UI
   // Pages marked with prerender: false will be rendered at runtime
@@ -44,6 +36,12 @@ export default defineConfig({
   },
   
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['is-hotkey']
+    },
+    ssr: {
+      noExternal: ['is-hotkey']
+    }
   }
 });

@@ -1,66 +1,169 @@
 {
   "courses": [
     {
-      "id": "giovani-fiv",
-      "title": "Corsi Giovani FIV",
-      "subtitle": "6-18 anni",
+      "id": "derive-settimanale",
+      "title": {
+        "it": "Corso Derive Settimanale",
+        "en": "Weekly Dinghy Course",
+        "de": "Jolle Wochenkurs"
+      },
+      "subtitle": {
+        "it": "Età 6-99",
+        "en": "Ages 6-99",
+        "de": "Alter 6-99"
+      },
       "icon": "sailboat",
-      "description": "Corsi di vela su derive per giovani dai 6 ai 18 anni. Una settimana intensiva dal lunedì al venerdì per imparare le basi della vela in sicurezza.",
-      "duration": "5 giorni",
-      "schedule": "Lunedì - Venerdì",
-      "period": "Giugno - Agosto",
-      "ageRange": "6-18 anni",
-      "boatType": "Derive",
-      "includes": [
-        "Istruttori FIV qualificati",
-        "Attrezzatura completa",
-        "Assicurazione",
-        "Tessera FIV"
-      ],
-      "price": 150.00,
-      "priceNote": "+ quota ass. + FIV"
+      "duration": {
+        "it": "5 giorni",
+        "en": "5 days",
+        "de": "5 Tage"
+      },
+      "period": {
+        "it": "Giugno - Agosto",
+        "en": "June - August",
+        "de": "Juni - August"
+      },
+      "boatType": {
+        "it": "Derive",
+        "en": "Dinghies",
+        "de": "Jollen"
+      },
+      "price": 175.00,
+      "priceNote": {
+        "it": "+ quota ass. + FIV",
+        "en": "+ membership + FIV",
+        "de": "+ Mitgliedschaft + FIV"
+      },
+      "description": {
+        "it": "Corso intensivo di vela su derive. Una settimana dal lunedì al venerdì per imparare le basi della navigazione a vela.",
+        "en": "Intensive sailing course on dinghies. A week from Monday to Friday to learn the basics of sailing.",
+        "de": "Intensiver Segelkurs auf Jollen. Eine Woche von Montag bis Freitag, um die Grundlagen des Segelns zu erlernen."
+      },
+      "includes": {
+        "it": ["Istruttori FIV qualificati", "Attrezzatura completa", "Assicurazione"],
+        "en": ["Qualified FIV instructors", "Complete equipment", "Insurance"],
+        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"]
+      },
+      "accommodation": {
+        "it": "È possibile pernottare presso la foresteria del Circolo, prezzo da concordare.",
+        "en": "Accommodation available at the Club guesthouse, price to be agreed.",
+        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung."
+      },
+      "order": 1
     },
     {
-      "id": "adulti-weekend",
-      "title": "Corsi Adulti Weekend",
-      "subtitle": "18+ anni",
+      "id": "derive-weekend",
+      "title": {
+        "it": "Corso Derive Weekend",
+        "en": "Weekend Dinghy Course",
+        "de": "Jolle Wochenendkurs"
+      },
+      "subtitle": {
+        "it": "Età 6-99",
+        "en": "Ages 6-99",
+        "de": "Alter 6-99"
+      },
       "icon": "sailboat",
-      "description": "Corso di vela su derive per adulti. Due fine settimana per apprendere le tecniche di base della navigazione a vela.",
-      "duration": "2 weekend",
-      "schedule": "Sabato e Domenica",
-      "period": "Maggio - Settembre",
-      "ageRange": "18+ anni",
-      "boatType": "Derive",
-      "includes": [
-        "Istruttori qualificati",
-        "Attrezzatura completa",
-        "Assicurazione",
-        "Tessera FIV"
-      ],
-      "price": 125.00,
-      "priceNote": "+ quota ass. + FIV"
+      "duration": {
+        "it": "2 weekend",
+        "en": "2 weekends",
+        "de": "2 Wochenenden"
+      },
+      "period": {
+        "it": "Maggio - Settembre",
+        "en": "May - September",
+        "de": "Mai - September"
+      },
+      "boatType": {
+        "it": "Derive",
+        "en": "Dinghies",
+        "de": "Jollen"
+      },
+      "price": 150.00,
+      "priceNote": {
+        "it": "+ quota ass. + FIV",
+        "en": "+ membership + FIV",
+        "de": "+ Mitgliedschaft + FIV"
+      },
+      "description": {
+        "it": "Corso di vela su derive distribuito su due fine settimana. Ideale per chi non può frequentare il corso settimanale.",
+        "en": "Sailing course on dinghies spread over two weekends. Ideal for those who cannot attend the weekly course.",
+        "de": "Segelkurs auf Jollen über zwei Wochenenden verteilt. Ideal für alle, die den Wochenkurs nicht besuchen können."
+      },
+      "includes": {
+        "it": ["Istruttori FIV qualificati", "Attrezzatura completa", "Assicurazione"],
+        "en": ["Qualified FIV instructors", "Complete equipment", "Insurance"],
+        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"]
+      },
+      "accommodation": {
+        "it": "È possibile pernottare presso la foresteria del Circolo, prezzo da concordare.",
+        "en": "Accommodation available at the Club guesthouse, price to be agreed.",
+        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung."
+      },
+      "order": 2
     },
     {
       "id": "cabinati",
-      "title": "Corsi Cabinati",
-      "subtitle": "18+ anni",
+      "title": {
+        "it": "Corso Cabinati",
+        "en": "Keelboat Course",
+        "de": "Kielbootkurs"
+      },
+      "subtitle": {
+        "it": "Età 6-99",
+        "en": "Ages 6-99",
+        "de": "Alter 6-99"
+      },
       "icon": "yacht",
-      "description": "Corso di vela su cabinati per adulti. Due fine settimana in date da concordare con gli interessati per imparare la navigazione su barche più grandi.",
-      "duration": "2 weekend",
-      "schedule": "Date da concordare",
-      "period": "Maggio - Settembre",
-      "ageRange": "18+ anni",
-      "boatType": "Cabinati",
-      "includes": [
-        "Istruttori qualificati",
-        "Attrezzatura completa",
-        "Assicurazione",
-        "Tessera FIV"
-      ],
-      "price": 150.00,
-      "priceNote": "+ quota ass. + FIV"
+      "duration": {
+        "it": "2 weekend",
+        "en": "2 weekends",
+        "de": "2 Wochenenden"
+      },
+      "period": {
+        "it": "Maggio - Settembre",
+        "en": "May - September",
+        "de": "Mai - September"
+      },
+      "boatType": {
+        "it": "Cabinati",
+        "en": "Keelboats",
+        "de": "Kielboote"
+      },
+      "price": 200.00,
+      "priceNote": {
+        "it": "+ quota ass. + FIV",
+        "en": "+ membership + FIV",
+        "de": "+ Mitgliedschaft + FIV"
+      },
+      "description": {
+        "it": "Corso di vela su cabinati. Due fine settimana in date da concordare per imparare la navigazione su barche più grandi.",
+        "en": "Sailing course on keelboats. Two weekends on dates to be agreed to learn sailing on larger boats.",
+        "de": "Segelkurs auf Kielbooten. Zwei Wochenenden an zu vereinbarenden Terminen, um das Segeln auf größeren Booten zu erlernen."
+      },
+      "includes": {
+        "it": ["Istruttori FIV qualificati", "Attrezzatura completa", "Assicurazione"],
+        "en": ["Qualified FIV instructors", "Complete equipment", "Insurance"],
+        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"]
+      },
+      "accommodation": {
+        "it": "È possibile pernottare presso la foresteria del Circolo, prezzo da concordare.",
+        "en": "Accommodation available at the Club guesthouse, price to be agreed.",
+        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung."
+      },
+      "order": 3
     }
-  ]
+  ],
+  "labels": {
+    "whatIncludes": {
+      "it": "Cosa include",
+      "en": "What's included",
+      "de": "Was enthalten ist"
+    },
+    "accommodation": {
+      "it": "Foresteria",
+      "en": "Accommodation",
+      "de": "Unterkunft"
+    }
+  }
 }
-
-

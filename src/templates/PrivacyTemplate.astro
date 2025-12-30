@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n';
+import content from '../data/privacy-content.json';
+import contact from '../data/contact.json';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+// Helper to get localized text
+const t = (obj: { it: string; en?: string; de?: string } | string | undefined, fallback = ''): string => {
+  if (!obj) return fallback;
+  if (typeof obj === 'string') return obj;
+  return obj[locale] || obj.it || fallback;
+};
+
+const subtitleText = {
+  it: 'Ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003',
+  en: 'Pursuant to EU Regulation 2016/679 (GDPR) and Italian D.Lgs. 196/2003',
+  de: 'Gemäß EU-Verordnung 2016/679 (DSGVO) und italienischem D.Lgs. 196/2003'
+};
+
+const lastUpdatedLabel = {
+  it: 'Ultimo aggiornamento',
+  en: 'Last updated',
+  de: 'Letzte Aktualisierung'
+};
+---
+
+<BaseLayout title={t(content.page.title)} description={t(content.page.description)} locale={locale}>
+  <!-- Title bar -->
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h1 class="text-2xl md:text-3xl font-black text-white">{t(content.page.title)}</h1>
+      <p class="text-sm md:text-base text-white/70 mt-2 max-w-2xl">{t(subtitleText)}</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-8 md:py-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <article class="markdown-content">
+        
+        <!-- Data Controller -->
+        <h2>{t(content.sections.dataController.title)}</h2>
+        <p>
+          <strong>{contact.legalName}</strong><br />
+          {contact.address.street}, {contact.address.postalCode} {contact.address.city} ({contact.address.province})<br />
+          C.F. {contact.fiscalCode} - P.IVA {contact.vatNumber}<br />
+          Email: <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
+
+        <!-- What Data -->
+        <h2>{t(content.sections.whatData.title)}</h2>
+        <p>{t(content.sections.whatData.intro)}</p>
+        <ul>
+          {content.sections.whatData.items.map((item) => (
+            <li><strong>{t(item.title)}:</strong> {t(item.description)}</li>
+          ))}
+        </ul>
+
+        <!-- Purposes -->
+        <h2>{t(content.sections.purposes.title)}</h2>
+        <p>{t(content.sections.purposes.intro)}</p>
+        <ul>
+          {content.sections.purposes.items.map((item) => (
+            <li><strong>{t(item.title)}:</strong> {t(item.description)}</li>
+          ))}
+        </ul>
+
+        <!-- Legal Basis -->
+        <h2>{t(content.sections.legalBasis.title)}</h2>
+        <ul>
+          {content.sections.legalBasis.items.map((item) => (
+            <li><strong>{t(item.title)}:</strong> {t(item.description)}</li>
+          ))}
+        </ul>
+
+        <!-- Data Sharing -->
+        <h2>{t(content.sections.dataSharing.title)}</h2>
+        <p>{t(content.sections.dataSharing.intro)}</p>
+        <ul>
+          {content.sections.dataSharing.items.map((item) => (
+            <li>{t(item)}</li>
+          ))}
+        </ul>
+        <p>{t(content.sections.dataSharing.noTransfer)}</p>
+
+        <!-- Retention -->
+        <h2>{t(content.sections.retention.title)}</h2>
+        <p>{t(content.sections.retention.intro)}</p>
+        <table>
+          <thead>
+            <tr>
+              <th>{t(content.sections.retention.table.headers.type)}</th>
+              <th>{t(content.sections.retention.table.headers.duration)}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {content.sections.retention.table.rows.map((row) => (
+              <tr>
+                <td>{t(row.type)}</td>
+                <td>{t(row.duration)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <!-- Rights -->
+        <h2>{t(content.sections.rights.title)}</h2>
+        <p>{t(content.sections.rights.intro)}</p>
+        <ul>
+          {content.sections.rights.items.map((item) => (
+            <li><strong>{t(item.title)}:</strong> {t(item.description)}</li>
+          ))}
+        </ul>
+        <p>{t(content.sections.rights.contact)} <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+
+        <!-- Complaint -->
+        <h2>{t(content.sections.complaint.title)}</h2>
+        <p>{t(content.sections.complaint.intro)}</p>
+        <p>
+          Piazza Venezia 11, 00187 Roma<br />
+          <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">www.garanteprivacy.it</a>
+        </p>
+
+        <!-- Minors -->
+        <h2>{t(content.sections.minors.title)}</h2>
+        <p>
+          {t(content.sections.minors.content)}
+        </p>
+        <p>
+          {t(content.sections.minors.moreInfo)} <a href={locale === 'it' ? 'safeguarding' : `/${locale}/safeguarding`}>Safeguarding</a>.
+        </p>
+
+        <!-- Security -->
+        <h2>{t(content.sections.security.title)}</h2>
+        <p>{t(content.sections.security.content)}</p>
+
+        <!-- Email Contact -->
+        <h2>{t(content.sections.emailContact.title)}</h2>
+        <p>{t(content.sections.emailContact.content)}</p>
+
+        <p><em>{t(content.sections.disclaimer)}</em></p>
+      </article>
+
+      <!-- Last Updated -->
+      <div class="mt-12 pt-6 border-t border-muted">
+        <p class="text-sm text-muted">
+          <strong>{t(lastUpdatedLabel)}:</strong> {t(content.page.lastUpdated)}
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

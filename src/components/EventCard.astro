@@ -1,38 +1,34 @@
 ---
 import { generateGoogleCalendarUrl } from '../utils/ics';
+import type { Locale } from '../i18n';
+import type { Event, LocalizedText } from '../types/event';
 
 interface Props {
-  event: {
-    id: string;
-    type: 'corso' | 'regata' | 'evento_sociale';
-    title: string;
-    subtitle?: string;
-    date: string;
-    endDate?: string;
-    time?: string;
-    description: string;
-    registrationUrl?: string;
-    documents?: {
-      bando?: string | null;
-      iscrizione?: string | null;
-      istruzioni?: string | null;
-      classifica?: string | null;
-    };
-    status: 'open' | 'closed' | 'completed';
-  };
+  event: Event;
   compact?: boolean;
+  locale?: Locale;
 }
 
-const { event, compact = false } = Astro.props;
+const { event, compact = false, locale = 'it' } = Astro.props;
+
+// Helper to get localized text with fallback to Italian
+const getText = (field: LocalizedText | undefined): string => {
+  if (!field) return '';
+  return field[locale] || field.it || '';
+};
+
+const title = getText(event.title);
+const subtitle = getText(event.subtitle);
+const description = getText(event.description);
 
 // Generate Google Calendar link
 const calendarUrl = generateGoogleCalendarUrl({
-  title: event.title,
-  description: event.description,
+  title,
+  description,
   date: event.date,
   endDate: event.endDate,
   time: event.time,
-  location: 'Circolo Nautico Caldè, Via Maggiore 36, 21010 Castelveccana (VA)',
+  location: 'Circolo Nautico Caldè, Via Maggiore 18, 21010 Castelveccana (VA)',
 });
 
 // Format date
@@ -41,16 +37,6 @@ function formatDate(dateStr: string): string {
   return date.toLocaleDateString('it-IT', {
     day: 'numeric',
     month: 'short',
-  });
-}
-
-function formatFullDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('it-IT', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
   });
 }
 
@@ -76,7 +62,7 @@ const typeConfig = {
   },
 };
 
-const config = typeConfig[event.type];
+const config = typeConfig[event.type as keyof typeof typeConfig] || typeConfig.evento_sociale;
 const dateDisplay = event.endDate 
   ? `${formatDate(event.date)} - ${formatDate(event.endDate)}`
   : formatDate(event.date);
@@ -113,12 +99,12 @@ const dateDisplay = event.endDate
         "font-bold text-[var(--color-text-primary)] dark:text-[var(--color-text-primary-dark)] mt-1",
         { "text-base": compact, "text-lg": !compact }
       ]}>
-        {event.title}
+        {title}
       </h3>
       
-      {event.subtitle && (
+      {subtitle && (
         <p class="text-sm text-muted">
-          {event.subtitle}
+          {subtitle}
         </p>
       )}
       
@@ -132,7 +118,7 @@ const dateDisplay = event.endDate
           
           <!-- Description -->
           <p class="text-sm text-muted mt-2 line-clamp-2">
-            {event.description}
+            {description}
           </p>
           
           <!-- Actions -->

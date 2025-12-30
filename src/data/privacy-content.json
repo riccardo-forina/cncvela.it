@@ -1,0 +1,275 @@
+{
+  "page": {
+    "title": {
+      "it": "Informativa Privacy",
+      "en": "Privacy Policy",
+      "de": "Datenschutzerklärung"
+    },
+    "description": {
+      "it": "Informativa sulla privacy del Circolo Nautico Caldè A.S.D. ai sensi del GDPR e del D.Lgs. 196/2003.",
+      "en": "Privacy policy of Circolo Nautico Caldè A.S.D. pursuant to GDPR and Italian D.Lgs. 196/2003.",
+      "de": "Datenschutzerklärung des Circolo Nautico Caldè A.S.D. gemäß DSGVO und italienischem D.Lgs. 196/2003."
+    },
+    "lastUpdated": {
+      "it": "Dicembre 2025",
+      "en": "December 2025",
+      "de": "Dezember 2025"
+    }
+  },
+  "sections": {
+    "dataController": {
+      "title": {
+        "it": "Titolare del Trattamento",
+        "en": "Data Controller",
+        "de": "Verantwortlicher"
+      }
+    },
+    "whatData": {
+      "title": {
+        "it": "1. Quali dati raccogliamo",
+        "en": "1. What data we collect",
+        "de": "1. Welche Daten wir erheben"
+      },
+      "intro": {
+        "it": "Il Circolo Nautico Caldè A.S.D. può raccogliere i seguenti dati personali:",
+        "en": "Circolo Nautico Caldè A.S.D. may collect the following personal data:",
+        "de": "Der Circolo Nautico Caldè A.S.D. kann folgende personenbezogene Daten erheben:"
+      },
+      "items": [
+        {
+          "title": { "it": "Dati identificativi", "en": "Identification data", "de": "Identifikationsdaten" },
+          "description": { "it": "nome, cognome, data di nascita, codice fiscale", "en": "name, surname, date of birth, tax code", "de": "Name, Vorname, Geburtsdatum, Steuernummer" }
+        },
+        {
+          "title": { "it": "Dati di contatto", "en": "Contact data", "de": "Kontaktdaten" },
+          "description": { "it": "indirizzo email, numero di telefono, indirizzo postale", "en": "email address, phone number, postal address", "de": "E-Mail-Adresse, Telefonnummer, Postanschrift" }
+        },
+        {
+          "title": { "it": "Dati relativi ai minori", "en": "Data relating to minors", "de": "Daten von Minderjährigen" },
+          "description": { "it": "per l'iscrizione ai corsi di vela giovanili, previo consenso dei genitori/tutori", "en": "for enrollment in youth sailing courses, with parental/guardian consent", "de": "für die Anmeldung zu Jugend-Segelkursen, mit Zustimmung der Eltern/Erziehungsberechtigten" }
+        },
+        {
+          "title": { "it": "Dati sulla salute", "en": "Health data", "de": "Gesundheitsdaten" },
+          "description": { "it": "certificati medici di idoneità sportiva, informazioni su allergie o condizioni rilevanti per la sicurezza", "en": "medical certificates of sports fitness, information on allergies or conditions relevant to safety", "de": "ärztliche Atteste zur Sporttauglichkeit, Informationen über Allergien oder sicherheitsrelevante Bedingungen" }
+        },
+        {
+          "title": { "it": "Immagini", "en": "Images", "de": "Bilder" },
+          "description": { "it": "foto e video durante le attività del circolo (solo con consenso specifico per l'uso pubblico)", "en": "photos and videos during club activities (only with specific consent for public use)", "de": "Fotos und Videos während der Clubaktivitäten (nur mit ausdrücklicher Zustimmung zur öffentlichen Nutzung)" }
+        }
+      ]
+    },
+    "purposes": {
+      "title": {
+        "it": "2. Finalità del trattamento",
+        "en": "2. Purposes of processing",
+        "de": "2. Zwecke der Verarbeitung"
+      },
+      "intro": {
+        "it": "I dati personali sono trattati per le seguenti finalità:",
+        "en": "Personal data is processed for the following purposes:",
+        "de": "Personenbezogene Daten werden für folgende Zwecke verarbeitet:"
+      },
+      "items": [
+        {
+          "title": { "it": "Gestione associativa", "en": "Association management", "de": "Vereinsverwaltung" },
+          "description": { "it": "iscrizione al circolo, tesseramento FIV, gestione quote sociali", "en": "club registration, FIV membership, management of membership fees", "de": "Clubanmeldung, FIV-Mitgliedschaft, Verwaltung der Mitgliedsbeiträge" }
+        },
+        {
+          "title": { "it": "Attività sportiva", "en": "Sports activities", "de": "Sportaktivitäten" },
+          "description": { "it": "organizzazione corsi di vela, regate, eventi", "en": "organization of sailing courses, regattas, events", "de": "Organisation von Segelkursen, Regatten, Veranstaltungen" }
+        },
+        {
+          "title": { "it": "Sicurezza", "en": "Safety", "de": "Sicherheit" },
+          "description": { "it": "gestione emergenze sanitarie durante le attività nautiche", "en": "management of health emergencies during nautical activities", "de": "Management von Gesundheitsnotfällen während der nautischen Aktivitäten" }
+        },
+        {
+          "title": { "it": "Comunicazioni istituzionali", "en": "Institutional communications", "de": "Institutionelle Mitteilungen" },
+          "description": { "it": "informazioni su attività, eventi, variazioni di programma", "en": "information about activities, events, schedule changes", "de": "Informationen über Aktivitäten, Veranstaltungen, Programmänderungen" }
+        },
+        {
+          "title": { "it": "Obblighi di legge", "en": "Legal obligations", "de": "Gesetzliche Pflichten" },
+          "description": { "it": "adempimenti fiscali, assicurativi, normativi", "en": "tax, insurance, regulatory compliance", "de": "steuerliche, versicherungstechnische, regulatorische Pflichten" }
+        }
+      ]
+    },
+    "legalBasis": {
+      "title": {
+        "it": "3. Base giuridica del trattamento",
+        "en": "3. Legal basis for processing",
+        "de": "3. Rechtsgrundlage der Verarbeitung"
+      },
+      "items": [
+        {
+          "title": { "it": "Esecuzione di un contratto", "en": "Performance of a contract", "de": "Vertragserfüllung" },
+          "description": { "it": "iscrizione al circolo, partecipazione ai corsi", "en": "club registration, course participation", "de": "Clubanmeldung, Kursteilnahme" }
+        },
+        {
+          "title": { "it": "Consenso", "en": "Consent", "de": "Einwilligung" },
+          "description": { "it": "per l'invio di comunicazioni promozionali, pubblicazione di foto/video", "en": "for sending promotional communications, publication of photos/videos", "de": "für Werbemitteilungen, Veröffentlichung von Fotos/Videos" }
+        },
+        {
+          "title": { "it": "Obbligo legale", "en": "Legal obligation", "de": "Rechtliche Verpflichtung" },
+          "description": { "it": "adempimenti fiscali e normativi", "en": "tax and regulatory compliance", "de": "steuerliche und regulatorische Pflichten" }
+        },
+        {
+          "title": { "it": "Interesse legittimo", "en": "Legitimate interest", "de": "Berechtigtes Interesse" },
+          "description": { "it": "tutela legale, sicurezza delle attività", "en": "legal protection, activity safety", "de": "rechtlicher Schutz, Aktivitätssicherheit" }
+        }
+      ]
+    },
+    "dataSharing": {
+      "title": {
+        "it": "4. Comunicazione dei dati",
+        "en": "4. Data sharing",
+        "de": "4. Datenweitergabe"
+      },
+      "intro": {
+        "it": "I dati personali possono essere comunicati a:",
+        "en": "Personal data may be shared with:",
+        "de": "Personenbezogene Daten können weitergegeben werden an:"
+      },
+      "items": [
+        { "it": "Federazione Italiana Vela (FIV): per il tesseramento federale", "en": "Italian Sailing Federation (FIV): for federation membership", "de": "Italienischer Segelverband (FIV): für die Verbandsmitgliedschaft" },
+        { "it": "Compagnie assicurative: per la copertura delle attività sportive", "en": "Insurance companies: for sports activity coverage", "de": "Versicherungsgesellschaften: für die Absicherung der Sportaktivitäten" },
+        { "it": "Enti organizzatori: per l'iscrizione a regate e competizioni", "en": "Organizing bodies: for registration in regattas and competitions", "de": "Veranstalter: für die Anmeldung zu Regatten und Wettbewerben" },
+        { "it": "Autorità competenti: quando richiesto per legge", "en": "Competent authorities: when required by law", "de": "Zuständige Behörden: wenn gesetzlich vorgeschrieben" }
+      ],
+      "noTransfer": {
+        "it": "I dati non vengono trasferiti a paesi terzi al di fuori dell'Unione Europea.",
+        "en": "Data is not transferred to third countries outside the European Union.",
+        "de": "Daten werden nicht in Drittländer außerhalb der Europäischen Union übertragen."
+      }
+    },
+    "retention": {
+      "title": {
+        "it": "5. Periodo di conservazione",
+        "en": "5. Retention period",
+        "de": "5. Aufbewahrungsfrist"
+      },
+      "intro": {
+        "it": "I dati personali sono conservati per il tempo necessario alle finalità indicate:",
+        "en": "Personal data is retained for the time necessary for the stated purposes:",
+        "de": "Personenbezogene Daten werden so lange aufbewahrt, wie es für die angegebenen Zwecke erforderlich ist:"
+      },
+      "table": {
+        "headers": {
+          "type": { "it": "Tipo di dato", "en": "Type of data", "de": "Datenart" },
+          "duration": { "it": "Durata", "en": "Duration", "de": "Dauer" }
+        },
+        "rows": [
+          { "type": { "it": "Iscrizioni e tesseramento", "en": "Registrations and membership", "de": "Anmeldungen und Mitgliedschaft" }, "duration": { "it": "10 anni dalla cessazione del rapporto", "en": "10 years from end of relationship", "de": "10 Jahre nach Beendigung der Beziehung" } },
+          { "type": { "it": "Certificati medici", "en": "Medical certificates", "de": "Ärztliche Atteste" }, "duration": { "it": "10 anni", "en": "10 years", "de": "10 Jahre" } },
+          { "type": { "it": "Documenti contabili", "en": "Accounting documents", "de": "Buchhaltungsunterlagen" }, "duration": { "it": "10 anni (obbligo fiscale)", "en": "10 years (tax requirement)", "de": "10 Jahre (steuerliche Pflicht)" } },
+          { "type": { "it": "Richieste di contatto", "en": "Contact requests", "de": "Kontaktanfragen" }, "duration": { "it": "Fino all'evasione + 6 mesi", "en": "Until resolved + 6 months", "de": "Bis zur Erledigung + 6 Monate" } },
+          { "type": { "it": "Immagini/video", "en": "Images/videos", "de": "Bilder/Videos" }, "duration": { "it": "Fino a revoca del consenso", "en": "Until consent is withdrawn", "de": "Bis zum Widerruf der Einwilligung" } }
+        ]
+      }
+    },
+    "rights": {
+      "title": {
+        "it": "6. Diritti dell'interessato",
+        "en": "6. Data subject rights",
+        "de": "6. Rechte der betroffenen Person"
+      },
+      "intro": {
+        "it": "In qualità di interessato, hai diritto a:",
+        "en": "As a data subject, you have the right to:",
+        "de": "Als betroffene Person haben Sie das Recht auf:"
+      },
+      "items": [
+        {
+          "title": { "it": "Accesso", "en": "Access", "de": "Auskunft" },
+          "description": { "it": "ottenere conferma dell'esistenza di tuoi dati e riceverne copia", "en": "obtain confirmation of your data and receive a copy", "de": "Bestätigung Ihrer Daten erhalten und eine Kopie erhalten" }
+        },
+        {
+          "title": { "it": "Rettifica", "en": "Rectification", "de": "Berichtigung" },
+          "description": { "it": "correggere dati inesatti o incompleti", "en": "correct inaccurate or incomplete data", "de": "unrichtige oder unvollständige Daten korrigieren" }
+        },
+        {
+          "title": { "it": "Cancellazione", "en": "Erasure", "de": "Löschung" },
+          "description": { "it": "richiedere la cancellazione dei dati (nei limiti di legge)", "en": "request deletion of data (within legal limits)", "de": "Löschung der Daten verlangen (im Rahmen des Gesetzes)" }
+        },
+        {
+          "title": { "it": "Limitazione", "en": "Restriction", "de": "Einschränkung" },
+          "description": { "it": "limitare il trattamento in determinati casi", "en": "restrict processing in certain cases", "de": "Verarbeitung in bestimmten Fällen einschränken" }
+        },
+        {
+          "title": { "it": "Portabilità", "en": "Portability", "de": "Datenübertragbarkeit" },
+          "description": { "it": "ricevere i tuoi dati in formato elettronico strutturato", "en": "receive your data in structured electronic format", "de": "Ihre Daten in strukturiertem elektronischem Format erhalten" }
+        },
+        {
+          "title": { "it": "Opposizione", "en": "Objection", "de": "Widerspruch" },
+          "description": { "it": "opporti al trattamento per motivi legittimi", "en": "object to processing for legitimate reasons", "de": "der Verarbeitung aus berechtigten Gründen widersprechen" }
+        },
+        {
+          "title": { "it": "Revoca del consenso", "en": "Withdrawal of consent", "de": "Widerruf der Einwilligung" },
+          "description": { "it": "revocare in qualsiasi momento i consensi prestati", "en": "withdraw consent at any time", "de": "Einwilligungen jederzeit widerrufen" }
+        }
+      ],
+      "contact": {
+        "it": "Per esercitare questi diritti, contattaci all'indirizzo:",
+        "en": "To exercise these rights, contact us at:",
+        "de": "Um diese Rechte auszuüben, kontaktieren Sie uns unter:"
+      }
+    },
+    "complaint": {
+      "title": {
+        "it": "7. Reclamo all'Autorità di Controllo",
+        "en": "7. Complaint to Supervisory Authority",
+        "de": "7. Beschwerde bei der Aufsichtsbehörde"
+      },
+      "intro": {
+        "it": "Se ritieni che il trattamento dei tuoi dati violi la normativa vigente, hai diritto di proporre reclamo al Garante per la Protezione dei Dati Personali:",
+        "en": "If you believe the processing of your data violates applicable law, you have the right to lodge a complaint with the Italian Data Protection Authority:",
+        "de": "Wenn Sie der Meinung sind, dass die Verarbeitung Ihrer Daten gegen geltendes Recht verstößt, haben Sie das Recht, eine Beschwerde bei der italienischen Datenschutzbehörde einzureichen:"
+      }
+    },
+    "minors": {
+      "title": {
+        "it": "8. Trattamento dati dei minori",
+        "en": "8. Processing of minors' data",
+        "de": "8. Verarbeitung von Daten Minderjähriger"
+      },
+      "content": {
+        "it": "Per l'iscrizione di minori ai corsi di vela, il consenso deve essere espresso da chi esercita la responsabilità genitoriale. Il circolo adotta misure specifiche per la tutela dei minori, in conformità alle normative sul Safeguarding (D.Lgs. 36/2021).",
+        "en": "For the enrollment of minors in sailing courses, consent must be given by the person exercising parental responsibility. The club adopts specific measures for the protection of minors, in compliance with Safeguarding regulations (D.Lgs. 36/2021).",
+        "de": "Für die Anmeldung Minderjähriger zu Segelkursen muss die Einwilligung von der Person erteilt werden, die die elterliche Verantwortung trägt. Der Club ergreift spezifische Maßnahmen zum Schutz Minderjähriger gemäß den Safeguarding-Vorschriften (D.Lgs. 36/2021)."
+      },
+      "moreInfo": {
+        "it": "Per maggiori informazioni, consulta la nostra pagina",
+        "en": "For more information, see our",
+        "de": "Weitere Informationen finden Sie auf unserer Seite"
+      }
+    },
+    "security": {
+      "title": {
+        "it": "9. Sicurezza dei dati",
+        "en": "9. Data security",
+        "de": "9. Datensicherheit"
+      },
+      "content": {
+        "it": "Il Circolo adotta misure tecniche e organizzative adeguate per proteggere i dati personali da accessi non autorizzati, perdita, distruzione o divulgazione. Il personale autorizzato al trattamento è formato sulle procedure di sicurezza e vincolato alla riservatezza.",
+        "en": "The Club adopts appropriate technical and organizational measures to protect personal data from unauthorized access, loss, destruction or disclosure. Personnel authorized to process data are trained on security procedures and bound by confidentiality.",
+        "de": "Der Club ergreift geeignete technische und organisatorische Maßnahmen zum Schutz personenbezogener Daten vor unbefugtem Zugriff, Verlust, Zerstörung oder Offenlegung. Das zur Verarbeitung befugte Personal ist in Sicherheitsverfahren geschult und zur Vertraulichkeit verpflichtet."
+      }
+    },
+    "emailContact": {
+      "title": {
+        "it": "10. Contatti via email",
+        "en": "10. Email contact",
+        "de": "10. E-Mail-Kontakt"
+      },
+      "content": {
+        "it": "Quando ci contatti via email (es. per informazioni, iscrizioni, o richieste), i dati che ci fornisci volontariamente vengono trattati per rispondere alla tua richiesta. Inviando un'email, presti il consenso implicito al trattamento dei dati contenuti nel messaggio per le finalità della comunicazione.",
+        "en": "When you contact us by email (e.g., for information, registrations, or requests), the data you voluntarily provide is processed to respond to your request. By sending an email, you implicitly consent to the processing of data contained in the message for communication purposes.",
+        "de": "Wenn Sie uns per E-Mail kontaktieren (z.B. für Informationen, Anmeldungen oder Anfragen), werden die von Ihnen freiwillig bereitgestellten Daten verarbeitet, um Ihre Anfrage zu beantworten. Durch das Senden einer E-Mail stimmen Sie implizit der Verarbeitung der im Nachricht enthaltenen Daten für Kommunikationszwecke zu."
+      }
+    },
+    "disclaimer": {
+      "it": "Il Circolo si riserva il diritto di modificare questa informativa. Eventuali modifiche saranno pubblicate su questa pagina.",
+      "en": "The Club reserves the right to modify this policy. Any changes will be published on this page.",
+      "de": "Der Club behält sich das Recht vor, diese Erklärung zu ändern. Änderungen werden auf dieser Seite veröffentlicht."
+    }
+  }
+}
+

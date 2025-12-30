@@ -1,0 +1,81 @@
+---
+interface Props {
+  id?: string;
+  mapSrc?: string;
+  loadMapLabel?: string;
+  class?: string;
+}
+
+const { 
+  id = 'map-container',
+  mapSrc = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1500!2d8.6618758!3d45.9459507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4785d9ec50257fbf%3A0x8b25f1a1c3349f59!2sCircolo%20Nautico%20Cald%C3%A8!5e0!3m2!1sit!2sit!4v1',
+  loadMapLabel = 'Clicca per caricare la mappa',
+  class: className = ''
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div 
+  id={id}
+  class:list={[
+    "map-lazy-container relative bg-secondary rounded-xl overflow-hidden border border-muted cursor-pointer group",
+    className
+  ]}
+  data-map-src={mapSrc}
+>
+  <img 
+    src={`${base}/images/map/placeholder.webp`}
+    alt="Map" 
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+  <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg mb-3 group-hover:scale-110 transition-transform">
+      <svg class="w-8 h-8 text-[var(--color-accent-primary)]" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+      </svg>
+    </div>
+    <span class="text-white font-medium text-sm">{loadMapLabel}</span>
+  </div>
+</div>
+
+<script>
+  // Initialize all map containers on the page
+  function initMapContainers() {
+    document.querySelectorAll('.map-lazy-container').forEach((container) => {
+      if (container.hasAttribute('data-map-initialized')) return;
+      container.setAttribute('data-map-initialized', 'true');
+      
+      container.addEventListener('click', () => {
+        const CookieConsent = (window as any).CookieConsent;
+        if (CookieConsent && !CookieConsent.acceptedCategory('analytics')) {
+          CookieConsent.showPreferences();
+          return;
+        }
+        loadMap(container as HTMLElement);
+      });
+    });
+  }
+
+  function loadMap(container: HTMLElement) {
+    const mapSrc = container.dataset.mapSrc;
+    if (mapSrc && !container.querySelector('iframe')) {
+      container.innerHTML = `
+        <iframe 
+          src="${mapSrc}"
+          class="absolute inset-0 w-full h-full border-0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Google Maps"
+        ></iframe>
+      `;
+      container.classList.remove('cursor-pointer', 'group');
+    }
+  }
+
+  // Run on DOMContentLoaded and after navigation (for SPA)
+  document.addEventListener('DOMContentLoaded', initMapContainers);
+  document.addEventListener('astro:page-load', initMapContainers);
+</script>
+

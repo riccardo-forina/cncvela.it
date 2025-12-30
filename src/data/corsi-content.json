@@ -1,0 +1,156 @@
+{
+  "page": {
+    "title": {
+      "it": "Scuola Vela",
+      "en": "Sailing School",
+      "de": "Segelschule"
+    },
+    "subtitle": {
+      "it": "Corsi di vela per tutte le età riconosciuti dalla Federazione Italiana Vela. Dal 1975 formiamo nuovi velisti sul Lago Maggiore.",
+      "en": "Sailing courses for all ages recognized by the Italian Sailing Federation. Since 1975 we have been training new sailors on Lake Maggiore.",
+      "de": "Segelkurse für alle Altersgruppen, anerkannt vom Italienischen Segelverband. Seit 1975 bilden wir neue Segler am Lago Maggiore aus."
+    },
+    "description": {
+      "it": "Scuola Vela FIV del Circolo Nautico Caldè. Corsi di vela per giovani e adulti sul Lago Maggiore.",
+      "en": "FIV Sailing School of Circolo Nautico Caldè. Sailing courses for young people and adults on Lake Maggiore.",
+      "de": "FIV Segelschule des Circolo Nautico Caldè. Segelkurse für Jugendliche und Erwachsene am Lago Maggiore."
+    }
+  },
+  "note": {
+    "title": {
+      "it": "I corsi sono riservati ai soci del Circolo",
+      "en": "Courses are reserved for Club members",
+      "de": "Kurse sind Vereinsmitgliedern vorbehalten"
+    },
+    "description": {
+      "it": "Per partecipare ai corsi è necessario essere soci del Circolo Nautico Caldè.",
+      "en": "To participate in courses, you must be a member of Circolo Nautico Caldè.",
+      "de": "Um an Kursen teilzunehmen, müssen Sie Mitglied des Circolo Nautico Caldè sein."
+    },
+    "link": {
+      "it": "Scopri come diventare socio →",
+      "en": "Find out how to become a member →",
+      "de": "Erfahren Sie, wie Sie Mitglied werden →"
+    }
+  },
+  "ourCourses": {
+    "it": "I Nostri Corsi",
+    "en": "Our Courses",
+    "de": "Unsere Kurse"
+  },
+  "upcomingCourses": {
+    "title": {
+      "it": "Prossimi Corsi",
+      "en": "Upcoming Courses",
+      "de": "Kommende Kurse"
+    },
+    "empty": {
+      "it": "Al momento non ci sono corsi in programma. Le date dei prossimi corsi saranno pubblicate nella Bacheca.",
+      "en": "There are currently no scheduled courses. Dates for upcoming courses will be published on the Events board.",
+      "de": "Derzeit sind keine Kurse geplant. Die Termine für kommende Kurse werden auf der Pinnwand veröffentlicht."
+    },
+    "goToEvents": {
+      "it": "Vai alla Bacheca",
+      "en": "Go to Events",
+      "de": "Zum Veranstaltungen"
+    }
+  },
+  "pricing": {
+    "title": {
+      "it": "Quote e Tariffe",
+      "en": "Fees and Prices",
+      "de": "Gebühren und Preise"
+    }
+  },
+  "registration": {
+    "title": {
+      "it": "Iscriviti ai Corsi",
+      "en": "Register for Courses",
+      "de": "Kursanmeldung"
+    },
+    "subtitle": {
+      "it": "Segui questi semplici passaggi per iscriverti a uno dei nostri corsi.",
+      "en": "Follow these simple steps to register for one of our courses.",
+      "de": "Befolgen Sie diese einfachen Schritte, um sich für einen unserer Kurse anzumelden."
+    },
+    "formTitle": {
+      "it": "Modulo di Iscrizione",
+      "en": "Registration Form",
+      "de": "Anmeldeformular"
+    },
+    "steps": [
+      {
+        "it": "<strong>Scarica</strong> il modulo di iscrizione cliccando il bottone qui sotto",
+        "en": "<strong>Download</strong> the registration form by clicking the button below",
+        "de": "<strong>Laden</strong> Sie das Anmeldeformular herunter"
+      },
+      {
+        "it": "<strong>Compila</strong> tutti i campi richiesti e <strong>firma</strong> il modulo",
+        "en": "<strong>Fill in</strong> all required fields and <strong>sign</strong> the form",
+        "de": "<strong>Füllen</strong> Sie alle Felder aus und <strong>unterschreiben</strong> Sie"
+      },
+      {
+        "it": "<strong>Invia</strong> il modulo compilato e firmato via email alla segreteria",
+        "en": "<strong>Send</strong> the completed form via email to the secretary",
+        "de": "<strong>Senden</strong> Sie das Formular per E-Mail an das Sekretariat"
+      }
+    ],
+    "downloadButton": {
+      "it": "Scarica Modulo",
+      "en": "Download Form",
+      "de": "Formular herunterladen"
+    },
+    "sendButton": {
+      "it": "Invia alla Segreteria",
+      "en": "Send to Secretary",
+      "de": "An Sekretariat senden"
+    }
+  },
+  "bankDetails": {
+    "title": {
+      "it": "Coordinate Bancarie per Bonifico",
+      "en": "Bank Details for Transfer",
+      "de": "Bankverbindung für Überweisung"
+    },
+    "accountHolder": {
+      "it": "Intestatario",
+      "en": "Account Holder",
+      "de": "Kontoinhaber"
+    },
+    "bank": {
+      "it": "Banca",
+      "en": "Bank",
+      "de": "Bank"
+    }
+  },
+  "safeguarding": {
+    "title": {
+      "it": "Safeguarding - Tutela dei Minori",
+      "en": "Safeguarding - Child Protection",
+      "de": "Safeguarding - Kinderschutz"
+    },
+    "description": {
+      "it": "Il CNC ha implementato un modello organizzativo a tutela dei minori come previsto dalla legge.",
+      "en": "CNC has implemented an organizational model for child protection as required by law.",
+      "de": "Der CNC hat ein Organisationsmodell zum Kinderschutz gemäß den gesetzlichen Vorgaben implementiert."
+    }
+  },
+  "labels": {
+    "duration": {
+      "it": "Durata",
+      "en": "Duration",
+      "de": "Dauer"
+    },
+    "period": {
+      "it": "Periodo",
+      "en": "Period",
+      "de": "Zeitraum"
+    },
+    "boat": {
+      "it": "Imbarcazione",
+      "en": "Boat",
+      "de": "Boot"
+    }
+  }
+}
+

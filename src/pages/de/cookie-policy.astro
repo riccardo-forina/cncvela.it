@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import contact from '../../data/contact.json';
+
+const locale = 'de';
+---
+
+<BaseLayout title="Cookie-Richtlinie" description="Informationen über Cookies, die von der Website des Circolo Nautico Caldè verwendet werden" locale={locale}>
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white py-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h1 class="text-3xl md:text-4xl font-black mb-2">Cookie-Richtlinie</h1>
+      <p class="text-white/80">Letzte Aktualisierung: Dezember 2024</p>
+    </div>
+  </section>
+
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        
+        <h2>Was sind Cookies</h2>
+        <p>Cookies sind kleine Textdateien, die von Websites an den Browser des Nutzers gesendet werden. Sie werden dort gespeichert, um bei nachfolgenden Besuchen an dieselben Websites zurückgesendet zu werden. Cookies werden für verschiedene Zwecke verwendet, haben unterschiedliche Eigenschaften und können sowohl vom Betreiber der besuchten Website als auch von Dritten verwendet werden.</p>
+
+        <h2>Verantwortlicher</h2>
+        <p>Der Verantwortliche ist:<br><strong>{contact.legalName}</strong><br>{contact.address.street}, {contact.address.postalCode} {contact.address.city} ({contact.address.province})<br>E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a><br>Steuernummer: {contact.fiscalCode}</p>
+
+        <h2>Arten von verwendeten Cookies</h2>
+        
+        <h3>Technische Cookies (Notwendig)</h3>
+        <p>Diese Cookies sind für das ordnungsgemäße Funktionieren der Website unerlässlich. Sie umfassen Cookies, die Präferenzen bezüglich der Cookie-Einwilligung speichern. Sie erfordern keine Einwilligung des Nutzers.</p>
+        <table class="w-full text-sm">
+          <thead><tr><th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Name</th><th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Zweck</th><th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Dauer</th></tr></thead>
+          <tbody><tr><td class="p-2 border-b dark:border-gray-700">cc_cookie</td><td class="p-2 border-b dark:border-gray-700">Speichert Cookie-Präferenzen</td><td class="p-2 border-b dark:border-gray-700">6 Monate</td></tr></tbody>
+        </table>
+
+        <h3>Analytische Cookies</h3>
+        <p>Diese Cookies ermöglichen es uns, Besuche und Verkehrsquellen zu zählen, damit wir die Leistung unserer Website messen und verbessern können. Sie helfen uns zu verstehen, welche Seiten am beliebtesten sind und wie Besucher durch die Website navigieren. Alle von diesen Cookies gesammelten Informationen sind aggregiert und daher anonym.</p>
+        <table class="w-full text-sm">
+          <thead><tr><th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Name</th><th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Anbieter</th><th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Zweck</th><th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Dauer</th></tr></thead>
+          <tbody>
+            <tr><td class="p-2 border-b dark:border-gray-700">_ga</td><td class="p-2 border-b dark:border-gray-700">Google Analytics</td><td class="p-2 border-b dark:border-gray-700">Unterscheidet Nutzer</td><td class="p-2 border-b dark:border-gray-700">2 Jahre</td></tr>
+            <tr><td class="p-2 border-b dark:border-gray-700">_gid</td><td class="p-2 border-b dark:border-gray-700">Google Analytics</td><td class="p-2 border-b dark:border-gray-700">Unterscheidet Nutzer</td><td class="p-2 border-b dark:border-gray-700">24 Stunden</td></tr>
+          </tbody>
+        </table>
+        <p class="text-sm text-gray-600 dark:text-gray-400">Weitere Informationen zu Google Analytics: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google-Datenschutzrichtlinie</a></p>
+
+        <h3>Cookies von Drittanbietern</h3>
+        <p>Unsere Website bindet Inhalte von Drittanbietern ein, die möglicherweise eigene Cookies installieren:</p>
+        <ul>
+          <li><strong>Google Maps</strong>: Wir verwenden Google Maps, um den Standort des Clubs anzuzeigen. Google kann Cookies für Funktionalität und Statistiken installieren. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google-Datenschutzrichtlinie</a></li>
+        </ul>
+
+        <h2>Einstellungen verwalten</h2>
+        <p>Sie können Ihre Cookie-Einstellungen jederzeit verwalten, indem Sie auf die Schaltfläche unten klicken:</p>
+        <button id="open-cookie-settings" class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary-hover)] text-white rounded-lg font-semibold transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Cookie-Einstellungen verwalten
+        </button>
+
+        <h2>Ihre Rechte</h2>
+        <p>Gemäß DSGVO (EU-Verordnung 2016/679) haben Sie das Recht:</p>
+        <ul>
+          <li>Zugang zu Ihren personenbezogenen Daten</li>
+          <li>Berichtigung unrichtiger Daten</li>
+          <li>Löschung Ihrer Daten ("Recht auf Vergessenwerden")</li>
+          <li>Einschränkung der Verarbeitung</li>
+          <li>Widerspruch gegen die Verarbeitung</li>
+          <li>Datenübertragbarkeit</li>
+          <li>Widerruf der Einwilligung jederzeit</li>
+          <li>Beschwerde bei der Datenschutzbehörde</li>
+        </ul>
+        <p>Um Ihre Rechte auszuüben, kontaktieren Sie uns unter: <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.getElementById('open-cookie-settings')?.addEventListener('click', () => {
+    if ((window as any).CookieConsent) { (window as any).CookieConsent.showPreferences(); }
+  });
+</script>
+
+<style>
+  .prose h2 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: var(--color-text-primary); }
+  .prose h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-primary); }
+  .prose p { margin-bottom: 1rem; color: var(--color-text-secondary); }
+  .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: var(--color-text-secondary); }
+  .prose li { margin-bottom: 0.5rem; }
+  .prose a { color: var(--color-accent-primary); }
+  .prose a:hover { text-decoration: underline; }
+  .prose table { margin-bottom: 1rem; border-collapse: collapse; }
+  @media (prefers-color-scheme: dark) {
+    .prose h2, .prose h3 { color: var(--color-text-primary-dark); }
+    .prose p, .prose ul { color: var(--color-text-secondary-dark); }
+    .prose a { color: var(--color-link-dark); }
+  }
+</style>
+

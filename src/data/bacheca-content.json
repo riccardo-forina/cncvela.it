@@ -1,0 +1,74 @@
+{
+  "page": {
+    "title": {
+      "it": "Bacheca Eventi",
+      "en": "Events Board",
+      "de": "Veranstaltungstafel"
+    },
+    "description": {
+      "it": "Tutti gli eventi del Circolo Nautico Caldè - corsi di vela, regate e eventi sociali.",
+      "en": "All events at Circolo Nautico Caldè - sailing courses, regattas and social events.",
+      "de": "Alle Veranstaltungen des Circolo Nautico Caldè - Segelkurse, Regatten und gesellschaftliche Events."
+    },
+    "subtitle": {
+      "it": "Tutti gli appuntamenti del circolo - corsi, regate e momenti conviviali.",
+      "en": "All club events - courses, regattas and social moments.",
+      "de": "Alle Clubtermine - Kurse, Regatten und gesellige Momente."
+    }
+  },
+  "filters": {
+    "all": {
+      "it": "Tutto",
+      "en": "All",
+      "de": "Alle"
+    },
+    "corso": {
+      "it": "Corsi",
+      "en": "Courses",
+      "de": "Kurse"
+    },
+    "regata": {
+      "it": "Regate",
+      "en": "Regattas",
+      "de": "Regatten"
+    },
+    "evento_sociale": {
+      "it": "Eventi",
+      "en": "Events",
+      "de": "Events"
+    }
+  },
+  "labels": {
+    "noEvents": {
+      "it": "Nessun evento in programma al momento.",
+      "en": "No events scheduled at the moment.",
+      "de": "Derzeit keine Veranstaltungen geplant."
+    },
+    "noFilterResults": {
+      "it": "Nessun evento di questo tipo in programma.",
+      "en": "No events of this type scheduled.",
+      "de": "Keine Veranstaltungen dieser Art geplant."
+    },
+    "pastEvents": {
+      "it": "Eventi Passati",
+      "en": "Past Events",
+      "de": "Vergangene Veranstaltungen"
+    },
+    "stayUpdated": {
+      "it": "Non Perdere Nessun Evento",
+      "en": "Don't Miss Any Event",
+      "de": "Verpassen Sie kein Event"
+    },
+    "stayUpdatedDescription": {
+      "it": "Resta aggiornato sulle attività del circolo. Contattaci per ricevere informazioni sui prossimi eventi.",
+      "en": "Stay updated on club activities. Contact us for information about upcoming events.",
+      "de": "Bleiben Sie über die Clubaktivitäten auf dem Laufenden. Kontaktieren Sie uns für Informationen über kommende Veranstaltungen."
+    },
+    "contactUs": {
+      "it": "Contattaci",
+      "en": "Contact Us",
+      "de": "Kontakt"
+    }
+  }
+}
+

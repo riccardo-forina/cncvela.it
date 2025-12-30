@@ -1,0 +1,174 @@
+{
+  "page": {
+    "title": {
+      "it": "Regate",
+      "en": "Regattas",
+      "de": "Regatten"
+    },
+    "subtitle": {
+      "it": "Calendario delle regate organizzate dal CNC sul Lago Maggiore. Scopri le prossime competizioni e scarica i documenti.",
+      "en": "Calendar of regattas organized by CNC on Lake Maggiore. Discover upcoming competitions and download documents.",
+      "de": "Kalender der vom CNC am Lago Maggiore organisierten Regatten. Entdecken Sie kommende Wettbewerbe und laden Sie Dokumente herunter."
+    },
+    "description": {
+      "it": "Regate veliche sul Lago Maggiore organizzate dal Circolo Nautico Caldè. Calendario, bandi, iscrizioni e classifiche.",
+      "en": "Sailing regattas on Lake Maggiore organized by Circolo Nautico Caldè. Calendar, notices, registrations and results.",
+      "de": "Segelregatten am Lago Maggiore, organisiert vom Circolo Nautico Caldè. Kalender, Ausschreibungen, Anmeldungen und Ergebnisse."
+    }
+  },
+  "calendar": {
+    "title": {
+      "it": "Calendario Regate 2026",
+      "en": "Regatta Calendar 2026",
+      "de": "Regattakalender 2026"
+    },
+    "fivLink": {
+      "it": "Calendario FIV Nazionale",
+      "en": "National FIV Calendar",
+      "de": "Nationaler FIV Kalender"
+    }
+  },
+  "noRegattas": {
+    "title": {
+      "it": "Nessuna regata in programma al momento.",
+      "en": "No regattas scheduled at this time.",
+      "de": "Derzeit keine Regatten geplant."
+    },
+    "subtitle": {
+      "it": "Torna a trovarci per il prossimo calendario!",
+      "en": "Check back for the next calendar!",
+      "de": "Schauen Sie für den nächsten Kalender wieder vorbei!"
+    }
+  },
+  "payment": {
+    "title": {
+      "it": "Pagamento Iscrizione",
+      "en": "Registration Payment",
+      "de": "Anmeldezahlung"
+    },
+    "description": {
+      "it": "Per completare l'iscrizione alla regata, effettuare il bonifico alle seguenti coordinate bancarie.",
+      "en": "To complete the regatta registration, make a bank transfer to the following account.",
+      "de": "Um die Regattaanmeldung abzuschließen, überweisen Sie auf folgendes Konto."
+    },
+    "causale": {
+      "it": "Indicare nella causale:",
+      "en": "Reference:",
+      "de": "Verwendungszweck:"
+    },
+    "causaleExample": {
+      "it": "Iscrizione regata [nome regata] - [nome partecipante]",
+      "en": "Regatta registration [regatta name] - [participant name]",
+      "de": "Regattaanmeldung [Regattaname] - [Teilnehmername]"
+    }
+  },
+  "pastResults": {
+    "title": {
+      "it": "Classifiche 2025",
+      "en": "Results 2025",
+      "de": "Ergebnisse 2025"
+    }
+  },
+  "documents": {
+    "bando": {
+      "it": "Bando",
+      "en": "Notice",
+      "de": "Ausschreibung"
+    },
+    "iscrizione": {
+      "it": "Iscrizione",
+      "en": "Registration",
+      "de": "Anmeldung"
+    },
+    "istruzioni": {
+      "it": "Istruzioni",
+      "en": "Instructions",
+      "de": "Anweisungen"
+    },
+    "classifica": {
+      "it": "Classifica",
+      "en": "Results",
+      "de": "Ergebnisse"
+    },
+    "download": {
+      "it": "Scarica",
+      "en": "Download",
+      "de": "Herunterladen"
+    },
+    "notAvailable": {
+      "it": "Non disponibile",
+      "en": "Not available",
+      "de": "Nicht verfügbar"
+    },
+    "afterRace": {
+      "it": "Dopo la gara",
+      "en": "After the race",
+      "de": "Nach dem Rennen"
+    },
+    "downloadPdf": {
+      "it": "Scarica PDF",
+      "en": "Download PDF",
+      "de": "PDF herunterladen"
+    }
+  },
+  "table": {
+    "pos": {
+      "it": "Pos",
+      "en": "Pos",
+      "de": "Pl."
+    },
+    "boat": {
+      "it": "Barca",
+      "en": "Boat",
+      "de": "Boot"
+    },
+    "skipper": {
+      "it": "Skipper",
+      "en": "Skipper",
+      "de": "Skipper"
+    },
+    "club": {
+      "it": "Circolo",
+      "en": "Club",
+      "de": "Verein"
+    },
+    "model": {
+      "it": "Modello",
+      "en": "Model",
+      "de": "Modell"
+    },
+    "time": {
+      "it": "Tempo",
+      "en": "Time",
+      "de": "Zeit"
+    }
+  },
+  "noResults": {
+    "it": "Classifica non ancora disponibile",
+    "en": "Results not yet available",
+    "de": "Ergebnisse noch nicht verfügbar"
+  },
+  "labels": {
+    "regata": {
+      "it": "Regata",
+      "en": "Regatta",
+      "de": "Regatta"
+    },
+    "startTime": {
+      "it": "Partenza ore",
+      "en": "Start at",
+      "de": "Start um"
+    },
+    "accountHolder": {
+      "it": "Intestatario",
+      "en": "Account Holder",
+      "de": "Kontoinhaber"
+    },
+    "bank": {
+      "it": "Banca",
+      "en": "Bank",
+      "de": "Bank"
+    }
+  }
+}
+

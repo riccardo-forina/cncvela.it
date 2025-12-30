@@ -1,0 +1,437 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Locale } from '../i18n';
+import content from '../data/galleria-content.json';
+import gallery from '../data/gallery.json';
+
+// Import all images dynamically for optimization
+const allImageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/**/*.{jpg,jpeg,png}',
+  { eager: true }
+);
+
+// Create a map from public path to optimized image
+function getOptimizedImage(publicPath: string): ImageMetadata | undefined {
+  const assetPath = `../assets/${publicPath}`;
+  const module = allImageModules[assetPath];
+  return module?.default;
+}
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+// Helper to get localized text
+const t = (obj: { it: string; en?: string; de?: string } | string | undefined, fallback = ''): string => {
+  if (!obj) return fallback;
+  if (typeof obj === 'string') return obj;
+  return obj[locale] || obj.it || fallback;
+};
+
+// Hero image
+const heroImage = getOptimizedImage('images/hero/calde-aerial.jpg');
+---
+
+<BaseLayout title={t(content.page.title)} description={t(content.page.description)} locale={locale}>
+  <!-- Hero image -->
+  <section class="relative h-[40vh] min-h-[300px] overflow-hidden">
+    {heroImage && (
+      <Image 
+        src={heroImage}
+        alt="Vista aerea della baia di Caldè"
+        class="absolute inset-0 w-full h-full object-cover"
+        widths={[640, 1024, 1536]}
+        sizes="100vw"
+        quality={70}
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
+  </section>
+  
+  <!-- Title bar -->
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <h1 class="text-2xl md:text-3xl font-black text-white">{t(content.page.title)}</h1>
+      <p class="text-sm md:text-base text-white/70 mt-2 max-w-2xl">{t(content.page.subtitle)}</p>
+    </div>
+  </section>
+
+  <!-- Category Filter Tabs -->
+  <section class="py-8 md:py-12">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="mb-8">
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtra per categoria">
+          <button
+            data-category="all"
+            class="gallery-tab active px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="true"
+          >
+            {t(content.categories.all)}
+          </button>
+          <button
+            data-category="corsi"
+            class="gallery-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+          >
+            {t(content.categories.corsi)}
+          </button>
+          <button
+            data-category="regate"
+            class="gallery-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+          >
+            {t(content.categories.regate)}
+          </button>
+          <button
+            data-category="hero"
+            class="gallery-tab px-4 py-2 rounded-full font-semibold text-sm transition-colors touch-target"
+            role="tab"
+            aria-selected="false"
+          >
+            {t(content.categories.hero)}
+          </button>
+        </div>
+      </div>
+      
+      <!-- Scuola Vela -->
+      <div class="gallery-section mb-12" data-section="corsi">
+        <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+          {t(content.sections.scuolaVela)}
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {gallery.corsi.map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                data-category="corsi"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[320, 480, 640]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                  <span class="text-white font-bold">{img.title}</span>
+                  <span class="text-white/80 text-sm">{img.description}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
+          {gallery.galleria.map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                data-category="corsi"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[320, 480, 640]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                  <span class="text-white font-bold">{img.title}</span>
+                  <span class="text-white/80 text-sm">{img.description}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Regate -->
+      <div class="gallery-section mb-12" data-section="regate">
+        <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+          {t(content.sections.regate)}
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {gallery.regate.map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-square rounded-xl overflow-hidden cursor-pointer"
+                data-category="regate"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[240, 320, 480]}
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                  <span class="text-white font-bold text-sm">{img.title}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Panorami -->
+      <div class="gallery-section" data-section="hero">
+        <h2 class="text-2xl font-black mb-6" style="font-size: var(--text-2xl);">
+          {t(content.sections.panorami)}
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[...gallery.hero, ...gallery.atmosfera].map((img) => {
+            const optimizedImg = getOptimizedImage(img.src);
+            return (
+              <figure 
+                class="gallery-item group relative aspect-video rounded-xl overflow-hidden cursor-pointer"
+                data-category="hero"
+                data-src={img.src}
+                data-alt={img.alt}
+                data-title={img.title}
+                data-description={img.description}
+              >
+                {optimizedImg ? (
+                  <Image 
+                    src={optimizedImg}
+                    alt={img.alt}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    widths={[480, 768, 1024]}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    loading="lazy"
+                  />
+                ) : (
+                  <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                )}
+                <figcaption class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                  <span class="text-white font-bold">{img.title}</span>
+                  <span class="text-white/80 text-sm">{img.description}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-sm">
+    <button 
+      id="lightbox-close"
+      class="absolute top-4 right-4 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white text-3xl z-10"
+      aria-label={t(content.lightbox.close)}
+    >
+      ×
+    </button>
+    <button 
+      id="lightbox-prev"
+      class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white text-3xl z-10"
+      aria-label={t(content.lightbox.prev)}
+    >
+      ‹
+    </button>
+    <button 
+      id="lightbox-next"
+      class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/80 hover:text-white text-3xl z-10"
+      aria-label={t(content.lightbox.next)}
+    >
+      ›
+    </button>
+    <div class="flex items-center justify-center h-full p-4 md:p-12">
+      <figure class="max-w-full max-h-full flex flex-col items-center">
+        <img 
+          id="lightbox-img"
+          src="" 
+          alt=""
+          class="max-w-full max-h-[80vh] object-contain rounded-lg"
+        />
+        <figcaption class="mt-4 text-center">
+          <span id="lightbox-title" class="text-white font-bold text-lg block"></span>
+          <span id="lightbox-desc" class="text-white/70 text-sm"></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .gallery-tab {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+  }
+  
+  .gallery-tab:hover {
+    background: var(--color-bg-tertiary, #e5e7eb);
+  }
+  
+  .gallery-tab.active {
+    background: var(--color-accent-secondary);
+    color: white;
+  }
+  
+  :global(.dark) .gallery-tab {
+    background: var(--color-bg-secondary-dark);
+    color: var(--color-text-secondary-dark);
+  }
+  
+  :global(.dark) .gallery-tab:hover {
+    background: var(--color-bg-tertiary-dark, #374151);
+  }
+  
+  :global(.dark) .gallery-tab.active {
+    background: var(--color-accent-secondary-dark);
+    color: white;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-section.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  // Tab filtering
+  const tabs = document.querySelectorAll('.gallery-tab');
+  const sections = document.querySelectorAll('.gallery-section');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const category = tab.getAttribute('data-category');
+      
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      
+      // Show/hide sections
+      if (category === 'all') {
+        sections.forEach(s => s.classList.remove('hidden'));
+      } else {
+        sections.forEach(s => {
+          if (s.getAttribute('data-section') === category) {
+            s.classList.remove('hidden');
+          } else {
+            s.classList.add('hidden');
+          }
+        });
+      }
+    });
+  });
+
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox') as HTMLDivElement;
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title') as HTMLSpanElement;
+  const lightboxDesc = document.getElementById('lightbox-desc') as HTMLSpanElement;
+  const lightboxClose = document.getElementById('lightbox-close') as HTMLButtonElement;
+  const lightboxPrev = document.getElementById('lightbox-prev') as HTMLButtonElement;
+  const lightboxNext = document.getElementById('lightbox-next') as HTMLButtonElement;
+
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  let currentIndex = 0;
+  let visibleItems: Element[] = [];
+
+  function updateVisibleItems() {
+    visibleItems = Array.from(galleryItems).filter(item => {
+      const section = item.closest('.gallery-section');
+      return section && !section.classList.contains('hidden');
+    });
+  }
+
+  function openLightbox(index: number) {
+    updateVisibleItems();
+    currentIndex = index;
+    const item = visibleItems[currentIndex] as HTMLElement;
+    
+    lightboxImg.src = item.dataset.src || '';
+    lightboxImg.alt = item.dataset.alt || '';
+    lightboxTitle.textContent = item.dataset.title || '';
+    lightboxDesc.textContent = item.dataset.description || '';
+    
+    lightbox.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+    openLightbox(currentIndex);
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % visibleItems.length;
+    openLightbox(currentIndex);
+  }
+
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      updateVisibleItems();
+      const visibleIndex = visibleItems.indexOf(item);
+      if (visibleIndex !== -1) {
+        openLightbox(visibleIndex);
+      }
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', showPrev);
+  lightboxNext.addEventListener('click', showNext);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+    
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+</script>
+
