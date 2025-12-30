@@ -41,7 +41,7 @@ function isActive(href: string, currentPath: string): boolean {
             "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent-primary)]",
             {
               "text-[var(--color-accent-primary)] dark:text-[#7CB3F0]": isActive(item.href, currentPath),
-              "text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]": !isActive(item.href, currentPath),
+              "text-muted": !isActive(item.href, currentPath),
             }
           ]}
           aria-current={isActive(item.href, currentPath) ? "page" : undefined}

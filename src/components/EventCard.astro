@@ -60,7 +60,7 @@ const typeConfig = {
     label: 'Corso',
     icon: '⛵',
     colorClass: 'bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)]',
-    textClass: 'text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]',
+    textClass: 'text-accent',
   },
   regata: {
     label: 'Regata',
@@ -83,7 +83,7 @@ const dateDisplay = event.endDate
 ---
 
 <article class:list={[
-  "bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-shadow hover:shadow-lg",
+  "bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-muted overflow-hidden transition-shadow hover:shadow-lg",
   { "p-4": compact, "p-6": !compact }
 ]}>
   <div class="flex items-start gap-4">
@@ -117,7 +117,7 @@ const dateDisplay = event.endDate
       </h3>
       
       {event.subtitle && (
-        <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+        <p class="text-sm text-muted">
           {event.subtitle}
         </p>
       )}
@@ -125,13 +125,13 @@ const dateDisplay = event.endDate
       {!compact && (
         <>
           <!-- Date & Time -->
-          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mt-2">
+          <p class="text-sm text-muted mt-2">
             <time datetime={event.date}>{dateDisplay}</time>
             {event.time && ` • ${event.time}`}
           </p>
           
           <!-- Description -->
-          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mt-2 line-clamp-2">
+          <p class="text-sm text-muted mt-2 line-clamp-2">
             {event.description}
           </p>
           

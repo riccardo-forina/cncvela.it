@@ -58,14 +58,14 @@ const upcomingCourses = events.events
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <div class="bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/10 border border-[var(--color-accent-primary)]/20 dark:border-[var(--color-accent-primary-dark)]/20 rounded-xl p-4 md:p-6">
         <div class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-6 h-6 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
           <div>
             <p class="font-bold mb-1">I corsi sono riservati ai soci del Circolo</p>
-            <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+            <p class="text-sm text-muted">
               Per partecipare ai corsi è necessario essere soci del Circolo Nautico Caldè. 
-              <a href="circolo#diventa-socio" class="text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] hover:underline font-medium">Scopri come diventare socio →</a>
+              <a href="circolo#diventa-socio" class="text-accent hover:underline font-medium">Scopri come diventare socio →</a>
             </p>
           </div>
         </div>
@@ -84,17 +84,17 @@ const upcomingCourses = events.events
         {courses.map(async (course) => {
           const { Content } = await course.render();
           return (
-            <article class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <article class="bg-secondary rounded-xl p-6 border border-muted">
               <div class="w-14 h-14 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex items-center justify-center mb-4">
                 <span class="text-2xl">{course.data.icon === 'yacht' ? '🛥️' : '⛵'}</span>
               </div>
               
               <h3 class="text-xl font-bold mb-1">{course.data.title}</h3>
-              <p class="text-sm text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] font-semibold mb-3">
+              <p class="text-sm text-accent font-semibold mb-3">
                 {course.data.subtitle}
               </p>
               
-              <div class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4 markdown-content">
+              <div class="text-sm text-muted mb-4 markdown-content">
                 <Content />
               </div>
               
@@ -119,10 +119,10 @@ const upcomingCourses = events.events
                 </li>
               </ul>
               
-              <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-                <p class="text-2xl font-black text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]">
+              <div class="pt-4 border-t border-muted">
+                <p class="text-2xl font-black text-accent">
                   €{course.data.price.toFixed(2)}
-                  <span class="text-xs font-normal text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+                  <span class="text-xs font-normal text-muted">
                     {course.data.priceNote}
                   </span>
                 </p>
@@ -149,12 +149,12 @@ const upcomingCourses = events.events
         </div>
       ) : (
         <div class="text-center py-8">
-          <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">
+          <p class="text-muted mb-4">
             Al momento non ci sono corsi in programma. Le date dei prossimi corsi saranno pubblicate nella Bacheca.
           </p>
           <a 
             href="bacheca" 
-            class="inline-flex items-center gap-2 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] font-semibold hover:underline"
+            class="inline-flex items-center gap-2 text-accent font-semibold hover:underline"
           >
             Vai alla Bacheca
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,10 +175,10 @@ const upcomingCourses = events.events
       
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {pricingCards.map((card) => (
-          <div class="bg-secondary rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div class="bg-secondary rounded-xl p-6 border border-muted">
             <h3 class="font-bold text-lg mb-1">{card.data.title}</h3>
             {card.data.note && (
-              <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">{card.data.note}</p>
+              <p class="text-sm text-muted mb-4">{card.data.note}</p>
             )}
             <ul class="space-y-3">
               {card.data.items.map((item) => (
@@ -186,17 +186,17 @@ const upcomingCourses = events.events
                   <div>
                     <p class="font-medium">{item.name}</p>
                     {item.note && (
-                      <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">{item.note}</p>
+                      <p class="text-xs text-muted">{item.note}</p>
                     )}
                   </div>
-                  <p class="font-bold text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)]">
+                  <p class="font-bold text-accent">
                     €{item.price.toFixed(2)}
                   </p>
                 </li>
               ))}
             </ul>
             {card.data.discounts && card.data.discounts.length > 0 && (
-              <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-1">
+              <div class="mt-4 pt-4 border-t border-muted space-y-1">
                 {card.data.discounts.map((discount) => (
                   <p class="text-sm text-green-600 dark:text-green-400 font-medium">
                     {discount.description}: <strong>{discount.discount}</strong>
@@ -216,12 +216,12 @@ const upcomingCourses = events.events
       <h2 class="text-2xl font-black mb-4 text-center" style="font-size: var(--text-2xl);">
         Iscriviti ai Corsi
       </h2>
-      <p class="text-center text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-8">
+      <p class="text-center text-muted mb-8">
         Segui questi semplici passaggi per iscriverti a uno dei nostri corsi.
       </p>
       
       <!-- Modulo di Iscrizione -->
-      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl p-8 border border-muted">
         <h3 class="font-bold text-lg mb-4 text-center">Modulo di Iscrizione</h3>
         
         <!-- Istruzioni -->
@@ -265,19 +265,19 @@ const upcomingCourses = events.events
       </div>
       
       <!-- Bank Details -->
-      <div class="mt-8 p-6 bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl border border-gray-200 dark:border-gray-700">
+      <div class="mt-8 p-6 bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)] rounded-xl border border-muted">
         <h3 class="font-bold mb-4">Coordinate Bancarie per Bonifico</h3>
         <dl class="space-y-2 text-sm">
           <div class="flex flex-col sm:flex-row sm:gap-4">
-            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Intestatario:</dt>
+            <dt class="font-medium text-muted sm:w-32">Intestatario:</dt>
             <dd>{pricingData.bankDetails.accountHolder}</dd>
           </div>
           <div class="flex flex-col sm:flex-row sm:gap-4">
-            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">Banca:</dt>
+            <dt class="font-medium text-muted sm:w-32">Banca:</dt>
             <dd>{pricingData.bankDetails.bankName} - {pricingData.bankDetails.branch}</dd>
           </div>
           <div class="flex flex-col sm:flex-row sm:gap-4">
-            <dt class="font-medium text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] sm:w-32">IBAN:</dt>
+            <dt class="font-medium text-muted sm:w-32">IBAN:</dt>
             <dd class="font-mono text-sm break-all">{pricingData.bankDetails.iban}</dd>
           </div>
         </dl>
@@ -296,11 +296,11 @@ const upcomingCourses = events.events
         </div>
         <div class="flex-1">
           <p class="font-bold">Safeguarding - Tutela dei Minori</p>
-          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+          <p class="text-sm text-muted">
             Il CNC ha implementato un modello organizzativo a tutela dei minori come previsto dalla legge.
           </p>
         </div>
-        <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-accent group-hover:translate-x-1 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
       </a>

@@ -22,13 +22,13 @@ const { contact, safeguarding } = board;
           />
           <div>
             <p class="font-bold">{contact.clubName}</p>
-            <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">A.S.D.</p>
+            <p class="text-sm text-muted">A.S.D.</p>
           </div>
         </div>
-        <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-2">
+        <p class="text-sm text-muted mb-2">
           Associazione Sportiva Dilettantistica dal 1965.
         </p>
-        <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] mb-4">
+        <p class="text-xs text-muted mb-4">
           Codice FIV n. 439 – XV Zona
         </p>
         <!-- Social Links -->
@@ -50,18 +50,14 @@ const { contact, safeguarding } = board;
       <!-- Contact -->
       <div>
         <h3 class="font-bold mb-4">Contatti</h3>
-        <address class="not-italic text-sm space-y-2 text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+        <address class="not-italic text-sm space-y-2 text-muted links-container">
           <p>{contact.address.street}</p>
           <p>{contact.address.postalCode} {contact.address.city} ({contact.address.province})</p>
           <p class="pt-2">
-            <a href={`tel:${contact.phone.replace(/\s/g, '')}`} class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
-              Tel: {contact.phone}
-            </a>
+            <a href={`tel:${contact.phone.replace(/\s/g, '')}`}>Tel: {contact.phone}</a>
           </p>
           <p>
-            <a href={`mailto:${contact.email}`} class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
-              {contact.email}
-            </a>
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
           </p>
         </address>
       </div>
@@ -69,27 +65,12 @@ const { contact, safeguarding } = board;
       <!-- Quick Links -->
       <div>
         <h3 class="font-bold mb-4">Link Utili</h3>
-        <ul class="text-sm space-y-2">
-          <li>
-            <a href="corsi#iscrizione" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
-              Iscrizione Corsi
-            </a>
-          </li>
-          <li>
-            <a href="circolo#documenti" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
-              Documenti
-            </a>
-          </li>
-          <li>
-            <a href="circolo#contatti" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
-              Come Raggiungerci
-            </a>
-          </li>
-          <li>
-            <a href="privacy" class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">
-              Privacy Policy
-            </a>
-          </li>
+        <ul class="text-sm space-y-2 links-container">
+          <li><a href="corsi#iscrizione">Iscrizione Corsi</a></li>
+          <li><a href="circolo#documenti">Documenti</a></li>
+          <li><a href="circolo#contatti">Come Raggiungerci</a></li>
+          <li><a href="privacy">Privacy Policy</a></li>
+          <li><a href="cookie-policy">Cookie Policy</a></li>
         </ul>
       </div>
     </div>
@@ -104,21 +85,23 @@ const { contact, safeguarding } = board;
         </div>
         <div class="flex-1 min-w-0">
           <p class="font-bold text-sm">Safeguarding</p>
-          <p class="text-xs text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+          <p class="text-xs text-muted">
             Tutela minori e prevenzione violenza • Resp. {safeguarding.officer.name}
           </p>
         </div>
-        <svg class="w-5 h-5 text-[var(--color-accent-primary)] dark:text-[var(--color-link-dark)] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-accent group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
         </svg>
       </a>
     </div>
     
     <!-- Bottom Bar -->
-    <div class="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+    <div class="mt-6 pt-6 border-t border-gray-300 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted">
       <p>© {new Date().getFullYear()} {contact.legalName}. Tutti i diritti riservati.</p>
-      <div class="flex items-center gap-4">
-        <a href="privacy" class="hover:text-[var(--color-accent-primary)] dark:hover:text-[var(--color-accent-primary-dark)] transition-colors">Privacy Policy</a>
+      <div class="flex items-center gap-4 flex-wrap justify-center links-container">
+        <a href="privacy">Privacy</a>
+        <span>•</span>
+        <a href="cookie-policy">Cookie</a>
         <span>•</span>
         <span>C.F. {contact.fiscalCode}</span>
       </div>

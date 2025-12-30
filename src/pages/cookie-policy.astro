@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import board from '../data/board.json';
+
+const { contact } = board;
+---
+
+<BaseLayout title="Cookie Policy" description="Informativa sui cookie utilizzati dal sito del Circolo Nautico Caldè">
+  <!-- Header Section -->
+  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white py-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <h1 class="text-3xl md:text-4xl font-black mb-2">Cookie Policy</h1>
+      <p class="text-white/80">Ultimo aggiornamento: Dicembre 2024</p>
+    </div>
+  </section>
+
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        
+        <h2>Cosa sono i Cookie</h2>
+        <p>
+          I cookie sono piccoli file di testo che i siti web visitati inviano al browser dell'utente, 
+          dove vengono memorizzati per essere ritrasmessi agli stessi siti in occasione di visite successive. 
+          I cookie sono utilizzati per diverse finalità, hanno caratteristiche diverse e possono essere 
+          utilizzati sia dal titolare del sito che si sta visitando, sia da terze parti.
+        </p>
+
+        <h2>Titolare del Trattamento</h2>
+        <p>
+          Il titolare del trattamento è:<br>
+          <strong>{contact.legalName}</strong><br>
+          {contact.address.street}, {contact.address.postalCode} {contact.address.city} ({contact.address.province})<br>
+          Email: <a href={`mailto:${contact.email}`}>{contact.email}</a><br>
+          C.F.: {contact.fiscalCode}
+        </p>
+
+        <h2>Tipologie di Cookie Utilizzati</h2>
+        
+        <h3>Cookie Tecnici (Necessari)</h3>
+        <p>
+          Questi cookie sono essenziali per il corretto funzionamento del sito web. 
+          Includono cookie che memorizzano le preferenze relative al consenso sui cookie.
+          Non richiedono il consenso dell'utente.
+        </p>
+        <table class="w-full text-sm">
+          <thead>
+            <tr>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Nome</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Scopo</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Durata</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border-b dark:border-gray-700">cc_cookie</td>
+              <td class="p-2 border-b dark:border-gray-700">Memorizza le preferenze sui cookie</td>
+              <td class="p-2 border-b dark:border-gray-700">6 mesi</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Cookie Analitici</h3>
+        <p>
+          Questi cookie ci permettono di contare le visite e le fonti di traffico, 
+          in modo da poter misurare e migliorare le prestazioni del nostro sito. 
+          Ci aiutano a sapere quali pagine sono più o meno popolari e a vedere come i 
+          visitatori si muovono all'interno del sito. Tutte le informazioni raccolte 
+          da questi cookie sono aggregate e quindi anonime.
+        </p>
+        <table class="w-full text-sm">
+          <thead>
+            <tr>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Nome</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Fornitore</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Scopo</th>
+              <th class="text-left p-2 bg-gray-100 dark:bg-gray-800">Durata</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 border-b dark:border-gray-700">_ga</td>
+              <td class="p-2 border-b dark:border-gray-700">Google Analytics</td>
+              <td class="p-2 border-b dark:border-gray-700">Distingue gli utenti</td>
+              <td class="p-2 border-b dark:border-gray-700">2 anni</td>
+            </tr>
+            <tr>
+              <td class="p-2 border-b dark:border-gray-700">_gid</td>
+              <td class="p-2 border-b dark:border-gray-700">Google Analytics</td>
+              <td class="p-2 border-b dark:border-gray-700">Distingue gli utenti</td>
+              <td class="p-2 border-b dark:border-gray-700">24 ore</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Per maggiori informazioni su Google Analytics: 
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            Privacy Policy di Google
+          </a>
+        </p>
+
+        <h3>Cookie di Terze Parti</h3>
+        <p>
+          Il nostro sito incorpora contenuti di terze parti che potrebbero installare cookie propri:
+        </p>
+        <ul>
+          <li>
+            <strong>Google Maps</strong>: utilizziamo le mappe di Google per mostrare la posizione del circolo. 
+            Google potrebbe installare cookie per funzionalità e statistiche. 
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+              Privacy Policy di Google
+            </a>
+          </li>
+        </ul>
+
+        <h2>Gestione delle Preferenze</h2>
+        <p>
+          Puoi gestire le tue preferenze sui cookie in qualsiasi momento cliccando sul pulsante qui sotto:
+        </p>
+        <button 
+          id="open-cookie-settings"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary-hover)] text-white rounded-lg font-semibold transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          Gestisci Preferenze Cookie
+        </button>
+
+        <h2>Come Disabilitare i Cookie dal Browser</h2>
+        <p>
+          Puoi anche gestire i cookie direttamente dal tuo browser. 
+          Di seguito i link alle guide per i browser più comuni:
+        </p>
+        <ul>
+          <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
+          <li><a href="https://support.mozilla.org/it/kb/protezione-antitracciamento-avanzata-firefox-desktop" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
+          <li><a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
+          <li><a href="https://support.microsoft.com/it-it/microsoft-edge/eliminare-i-cookie-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Microsoft Edge</a></li>
+        </ul>
+
+        <h2>Diritti dell'Interessato</h2>
+        <p>
+          In qualità di interessato, ai sensi del Regolamento UE 2016/679 (GDPR), hai diritto di:
+        </p>
+        <ul>
+          <li>Accedere ai tuoi dati personali</li>
+          <li>Rettificare i dati inesatti</li>
+          <li>Cancellare i tuoi dati ("diritto all'oblio")</li>
+          <li>Limitare il trattamento</li>
+          <li>Opporti al trattamento</li>
+          <li>Portabilità dei dati</li>
+          <li>Revocare il consenso in qualsiasi momento</li>
+          <li>Proporre reclamo all'Autorità Garante per la Protezione dei Dati Personali</li>
+        </ul>
+        <p>
+          Per esercitare i tuoi diritti, puoi contattarci all'indirizzo email: 
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </p>
+
+        <h2>Modifiche alla Cookie Policy</h2>
+        <p>
+          Questa Cookie Policy potrebbe essere aggiornata periodicamente. 
+          Ti invitiamo a consultare regolarmente questa pagina per essere informato 
+          su eventuali modifiche.
+        </p>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.getElementById('open-cookie-settings')?.addEventListener('click', () => {
+    if ((window as any).CookieConsent) {
+      (window as any).CookieConsent.showPreferences();
+    }
+  });
+</script>
+
+<style>
+  .prose h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+  }
+  .prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+  }
+  .prose p {
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+  }
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+  .prose a {
+    color: var(--color-accent-primary);
+  }
+  .prose a:hover {
+    text-decoration: underline;
+  }
+  .prose table {
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .prose h2,
+    .prose h3 {
+      color: var(--color-text-primary-dark);
+    }
+    .prose p,
+    .prose ul {
+      color: var(--color-text-secondary-dark);
+    }
+    .prose a {
+      color: var(--color-link-dark);
+    }
+  }
+</style>
+

@@ -30,7 +30,7 @@ const { Content } = await page.render();
 
   <!-- Subtitle -->
   <section class="py-6 md:py-8 text-center">
-    <p class="text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-2xl mx-auto px-4 lg:px-6">
+    <p class="text-lg text-muted max-w-2xl mx-auto px-4 lg:px-6">
       Ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003 e s.m.i.
     </p>
   </section>
@@ -44,8 +44,8 @@ const { Content } = await page.render();
 
       <!-- Last Updated -->
       {page.data.lastUpdated && (
-        <div class="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
-          <p class="text-sm text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)]">
+        <div class="mt-12 pt-6 border-t border-muted">
+          <p class="text-sm text-muted">
             <strong>Ultimo aggiornamento:</strong> {page.data.lastUpdated}
           </p>
         </div>

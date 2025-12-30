@@ -10,6 +10,7 @@ const pages = [
   { path: 'meteo', changefreq: 'daily', priority: '0.7', lastmod: '2025-12-27' },
   { path: 'safeguarding', changefreq: 'yearly', priority: '0.5', lastmod: '2025-12-27' },
   { path: 'privacy', changefreq: 'yearly', priority: '0.3', lastmod: '2025-12-27' },
+  { path: 'cookie-policy', changefreq: 'yearly', priority: '0.3', lastmod: '2025-12-30' },
 ];
 
 export const GET: APIRoute = ({ site }) => {

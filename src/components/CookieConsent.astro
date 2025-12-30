@@ -1,0 +1,227 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<script define:vars={{ base }}>
+  // Store base URL for use in cookie consent config
+  window.__BASE_URL__ = base;
+</script>
+
+<script>
+  import 'vanilla-cookieconsent/dist/cookieconsent.css';
+  import * as CookieConsent from 'vanilla-cookieconsent';
+  
+  const baseUrl = (window as any).__BASE_URL__ || '';
+
+  // Evento custom per notificare quando i cookie analytics sono accettati
+  const dispatchConsentEvent = (accepted: boolean) => {
+    window.dispatchEvent(new CustomEvent('cookieconsent', { 
+      detail: { analytics: accepted } 
+    }));
+  };
+
+  CookieConsent.run({
+    guiOptions: {
+      consentModal: {
+        layout: 'box',
+        position: 'bottom left',
+        equalWeightButtons: false,
+        flipButtons: false
+      },
+      preferencesModal: {
+        layout: 'box',
+        position: 'right',
+        equalWeightButtons: true,
+        flipButtons: false
+      }
+    },
+
+    categories: {
+      necessary: {
+        enabled: true,
+        readOnly: true
+      },
+      analytics: {
+        enabled: false,
+        readOnly: false,
+        autoClear: {
+          cookies: [
+            { name: /^_ga/ },
+            { name: '_gid' }
+          ]
+        }
+      }
+    },
+
+    language: {
+      default: 'it',
+      translations: {
+        it: {
+          consentModal: {
+            title: '🍪 Utilizziamo i cookie',
+            description: `Questo sito utilizza cookie tecnici necessari al funzionamento e cookie analitici per comprendere come viene utilizzato il sito. <a href="${baseUrl}/cookie-policy" class="cc-link">Leggi la Cookie Policy</a>`,
+            acceptAllBtn: 'Accetta tutti',
+            acceptNecessaryBtn: 'Solo necessari',
+            showPreferencesBtn: 'Gestisci preferenze'
+          },
+          preferencesModal: {
+            title: 'Preferenze Cookie',
+            acceptAllBtn: 'Accetta tutti',
+            acceptNecessaryBtn: 'Solo necessari',
+            savePreferencesBtn: 'Salva preferenze',
+            closeIconLabel: 'Chiudi',
+            sections: [
+              {
+                title: 'Uso dei Cookie',
+                description: 'Utilizziamo i cookie per garantire le funzionalità di base del sito web e per migliorare la tua esperienza online.'
+              },
+              {
+                title: 'Cookie Necessari',
+                description: 'Questi cookie sono essenziali per il corretto funzionamento del sito. Senza questi cookie, il sito web non funzionerebbe correttamente.',
+                linkedCategory: 'necessary'
+              },
+              {
+                title: 'Cookie Analitici',
+                description: 'Questi cookie raccolgono informazioni su come utilizzi il sito web, quali pagine hai visitato e su quali link hai cliccato. Tutti i dati sono anonimi e non possono essere utilizzati per identificarti.',
+                linkedCategory: 'analytics'
+              },
+              {
+                title: 'Maggiori informazioni',
+                description: 'Per qualsiasi domanda relativa alla nostra policy sui cookie e alle tue scelte, <a class="cc-link" href="mailto:segreteria@cncvela.it">contattaci</a>.'
+              }
+            ]
+          }
+        }
+      }
+    },
+
+    onFirstConsent: ({ cookie }) => {
+      const analyticsAccepted = cookie.categories.includes('analytics');
+      dispatchConsentEvent(analyticsAccepted);
+      
+      if (analyticsAccepted) {
+        loadGoogleMaps();
+        loadGoogleAnalytics();
+      }
+    },
+
+    onConsent: ({ cookie }) => {
+      const analyticsAccepted = cookie.categories.includes('analytics');
+      dispatchConsentEvent(analyticsAccepted);
+      
+      if (analyticsAccepted) {
+        loadGoogleMaps();
+        loadGoogleAnalytics();
+      }
+    },
+
+    onChange: ({ cookie }) => {
+      const analyticsAccepted = cookie.categories.includes('analytics');
+      dispatchConsentEvent(analyticsAccepted);
+      
+      if (!analyticsAccepted) {
+        // Ricarica la pagina per rimuovere gli script
+        window.location.reload();
+      } else {
+        loadGoogleMaps();
+        loadGoogleAnalytics();
+      }
+    }
+  });
+
+  // Funzione per caricare Google Maps su tutti i container
+  function loadGoogleMaps() {
+    document.querySelectorAll('[data-map-src]').forEach((container) => {
+      const mapSrc = (container as HTMLElement).dataset.mapSrc;
+      if (mapSrc && !container.querySelector('iframe')) {
+        const iframe = document.createElement('iframe');
+        iframe.src = mapSrc;
+        iframe.width = '100%';
+        iframe.height = '100%';
+        iframe.style.cssText = 'border:0; min-height: 300px; position: absolute; inset: 0;';
+        iframe.allowFullscreen = true;
+        iframe.loading = 'lazy';
+        iframe.referrerPolicy = 'no-referrer-when-downgrade';
+        iframe.title = 'Mappa del Circolo Nautico Caldè';
+        container.appendChild(iframe);
+      }
+    });
+  }
+
+  // Google Analytics - carica solo su produzione (non su GitHub Pages staging)
+  function loadGoogleAnalytics() {
+    const GA_ID = 'G-L1SJ5B2TWG';
+    const isProduction = window.location.hostname === 'www.cncvela.it' || 
+                         window.location.hostname === 'cncvela.it';
+    
+    // Non caricare GA su staging/localhost
+    if (!isProduction) {
+      console.log('[Analytics] Skipped - not production environment');
+      return;
+    }
+    
+    // Evita doppio caricamento
+    if ((window as any).gtag) {
+      return;
+    }
+    
+    // Carica gtag.js
+    const script = document.createElement('script');
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    script.async = true;
+    document.head.appendChild(script);
+    
+    // Inizializza dataLayer e gtag
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    function gtag(...args: any[]) {
+      (window as any).dataLayer.push(args);
+    }
+    (window as any).gtag = gtag;
+    
+    gtag('js', new Date());
+    gtag('config', GA_ID, {
+      'anonymize_ip': true,  // GDPR: anonimizza IP
+      'cookie_flags': 'SameSite=None;Secure'
+    });
+    
+    console.log('[Analytics] Google Analytics loaded');
+  }
+
+  // Esporta per uso globale
+  (window as any).CookieConsent = CookieConsent;
+</script>
+
+<style is:global>
+  /* Tema custom per cookie consent - colori del sito */
+  :root {
+    --cc-bg: #fff;
+    --cc-text: #1e293b;
+    --cc-btn-primary-bg: #0c4a6e;
+    --cc-btn-primary-text: #fff;
+    --cc-btn-primary-hover-bg: #075985;
+    --cc-btn-secondary-bg: #e2e8f0;
+    --cc-btn-secondary-text: #1e293b;
+    --cc-btn-secondary-hover-bg: #cbd5e1;
+    --cc-toggle-bg-on: #0c4a6e;
+    --cc-link-color: #0369a1;
+  }
+
+  .dark {
+    --cc-bg: #1e293b;
+    --cc-text: #e2e8f0;
+    --cc-btn-primary-bg: #38bdf8;
+    --cc-btn-primary-text: #0c4a6e;
+    --cc-btn-primary-hover-bg: #7dd3fc;
+    --cc-btn-secondary-bg: #334155;
+    --cc-btn-secondary-text: #e2e8f0;
+    --cc-btn-secondary-hover-bg: #475569;
+    --cc-toggle-bg-on: #38bdf8;
+    --cc-link-color: #38bdf8;
+  }
+
+  /* Assicura che il banner sia sempre visibile sopra tutto */
+  #cc-main {
+    z-index: 9999 !important;
+  }
+</style>
+
