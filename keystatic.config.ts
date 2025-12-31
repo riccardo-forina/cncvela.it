@@ -17,25 +17,20 @@ const localizedText = (label: string, options?: { multiline?: boolean; required?
 // =============================================================================
 // CONFIGURAZIONE KEYSTATIC
 // =============================================================================
-// CMS attivo solo in development locale e produzione
-// Preview deployments usano local mode (sola lettura)
-const isProduction = process.env.VERCEL_ENV === 'production';
-const isDevelopment = process.env.NODE_ENV === 'development';
+// DEV = local mode (modifica file direttamente)
+// PROD = GitHub mode (crea branch cms/*, poi PR)
 
 export default config({
-  storage: 
-    isDevelopment
-      ? { kind: 'local' }
-      : isProduction
-        ? {
-            kind: 'github',
-            repo: {
-              owner: 'riccardo-forina',
-              name: 'cncvela.it',
-            },
-            branchPrefix: 'cms/',
-          }
-        : { kind: 'local' }, // Preview: local mode (read-only, no OAuth needed)
+  storage: import.meta.env.DEV
+    ? { kind: 'local' }
+    : {
+        kind: 'github',
+        repo: {
+          owner: 'riccardo-forina',
+          name: 'cncvela.it',
+        },
+        branchPrefix: 'cms/',
+      },
   
   ui: {
     brand: {
