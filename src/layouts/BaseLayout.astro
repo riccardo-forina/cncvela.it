@@ -140,7 +140,7 @@ const jsonLd = {
     <!-- Fonts: Self-hosted via @fontsource for better performance -->
     
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     
     <title>{fullTitle}</title>
   </head>

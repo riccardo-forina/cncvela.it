@@ -89,7 +89,7 @@ const courseImages = {
         </button>
       </div>
     
-      <script define:vars={{ videoPathDesktop, videoPathMobile }}>
+      <script is:inline define:vars={{ videoPathDesktop, videoPathMobile }}>
         document.addEventListener('DOMContentLoaded', () => {
           const video = document.getElementById('hero-video');
           const sourceMp4 = document.getElementById('video-source-mp4');

@@ -35,6 +35,13 @@ export default config({
         branchPrefix: 'cms/',
       },
   
+  // URL esplicito per OAuth redirect e cookie
+  ...(!isLocal && { 
+    site: { 
+      url: 'https://www.cncvela.it' 
+    } 
+  }),
+  
   ui: {
     brand: {
       name: 'CNC Caldè',

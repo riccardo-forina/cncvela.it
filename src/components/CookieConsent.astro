@@ -1,11 +1,11 @@
 ---
-import { getLocaleFromUrl, type Locale } from '../i18n';
+import { getLocaleFromUrl } from '../i18n';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const locale = getLocaleFromUrl(Astro.url);
 ---
 
-<script define:vars={{ base, locale }}>
+<script is:inline define:vars={{ base, locale }}>
   // Store base URL and locale for use in cookie consent config
   window.__BASE_URL__ = base;
   window.__LOCALE__ = locale;
@@ -13,7 +13,8 @@ const locale = getLocaleFromUrl(Astro.url);
 
 <script>
   import 'vanilla-cookieconsent/dist/cookieconsent.css';
-  import * as CookieConsent from 'vanilla-cookieconsent';
+  // @ts-ignore - namespace import needed, no default export
+import * as CookieConsent from 'vanilla-cookieconsent';
   
   const baseUrl = (window as any).__BASE_URL__ || '';
   const currentLocale = (window as any).__LOCALE__ || 'it';

@@ -192,7 +192,7 @@ const translations = {
   </section>
 </BaseLayout>
 
-<script define:vars={{ LAT, LON, translations, locale }}>
+<script is:inline define:vars={{ LAT, LON, translations, locale }}>
   // Wind direction to compass
   function degToCompass(deg) {
     const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
