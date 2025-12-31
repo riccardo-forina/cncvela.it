@@ -9,7 +9,6 @@ import type { Locale } from '../i18n';
 // Import data
 import content from '../data/homepage-content.json';
 import clubLife from '../data/club-life-config.json';
-import instagramData from '../data/instagram-feed.json';
 import contact from '../data/contact.json';
 
 // Import images
@@ -255,7 +254,7 @@ const courseImages = {
         <!-- Right: Instagram Feed (always visible) -->
         <div>
           <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold">{t(instagramData.title)}</h3>
+            <h3 class="text-xl font-bold">{t(clubLife.instagram.title)}</h3>
           </div>
           <InstagramFeed locale={locale} />
         </div>

@@ -40,11 +40,5 @@ export default defineConfig({
   
   vite: {
     plugins: [tailwindcss()],
-    optimizeDeps: {
-      include: ['is-hotkey']
-    },
-    ssr: {
-      noExternal: ['is-hotkey']
-    }
   }
 });

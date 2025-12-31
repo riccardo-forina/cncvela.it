@@ -225,6 +225,11 @@ export default config({
           cta: localizedText('Testo link'),
         }, { label: 'Messaggio fuori stagione' }),
         galleryLink: localizedText('Testo link archivio storico'),
+        instagram: fields.object({
+          title: localizedText('Titolo sezione Instagram'),
+          cta: localizedText('Testo CTA'),
+          profileUrl: fields.url({ label: 'URL profilo Instagram' }),
+        }, { label: '📸 Instagram' }),
       },
     }),
 
@@ -238,28 +243,8 @@ export default config({
       schema: {
         beholdFeedUrl: fields.url({
           label: '🔗 Behold Feed URL',
-          description: 'URL del feed Behold.so (es: https://feeds.behold.so/XXXXX)',
+          description: 'URL del feed Behold.so (es: https://feeds.behold.so/XXXXX). Mostra gli ultimi 4 post.',
         }),
-        mode: fields.select({
-          label: 'Modalità',
-          description: 'Scegli se mostrare i post più recenti o selezionarli manualmente',
-          options: [
-            { label: 'Ultimi post (automatico)', value: 'latest' },
-            { label: 'Post selezionati', value: 'selected' },
-          ],
-          defaultValue: 'latest',
-        }),
-        selectedPosts: fields.array(
-          fields.text({ 
-            label: 'ID Post',
-            description: 'L\'ID del post Instagram (la parte dopo /p/ nel link, es: C8lkQVdoGjO)',
-          }),
-          { 
-            label: 'Post selezionati',
-            description: 'Aggiungi gli ID dei post da mostrare (max 4). Usato solo se modalità = "Post selezionati"',
-            itemLabel: (props) => props.value || 'Post',
-          }
-        ),
       },
     }),
 

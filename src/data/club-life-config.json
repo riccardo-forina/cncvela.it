@@ -31,6 +31,19 @@
     "it": "Sfoglia l'album storico del circolo",
     "en": "Browse the club's historical album",
     "de": "Das historische Album des Clubs durchblättern"
+  },
+  "instagram": {
+    "title": {
+      "it": "Seguici su Instagram",
+      "en": "Follow us on Instagram",
+      "de": "Folge uns auf Instagram"
+    },
+    "cta": {
+      "it": "Vedi tutti i post",
+      "en": "See all posts",
+      "de": "Alle Beiträge ansehen"
+    },
+    "profileUrl": "https://www.instagram.com/circolo_nautico_calde"
   }
 }
 
