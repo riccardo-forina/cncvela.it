@@ -20,8 +20,11 @@ const localizedText = (label: string, options?: { multiline?: boolean; required?
 // DEV = local mode (modifica file direttamente)
 // PROD = GitHub mode (crea branch cms/*, poi PR)
 
+// Use local storage in dev, GitHub in production
+const isLocal = import.meta.env.DEV || !import.meta.env.PROD;
+
 export default config({
-  storage: import.meta.env.DEV
+  storage: isLocal
     ? { kind: 'local' }
     : {
         kind: 'github',
