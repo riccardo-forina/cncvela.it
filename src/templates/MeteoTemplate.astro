@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LakeWindMap from '../components/LakeWindMap.astro';
 import type { Locale } from '../i18n';
 import content from '../data/meteo-content.json';
 
@@ -59,132 +60,103 @@ const translations = {
 ---
 
 <BaseLayout title={t(content.page.title)} description={t(content.page.description)} locale={locale}>
-  <!-- Title bar -->
-  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <h1 class="text-2xl md:text-3xl font-black text-white">{t(content.page.title)}</h1>
-      <p class="text-sm md:text-base text-white/70 mt-2 max-w-2xl">{t(content.page.subtitle)}</p>
-    </div>
-  </section>
+  <!-- Tactical Wind Map Hero (Full Viewport) -->
+  <LakeWindMap locale={locale} />
 
-  <!-- Legend & Source Box -->
-  <section class="py-8 md:py-12">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <div class="bg-secondary rounded-xl p-4 md:p-6">
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-          <!-- Legend -->
-          <div>
-            <p class="text-sm font-medium mb-1">{t(content.legend.title)}</p>
-            <p class="text-xs text-muted mb-3">{t(content.legend.description)}</p>
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-sm">
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-sky-500 flex-shrink-0"></span>
-                <span>{t(content.legend.levels.calm)}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                <span>{t(content.legend.levels.light)}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-amber-500 flex-shrink-0"></span>
-                <span>{t(content.legend.levels.moderate)}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-orange-500 flex-shrink-0"></span>
-                <span>{t(content.legend.levels.strong)}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></span>
-                <span>{t(content.legend.levels.veryStrong)}</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Data Source -->
-          <div class="text-xs text-muted md:text-right md:min-w-[200px]">
-            <p class="font-medium text-[var(--color-text-primary)] dark:text-[var(--color-text-primary-dark)]">{t(content.source.title)}</p>
-            <p><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" class="inline-link">Open-Meteo API</a></p>
-            <p class="mt-1">{t(content.source.position)}: <a href="https://maps.app.goo.gl/HrvN1bRb2mzhJw1n6" target="_blank" rel="noopener noreferrer" class="inline-link">CNC Caldè</a></p>
-            <p>{t(content.source.model)}: ECMWF</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Current Conditions & Sailing Assessment -->
-  <section class="pb-12 md:pb-16">
-    <div class="max-w-4xl mx-auto px-4 lg:px-6">
+  <!-- Tactical Data Section -->
+  <section class="tactical-data-section bg-slate-200 dark:bg-slate-950 py-8 md:py-12">
+    <div class="max-w-4xl mx-auto px-4 lg:px-6 space-y-6">
       
-      <!-- Combined Weather Card -->
-      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-2xl border border-muted p-6 md:p-8 mb-8">
+      <!-- Current Conditions Panel -->
+      <div class="tactical-panel bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
         
-        <h2 class="text-xl font-bold mb-6">
-          {t(content.sailing.title)}
-        </h2>
+        <!-- Panel Header -->
+        <div class="flex items-center justify-between px-5 py-3 bg-slate-100 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700/50">
+          <h2 class="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4 text-cyan-600 dark:text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+            {t(content.sailing.title)}
+          </h2>
+          <span class="text-[10px] font-mono text-slate-500" id="last-update">{t(content.current.updated)}: --</span>
+        </div>
         
         <!-- Sailing Status Banner -->
-        <div id="sailing-banner" class="rounded-xl p-4 mb-6 text-center bg-gray-100 dark:bg-gray-800">
-          <p class="text-2xl font-black" id="wind-status">--</p>
-          <p class="text-sm text-muted">
-            {t(content.sailing.recommendedFor)}: <span id="recommended-for" class="font-semibold">--</span>
+        <div id="sailing-banner" class="mx-4 mt-4 rounded-lg p-4 text-center bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/30">
+          <p class="text-xl md:text-2xl font-black text-slate-800 dark:text-white" id="wind-status">--</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+            {t(content.sailing.recommendedFor)}: <span id="recommended-for" class="font-semibold text-slate-700 dark:text-slate-300">--</span>
           </p>
         </div>
         
         <!-- Weather Stats Grid -->
-        <div id="current-weather" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          <div class="text-center p-4 bg-secondary rounded-xl">
-            <p class="text-3xl md:text-4xl font-black text-accent">
-              <span id="current-wind-speed">--</span><span class="text-lg md:text-xl font-bold ml-1">kn</span>
+        <div id="current-weather" class="grid grid-cols-2 md:grid-cols-4 gap-3 p-4">
+          <div class="stat-card text-center p-4 bg-slate-100 dark:bg-slate-800/40 rounded-lg border border-slate-200 dark:border-slate-700/30">
+            <p class="text-3xl md:text-4xl font-black text-cyan-600 dark:text-cyan-400 font-mono">
+              <span id="current-wind-speed">--</span><span class="text-base font-bold ml-1 text-cyan-600/70 dark:text-cyan-500/70">kn</span>
             </p>
-            <p class="text-xs md:text-sm text-muted">{t(content.current.wind)}</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider mt-1">{t(content.current.wind)}</p>
           </div>
-          <div class="text-center p-4 bg-secondary rounded-xl">
-            <p class="text-3xl md:text-4xl font-black text-[var(--color-accent-secondary)] dark:text-[var(--color-accent-secondary-dark)]" id="current-wind-dir">--</p>
-            <p class="text-xs md:text-sm text-muted">{t(content.current.direction)}</p>
+          <div class="stat-card text-center p-4 bg-slate-100 dark:bg-slate-800/40 rounded-lg border border-slate-200 dark:border-slate-700/30">
+            <p class="text-3xl md:text-4xl font-black text-emerald-600 dark:text-emerald-400 font-mono" id="current-wind-dir">--</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider mt-1">{t(content.current.direction)}</p>
           </div>
-          <div class="text-center p-4 bg-secondary rounded-xl">
-            <p class="text-3xl md:text-4xl font-black">
-              <span id="current-temp">--</span><span class="text-lg md:text-xl font-bold ml-1">°C</span>
+          <div class="stat-card text-center p-4 bg-slate-100 dark:bg-slate-800/40 rounded-lg border border-slate-200 dark:border-slate-700/30">
+            <p class="text-3xl md:text-4xl font-black text-amber-600 dark:text-amber-400 font-mono">
+              <span id="current-temp">--</span><span class="text-base font-bold ml-1 text-amber-600/70 dark:text-amber-500/70">°C</span>
             </p>
-            <p class="text-xs md:text-sm text-muted">{t(content.current.temperature)}</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider mt-1">{t(content.current.temperature)}</p>
           </div>
-          <div class="text-center p-4 bg-secondary rounded-xl">
-            <p class="text-3xl md:text-4xl font-black">
-              <span id="current-humidity">--</span><span class="text-lg md:text-xl font-bold ml-1">%</span>
+          <div class="stat-card text-center p-4 bg-slate-100 dark:bg-slate-800/40 rounded-lg border border-slate-200 dark:border-slate-700/30">
+            <p class="text-3xl md:text-4xl font-black text-sky-600 dark:text-sky-400 font-mono">
+              <span id="current-humidity">--</span><span class="text-base font-bold ml-1 text-sky-600/70 dark:text-sky-500/70">%</span>
             </p>
-            <p class="text-xs md:text-sm text-muted">{t(content.current.humidity)}</p>
+            <p class="text-xs text-slate-500 uppercase tracking-wider mt-1">{t(content.current.humidity)}</p>
           </div>
         </div>
-        
-        <p class="text-xs text-muted mt-4 text-center" id="last-update">
-          {t(content.current.updated)}: --
-        </p>
       </div>
 
-      <!-- Hourly Forecast -->
-      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-2xl border border-muted p-6 md:p-8 mb-8">
-        <h2 class="text-lg font-bold mb-4">
-          {t(content.forecast.hourly)}
-        </h2>
+      <!-- Hourly Forecast Panel -->
+      <div class="tactical-panel bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
         
-        <div id="hourly-forecast" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-2">
-          <p class="col-span-full text-muted">{t(content.forecast.loading)}</p>
+        <!-- Panel Header -->
+        <div class="flex items-center justify-between px-5 py-3 bg-slate-100 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700/50">
+          <h2 class="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4 text-cyan-600 dark:text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            {t(content.forecast.hourly)}
+          </h2>
         </div>
         
-        <p class="text-xs text-muted mt-4">
-          {t(content.forecast.disclaimer)}
-        </p>
+        <div class="p-4">
+          <div id="hourly-forecast" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-2">
+            <p class="col-span-full text-slate-500 text-sm">{t(content.forecast.loading)}</p>
+          </div>
+          
+          <p class="text-[10px] text-slate-600 mt-4 font-mono">
+            {t(content.forecast.disclaimer)}
+          </p>
+        </div>
       </div>
 
-      <!-- Daily Forecast -->
-      <div class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-secondary-dark)] rounded-2xl border border-muted p-6 md:p-8 mb-8">
-        <h2 class="text-lg font-bold mb-4">
-          {t(content.forecast.daily)}
-        </h2>
+      <!-- Daily Forecast Panel -->
+      <div class="tactical-panel bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
         
-        <div id="daily-forecast" class="space-y-3">
-          <p class="text-muted">{t(content.forecast.loading)}</p>
+        <!-- Panel Header -->
+        <div class="flex items-center justify-between px-5 py-3 bg-slate-100 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700/50">
+          <h2 class="text-sm font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4 text-cyan-600 dark:text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            {t(content.forecast.daily)}
+          </h2>
+        </div>
+        
+        <div class="p-4">
+          <div id="daily-forecast" class="space-y-2">
+            <p class="text-slate-500 text-sm">{t(content.forecast.loading)}</p>
+          </div>
         </div>
       </div>
 
@@ -200,18 +172,18 @@ const translations = {
     return directions[index];
   }
 
-  // Get wind status, recommendation, and color (thresholds in knots)
+  // Get wind status, recommendation, and color (thresholds in knots) - Light/Dark mode compatible
   function getWindConditions(speed) {
     if (speed < 3) {
-      return { status: translations.windStatus.calm, recommendation: translations.recommendations.calm, bgClass: 'bg-sky-100 dark:bg-sky-900/30', dotClass: 'bg-sky-500' };
+      return { status: translations.windStatus.calm, recommendation: translations.recommendations.calm, bgClass: 'bg-sky-500/10', dotClass: 'bg-sky-500', textClass: 'text-sky-600 dark:text-sky-400' };
     } else if (speed < 7) {
-      return { status: translations.windStatus.light, recommendation: translations.recommendations.light, bgClass: 'bg-emerald-100 dark:bg-emerald-900/30', dotClass: 'bg-emerald-500' };
+      return { status: translations.windStatus.light, recommendation: translations.recommendations.light, bgClass: 'bg-emerald-500/10', dotClass: 'bg-emerald-500', textClass: 'text-emerald-600 dark:text-emerald-400' };
     } else if (speed < 11) {
-      return { status: translations.windStatus.moderate, recommendation: translations.recommendations.moderate, bgClass: 'bg-amber-100 dark:bg-amber-900/30', dotClass: 'bg-amber-500' };
+      return { status: translations.windStatus.moderate, recommendation: translations.recommendations.moderate, bgClass: 'bg-amber-500/10', dotClass: 'bg-amber-500', textClass: 'text-amber-600 dark:text-amber-400' };
     } else if (speed < 16) {
-      return { status: translations.windStatus.strong, recommendation: translations.recommendations.strong, bgClass: 'bg-orange-100 dark:bg-orange-900/30', dotClass: 'bg-orange-500' };
+      return { status: translations.windStatus.strong, recommendation: translations.recommendations.strong, bgClass: 'bg-orange-500/10', dotClass: 'bg-orange-500', textClass: 'text-orange-600 dark:text-orange-400' };
     } else {
-      return { status: translations.windStatus.veryStrong, recommendation: translations.recommendations.veryStrong, bgClass: 'bg-red-100 dark:bg-red-900/30', dotClass: 'bg-red-500' };
+      return { status: translations.windStatus.veryStrong, recommendation: translations.recommendations.veryStrong, bgClass: 'bg-red-500/10', dotClass: 'bg-red-500', textClass: 'text-red-600 dark:text-red-400' };
     }
   }
 
@@ -282,15 +254,15 @@ const translations = {
       document.getElementById('last-update').textContent = 
         `${translations.updated}: ${now.toLocaleTimeString(locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-US' : 'it-IT', { hour: '2-digit', minute: '2-digit' })}`;
       
-      // Update sailing conditions banner
+      // Update sailing conditions banner - Tactical Dark Theme
       const conditions = getWindConditions(windSpeed);
       const banner = document.getElementById('sailing-banner');
       const statusEl = document.getElementById('wind-status');
-      statusEl.innerHTML = `<span class="inline-block w-3 h-3 rounded-full ${conditions.dotClass} mr-2"></span>${conditions.status}`;
+      statusEl.innerHTML = `<span class="inline-block w-3 h-3 rounded-full ${conditions.dotClass} mr-2 shadow-lg"></span><span class="${conditions.textClass}">${conditions.status}</span>`;
       document.getElementById('recommended-for').textContent = conditions.recommendation;
       
       // Update banner background color
-      banner.className = `rounded-xl p-4 mb-6 text-center ${conditions.bgClass}`;
+      banner.className = `mx-4 mt-4 rounded-lg p-4 text-center border border-slate-200 dark:border-slate-700/30 ${conditions.bgClass}`;
       
       // Update hourly forecast
       const hourlyContainer = document.getElementById('hourly-forecast');
@@ -303,18 +275,19 @@ const translations = {
         const speed = Math.round(data.hourly.wind_speed_10m[i]);
         const dir = degToCompass(data.hourly.wind_direction_10m[i]);
         
-        // Color based on wind speed (knots)
-        let bgColor = 'bg-sky-100 dark:bg-sky-900/30';
-        if (speed >= 3 && speed < 7) bgColor = 'bg-emerald-100 dark:bg-emerald-900/30';
-        else if (speed >= 7 && speed < 11) bgColor = 'bg-amber-100 dark:bg-amber-900/30';
-        else if (speed >= 11 && speed < 16) bgColor = 'bg-orange-100 dark:bg-orange-900/30';
-        else if (speed >= 16) bgColor = 'bg-red-100 dark:bg-red-900/30';
+        // Colors based on wind speed (knots) - light/dark mode compatible
+        let bgColor = 'bg-sky-500/10 border-sky-500/30';
+        let textColor = 'text-sky-600 dark:text-sky-400';
+        if (speed >= 3 && speed < 7) { bgColor = 'bg-emerald-500/10 border-emerald-500/30'; textColor = 'text-emerald-600 dark:text-emerald-400'; }
+        else if (speed >= 7 && speed < 11) { bgColor = 'bg-amber-500/10 border-amber-500/30'; textColor = 'text-amber-600 dark:text-amber-400'; }
+        else if (speed >= 11 && speed < 16) { bgColor = 'bg-orange-500/10 border-orange-500/30'; textColor = 'text-orange-600 dark:text-orange-400'; }
+        else if (speed >= 16) { bgColor = 'bg-red-500/10 border-red-500/30'; textColor = 'text-red-600 dark:text-red-400'; }
         
         hourlyHTML += `
-          <div class="text-center p-2 rounded-lg ${bgColor}">
-            <p class="text-xs text-muted">${hour}</p>
-            <p class="text-base font-bold">${speed}<span class="text-[10px] font-medium ml-0.5">kn</span></p>
-            <p class="text-xs font-medium">${dir}</p>
+          <div class="text-center p-2 rounded-lg border ${bgColor}">
+            <p class="text-[10px] text-slate-600 dark:text-slate-500 font-mono">${hour}</p>
+            <p class="text-base font-black font-mono ${textColor}">${speed}<span class="text-[10px] font-medium ml-0.5 opacity-60">kn</span></p>
+            <p class="text-xs font-medium text-slate-500 dark:text-slate-400">${dir}</p>
           </div>
         `;
       }
@@ -335,21 +308,21 @@ const translations = {
         const windConditions = getWindConditions(windMax);
         
         dailyHTML += `
-          <div class="flex items-center justify-between p-3 rounded-xl ${windConditions.bgClass}">
+          <div class="flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700/30 ${windConditions.bgClass}">
             <div class="flex items-center gap-3 min-w-0">
               <span class="text-2xl">${weather.icon}</span>
               <div class="min-w-0">
-                <p class="font-bold">${day}</p>
-                <p class="text-xs text-muted truncate">${weather.desc}</p>
+                <p class="font-bold text-slate-700 dark:text-slate-200">${day}</p>
+                <p class="text-xs text-slate-500 truncate">${weather.desc}</p>
               </div>
             </div>
             <div class="flex items-center gap-4 md:gap-6 text-right">
               <div>
-                <p class="font-bold">${tempMax}° <span class="font-normal text-muted">/ ${tempMin}°</span></p>
+                <p class="font-bold text-amber-600 dark:text-amber-400 font-mono">${tempMax}° <span class="font-normal text-slate-500">/ ${tempMin}°</span></p>
               </div>
               <div class="min-w-[60px]">
-                <p class="font-bold text-accent">${windMax} kn</p>
-                <p class="text-xs text-muted">${windDir}</p>
+                <p class="font-black font-mono ${windConditions.textClass}">${windMax} <span class="text-xs opacity-60">kn</span></p>
+                <p class="text-xs text-slate-500">${windDir}</p>
               </div>
             </div>
           </div>
