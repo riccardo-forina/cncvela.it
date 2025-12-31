@@ -122,3 +122,4 @@ Ogni volontario che accede a dati personali deve sottoscrivere una dichiarazione
 
 ---
 *Documento a uso interno redatto per la formazione del personale volontario.*
+

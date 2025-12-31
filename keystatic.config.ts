@@ -33,6 +33,7 @@ export default config({
               owner: 'riccardo-forina',
               name: 'cncvela.it',
             },
+            branchPrefix: 'cms/',
           }
         : { kind: 'local' }, // Preview: local mode (read-only, no OAuth needed)
   
