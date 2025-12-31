@@ -7,6 +7,9 @@ import vercel from '@astrojs/vercel';
 
 const isVercelProduction = process.env.VERCEL_ENV === 'production';
 
+// In produzione: dominio finale (www.cncvela.it)
+// In preview/staging: URL Vercel dinamico (per SEO canonical)
+// In locale: localhost
 export default defineConfig({
   site: isVercelProduction 
     ? 'https://www.cncvela.it' 

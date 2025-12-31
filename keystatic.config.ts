@@ -17,17 +17,24 @@ const localizedText = (label: string, options?: { multiline?: boolean; required?
 // =============================================================================
 // CONFIGURAZIONE KEYSTATIC
 // =============================================================================
+// CMS attivo solo in development locale e produzione
+// Preview deployments usano local mode (sola lettura)
+const isProduction = process.env.VERCEL_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 export default config({
   storage: 
-    process.env.NODE_ENV === 'development'
+    isDevelopment
       ? { kind: 'local' }
-      : {
-          kind: 'github',
-          repo: {
-            owner: 'riccardo-forina',
-            name: 'cncvela.it',
-          },
-        },
+      : isProduction
+        ? {
+            kind: 'github',
+            repo: {
+              owner: 'riccardo-forina',
+              name: 'cncvela.it',
+            },
+          }
+        : { kind: 'local' }, // Preview: local mode (read-only, no OAuth needed)
   
   ui: {
     brand: {
