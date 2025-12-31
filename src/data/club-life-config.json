@@ -1,0 +1,36 @@
+{
+  "eventsStartDate": "2026-04-01",
+  "title": {
+    "it": "Vita al Circolo",
+    "en": "Club Life",
+    "de": "Clubleben"
+  },
+  "subtitle": {
+    "it": "Eventi, corsi e momenti insieme nella nostra comunità velica",
+    "en": "Events, courses and moments together in our sailing community",
+    "de": "Veranstaltungen, Kurse und gemeinsame Momente in unserer Segelgemeinschaft"
+  },
+  "offSeason": {
+    "title": {
+      "it": "La stagione riprende in primavera",
+      "en": "Season starts in spring",
+      "de": "Saison beginnt im Frühjahr"
+    },
+    "description": {
+      "it": "Segui i nostri social per restare aggiornato sulle prossime attività",
+      "en": "Follow our social media to stay updated on upcoming activities",
+      "de": "Folge unseren Social Media für Updates zu kommenden Aktivitäten"
+    },
+    "cta": {
+      "it": "Vedi il calendario completo",
+      "en": "See full calendar",
+      "de": "Vollständigen Kalender ansehen"
+    }
+  },
+  "galleryLink": {
+    "it": "Sfoglia l'album storico del circolo",
+    "en": "Browse the club's historical album",
+    "de": "Das historische Album des Clubs durchblättern"
+  }
+}
+

@@ -207,6 +207,7 @@ export const translations = {
     documents: { it: 'Documenti', en: 'Documents', de: 'Dokumente' },
     howToReach: { it: 'Come Raggiungerci', en: 'How to Reach Us', de: 'Anfahrt' },
     followFacebook: { it: 'Seguici su Facebook', en: 'Follow us on Facebook', de: 'Folge uns auf Facebook' },
+    followInstagram: { it: 'Seguici su Instagram', en: 'Follow us on Instagram', de: 'Folge uns auf Instagram' },
     description: { 
       it: 'Associazione Sportiva Dilettantistica dal 1965.', 
       en: 'Amateur Sports Association since 1965.', 

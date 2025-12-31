@@ -2,11 +2,14 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MapEmbed from '../components/MapEmbed.astro';
+import InstagramFeed from '../components/InstagramFeed.astro';
+import UpcomingEvents from '../components/UpcomingEvents.astro';
 import type { Locale } from '../i18n';
 
 // Import data
 import content from '../data/homepage-content.json';
-import gallery from '../data/gallery.json';
+import clubLife from '../data/club-life-config.json';
+import instagramData from '../data/instagram-feed.json';
 import contact from '../data/contact.json';
 
 // Import images
@@ -26,26 +29,6 @@ const t = (obj: { it: string; en?: string; de?: string } | undefined, fallback =
   if (!obj) return fallback;
   return obj[locale] || obj.it || fallback;
 };
-
-// Import all images dynamically for gallery preview optimization
-const allImageModules = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/images/**/*.{jpg,jpeg,png}',
-  { eager: true }
-);
-
-// Helper to get optimized image from public path
-function getOptimizedImage(publicPath: string): ImageMetadata | undefined {
-  const assetPath = `../assets/${publicPath}`;
-  const module = allImageModules[assetPath];
-  return module?.default;
-}
-
-// Get a selection of photos for the preview
-const previewPhotos = [
-  ...gallery.corsi.slice(0, 2),
-  ...gallery.galleria.filter(img => img.src.includes('gruppo')).slice(0, 1),
-  ...gallery.regate.slice(0, 1),
-];
 
 // Base URL for public assets
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -234,57 +217,90 @@ const courseImages = {
     </section>
   </div>
   
-  <!-- GALLERY PREVIEW -->
+  <!-- VITA AL CIRCOLO: Events + Instagram -->
   <section class="py-16 md:py-24">
     <div class="max-w-6xl mx-auto px-4 lg:px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-black mb-4" style="font-size: var(--text-3xl);">
-          {t(content.gallery.title)}
+          {t(clubLife.title)}
         </h2>
         <p class="text-muted max-w-2xl mx-auto">
-          {t(content.gallery.subtitle)}
+          {t(clubLife.subtitle)}
         </p>
       </div>
       
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8">
-        {previewPhotos.map((img, idx) => {
-          const optimizedImg = getOptimizedImage(img.src);
-          return (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Left: Upcoming Events (shown via JS if events within 60 days) -->
+        <div>
+          <UpcomingEvents locale={locale} maxEvents={2} startDate={clubLife.eventsStartDate} />
+          
+          <!-- Fallback when no events (always rendered, visible when events hidden) -->
+          <div id="no-events-fallback" class="text-center py-8 px-4 bg-[var(--color-accent-primary)]/5 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-2xl border border-[var(--color-accent-primary)]/20">
+            <div class="w-16 h-16 mx-auto mb-4 bg-[var(--color-accent-primary)]/10 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-[var(--color-accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-lg mb-2">{t(clubLife.offSeason.title)}</h3>
+            <p class="text-muted text-sm mb-4">{t(clubLife.offSeason.description)}</p>
             <a 
-              href="galleria" 
-              class:list={[
-                "group relative overflow-hidden rounded-2xl",
-                idx === 0 ? "col-span-2 row-span-2 aspect-square" : "aspect-square"
-              ]}
+              href="bacheca" 
+              class="inline-flex items-center gap-2 text-[var(--color-accent-primary)] dark:text-[#7CB3F0] font-semibold text-sm hover:underline"
             >
-              {optimizedImg ? (
-                <Image 
-                  src={optimizedImg}
-                  alt={img.alt}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  widths={idx === 0 ? [400, 600, 800] : [200, 300, 400]}
-                  sizes={idx === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                  loading="lazy"
-                />
-              ) : (
-                <img src={img.src} alt={img.alt} loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              )}
-              <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              {t(clubLife.offSeason.cta)} →
             </a>
-          );
-        })}
+          </div>
+        </div>
+        
+        <!-- Right: Instagram Feed (always visible) -->
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold">{t(instagramData.title)}</h3>
+          </div>
+          <InstagramFeed locale={locale} />
+        </div>
       </div>
       
-      <div class="text-center">
-        <a href="galleria" class="inline-flex items-center gap-2 text-[var(--color-accent-primary)] dark:text-[#7CB3F0] font-semibold hover:underline dark:hover:text-white">
-          {t(content.gallery.viewAll)}
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+      <!-- Gallery link (subtle) -->
+      <div class="mt-12 text-center">
+        <a 
+          href="galleria" 
+          class="inline-flex items-center gap-2 text-sm text-muted hover:text-[var(--color-accent-primary)] dark:hover:text-[#7CB3F0] transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
           </svg>
+          {t(clubLife.galleryLink)}
         </a>
       </div>
     </div>
   </section>
+  
+  <script>
+    // Hide fallback if events are shown
+    document.addEventListener('DOMContentLoaded', () => {
+      const eventsSection = document.getElementById('upcoming-events');
+      const fallback = document.getElementById('no-events-fallback');
+      
+      if (eventsSection && fallback) {
+        // Use MutationObserver to detect when events section becomes visible
+        const observer = new MutationObserver(() => {
+          if (!eventsSection.classList.contains('hidden')) {
+            fallback.classList.add('hidden');
+          }
+        });
+        
+        observer.observe(eventsSection, { attributes: true, attributeFilter: ['class'] });
+        
+        // Also check immediately after a short delay (for JS execution order)
+        setTimeout(() => {
+          if (!eventsSection.classList.contains('hidden')) {
+            fallback.classList.add('hidden');
+          }
+        }, 100);
+      }
+    });
+  </script>
   
   <!-- CORSI -->
   <section class="py-16 md:py-24 bg-secondary">

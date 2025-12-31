@@ -52,7 +52,11 @@
         "en": "Subsequent courses in the same season",
         "de": "Folgekurse in der gleichen Saison"
       },
-      "discount": "15%"
+      "discount": {
+        "it": "15%",
+        "en": "15%",
+        "de": "15%"
+      }
     },
     {
       "description": {
@@ -68,5 +72,6 @@
     }
   ]
 }
+
 
 

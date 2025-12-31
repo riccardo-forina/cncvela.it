@@ -69,23 +69,6 @@
       }
     }
   ],
-  "gallery": {
-    "title": {
-      "it": "La Vela a Caldè",
-      "en": "Sailing in Caldè",
-      "de": "Segeln in Caldè"
-    },
-    "subtitle": {
-      "it": "Corsi per giovani e adulti, regate, e una comunità di appassionati sul Lago Maggiore",
-      "en": "Courses for youth and adults, regattas, and a community of enthusiasts on Lake Maggiore",
-      "de": "Kurse für Jugendliche und Erwachsene, Regatten und eine Gemeinschaft von Enthusiasten am Lago Maggiore"
-    },
-    "viewAll": {
-      "it": "Vedi tutte le foto",
-      "en": "View all photos",
-      "de": "Alle Fotos ansehen"
-    }
-  },
   "courses": {
     "title": {
       "it": "Corsi per i Soci",
@@ -214,5 +197,3 @@
     }
   }
 }
-
-

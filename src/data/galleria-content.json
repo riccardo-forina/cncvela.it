@@ -1,19 +1,19 @@
 {
   "page": {
     "title": {
-      "it": "Galleria",
-      "en": "Gallery",
-      "de": "Galerie"
+      "it": "Archivio Storico",
+      "en": "Historical Archive",
+      "de": "Historisches Archiv"
     },
     "description": {
-      "it": "Le foto del Circolo Nautico Caldè - Scuola Vela, Regate e momenti di vita del nostro circolo",
-      "en": "Photos of Circolo Nautico Caldè - Sailing School, Regattas and moments from our club",
-      "de": "Fotos des Circolo Nautico Caldè - Segelschule, Regatten und Momente aus unserem Club"
+      "it": "L'archivio fotografico del Circolo Nautico Caldè - Ricordi di corsi, regate e momenti vissuti insieme dal 1965",
+      "en": "Photo archive of Circolo Nautico Caldè - Memories of courses, regattas and moments shared together since 1965",
+      "de": "Fotoarchiv des Circolo Nautico Caldè - Erinnerungen an Kurse, Regatten und gemeinsame Momente seit 1965"
     },
     "subtitle": {
-      "it": "Immagini delle nostre attività sul Lago Maggiore",
-      "en": "Images of our activities on Lake Maggiore",
-      "de": "Bilder unserer Aktivitäten am Lago Maggiore"
+      "it": "I ricordi del nostro circolo sul Lago Maggiore",
+      "en": "Memories from our club on Lake Maggiore",
+      "de": "Erinnerungen aus unserem Club am Lago Maggiore"
     }
   },
   "categories": {
@@ -73,5 +73,6 @@
     }
   }
 }
+
 
 

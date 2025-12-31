@@ -38,8 +38,12 @@ export default config({
     },
     navigation: {
       '📅 Eventi': ['events'],
-      '🏠 Homepage': ['homepageContent'],
+      '🏠 Homepage': ['clubLifeConfig', 'instagramFeed'],
+      '⛵ Corsi': ['courses', 'courseFees', 'fivFees'],
+      'ℹ️ Info Circolo': ['contact', 'boardMembers', 'safeguardingOfficer', 'clubDocuments'],
+      '💰 Tariffe': ['membershipFees', 'boatStorage', 'bankDetails'],
       '📄 Pagine': [
+        'homepageContent',
         'corsiContent', 
         'regateContent', 
         'bachecaContent', 
@@ -49,9 +53,6 @@ export default config({
         'privacyContent', 
         'safeguardingContent'
       ],
-      '⛵ Corsi': ['courses', 'courseFees', 'fivFees'],
-      'ℹ️ Info Circolo': ['contact', 'boardMembers', 'safeguardingOfficer', 'clubDocuments'],
-      '💰 Tariffe': ['membershipFees', 'boatStorage', 'bankDetails'],
     },
   },
 
@@ -166,11 +167,6 @@ export default config({
             itemLabel: (props) => props.fields.value.value || 'Statistica'
           }
         ),
-        gallery: fields.object({
-          title: localizedText('Titolo sezione'),
-          subtitle: localizedText('Sottotitolo'),
-          viewAll: localizedText('Testo link'),
-        }, { label: 'Sezione Galleria' }),
         courses: fields.object({
           title: localizedText('Titolo sezione'),
           subtitle: localizedText('Sottotitolo'),
@@ -206,10 +202,72 @@ export default config({
     }),
 
     // =========================================================================
+    // 🏠 HOMEPAGE - INSTAGRAM FEED
+    // =========================================================================
+
+    // =========================================================================
+    // 🎪 VITA AL CIRCOLO - CONFIG
+    // =========================================================================
+    clubLifeConfig: singleton({
+      label: 'Vita al Circolo',
+      path: 'src/data/club-life-config',
+      format: { data: 'json' },
+      schema: {
+        eventsStartDate: fields.date({ 
+          label: '📅 Mostra eventi da', 
+          description: 'Data a partire dalla quale mostrare gli eventi in homepage. Lascia vuoto per nascondere sempre.',
+        }),
+        title: localizedText('Titolo sezione'),
+        subtitle: localizedText('Sottotitolo'),
+        offSeason: fields.object({
+          title: localizedText('Titolo fuori stagione'),
+          description: localizedText('Descrizione'),
+          cta: localizedText('Testo link'),
+        }, { label: 'Messaggio fuori stagione' }),
+        galleryLink: localizedText('Testo link archivio storico'),
+      },
+    }),
+
+    // =========================================================================
+    // 🏠 HOMEPAGE - INSTAGRAM FEED
+    // =========================================================================
+    instagramFeed: singleton({
+      label: 'Instagram Feed',
+      path: 'src/data/instagram-feed',
+      format: { data: 'json' },
+      schema: {
+        beholdFeedUrl: fields.url({
+          label: '🔗 Behold Feed URL',
+          description: 'URL del feed Behold.so (es: https://feeds.behold.so/XXXXX)',
+        }),
+        mode: fields.select({
+          label: 'Modalità',
+          description: 'Scegli se mostrare i post più recenti o selezionarli manualmente',
+          options: [
+            { label: 'Ultimi post (automatico)', value: 'latest' },
+            { label: 'Post selezionati', value: 'selected' },
+          ],
+          defaultValue: 'latest',
+        }),
+        selectedPosts: fields.array(
+          fields.text({ 
+            label: 'ID Post',
+            description: 'L\'ID del post Instagram (la parte dopo /p/ nel link, es: C8lkQVdoGjO)',
+          }),
+          { 
+            label: 'Post selezionati',
+            description: 'Aggiungi gli ID dei post da mostrare (max 4). Usato solo se modalità = "Post selezionati"',
+            itemLabel: (props) => props.value || 'Post',
+          }
+        ),
+      },
+    }),
+
+    // =========================================================================
     // 📄 PAGINE - CORSI
     // =========================================================================
     corsiContent: singleton({
-      label: 'Pagina Corsi',
+      label: 'Corsi',
       path: 'src/data/corsi-content',
       format: { data: 'json' },
       schema: {
@@ -264,7 +322,7 @@ export default config({
     // 📄 PAGINE - REGATE
     // =========================================================================
     regateContent: singleton({
-      label: 'Pagina Regate',
+      label: 'Regate',
       path: 'src/data/regate-content',
       format: { data: 'json' },
       schema: {
@@ -322,7 +380,7 @@ export default config({
     // 📄 PAGINE - BACHECA
     // =========================================================================
     bachecaContent: singleton({
-      label: 'Pagina Bacheca',
+      label: 'Bacheca',
       path: 'src/data/bacheca-content',
       format: { data: 'json' },
       schema: {
@@ -352,7 +410,7 @@ export default config({
     // 📄 PAGINE - GALLERIA
     // =========================================================================
     galleriaContent: singleton({
-      label: 'Pagina Galleria',
+      label: 'Archivio Storico',
       path: 'src/data/galleria-content',
       format: { data: 'json' },
       schema: {
@@ -384,7 +442,7 @@ export default config({
     // 📄 PAGINE - IL CIRCOLO
     // =========================================================================
     circoloContent: singleton({
-      label: 'Pagina Il Circolo',
+      label: 'Il Circolo',
       path: 'src/data/circolo-content',
       format: { data: 'json' },
       schema: {
@@ -463,7 +521,7 @@ export default config({
     // 📄 PAGINE - METEO
     // =========================================================================
     meteoContent: singleton({
-      label: 'Pagina Meteo',
+      label: 'Meteo',
       path: 'src/data/meteo-content',
       format: { data: 'json' },
       schema: {
@@ -544,7 +602,7 @@ export default config({
     // 📄 PAGINE - PRIVACY
     // =========================================================================
     privacyContent: singleton({
-      label: 'Pagina Privacy',
+      label: 'Privacy',
       path: 'src/data/privacy-content',
       format: { data: 'json' },
       schema: {
@@ -581,7 +639,7 @@ export default config({
     // 📄 PAGINE - SAFEGUARDING
     // =========================================================================
     safeguardingContent: singleton({
-      label: 'Pagina Safeguarding',
+      label: 'Safeguarding',
       path: 'src/data/safeguarding-content',
       format: { data: 'json' },
       schema: {
@@ -682,7 +740,7 @@ export default config({
         discounts: fields.array(
           fields.object({
             description: localizedText('Descrizione'),
-            discount: fields.text({ label: 'Sconto' }),
+            discount: localizedText('Sconto'),
           }),
           { label: 'Sconti' }
         ),

@@ -1,0 +1,162 @@
+---
+/**
+ * Upcoming Events Component
+ * Shows next events starting from a configurable date (CMS controlled)
+ * Hidden by default, shown via client-side JS if startDate has passed
+ */
+import type { Locale } from '../i18n';
+import eventsJson from '../data/events.json';
+
+interface Props {
+  locale: Locale;
+  maxEvents?: number;
+  startDate?: string; // ISO date string (YYYY-MM-DD) - show events from this date
+  class?: string;
+}
+
+const { locale, maxEvents = 3, startDate, class: className } = Astro.props;
+
+const events = (eventsJson as { events: any[] }).events;
+
+// Helper to get localized text
+const t = (obj: { it: string; en?: string; de?: string } | string | undefined, fallback = ''): string => {
+  if (!obj) return fallback;
+  if (typeof obj === 'string') return obj;
+  return obj[locale] || obj.it || fallback;
+};
+
+// Type colors
+const typeConfig: Record<string, { bg: string; text: string; label: { it: string; en: string; de: string } }> = {
+  corso: { 
+    bg: 'bg-[var(--color-accent-primary)]', 
+    text: 'text-white',
+    label: { it: 'Corso', en: 'Course', de: 'Kurs' }
+  },
+  regata: { 
+    bg: 'bg-[var(--color-accent-secondary)]', 
+    text: 'text-[var(--color-accent-primary)]',
+    label: { it: 'Regata', en: 'Regatta', de: 'Regatta' }
+  },
+  evento_sociale: { 
+    bg: 'bg-[var(--color-accent-tertiary)]', 
+    text: 'text-white',
+    label: { it: 'Evento', en: 'Event', de: 'Event' }
+  },
+};
+
+// Labels
+const labels = {
+  title: { it: 'Prossimi Eventi', en: 'Upcoming Events', de: 'Kommende Veranstaltungen' },
+  viewAll: { it: 'Vedi tutti gli eventi', en: 'View all events', de: 'Alle Veranstaltungen' },
+  register: { it: 'Iscriviti', en: 'Register', de: 'Anmelden' },
+  noEvents: { it: 'La stagione riprende in primavera', en: 'Season starts in spring', de: 'Die Saison beginnt im Frühjahr' },
+};
+
+// Filter future events and sort by date
+const allFutureEvents = events
+  .filter(e => new Date(e.date) > new Date())
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+const totalEventsCount = allFutureEvents.length;
+const futureEvents = allFutureEvents.slice(0, maxEvents);
+
+// Format date
+const formatDate = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = { 
+    day: 'numeric', 
+    month: 'short',
+  };
+  const localeMap: Record<Locale, string> = { it: 'it-IT', en: 'en-GB', de: 'de-DE' };
+  return date.toLocaleDateString(localeMap[locale], options);
+};
+---
+
+<section 
+  id="upcoming-events" 
+  class:list={["upcoming-events hidden", className]}
+  data-start-date={startDate || ''}
+  data-has-events={futureEvents.length > 0}
+>
+  <div class="flex items-center justify-between mb-6">
+    <h3 class="text-xl font-bold">{t(labels.title)}</h3>
+    <a 
+      href="bacheca" 
+      class="inline-flex items-center gap-2 text-sm text-[var(--color-accent-primary)] dark:text-[#7CB3F0] font-semibold hover:underline"
+    >
+      {t(labels.viewAll)}
+      <span class="inline-flex items-center justify-center min-w-[1.5rem] h-6 px-2 text-xs font-bold text-[var(--color-accent-primary)] bg-[var(--color-accent-secondary)] rounded-full shadow-sm">
+        {totalEventsCount}
+      </span>
+    </a>
+  </div>
+  
+  {futureEvents.length > 0 ? (
+    <div class="space-y-3">
+      {futureEvents.map((event) => {
+        const config = typeConfig[event.type] || typeConfig.evento_sociale;
+        return (
+          <a 
+            href={event.registrationUrl || 'bacheca'}
+            class="group flex items-center gap-4 p-4 bg-white dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-primary)] dark:hover:border-[var(--color-accent-primary-dark)] hover:shadow-md transition-all"
+          >
+            <!-- Date badge -->
+            <div class="flex-shrink-0 w-14 h-14 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/20 rounded-xl flex flex-col items-center justify-center">
+              <span class="text-lg font-black text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+                {new Date(event.date).getDate()}
+              </span>
+              <span class="text-xs text-muted uppercase">
+                {formatDate(event.date).split(' ')[1]}
+              </span>
+            </div>
+            
+            <!-- Content -->
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class:list={["text-xs font-bold px-2 py-0.5 rounded-full", config.bg, config.text]}>
+                  {t(config.label)}
+                </span>
+              </div>
+              <h4 class="font-bold text-sm truncate group-hover:text-[var(--color-accent-primary)] transition-colors">
+                {t(event.title)}
+              </h4>
+              {event.subtitle && (
+                <p class="text-xs text-muted truncate">{t(event.subtitle)}</p>
+              )}
+            </div>
+            
+            <!-- Arrow -->
+            <svg class="w-5 h-5 text-muted group-hover:text-[var(--color-accent-primary)] group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        );
+      })}
+    </div>
+  ) : (
+    <p class="text-muted text-center py-8">{t(labels.noEvents)}</p>
+  )}
+</section>
+
+<script>
+  // Show events section only if startDate has passed and there are future events
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('upcoming-events');
+    if (!section) return;
+    
+    const startDate = section.dataset.startDate;
+    const hasEvents = section.dataset.hasEvents === 'true';
+    
+    // No startDate = never show, no events = nothing to show
+    if (!startDate || !hasEvents) return;
+    
+    const now = new Date();
+    const start = new Date(startDate);
+    
+    // Show only if today >= startDate
+    if (now >= start) {
+      section.classList.remove('hidden');
+    }
+  });
+</script>
+
