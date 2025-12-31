@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 import MapEmbed from '../components/MapEmbed.astro';
 import type { Locale } from '../i18n';
 
@@ -47,12 +48,10 @@ const t = (obj: { it: string; en?: string; de?: string } | undefined, fallback =
     />
   </section>
   
-  <!-- Title bar -->
-  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <h1 class="text-2xl md:text-3xl font-black text-white">{t(content.pageTitle)}</h1>
-    </div>
-  </section>
+  <PageHeader title={t(content.pageTitle)} subtitle={t(content.pageDescription)} />
+
+  <!-- Page Content -->
+  <div class="bg-slate-200 dark:bg-slate-950">
 
   <!-- Chi Siamo -->
   <section id="chi-siamo" class="py-12 md:py-16">
@@ -477,5 +476,6 @@ const t = (obj: { it: string; en?: string; de?: string } | undefined, fallback =
       </div>
     </div>
   </section>
+  </div>
 </BaseLayout>
 

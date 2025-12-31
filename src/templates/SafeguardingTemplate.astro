@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 import type { Locale } from '../i18n';
 import content from '../data/safeguarding-content.json';
 import safeguarding from '../data/safeguarding.json';
@@ -37,13 +38,10 @@ const contactResponsibleLabel = {
 ---
 
 <BaseLayout title={t(content.page.title)} description={t(content.page.description)} locale={locale}>
-  <!-- Title bar -->
-  <section class="bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] py-6 md:py-8">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <h1 class="text-2xl md:text-3xl font-black text-white">{t(content.page.title)}</h1>
-      <p class="text-sm md:text-base text-white/70 mt-2 max-w-2xl">{t(content.page.subtitle)}</p>
-    </div>
-  </section>
+  <PageHeader title={t(content.page.title)} subtitle={t(content.page.subtitle)} />
+
+  <!-- Page Content -->
+  <div class="bg-slate-200 dark:bg-slate-950">
 
   <!-- Content -->
   <section class="py-12 md:py-16">
@@ -127,6 +125,7 @@ const contactResponsibleLabel = {
       </a>
     </div>
   </section>
+  </div>
 </BaseLayout>
 
 
