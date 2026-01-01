@@ -10,9 +10,14 @@ import type { Locale } from '../i18n';
 
 interface Props {
   locale?: Locale;
+  todayWeather?: {
+    icon: string;
+    tempMax: number;
+    tempMin: number;
+  };
 }
 
-const { locale = 'it' } = Astro.props;
+const { locale = 'it', todayWeather } = Astro.props;
 
 // Strategic coordinates for Lake Maggiore
 const LOCATIONS = [
@@ -148,16 +153,18 @@ try {
 
 // Translations
 const t = {
-  title: { it: 'Meteo Tattico', en: 'Tactical Weather', de: 'Taktisches Wetter' },
+  title: { it: 'Meteo Live', en: 'Live Weather', de: 'Live Wetter' },
+  legend: { it: 'Legenda', en: 'Legend', de: 'Legende' },
   model: { it: 'Modello ICON-D2 (High Res)', en: 'ICON-D2 Model (High Res)', de: 'ICON-D2-Modell (High Res)' },
   scroll: { it: 'Scorri per dettagli', en: 'Scroll for details', de: 'Scrollen für Details' },
+  disclaimer: { it: 'Osservare sempre il lago prima di uscire', en: 'Always check the lake before going out', de: 'Überprüfen Sie immer den See, bevor Sie losfahren' },
 };
 
 const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
 ---
 
 <!-- Full viewport hero -->
-<div class="lake-wind-hero h-[calc(100svh-4rem)] md:h-[calc(100svh-5rem)] flex flex-col pb-16 md:pb-0">
+<div class="lake-wind-hero h-[calc(100svh-4rem-4rem)] md:h-[calc(100svh-5rem)] md:min-h-[850px] flex flex-col shadow-2xl">
   
   <!-- Map Section -->
   <section class="tactical-bg relative flex-1 min-h-0 overflow-hidden flex items-center justify-center">
@@ -230,7 +237,7 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
             </div>
             
             <!-- Badge -->
-            <div class="speed-badge relative flex flex-col items-start">
+            <div class="speed-badge relative flex flex-col items-center">
               <span class={`absolute -inset-1 rounded-lg opacity-25 animate-ping ${data.colors.pulse}`} style="animation-duration: 2.5s;"></span>
               <div 
                 class="badge-box relative px-3 py-1.5 rounded-lg backdrop-blur-md font-mono font-black text-xl leading-none bg-slate-900/85 border border-white/10"
@@ -239,14 +246,25 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
                 <span style={`color: ${data.colors.text};`}>{fetchError ? '--' : data.windSpeed}</span>
                 <span class="text-sm ml-1 font-bold opacity-60" style={`color: ${data.colors.text};`}>kn</span>
               </div>
-              <span class="text-xs font-bold tracking-wider mt-1.5 uppercase whitespace-nowrap flex items-center gap-1" style={`color: ${data.colors.text}; text-shadow: 0 2px 6px rgba(0,0,0,0.9);`}>
+              <span class="text-xs font-bold tracking-wider mt-1.5 uppercase whitespace-nowrap text-center" style={`color: ${data.colors.text}; text-shadow: 0 2px 6px rgba(0,0,0,0.9);`}>
                 {data.name}
-                {data.id === 'calde' && <img src="/images/logo-round.svg" alt="CNC" class="w-4 h-4 inline-block" />}
               </span>
+              {data.id === 'calde' && <img src="/images/logo-round.svg" alt="CNC" class="w-8 h-8 mt-1.5" />}
             </div>
           </div>
         ))}
       </div>
+      
+      <!-- Weather Widget (Top Left) -->
+      {todayWeather && (
+        <div class="absolute top-8 md:top-4 left-4 z-20 flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.4)]">
+          <span class="text-2xl">{todayWeather.icon}</span>
+          <div class="flex flex-col">
+            <span class="text-white font-mono font-bold text-sm leading-tight">{todayWeather.tempMax}°</span>
+            <span class="text-slate-400 font-mono text-xs leading-tight">{todayWeather.tempMin}°</span>
+          </div>
+        </div>
+      )}
       
       {fetchError && (
         <div class="absolute inset-0 flex items-center justify-center bg-slate-950/70 backdrop-blur-sm z-30 rounded-lg">
@@ -258,78 +276,106 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
     </div>
     
     <!-- Scroll hint -->
-    <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center text-slate-600 z-10">
-      <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center text-slate-400 z-10">
+      <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
-      <p class="text-[10px] mt-1">{tl('scroll')}</p>
+      <p class="text-sm mt-1">{tl('scroll')}</p>
     </div>
   </section>
   
   <!-- Control Console (Bottom Panel) -->
   <section class="console-panel bg-[var(--color-accent-primary)] dark:bg-slate-900/95 backdrop-blur-md border-t border-white/20 dark:border-slate-700/50 shrink-0">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6 py-4 flex flex-col gap-3">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6 py-4">
       
-      <!-- Row 1: Header Title -->
-      <div class="flex items-center gap-3">
-        <h2 class="text-2xl md:text-3xl font-black text-white">
-          {tl('title')}
-        </h2>
-        <span class="text-xs font-mono font-semibold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded">
-          LIVE
-        </span>
-      </div>
-      
-      <!-- Row 2: Legend with descriptions -->
-      <div class="grid grid-cols-5 gap-2 text-center">
-        <div class="flex flex-col items-center gap-1">
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.6)]"></span>
-            <span class="text-sm font-semibold text-sky-300">&lt;3 kn</span>
+      <!-- Vertical Stack Layout -->
+      <div class="flex flex-col gap-3">
+        
+        <!-- Title with Live indicator + Legend toggle (mobile) -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+          <h2 class="text-2xl md:text-3xl font-black text-white">
+            {tl('title')}
+          </h2>
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
           </div>
-          <span class="text-xs text-slate-400">Principianti, SUP</span>
+          <!-- Toggle button - mobile only -->
+          <button 
+            id="legend-toggle" 
+            class="md:hidden flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+            aria-expanded="false"
+            aria-controls="legend-content"
+          >
+            <span>{tl('legend')}</span>
+            <svg id="legend-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
         </div>
-        <div class="flex flex-col items-center gap-1">
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"></span>
-            <span class="text-sm font-semibold text-emerald-300">3-7 kn</span>
+        
+        <!-- Legend: Hidden on mobile by default, always visible on desktop -->
+        <div id="legend-content" class="hidden md:block">
+          <div class="grid grid-cols-2 gap-x-6 gap-y-2 md:flex md:flex-row md:gap-6">
+            <!-- Level 1 -->
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.5)]"></span>
+              <span class="text-sm text-white/90"><span class="font-semibold text-sky-300">&lt;3kn</span> <span class="text-white/60">Principianti</span></span>
+            </div>
+            <!-- Level 2 -->
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span>
+              <span class="text-sm text-white/90"><span class="font-semibold text-emerald-300">3-7kn</span> <span class="text-white/60">Tutti</span></span>
+            </div>
+            <!-- Level 3 -->
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]"></span>
+              <span class="text-sm text-white/90"><span class="font-semibold text-amber-300">7-11kn</span> <span class="text-white/60">Esperti</span></span>
+            </div>
+            <!-- Level 4 -->
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.5)]"></span>
+              <span class="text-sm text-white/90"><span class="font-semibold text-orange-300">11-16kn</span> <span class="text-white/60">Attenzione</span></span>
+            </div>
+            <!-- Level 5 -->
+            <div class="flex items-center gap-2 col-span-2 md:col-span-1">
+              <span class="w-3 h-3 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.5)]"></span>
+              <span class="text-sm text-white/90"><span class="font-semibold text-red-300">&gt;16kn</span> <span class="text-white/60">Sconsigliato</span></span>
+            </div>
           </div>
-          <span class="text-xs text-slate-400">Tutti i livelli</span>
         </div>
-        <div class="flex flex-col items-center gap-1">
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]"></span>
-            <span class="text-sm font-semibold text-amber-300">7-11 kn</span>
-          </div>
-          <span class="text-xs text-slate-400">Velisti esperti</span>
+        
+        <!-- Disclaimer - always below -->
+        <div class="flex items-center gap-2 text-white/50 pt-2 border-t border-white/10">
+          <svg class="w-4 h-4 text-amber-500/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <p class="text-sm">
+            {tl('model')} · {tl('disclaimer')}
+          </p>
         </div>
-        <div class="flex flex-col items-center gap-1">
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-full bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.6)]"></span>
-            <span class="text-sm font-semibold text-orange-300">11-16 kn</span>
-          </div>
-          <span class="text-xs text-slate-400">Solo esperti</span>
-        </div>
-        <div class="flex flex-col items-center gap-1">
-          <div class="flex items-center gap-1.5">
-            <span class="w-3 h-3 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.6)]"></span>
-            <span class="text-sm font-semibold text-red-300">&gt;16 kn</span>
-          </div>
-          <span class="text-xs text-slate-400">Sconsigliato uscire</span>
-        </div>
-      </div>
-      
-      <!-- Row 3: Disclaimer -->
-      <div class="flex items-center justify-center gap-2 text-slate-500 pt-2 border-t border-slate-800">
-        <svg class="w-4 h-4 text-amber-500/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-        </svg>
-        <p class="text-xs">
-          {tl('model')} — Osservare sempre il lago prima di uscire.
-        </p>
       </div>
     </div>
   </section>
+  
+  <script>
+    // Legend toggle for mobile
+    const toggleBtn = document.getElementById('legend-toggle');
+    const legendContent = document.getElementById('legend-content');
+    const chevron = document.getElementById('legend-chevron');
+    
+    if (toggleBtn && legendContent && chevron) {
+      toggleBtn.addEventListener('click', () => {
+        const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+        
+        toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+        legendContent.classList.toggle('hidden');
+        chevron.classList.toggle('rotate-180');
+      });
+    }
+  </script>
 </div>
 
 <style>
