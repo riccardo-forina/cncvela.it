@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark mode: use class strategy instead of media query */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ============================================
    CNC VELA DESIGN SYSTEM
    Mobile-First | Accessible | Bold Sporty
@@ -111,11 +114,9 @@ body {
 }
 
 /* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  body {
-    color: var(--color-text-primary-dark);
-    background-color: var(--color-bg-primary-dark);
-  }
+.dark body {
+  color: var(--color-text-primary-dark);
+  background-color: var(--color-bg-primary-dark);
 }
 
 /* ----------------------------------------
@@ -131,14 +132,12 @@ body {
   background-color: var(--color-accent-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .bg-secondary {
-    background-color: var(--color-bg-secondary-dark);
-  }
-  
-  .bg-accent {
-    background-color: var(--color-accent-primary-dark);
-  }
+.dark .bg-secondary {
+  background-color: var(--color-bg-secondary-dark);
+}
+
+.dark .bg-accent {
+  background-color: var(--color-accent-primary-dark);
 }
 
 /* Text utilities */
@@ -150,14 +149,12 @@ body {
   color: var(--color-accent-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .text-muted {
-    color: var(--color-text-secondary-dark);
-  }
-  
-  .text-accent {
-    color: var(--color-link-dark);
-  }
+.dark .text-muted {
+  color: var(--color-text-secondary-dark);
+}
+
+.dark .text-accent {
+  color: var(--color-link-dark);
 }
 
 /* Border utilities */
@@ -165,10 +162,8 @@ body {
   border-color: #e5e7eb; /* gray-200 */
 }
 
-@media (prefers-color-scheme: dark) {
-  .border-muted {
-    border-color: #374151; /* gray-700 */
-  }
+.dark .border-muted {
+  border-color: #374151; /* gray-700 */
 }
 
 /* Layout utilities */
@@ -231,18 +226,16 @@ a.link:hover,
   text-decoration-color: currentColor;
 }
 
-@media (prefers-color-scheme: dark) {
-  a.link,
-  .links-container a {
-    color: var(--color-text-secondary-dark);
-  }
-  
-  a.link:hover,
-  .links-container a:hover,
-  footer .links-container a:hover,
-  address.links-container a:hover {
-    color: var(--color-link-dark) !important;
-  }
+.dark a.link,
+.dark .links-container a {
+  color: var(--color-text-secondary-dark);
+}
+
+.dark a.link:hover,
+.dark .links-container a:hover,
+.dark footer .links-container a:hover,
+.dark address.links-container a:hover {
+  color: var(--color-link-dark) !important;
 }
 
 /* Inline links within text (more prominent) */
@@ -258,15 +251,13 @@ a.inline-link:hover {
   opacity: 0.8;
 }
 
-@media (prefers-color-scheme: dark) {
-  a.inline-link {
-    color: var(--color-link-dark);
-  }
-  
-  a.inline-link:hover {
-    color: var(--color-link-dark);
-    opacity: 0.8;
-  }
+.dark a.inline-link {
+  color: var(--color-link-dark);
+}
+
+.dark a.inline-link:hover {
+  color: var(--color-link-dark);
+  opacity: 0.8;
 }
 
 /* ----------------------------------------
@@ -277,10 +268,8 @@ a.inline-link:hover {
   outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :focus-visible {
-    outline-color: var(--color-accent-primary-dark);
-  }
+.dark :focus-visible {
+  outline-color: var(--color-accent-primary-dark);
 }
 
 /* ----------------------------------------
@@ -435,36 +424,34 @@ a.inline-link:hover {
 }
 
 /* Dark mode */
-@media (prefers-color-scheme: dark) {
-  .markdown-content h2,
-  .markdown-content h3,
-  .markdown-content strong {
-    color: var(--color-text-primary-dark);
-  }
-  
-  .markdown-content p,
-  .markdown-content ul,
-  .markdown-content ol,
-  .markdown-content li,
-  .markdown-content td,
-  .markdown-content em {
-    color: var(--color-text-secondary-dark);
-  }
-  
-  .markdown-content th {
-    color: var(--color-text-primary-dark);
-    border-color: #4a5568;
-  }
-  
-  .markdown-content td {
-    border-color: #4a5568;
-  }
-  
-  .markdown-content a {
-    color: var(--color-link-dark);
-  }
-  
-  .markdown-content hr {
-    border-color: #4a5568;
-  }
+.dark .markdown-content h2,
+.dark .markdown-content h3,
+.dark .markdown-content strong {
+  color: var(--color-text-primary-dark);
+}
+
+.dark .markdown-content p,
+.dark .markdown-content ul,
+.dark .markdown-content ol,
+.dark .markdown-content li,
+.dark .markdown-content td,
+.dark .markdown-content em {
+  color: var(--color-text-secondary-dark);
+}
+
+.dark .markdown-content th {
+  color: var(--color-text-primary-dark);
+  border-color: #4a5568;
+}
+
+.dark .markdown-content td {
+  border-color: #4a5568;
+}
+
+.dark .markdown-content a {
+  color: var(--color-link-dark);
+}
+
+.dark .markdown-content hr {
+  border-color: #4a5568;
 }

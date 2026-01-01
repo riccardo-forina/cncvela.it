@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeSwitcher from './ThemeSwitcher.astro';
 import logoImage from '../assets/images/logo.png';
 import { t, getLocaleFromUrl } from '../i18n';
 
@@ -70,8 +71,9 @@ function isActive(href: string, currentPath: string): boolean {
           ))}
         </ul>
         
-        <!-- Language Switcher (Desktop) -->
-        <div class="pl-4 border-l border-muted">
+        <!-- Theme & Language Switcher (Desktop) -->
+        <div class="pl-4 border-l border-muted flex items-center gap-2">
+          <ThemeSwitcher />
           <LanguageSwitcher />
         </div>
       </nav>
@@ -94,8 +96,11 @@ function isActive(href: string, currentPath: string): boolean {
       <span class="font-bold text-sm">Circolo Nautico Caldè</span>
     </a>
     
-    <!-- Language Switcher (Mobile) -->
-    <LanguageSwitcher />
+    <!-- Theme & Language Switcher (Mobile) -->
+    <div class="flex items-center gap-1">
+      <ThemeSwitcher />
+      <LanguageSwitcher />
+    </div>
   </div>
 </header>
 

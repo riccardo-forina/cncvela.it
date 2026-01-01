@@ -142,6 +142,19 @@ const jsonLd = {
     <!-- JSON-LD Structured Data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     
+    <!-- Theme initialization (prevents flash) -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme') || 'system';
+        const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+    
     <title>{fullTitle}</title>
   </head>
   <body class="min-h-screen flex flex-col bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:bg-[var(--color-bg-primary-dark)] dark:text-[var(--color-text-primary-dark)]">

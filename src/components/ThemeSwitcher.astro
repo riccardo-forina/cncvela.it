@@ -1,0 +1,230 @@
+---
+/**
+ * ThemeSwitcher Component
+ * Allows users to switch between Light, Dark, and System theme
+ * Uses vanilla JavaScript (same pattern as LanguageSwitcher)
+ */
+---
+
+<div class="theme-switcher relative">
+  <button 
+    class="theme-toggle flex items-center justify-center w-10 h-10 rounded-lg 
+           text-gray-700 dark:text-gray-200
+           hover:bg-gray-100 dark:hover:bg-gray-700
+           transition-colors"
+    aria-label="Cambia tema"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <!-- Sun icon (light mode) -->
+    <svg class="w-5 h-5 theme-icon theme-icon-light hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+    </svg>
+    <!-- Moon icon (dark mode) -->
+    <svg class="w-5 h-5 theme-icon theme-icon-dark hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </svg>
+    <!-- System icon (contrast/auto - half circle) -->
+    <svg class="w-5 h-5 theme-icon theme-icon-system hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="6" />
+      <path d="M12 6a6 6 0 010 12" fill="currentColor" />
+    </svg>
+  </button>
+  
+  <!-- Dropdown menu -->
+  <div 
+    class="theme-dropdown absolute right-0 top-full mt-1 py-1 
+           bg-white dark:bg-gray-800 
+           rounded-lg shadow-lg border border-gray-200 dark:border-gray-700
+           opacity-0 invisible transform -translate-y-2
+           transition-all duration-200 ease-out z-50 min-w-[130px]"
+    role="menu"
+  >
+    <button 
+      class="theme-option flex items-center gap-3 w-full px-4 py-2 text-sm text-left 
+             text-gray-700 dark:text-gray-200
+             hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      data-theme="light"
+      role="menuitem"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+      </svg>
+      <span>Light</span>
+      <svg class="w-4 h-4 ml-auto text-cyan-500 check-icon hidden" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+    <button 
+      class="theme-option flex items-center gap-3 w-full px-4 py-2 text-sm text-left 
+             text-gray-700 dark:text-gray-200
+             hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      data-theme="dark"
+      role="menuitem"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+      </svg>
+      <span>Dark</span>
+      <svg class="w-4 h-4 ml-auto text-cyan-500 check-icon hidden" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+    <button 
+      class="theme-option flex items-center gap-3 w-full px-4 py-2 text-sm text-left 
+             text-gray-700 dark:text-gray-200
+             hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      data-theme="system"
+      role="menuitem"
+    >
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="6" />
+        <path d="M12 6a6 6 0 010 12" fill="currentColor" />
+      </svg>
+      <span>Sistema</span>
+      <svg class="w-4 h-4 ml-auto text-cyan-500 check-icon hidden" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  type ThemePreference = 'light' | 'dark' | 'system';
+
+  function getThemePreference(): ThemePreference {
+    if (typeof localStorage !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark' || stored === 'system') {
+        return stored;
+      }
+    }
+    return 'system';
+  }
+
+  function getSystemTheme(): 'light' | 'dark' {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme: ThemePreference) {
+    const effectiveTheme = theme === 'system' ? getSystemTheme() : theme;
+    
+    if (effectiveTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
+    // Update all theme switchers on the page
+    document.querySelectorAll('.theme-switcher').forEach(switcher => {
+      // Update button icon visibility
+      const lightIcon = switcher.querySelector('.theme-icon-light');
+      const darkIcon = switcher.querySelector('.theme-icon-dark');
+      const systemIcon = switcher.querySelector('.theme-icon-system');
+      
+      lightIcon?.classList.toggle('hidden', theme !== 'light');
+      darkIcon?.classList.toggle('hidden', theme !== 'dark');
+      systemIcon?.classList.toggle('hidden', theme !== 'system');
+      
+      // Update checkmarks in dropdown
+      switcher.querySelectorAll('.theme-option').forEach(btn => {
+        const btnTheme = (btn as HTMLElement).dataset.theme;
+        const checkIcon = btn.querySelector('.check-icon');
+        checkIcon?.classList.toggle('hidden', btnTheme !== theme);
+      });
+    });
+  }
+
+  function setTheme(theme: ThemePreference) {
+    localStorage.setItem('theme', theme);
+    applyTheme(theme);
+  }
+
+  function initThemeSwitchers() {
+    document.querySelectorAll('.theme-switcher').forEach((switcher) => {
+      // Skip if already initialized
+      if (switcher.hasAttribute('data-initialized')) return;
+      switcher.setAttribute('data-initialized', 'true');
+      
+      const toggle = switcher.querySelector('.theme-toggle') as HTMLButtonElement;
+      const dropdown = switcher.querySelector('.theme-dropdown') as HTMLElement;
+      const options = switcher.querySelectorAll('.theme-option');
+      
+      if (!toggle || !dropdown) return;
+      
+      let isOpen = false;
+      
+      function openDropdown() {
+        isOpen = true;
+        dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
+        dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+      
+      function closeDropdown() {
+        isOpen = false;
+        dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+        dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if (isOpen) {
+          closeDropdown();
+        } else {
+          openDropdown();
+        }
+      });
+      
+      // Handle theme option clicks
+      options.forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const theme = (option as HTMLElement).dataset.theme as ThemePreference;
+          if (theme) {
+            setTheme(theme);
+            closeDropdown();
+          }
+        });
+      });
+      
+      // Close on click outside
+      document.addEventListener('click', (e) => {
+        if (isOpen && !switcher.contains(e.target as Node)) {
+          closeDropdown();
+        }
+      });
+      
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) {
+          closeDropdown();
+          toggle.focus();
+        }
+      });
+    });
+    
+    // Apply current theme
+    const theme = getThemePreference();
+    applyTheme(theme);
+  }
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    const theme = getThemePreference();
+    if (theme === 'system') {
+      applyTheme('system');
+    }
+  });
+
+  // Run on DOM ready and on Astro page transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeSwitchers);
+  } else {
+    initThemeSwitchers();
+  }
+  document.addEventListener('astro:page-load', initThemeSwitchers);
+  document.addEventListener('astro:after-swap', initThemeSwitchers);
+</script>
