@@ -226,43 +226,46 @@ import * as CookieConsent from 'vanilla-cookieconsent';
     });
   }
 
-  // Google Analytics - carica solo su produzione (non su GitHub Pages staging)
+  // Google Analytics - carica solo su produzione
   function loadGoogleAnalytics() {
     const GA_ID = 'G-L1SJ5B2TWG';
     const isProduction = window.location.hostname === 'www.cncvela.it' || 
                          window.location.hostname === 'cncvela.it';
     
-    // Non caricare GA su staging/localhost
     if (!isProduction) {
-      console.log('[Analytics] Skipped - not production environment');
       return;
     }
     
-    // Evita doppio caricamento
-    if ((window as any).gtag) {
+    // Inizializza dataLayer e gtag
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    function gtag(..._args: any[]) {
+      (window as any).dataLayer.push(arguments);
+    }
+    (window as any).gtag = gtag;
+    
+    // Evita doppio caricamento dello script
+    if (document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_ID}"]`)) {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
       return;
     }
+    
+    // Consent Mode v2
+    gtag('consent', 'default', {
+      'analytics_storage': 'granted',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
+    });
+    
+    // Inizializza GA
+    gtag('js', new Date());
+    gtag('config', GA_ID);
     
     // Carica gtag.js
     const script = document.createElement('script');
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
     script.async = true;
     document.head.appendChild(script);
-    
-    // Inizializza dataLayer e gtag
-    (window as any).dataLayer = (window as any).dataLayer || [];
-    function gtag(...args: any[]) {
-      (window as any).dataLayer.push(args);
-    }
-    (window as any).gtag = gtag;
-    
-    gtag('js', new Date());
-    gtag('config', GA_ID, {
-      'anonymize_ip': true,  // GDPR: anonimizza IP
-      'cookie_flags': 'SameSite=None;Secure'
-    });
-    
-    console.log('[Analytics] Google Analytics loaded');
   }
 
   // Esporta per uso globale
