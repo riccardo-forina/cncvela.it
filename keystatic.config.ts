@@ -18,22 +18,22 @@ const localizedText = (label: string, options?: { multiline?: boolean; required?
 // CONFIGURAZIONE KEYSTATIC
 // =============================================================================
 // DEV = local mode (modifica file direttamente)
-// PROD = GitHub mode (crea branch cms/*, poi PR)
+// PROD = Keystatic Cloud (gestito da keystatic.cloud)
 
-// Use local storage in dev, GitHub in production
+// Use local storage in dev, Keystatic Cloud in production
 const isLocal = import.meta.env.DEV || !import.meta.env.PROD;
 
 export default config({
-  storage: isLocal
-    ? { kind: 'local' }
-    : {
-        kind: 'github',
-        repo: {
-          owner: 'riccardo-forina',
-          name: 'cncvela.it',
-        },
-        branchPrefix: 'cms/',
+  storage: isLocal 
+    ? { kind: 'local' } 
+    : { 
+        kind: 'cloud',
+        branchPrefix: 'cms/',  // Forza branch mode: crea branch cms/* e poi PR
       },
+  
+  cloud: {
+    project: 'cnc-vela/cncvela-it',
+  },
   
   ui: {
     brand: {
