@@ -30,6 +30,8 @@ interface DebugResults {
   keystatic: Record<string, unknown>;
   oauthTest?: OAuthTestResult;
   issues?: string[];
+  helpfulLinks?: Record<string, string>;
+  cookieAnalysis?: Record<string, unknown>;
 }
 
 export const GET: APIRoute = async ({ request, url }) => {
@@ -58,6 +60,15 @@ export const GET: APIRoute = async ({ request, url }) => {
   };
 
   // 2. Request info
+  const cookieHeader = request.headers.get('cookie') || '';
+  const cookies = cookieHeader.split(';').map(c => c.trim()).filter(Boolean);
+  const keystatiCookies = cookies.filter(c => 
+    c.startsWith('keystatic') || 
+    c.startsWith('ks-') || 
+    c.includes('state') ||
+    c.includes('session')
+  );
+  
   results.request = {
     url: request.url,
     host: request.headers.get('host'),
@@ -65,7 +76,11 @@ export const GET: APIRoute = async ({ request, url }) => {
     referer: request.headers.get('referer'),
     'x-forwarded-host': request.headers.get('x-forwarded-host'),
     'x-forwarded-proto': request.headers.get('x-forwarded-proto'),
-    cookies: request.headers.get('cookie') ? 'present' : 'none',
+    cookieCount: cookies.length,
+    keystaticCookies: keystatiCookies.length > 0 
+      ? keystatiCookies.map(c => c.split('=')[0]) // Solo i nomi, non i valori
+      : 'none found',
+    allCookieNames: cookies.map(c => c.split('=')[0]),
   };
 
   // 3. Keystatic expected URLs
@@ -201,6 +216,26 @@ export const GET: APIRoute = async ({ request, url }) => {
   }
 
   results.issues = issues.length > 0 ? issues : ['No obvious issues detected'];
+
+  // 7. Helpful links
+  results.helpfulLinks = {
+    vercelLogs: 'Check Vercel Dashboard → Functions → Logs for detailed errors',
+    githubAppSettings: 'https://github.com/settings/apps/cnc-keystatic',
+    githubOAuthSettings: 'https://github.com/settings/developers',
+    keystatiDocs: 'https://keystatic.com/docs/github-mode',
+  };
+
+  // 8. Check for potential cookie/domain issues
+  const potentialIssues: string[] = [];
+  if (keystatiCookies.length === 0) {
+    potentialIssues.push('⚠️ No Keystatic cookies found - state may not persist between OAuth redirects');
+  }
+  
+  results.cookieAnalysis = {
+    totalCookies: cookies.length,
+    keystatiCookiesFound: keystatiCookies.length,
+    potentialIssues: potentialIssues.length > 0 ? potentialIssues : ['Cookies look OK'],
+  };
 
   return new Response(JSON.stringify(results, null, 2), {
     headers: { 'Content-Type': 'application/json' },
