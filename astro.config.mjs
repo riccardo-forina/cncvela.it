@@ -18,15 +18,11 @@ export default defineConfig({
       : 'http://localhost:4321',
   base: '/',
   
-  // Keystatic needs server mode for the admin UI
-  // Pages marked with prerender: false will be rendered at runtime
-  output: 'server',
-  
   adapter: vercel(),
   
   integrations: [
     react(),
-    keystatic(),
+    keystatic()
   ],
   
   // i18n configuration
