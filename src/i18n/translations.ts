@@ -251,6 +251,19 @@ export const translations = {
     acceptNecessary: { it: 'Solo necessari', en: 'Only necessary', de: 'Nur notwendige' },
     managePreferences: { it: 'Gestisci preferenze', en: 'Manage preferences', de: 'Einstellungen verwalten' },
   },
+
+  // ===== 404 PAGE =====
+  notFound: {
+    pageTitle: { it: '404 - Pagina non trovata', en: '404 - Page not found', de: '404 - Seite nicht gefunden' },
+    code: { it: '404', en: '404', de: '404' },
+    title: { it: 'Fuori Rotta', en: 'Off Course', de: 'Vom Kurs Abgekommen' },
+    description: {
+      it: 'Sembra che tu abbia virato troppo presto.<br/>Questa pagina è finita sugli scogli o non è mai esistita.',
+      en: 'Looks like you tacked too early.<br/>This page has run aground or never existed.',
+      de: 'Es scheint, dass du zu früh gewendet hast.<br/>Diese Seite ist auf Grund gelaufen oder hat nie existiert.',
+    },
+    backHome: { it: 'Torna in Porto', en: 'Back to Harbor', de: 'Zurück zum Hafen' },
+  },
 } as const;
 
 // Helper function to get translation

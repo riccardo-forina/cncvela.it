@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<BaseLayout title={t('notFound.pageTitle', locale)}>
+  <section class="min-h-[70vh] flex flex-col items-center justify-center relative overflow-hidden text-center px-4 py-16">
+    
+    <!-- Content wrapper -->
+    <div class="relative z-10 flex flex-col items-center">
+      
+      <!-- Radar animation -->
+      <div class="radar-wrapper">
+        <div class="radar-board">
+          <div class="radar-round radar-round-sm"></div>
+          <div class="radar-round radar-round-md"></div>
+          <div class="radar-line radar-line-x"></div>
+          <div class="radar-line radar-line-y"></div>
+        </div>
+        <div class="radar-sweep"></div>
+        
+        <!-- Sailboat icon in center -->
+        <div class="absolute inset-0 flex items-center justify-center z-20">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 md:w-20 md:h-20 text-[var(--color-accent-primary)] dark:text-[var(--color-accent-secondary-dark)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/>
+            <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/>
+            <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/>
+            <path d="M12 10V2"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Error code -->
+      <h1 class="text-6xl md:text-8xl font-black text-[var(--color-accent-primary)] dark:text-[var(--color-accent-secondary-dark)] mb-2 mt-8">
+        {t('notFound.code', locale)}
+      </h1>
+      
+      <!-- Title -->
+      <h2 class="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] dark:text-[var(--color-text-primary-dark)] mb-4 uppercase tracking-widest">
+        {t('notFound.title', locale)}
+      </h2>
+
+      <!-- Description -->
+      <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-md mx-auto mb-10 leading-relaxed" set:html={t('notFound.description', locale)} />
+
+      <!-- CTA Button - standard site style -->
+      <a href={locale === 'it' ? '/' : `/${locale}/`} 
+         class="group inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:-translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 19-7-7 7-7"/>
+          <path d="M19 12H5"/>
+        </svg>
+        {t('notFound.backHome', locale)}
+      </a>
+
+    </div>
+
+  </section>
+</BaseLayout>
+
+<style>
+  .radar-wrapper {
+    position: relative;
+    width: min(70vw, 70vh, 400px);
+    height: min(70vw, 70vh, 400px);
+  }
+  
+  @media (min-width: 768px) {
+    .radar-wrapper {
+      width: min(50vw, 50vh, 500px);
+      height: min(50vw, 50vh, 500px);
+    }
+  }
+  
+  .radar-board {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .radar-round {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--color-accent-primary);
+    opacity: 0.3;
+  }
+  
+  :global(.dark) .radar-round {
+    border-color: #38bdf8;
+    opacity: 0.3;
+  }
+  
+  .radar-round-sm {
+    width: 33%;
+    height: 33%;
+  }
+  
+  .radar-round-md {
+    width: 66%;
+    height: 66%;
+  }
+  
+  .radar-line {
+    position: absolute;
+    background: var(--color-accent-primary);
+    opacity: 0.2;
+  }
+  
+  :global(.dark) .radar-line {
+    background: #38bdf8;
+    opacity: 0.2;
+  }
+  
+  .radar-line-x {
+    width: 100%;
+    height: 1px;
+  }
+  
+  .radar-line-y {
+    width: 1px;
+    height: 100%;
+  }
+  
+  .radar-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .radar-sweep::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    background: linear-gradient(
+      90deg,
+      rgba(30, 58, 95, 0) 0%,
+      rgba(30, 58, 95, 0.5) 100%
+    );
+    transform-origin: bottom left;
+    animation: radar-spin 3s linear infinite;
+  }
+  
+  :global(.dark) .radar-sweep::before {
+    background: linear-gradient(
+      90deg,
+      rgba(56, 189, 248, 0) 0%,
+      rgba(56, 189, 248, 0.6) 100%
+    );
+  }
+  
+  .radar-sweep::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(30, 58, 95, 0.12) 30deg,
+      transparent 90deg,
+      transparent 360deg
+    );
+    animation: radar-spin 3s linear infinite;
+  }
+  
+  :global(.dark) .radar-sweep::after {
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(56, 189, 248, 0.15) 30deg,
+      transparent 90deg,
+      transparent 360deg
+    );
+  }
+  
+  @keyframes radar-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Glow effect */
+  .radar-board::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(30, 58, 95, 0.08) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  
+  :global(.dark) .radar-board::after {
+    background: radial-gradient(
+      circle,
+      rgba(56, 189, 248, 0.1) 0%,
+      transparent 70%
+    );
+  }
+</style>
+
