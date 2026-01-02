@@ -1,0 +1,65 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/informazioni.html",
+      "destination": "/circolo",
+      "permanent": true
+    },
+    {
+      "source": "/contatti.html",
+      "destination": "/circolo",
+      "permanent": true
+    },
+    {
+      "source": "/safeguarding.html",
+      "destination": "/safeguarding",
+      "permanent": true
+    },
+    {
+      "source": "/regate.html",
+      "destination": "/regate",
+      "permanent": true
+    },
+    {
+      "source": "/documenti.html",
+      "destination": "/circolo#documenti",
+      "permanent": true
+    },
+    {
+      "source": "/iscrizione.html",
+      "destination": "/corsi",
+      "permanent": true
+    },
+    {
+      "source": "/meteo.html",
+      "destination": "/meteo",
+      "permanent": true
+    },
+    {
+      "source": "/squadra-sportiva.html",
+      "destination": "/corsi",
+      "permanent": true
+    },
+    {
+      "source": "/scuola-di-vela.html",
+      "destination": "/corsi",
+      "permanent": true
+    },
+    {
+      "source": "/video-e-foto.html",
+      "destination": "/galleria",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/download/:path*",
+      "destination": "/circolo#documenti",
+      "permanent": true
+    }
+  ]
+}
