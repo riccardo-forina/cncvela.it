@@ -9,7 +9,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BottomNav from '../components/BottomNav.astro';
 import CookieConsent from '../components/CookieConsent.astro';
-import { getLocaleFromUrl, defaultLocale, type Locale } from '../i18n';
+import { getLocaleFromUrl, defaultLocale, locales, t, type Locale } from '../i18n';
 
 interface BreadcrumbItem {
   name: string;
@@ -52,39 +52,60 @@ const isGitHubPages = siteUrl.includes('github.io');
 const pagePath = currentPath.replace(baseUrl, '').replace(/^\/+/, '');
 const canonicalUrl = pagePath ? `${productionUrl}/${pagePath}` : productionUrl;
 
+// Build alternate language URLs for hreflang tags
+// Remove locale prefix from path to get the base page path
+const pagePathWithoutLocale = pagePath.replace(/^(en|de)\//, '').replace(/^(en|de)$/, '');
+const getAlternateUrl = (loc: Locale) => {
+  if (loc === defaultLocale) {
+    // Italian (default) - no prefix
+    return pagePathWithoutLocale ? `${productionUrl}/${pagePathWithoutLocale}` : productionUrl;
+  }
+  // Other languages - add prefix
+  return pagePathWithoutLocale ? `${productionUrl}/${loc}/${pagePathWithoutLocale}` : `${productionUrl}/${loc}/`;
+};
+const alternateUrls = locales.map(loc => ({ locale: loc, url: getAlternateUrl(loc) }));
+
 // Robots directive - noindex on staging, index on production
 const robotsContent = isGitHubPages ? 'noindex, nofollow' : 'index, follow';
 
 const fullTitle = `${title} | CNC Caldè`;
 const ogImage = `${fullSiteUrl}/${image}`;
 
-// JSON-LD Structured Data for the organization
+// JSON-LD Structured Data for the organization (Site-Wide SEO, i18n aware)
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SportsClub",
-  "name": "Circolo Nautico Caldè A.S.D.",
-  "alternateName": "CNC Caldè",
-  "description": "Scuola vela FIV e regate sul Lago Maggiore dal 1970. Corsi di vela per giovani e adulti.",
-  "url": fullSiteUrl || "https://www.cncvela.it",
-  "logo": `${fullSiteUrl}/images/logo-square.png`,
-  "image": `${fullSiteUrl}/images/logo.png`,
+  "@type": "SportsOrganization",
+  "name": t('organization.name', locale),
+  "alternateName": ["CNC Vela", "CNC Caldè"],
+  "url": "https://cncvela.it",
+  "logo": "https://cncvela.it/images/logo-square.png",
+  "description": t('organization.description', locale),
   "telephone": "+39 333 9769317",
   "email": "segreteria@cncvela.it",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Via Maggiore 36",
-    "addressLocality": "Castelveccana",
-    "postalCode": "21010",
-    "addressRegion": "VA",
-    "addressCountry": "IT"
+    "streetAddress": t('organization.streetAddress', locale),
+    "addressLocality": t('organization.addressLocality', locale),
+    "addressRegion": t('organization.addressRegion', locale),
+    "postalCode": t('organization.postalCode', locale),
+    "addressCountry": t('organization.addressCountry', locale)
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 45.9448,
-    "longitude": 8.6612
+    "latitude": 45.9606,
+    "longitude": 8.6469
   },
+  "areaServed": [
+    { "@type": "City", "name": t('organization.areaServed.castelveccana', locale) },
+    { "@type": "City", "name": t('organization.areaServed.luino', locale) },
+    { "@type": "City", "name": t('organization.areaServed.laveno', locale) },
+    { "@type": "City", "name": t('organization.areaServed.portoValtravaglia', locale) },
+    { "@type": "Place", "name": t('organization.areaServed.altoLago', locale) },
+    { "@type": "Place", "name": t('organization.areaServed.varese', locale) }
+  ],
   "sameAs": [
-    "https://www.facebook.com/profile.php?id=100039811966520"
+    "https://www.facebook.com/profile.php?id=100039811966520",
+    "https://www.instagram.com/circolo_nautico_calde"
   ],
   "sport": "Sailing",
   "foundingDate": "1970",
@@ -105,6 +126,12 @@ const jsonLd = {
     
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Alternate Language URLs (hreflang) -->
+    {alternateUrls.map(({ locale: loc, url }) => (
+      <link rel="alternate" hreflang={loc} href={url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={getAlternateUrl(defaultLocale)} />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

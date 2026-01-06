@@ -8,8 +8,20 @@
 
 import type { Locale } from '../i18n';
 
+interface MapTranslations {
+  title: string;
+  seoTitle: string;
+  ariaLabel: string;
+  mapAlt: string;
+  legend: string;
+  model: string;
+  scroll: string;
+  disclaimer: string;
+}
+
 interface Props {
   locale?: Locale;
+  translations: MapTranslations;
   todayWeather?: {
     icon: string;
     tempMax: number;
@@ -17,7 +29,7 @@ interface Props {
   };
 }
 
-const { locale = 'it', todayWeather } = Astro.props;
+const { locale = 'it', translations: t, todayWeather } = Astro.props;
 
 // Strategic coordinates for Lake Maggiore
 const LOCATIONS = [
@@ -151,23 +163,18 @@ try {
   }));
 }
 
-// Translations
-const t = {
-  title: { it: 'Meteo Live', en: 'Live Weather', de: 'Live Wetter' },
-  legend: { it: 'Legenda', en: 'Legend', de: 'Legende' },
-  model: { it: 'Modello ICON-D2 (High Res)', en: 'ICON-D2 Model (High Res)', de: 'ICON-D2-Modell (High Res)' },
-  scroll: { it: 'Scorri per dettagli', en: 'Scroll for details', de: 'Scrollen für Details' },
-  disclaimer: { it: 'Osservare sempre il lago prima di uscire', en: 'Always check the lake before going out', de: 'Überprüfen Sie immer den See, bevor Sie losfahren' },
-};
-
-const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
+// Translations are now passed as props from MeteoTemplate
 ---
 
 <!-- Full viewport hero -->
 <div class="lake-wind-hero h-[calc(100svh-4rem-4rem)] md:h-[calc(100svh-5rem)] md:min-h-[850px] flex flex-col relative z-10 shadow-[0_10px_40px_-5px_rgba(0,0,0,0.5)]">
   
   <!-- Map Section -->
-  <section class="tactical-bg relative flex-1 min-h-0 overflow-hidden flex items-center justify-center">
+  <section 
+    class="tactical-bg relative flex-1 min-h-0 overflow-hidden flex items-center justify-center"
+    role="region"
+    aria-label={t.ariaLabel}
+  >
     
     <!-- Tactical Grid Overlay -->
     <div class="tactical-grid absolute inset-0 opacity-[0.03] pointer-events-none"></div>
@@ -182,6 +189,8 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
         class="lake-svg absolute inset-0 w-full h-full"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label={t.mapAlt}
       >
         <defs>
           <filter id="lakeGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -280,7 +289,7 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
       <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
       </svg>
-      <p class="text-sm mt-1">{tl('scroll')}</p>
+      <p class="text-sm mt-1">{t.scroll}</p>
     </div>
   </section>
   
@@ -294,9 +303,10 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
         <!-- Title with Live indicator + Legend toggle (mobile) -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-          <h2 class="text-2xl md:text-3xl font-black text-white">
-            {tl('title')}
-          </h2>
+          <h1 class="text-2xl md:text-3xl font-black text-white">
+            {t.title}
+            <span class="sr-only">{t.seoTitle}</span>
+          </h1>
             <span class="relative flex h-3 w-3">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
@@ -309,7 +319,7 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
             aria-expanded="false"
             aria-controls="legend-content"
           >
-            <span>{tl('legend')}</span>
+            <span>{t.legend}</span>
             <svg id="legend-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
@@ -353,7 +363,7 @@ const tl = (key: keyof typeof t) => t[key][locale] || t[key].it;
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
           </svg>
           <p class="text-sm">
-            {tl('model')} · {tl('disclaimer')}
+            {t.model} · {t.disclaimer}
           </p>
         </div>
       </div>

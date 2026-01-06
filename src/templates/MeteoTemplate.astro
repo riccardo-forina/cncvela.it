@@ -294,6 +294,16 @@ const dirMap: Record<string, number> = { 'N': 0, 'NE': 45, 'E': 90, 'SE': 135, '
   <!-- Tactical Wind Map Hero (Full Viewport) -->
   <LakeWindMap 
     locale={locale} 
+    translations={{
+      title: t(content.map.title),
+      seoTitle: t(content.map.seoTitle),
+      ariaLabel: t(content.map.ariaLabel),
+      mapAlt: t(content.map.mapAlt),
+      legend: t(content.map.legend),
+      model: t(content.map.model),
+      scroll: t(content.map.scroll),
+      disclaimer: t(content.map.disclaimer),
+    }}
     todayWeather={forecastData?.daily?.[0] ? {
       icon: forecastData.daily[0].weatherIcon,
       tempMax: forecastData.daily[0].tempMax,
@@ -317,9 +327,9 @@ const dirMap: Record<string, number> = { 'N': 0, 'NE': 45, 'E': 90, 'SE': 135, '
             
             <!-- Header -->
             <div class="flex justify-between items-end mb-4">
-              <h3 class="font-bold text-base text-slate-800 dark:text-white">
+              <h2 class="font-bold text-base text-slate-800 dark:text-white">
                 Vento oggi
-              </h3>
+              </h2>
               <span class="text-sm md:text-xs text-slate-400 font-mono">max 20kn</span>
               </div>
 
@@ -422,12 +432,12 @@ const dirMap: Record<string, number> = { 'N': 0, 'NE': 45, 'E': 90, 'SE': 135, '
 
           <!-- Weekly Forecast (Map Style) -->
           <div class="w-full">
-            <h3 class="font-bold text-base flex items-center gap-2 text-slate-800 dark:text-white mb-4">
+            <h2 class="font-bold text-base flex items-center gap-2 text-slate-800 dark:text-white mb-4">
               <svg class="w-4 h-4 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
               Prossimi giorni
-            </h3>
+            </h2>
             
             <!-- Horizontal Row of Day Cards (Map Style - Arrow + Box) -->
             <div class="flex flex-wrap justify-between gap-y-4">
@@ -496,6 +506,57 @@ const dirMap: Record<string, number> = { 'N': 0, 'NE': 45, 'E': 90, 'SE': 135, '
 
     </div>
   </section>
+  
+  <!-- JSON-LD Structured Data for SEO -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WeatherForecast",
+    "name": t({ 
+      it: "Meteo Vento Caldè", 
+      en: "Caldè Wind Weather", 
+      de: "Wetter Wind Caldè" 
+    }),
+    "description": t({ 
+      it: "Previsioni vento e meteo live per vela e sport nautici a Caldè, Lago Maggiore.", 
+      en: "Live wind and weather forecast for sailing and water sports at Caldè, Lake Maggiore.", 
+      de: "Live-Wind- und Wettervorhersage für Segeln und Wassersport in Caldè, Lago Maggiore." 
+    }),
+    "location": {
+      "@type": "Place",
+      "name": "Caldè",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.9448,
+        "longitude": 8.6612
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Castelveccana",
+        "addressRegion": "VA",
+        "addressCountry": "IT"
+      }
+    },
+    "areaServed": [
+      { "@type": "City", "name": t({ it: "Castelveccana", en: "Castelveccana", de: "Castelveccana" }) },
+      { "@type": "City", "name": t({ it: "Porto Valtravaglia", en: "Porto Valtravaglia", de: "Porto Valtravaglia" }) },
+      { "@type": "City", "name": t({ it: "Laveno-Mombello", en: "Laveno-Mombello", de: "Laveno-Mombello" }) },
+      { "@type": "City", "name": t({ it: "Luino", en: "Luino", de: "Luino" }) },
+      { "@type": "Place", "name": t({ it: "Alto Lago Maggiore", en: "Upper Lake Maggiore", de: "Oberer Lago Maggiore" }) }
+    ],
+    "provider": {
+      "@type": "SportsOrganization",
+      "name": "Circolo Nautico Caldè",
+      "url": "https://cncvela.it"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": t({ 
+        it: "Velisti, Windsurfer", 
+        en: "Sailors, Windsurfers", 
+        de: "Segler, Windsurfer" 
+      })
+    }
+  })} />
 </BaseLayout>
 
 <style>

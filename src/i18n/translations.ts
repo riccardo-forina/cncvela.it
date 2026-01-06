@@ -264,6 +264,29 @@ export const translations = {
     },
     backHome: { it: 'Torna in Porto', en: 'Back to Harbor', de: 'Zurück zum Hafen' },
   },
+
+  // ===== ORGANIZATION (JSON-LD SEO) =====
+  organization: {
+    name: { it: 'Circolo Nautico Caldè', en: 'Circolo Nautico Caldè', de: 'Circolo Nautico Caldè' },
+    description: {
+      it: 'Circolo velico sul Lago Maggiore: Scuola Vela, Regate e Base Nautica a Caldè (Castelveccana).',
+      en: 'Sailing club on Lake Maggiore: Sailing School, Regattas and Nautical Base in Caldè (Castelveccana).',
+      de: 'Segelclub am Lago Maggiore: Segelschule, Regatten und Nautische Basis in Caldè (Castelveccana).',
+    },
+    streetAddress: { it: 'Via Maggiore 18', en: 'Via Maggiore 18', de: 'Via Maggiore 18' },
+    addressLocality: { it: 'Castelveccana', en: 'Castelveccana', de: 'Castelveccana' },
+    addressRegion: { it: 'VA', en: 'VA', de: 'VA' },
+    postalCode: { it: '21010', en: '21010', de: '21010' },
+    addressCountry: { it: 'IT', en: 'IT', de: 'IT' },
+    areaServed: {
+      castelveccana: { it: 'Castelveccana', en: 'Castelveccana', de: 'Castelveccana' },
+      luino: { it: 'Luino', en: 'Luino', de: 'Luino' },
+      laveno: { it: 'Laveno-Mombello', en: 'Laveno-Mombello', de: 'Laveno-Mombello' },
+      portoValtravaglia: { it: 'Porto Valtravaglia', en: 'Porto Valtravaglia', de: 'Porto Valtravaglia' },
+      altoLago: { it: 'Alto Lago Maggiore', en: 'Upper Lake Maggiore', de: 'Oberer Lago Maggiore' },
+      varese: { it: 'Varese', en: 'Varese', de: 'Varese' },
+    },
+  },
 } as const;
 
 // Helper function to get translation

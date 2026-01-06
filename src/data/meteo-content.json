@@ -6,14 +6,56 @@
       "de": "Wetter Caldè"
     },
     "description": {
-      "it": "Previsioni meteo per Caldè, Lago Maggiore. Vento, temperatura e condizioni per la vela.",
-      "en": "Weather forecast for Caldè, Lake Maggiore. Wind, temperature and sailing conditions.",
-      "de": "Wettervorhersage für Caldè, Lago Maggiore. Wind, Temperatur und Segelbedingungen."
+      "it": "Vento e previsioni meteo per Caldè, Lago Maggiore. Condizioni live, temperatura e forecast per la vela sul lago.",
+      "en": "Wind and weather forecast for Caldè, Lake Maggiore. Live conditions, temperature and sailing forecast.",
+      "de": "Wind und Wettervorhersage für Caldè, Lago Maggiore. Live-Bedingungen, Temperatur und Segelvorhersage."
     },
     "subtitle": {
       "it": "Previsioni per il Lago Maggiore",
       "en": "Forecast for Lake Maggiore",
       "de": "Vorhersage für den Lago Maggiore"
+    }
+  },
+  "map": {
+    "title": {
+      "it": "Meteo Live",
+      "en": "Live Weather",
+      "de": "Live Wetter"
+    },
+    "seoTitle": {
+      "it": "Vento e Previsioni Caldè Lago Maggiore",
+      "en": "Wind and Weather Forecast Caldè Lake Maggiore",
+      "de": "Wind und Wettervorhersage Caldè Lago Maggiore"
+    },
+    "ariaLabel": {
+      "it": "Mappa Vento in Tempo Reale: Lago Maggiore e Caldè",
+      "en": "Real-Time Wind Map: Lake Maggiore and Caldè",
+      "de": "Echtzeit-Windkarte: Lago Maggiore und Caldè"
+    },
+    "mapAlt": {
+      "it": "Mappa del vento Lago Maggiore",
+      "en": "Wind map of Lake Maggiore",
+      "de": "Windkarte Lago Maggiore"
+    },
+    "legend": {
+      "it": "Legenda",
+      "en": "Legend",
+      "de": "Legende"
+    },
+    "model": {
+      "it": "Modello ICON-D2 (High Res)",
+      "en": "ICON-D2 Model (High Res)",
+      "de": "ICON-D2-Modell (High Res)"
+    },
+    "scroll": {
+      "it": "Scorri per dettagli",
+      "en": "Scroll for details",
+      "de": "Scrollen für Details"
+    },
+    "disclaimer": {
+      "it": "Osservare sempre il lago prima di uscire",
+      "en": "Always check the lake before going out",
+      "de": "Überprüfen Sie immer den See, bevor Sie losfahren"
     }
   },
   "legend": {
