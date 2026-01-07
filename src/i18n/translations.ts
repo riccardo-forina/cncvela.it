@@ -15,7 +15,7 @@ export const translations = {
   // ===== NAVIGATION =====
   nav: {
     home: { it: 'Home', en: 'Home', de: 'Home' },
-    club: { it: 'Il Circolo', en: 'The Club', de: 'Der Verein' },
+    club: { it: 'Il Circolo', en: 'The Association', de: 'Der Verein' },
     courses: { it: 'Corsi', en: 'Courses', de: 'Kurse' },
     regattas: { it: 'Regate', en: 'Regattas', de: 'Regatten' },
     events: { it: 'Bacheca', en: 'Events', de: 'Termine' },
@@ -134,7 +134,7 @@ export const translations = {
 
   // ===== CLUB PAGE =====
   club: {
-    pageTitle: { it: 'Il Circolo', en: 'The Club', de: 'Der Verein' },
+    pageTitle: { it: 'Il Circolo', en: 'The Association', de: 'Der Verein' },
     whoWeAre: { it: 'Chi Siamo', en: 'Who We Are', de: 'Wer wir sind' },
     facilities: { it: 'Le Nostre Strutture', en: 'Our Facilities', de: 'Unsere Einrichtungen' },
     board: { it: 'Consiglio Direttivo', en: 'Board of Directors', de: 'Vorstand' },
