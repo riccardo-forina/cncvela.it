@@ -1,6 +1,102 @@
 {
   "events": [
     {
+      "id": "scuola-vela-luglio-1-2026",
+      "type": "corso",
+      "title": {
+        "it": "Scuola Vela 2026",
+        "en": "Sailing School 2026",
+        "de": "Segelschule 2026"
+      },
+      "subtitle": {
+        "it": "Dai 6 anni — Bug, Laser e Optimist",
+        "en": "Ages 6+ — Bug, Laser and Optimist",
+        "de": "Ab 6 Jahren — Bug, Laser und Optimist"
+      },
+      "date": "2026-07-13",
+      "endDate": "2026-07-17",
+      "time": "08:30",
+      "description": {
+        "it": "Corso di vela dal lunedì al venerdì con istruttori federali certificati. Dalle 8.30 alle 17.00.",
+        "en": "Sailing course Monday to Friday with certified federal instructors. From 8:30 AM to 5:00 PM.",
+        "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
+      },
+      "status": "open",
+      "documents": {}
+    },
+    {
+      "id": "scuola-vela-luglio-2-2026",
+      "type": "corso",
+      "title": {
+        "it": "Scuola Vela 2026",
+        "en": "Sailing School 2026",
+        "de": "Segelschule 2026"
+      },
+      "subtitle": {
+        "it": "Dai 6 anni — Bug, Laser e Optimist",
+        "en": "Ages 6+ — Bug, Laser and Optimist",
+        "de": "Ab 6 Jahren — Bug, Laser und Optimist"
+      },
+      "date": "2026-07-20",
+      "endDate": "2026-07-23",
+      "time": "08:30",
+      "description": {
+        "it": "Corso di vela dal lunedì al venerdì con istruttori federali certificati. Dalle 8.30 alle 17.00.",
+        "en": "Sailing course Monday to Friday with certified federal instructors. From 8:30 AM to 5:00 PM.",
+        "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
+      },
+      "status": "open",
+      "documents": {}
+    },
+    {
+      "id": "scuola-vela-agosto-1-2026",
+      "type": "corso",
+      "title": {
+        "it": "Scuola Vela 2026",
+        "en": "Sailing School 2026",
+        "de": "Segelschule 2026"
+      },
+      "subtitle": {
+        "it": "Dai 6 anni — Bug, Laser e Optimist",
+        "en": "Ages 6+ — Bug, Laser and Optimist",
+        "de": "Ab 6 Jahren — Bug, Laser und Optimist"
+      },
+      "date": "2026-08-03",
+      "endDate": "2026-08-07",
+      "time": "08:30",
+      "description": {
+        "it": "Corso di vela dal lunedì al venerdì con istruttori federali certificati. Dalle 8.30 alle 17.00.",
+        "en": "Sailing course Monday to Friday with certified federal instructors. From 8:30 AM to 5:00 PM.",
+        "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
+      },
+      "status": "open",
+      "documents": {}
+    },
+    {
+      "id": "scuola-vela-agosto-2-2026",
+      "type": "corso",
+      "title": {
+        "it": "Scuola Vela 2026",
+        "en": "Sailing School 2026",
+        "de": "Segelschule 2026"
+      },
+      "subtitle": {
+        "it": "Dai 6 anni — Bug, Laser e Optimist",
+        "en": "Ages 6+ — Bug, Laser and Optimist",
+        "de": "Ab 6 Jahren — Bug, Laser und Optimist"
+      },
+      "date": "2026-08-21",
+      "endDate": "2026-08-25",
+      "time": "08:30",
+      "description": {
+        "it": "Corso di vela dal lunedì al venerdì con istruttori federali certificati. Dalle 8.30 alle 17.00.",
+        "en": "Sailing course Monday to Friday with certified federal instructors. From 8:30 AM to 5:00 PM.",
+        "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
+      },
+      "status": "open",
+      "documents": {}
+    },
+    {
       "id": "veleggiata-sociale-giugno-2026",
       "type": "regata",
       "title": {
