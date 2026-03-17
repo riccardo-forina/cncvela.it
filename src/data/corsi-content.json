@@ -1,9 +1,9 @@
 {
   "page": {
     "title": {
-      "it": "Scuola Vela",
-      "en": "Sailing School",
-      "de": "Segelschule"
+      "it": "Scuola Vela sul Lago Maggiore",
+      "en": "Sailing School on Lake Maggiore",
+      "de": "Segelschule am Lago Maggiore"
     },
     "subtitle": {
       "it": "Corsi di vela per tutte le età riconosciuti dalla Federazione Italiana Vela. Dal 1975 formiamo nuovi velisti sul Lago Maggiore.",
@@ -153,4 +153,3 @@
     }
   }
 }
-
