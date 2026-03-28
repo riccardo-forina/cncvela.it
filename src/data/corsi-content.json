@@ -90,9 +90,9 @@
         "de": "<strong>Füllen</strong> Sie alle Felder aus und <strong>unterschreiben</strong> Sie"
       },
       {
-        "it": "<strong>Invia</strong> il modulo compilato e firmato via email alla segreteria",
-        "en": "<strong>Send</strong> the completed form via email to the secretary",
-        "de": "<strong>Senden</strong> Sie das Formular per E-Mail an das Sekretariat"
+        "it": "<strong>Invia</strong> il modulo compilato e firmato via email alla Scuola Vela",
+        "en": "<strong>Send</strong> the completed form via email to the Sailing School",
+        "de": "<strong>Senden</strong> Sie das Formular per E-Mail an die Segelschule"
       }
     ],
     "downloadButton": {
@@ -101,9 +101,9 @@
       "de": "Formular herunterladen"
     },
     "sendButton": {
-      "it": "Invia alla Segreteria",
-      "en": "Send to Secretary",
-      "de": "An Sekretariat senden"
+      "it": "Invia alla Scuola Vela",
+      "en": "Send to Sailing School",
+      "de": "An Segelschule senden"
     }
   },
   "bankDetails": {

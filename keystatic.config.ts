@@ -772,6 +772,7 @@ export default config({
         phone: fields.text({ label: 'Telefono' }),
         fax: fields.text({ label: 'Fax' }),
         email: fields.text({ label: 'Email' }),
+        emailScuolaVela: fields.text({ label: 'Email Scuola Vela' }),
         website: fields.text({ label: 'Sito web' }),
         fiscalCode: fields.text({ label: 'Codice fiscale' }),
         vatNumber: fields.text({ label: 'P.IVA' }),
