@@ -14,7 +14,7 @@
       }
     },
     {
-      "name": "Lucia Piccinini",
+      "name": "Annalisa Nova",
       "role": {
         "it": "Vice Presidente",
         "en": "Vice President",
@@ -24,9 +24,17 @@
     {
       "name": "Paolo Fizzotti",
       "role": {
-        "it": "Segretario e Tesoriere",
-        "en": "Secretary and Treasurer",
-        "de": "Sekretär und Schatzmeister"
+        "it": "Tesoriere",
+        "en": "Treasurer",
+        "de": "Schatzmeister"
+      }
+    },
+    {
+      "name": "Lucia Piccinini",
+      "role": {
+        "it": "Segretaria",
+        "en": "Secretary",
+        "de": "Sekretär"
       }
     },
     {
@@ -46,6 +54,14 @@
       }
     },
     {
+      "name": "Anna Luti",
+      "role": {
+        "it": "Referente Comunicazione",
+        "en": "Communications Officer",
+        "de": "Referent für Kommunikation"
+      }
+    },
+    {
       "name": "Enrico Cigolotti",
       "role": {
         "it": "Consigliere",
@@ -54,7 +70,15 @@
       }
     },
     {
-      "name": "Faustina Lalatta",
+      "name": "Roberto De Zordi",
+      "role": {
+        "it": "Consigliere",
+        "en": "Board Member",
+        "de": "Vorstandsmitglied"
+      }
+    },
+    {
+      "name": "Michele Papa",
       "role": {
         "it": "Consigliere",
         "en": "Board Member",
@@ -77,13 +101,21 @@
       "de": "Schiedsgericht"
     },
     "members": [
-      { "name": "Marco Engel" },
-      { "name": "Alessandra Nicoletti" },
-      { "name": "Paolo Moroni" }
+      {
+        "name": "Marco Engel"
+      },
+      {
+        "name": "Alessandra Nicoletti"
+      },
+      {
+        "name": "Graziano Della Rossa"
+      },
+      {
+        "name": "Giorgio Martinelli"
+      },
+      {
+        "name": "Michela Orlando"
+      }
     ]
   }
 }
-
-
-
-
