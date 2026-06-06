@@ -101,11 +101,11 @@ const formatDate = (dateStr: string): string => {
             class="group flex items-center gap-4 p-4 bg-white dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-primary)] dark:hover:border-[var(--color-accent-primary-dark)] hover:shadow-md transition-all"
           >
             <!-- Date badge -->
-            <div class="flex-shrink-0 w-14 h-14 bg-[var(--color-accent-primary)]/10 dark:bg-[var(--color-accent-primary-dark)]/20 rounded-xl flex flex-col items-center justify-center">
-              <span class="text-lg font-black text-[var(--color-accent-primary)] dark:text-[var(--color-accent-primary-dark)]">
+            <div class="flex-shrink-0 w-14 h-14 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex flex-col items-center justify-center text-white">
+              <span class="text-lg font-black leading-none">
                 {new Date(event.date).getDate()}
               </span>
-              <span class="text-xs text-muted uppercase">
+              <span class="text-xs uppercase opacity-80">
                 {formatDate(event.date).split(' ')[1]}
               </span>
             </div>

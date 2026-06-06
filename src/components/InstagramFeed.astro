@@ -1,40 +1,40 @@
 ---
 /**
  * Instagram Feed Component
- * Fetches latest 4 images from Behold.so feed
+ * Fetches posts from Behold.so feed and displays as a text list
  */
 import type { Locale } from '../i18n';
 import feedConfig from '../data/instagram-feed.json';
 
 interface Props {
   locale: Locale;
+  title: string;
   class?: string;
 }
 
-const { class: className } = Astro.props;
+const { locale, title, class: className } = Astro.props;
 
-// Behold.so feed URL from CMS
 const BEHOLD_FEED_URL = feedConfig.beholdFeedUrl || '';
-
 const profileUrl = 'https://www.instagram.com/circolo_nautico_calde';
 
 interface BeholdPost {
   id: string;
-  mediaUrl: string;
   permalink: string;
   caption?: string;
-  mediaType: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
-  thumbnailUrl?: string;
-  sizes?: {
-    small?: { mediaUrl: string };
-    medium?: { mediaUrl: string };
-    large?: { mediaUrl: string };
-  };
+  prunedCaption?: string;
+  timestamp?: string;
 }
+
+const fallbackLabels = {
+  empty: {
+    it: 'Seguici su Instagram per restare aggiornato sulle attività del circolo.',
+    en: 'Follow us on Instagram to stay updated on club activities.',
+    de: 'Folgen Sie uns auf Instagram, um über Clubaktivitäten informiert zu bleiben.',
+  },
+};
 
 let posts: BeholdPost[] = [];
 
-// Fetch from Behold if URL is configured
 if (BEHOLD_FEED_URL) {
   try {
     const response = await fetch(BEHOLD_FEED_URL);
@@ -46,61 +46,59 @@ if (BEHOLD_FEED_URL) {
     console.warn('Failed to fetch Behold feed:', error);
   }
 }
+
+const formatPostDate = (timestamp: string | undefined): string => {
+  if (!timestamp) return '';
+  const date = new Date(timestamp);
+  const localeMap: Record<Locale, string> = { it: 'it-IT', en: 'en-GB', de: 'de-DE' };
+  return date.toLocaleDateString(localeMap[locale], { day: 'numeric', month: 'short', year: 'numeric' });
+};
+
+const getCaption = (post: BeholdPost): string =>
+  post.prunedCaption || post.caption || '';
 ---
 
 <div class:list={["instagram-feed", className]}>
-  {posts.length > 0 ? (
-    <>
-      <div class="grid grid-cols-4 gap-2 md:gap-3">
-        {posts.map((post) => (
-          <a 
-            href={post.permalink}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative aspect-square overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800"
-          >
-            <img 
-              src={post.sizes?.medium?.mediaUrl || post.thumbnailUrl || post.mediaUrl}
-              alt={post.caption?.slice(0, 100) || 'Post Instagram'}
-              loading="lazy"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-            {post.mediaType === 'VIDEO' && (
-              <div class="absolute top-2 right-2">
-                <svg class="w-5 h-5 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </div>
-            )}
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-          </a>
-        ))}
-      </div>
-    </>
-  ) : (
-    <div class="grid grid-cols-4 gap-2 md:gap-3">
-      {[1,2,3,4].map(() => (
-        <div class="aspect-square rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-          <svg class="w-8 h-8 text-gray-300 dark:text-gray-600" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63z" clip-rule="evenodd" />
-          </svg>
-        </div>
-      ))}
-    </div>
-  )}
-  
-  <!-- CTA -->
-  <div class="mt-4 flex justify-center">
-    <a 
+  <div class="flex items-center justify-between gap-3 mb-6">
+    <h3 class="text-xl font-bold">{title}</h3>
+    <a
       href={profileUrl}
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white font-semibold rounded-full hover:opacity-90 transition-opacity"
+      class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-gradient-to-r from-[#f09433] via-[#e6683c] to-[#bc1888] text-white rounded-full hover:opacity-90 transition-opacity shrink-0"
     >
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
       </svg>
-      @circolo_nautico_calde
+      <span class="hidden sm:inline">@circolo_nautico_calde</span>
     </a>
   </div>
+
+  {posts.length > 0 ? (
+    <ul class="divide-y divide-gray-200 dark:divide-gray-700 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-[var(--color-bg-secondary-dark)]">
+      {posts.map((post) => (
+        <li>
+          <a
+            href={post.permalink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block p-4 hover:bg-gray-50 dark:hover:bg-[var(--color-bg-primary-dark)] transition-colors"
+          >
+            {post.timestamp && (
+              <time datetime={post.timestamp} class="text-xs text-muted uppercase tracking-wide">
+                {formatPostDate(post.timestamp)}
+              </time>
+            )}
+            <p class="mt-1 text-sm line-clamp-3 group-hover:text-[var(--color-accent-primary)] dark:group-hover:text-[#7CB3F0] transition-colors">
+              {getCaption(post)}
+            </p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="text-sm text-muted text-center py-6 px-4 bg-white dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700">
+      {fallbackLabels.empty[locale] || fallbackLabels.empty.it}
+    </p>
+  )}
 </div>

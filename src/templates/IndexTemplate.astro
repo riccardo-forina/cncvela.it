@@ -234,7 +234,7 @@ const courseImages = {
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         <!-- Left: Upcoming Events (shown via JS if events within 60 days) -->
         <div>
-          <UpcomingEvents locale={locale} maxEvents={2} startDate={clubLife.eventsStartDate} />
+          <UpcomingEvents locale={locale} maxEvents={4} startDate={clubLife.eventsStartDate} />
           
           <!-- Fallback when no events (always rendered, visible when events hidden) -->
           <div id="no-events-fallback" class="text-center py-8 px-4 bg-[var(--color-accent-primary)]/5 dark:bg-[var(--color-accent-primary-dark)]/10 rounded-2xl border border-[var(--color-accent-primary)]/20">
@@ -256,10 +256,7 @@ const courseImages = {
         
         <!-- Right: Instagram Feed (always visible) -->
         <div>
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold">{t(clubLife.instagram.title)}</h3>
-          </div>
-          <InstagramFeed locale={locale} />
+          <InstagramFeed locale={locale} title={t(clubLife.instagram.title)} />
         </div>
       </div>
       
