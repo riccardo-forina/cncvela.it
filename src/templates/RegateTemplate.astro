@@ -4,13 +4,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import type { Locale } from '../i18n';
 import type { Event } from '../types/event';
+import {
+  getAvailableDocuments,
+  getRegattaYears,
+  groupRegattasByYear,
+} from '../utils/eventDocuments';
 
-// Import data
 import content from '../data/regate-content.json';
 import eventsData from '../data/events.json';
 import bankDetails from '../data/bank-details.json';
 
-// Import image
 import heroImage from '../assets/images/galleria/vela-azione-1.jpg';
 
 interface Props {
@@ -19,23 +22,15 @@ interface Props {
 
 const { locale } = Astro.props;
 
-// Helper to get localized text
 const t = (obj: { it: string; en?: string; de?: string } | undefined, fallback = ''): string => {
   if (!obj) return fallback;
   return obj[locale] || obj.it || fallback;
 };
 
-// Get regattas
-const now = new Date();
 const events = eventsData.events as Event[];
-const upcomingRegattas = events
-  .filter(event => event.type === 'regata' && new Date(event.date) >= now)
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-const pastRegattas = events
-  .filter(event => event.type === 'regata' && new Date(event.date) < now)
-  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  .slice(0, 5);
+const regattasByYear = groupRegattasByYear(events);
+const years = getRegattaYears(regattasByYear);
+const documentLabels = content.documents;
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -59,7 +54,6 @@ function formatShortDate(dateStr: string): string {
 ---
 
 <BaseLayout title={t(content.page.title)} description={t(content.page.description)} locale={locale}>
-  <!-- Hero image -->
   <section class="relative h-[35vh] min-h-[250px] overflow-hidden">
     <Image 
       src={heroImage}
@@ -75,166 +69,8 @@ function formatShortDate(dateStr: string): string {
   
   <PageHeader title={t(content.page.title)} subtitle={t(content.page.subtitle)} />
 
-  <!-- Page Content -->
   <div class="bg-slate-200 dark:bg-slate-950">
 
-  <!-- Upcoming Regattas -->
-  <section class="py-12 md:py-16">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-        <h2 class="text-2xl font-black" style="font-size: var(--text-2xl);">
-          {t(content.calendar.title)}
-        </h2>
-        <a 
-          href="https://www.federvela.it/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-          </svg>
-          {t(content.calendar.fivLink)}
-        </a>
-      </div>
-      
-      {upcomingRegattas.length > 0 ? (
-        <div class="space-y-6">
-          {upcomingRegattas.map((regata) => (
-            <article class="bg-secondary rounded-xl border border-muted overflow-hidden">
-              <div class="p-6">
-                <div class="flex flex-col md:flex-row md:items-start gap-6">
-                  <div class="flex-shrink-0">
-                    <div class="w-20 h-20 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] rounded-xl flex flex-col items-center justify-center text-white">
-                      <span class="text-2xl" aria-hidden="true">🏆</span>
-                      <span class="text-sm font-bold mt-1">{formatShortDate(regata.date)}</span>
-                    </div>
-                  </div>
-                  
-                  <div class="flex-1">
-                    <span class="inline-block px-3 py-1 bg-[var(--color-accent-secondary)]/10 dark:bg-[var(--color-accent-secondary-dark)]/20 text-[var(--color-accent-secondary)] dark:text-[var(--color-accent-secondary-dark)] text-xs font-bold uppercase tracking-wide rounded-full mb-2">
-                      {t(content.labels.regata)}
-                    </span>
-                    
-                    <h3 class="text-xl font-bold mb-1">{regata.title[locale] || regata.title.it}</h3>
-                    {regata.subtitle?.[locale] && (
-                      <p class="text-muted mb-2">
-                        {regata.subtitle[locale] || regata.subtitle.it}
-                      </p>
-                    )}
-                    
-                    <p class="text-sm text-muted">
-                      <time datetime={regata.date}>{formatDate(regata.date)}</time>
-                      {regata.time && ` • ${t(content.labels.startTime)} ${regata.time}`}
-                    </p>
-                    
-                    <p class="text-sm text-muted mt-2">
-                      {regata.description[locale] || regata.description.it}
-                    </p>
-                  </div>
-                </div>
-                
-                {regata.documents && (
-                  <div class="mt-6 pt-6 border-t border-muted">
-                    <h4 class="text-sm font-bold mb-3">{locale === 'en' ? 'Documents' : locale === 'de' ? 'Dokumente' : 'Documenti'}</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      <a
-                        href={regata.documents.bando || '#'}
-                        class:list={[
-                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
-                          regata.documents.bando 
-                            ? "border-muted hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
-                            : "border-muted opacity-50 cursor-not-allowed"
-                        ]}
-                        target={regata.documents.bando ? "_blank" : undefined}
-                        rel={regata.documents.bando ? "noopener noreferrer" : undefined}
-                        aria-disabled={!regata.documents.bando}
-                      >
-                        <span class="text-2xl">📋</span>
-                        <span class="text-sm font-medium">{t(content.documents.bando)}</span>
-                        <span class="text-xs text-muted">
-                          {regata.documents.bando ? t(content.documents.download) : t(content.documents.notAvailable)}
-                        </span>
-                      </a>
-                      
-                      <a
-                        href={regata.documents.iscrizione || '#'}
-                        class:list={[
-                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
-                          regata.documents.iscrizione 
-                            ? "border-muted hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
-                            : "border-muted opacity-50 cursor-not-allowed"
-                        ]}
-                        target={regata.documents.iscrizione ? "_blank" : undefined}
-                        rel={regata.documents.iscrizione ? "noopener noreferrer" : undefined}
-                        aria-disabled={!regata.documents.iscrizione}
-                      >
-                        <span class="text-2xl">📝</span>
-                        <span class="text-sm font-medium">{t(content.documents.iscrizione)}</span>
-                        <span class="text-xs text-muted">
-                          {regata.documents.iscrizione ? t(content.documents.download) : t(content.documents.notAvailable)}
-                        </span>
-                      </a>
-                      
-                      <a
-                        href={regata.documents.istruzioni || '#'}
-                        class:list={[
-                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
-                          regata.documents.istruzioni 
-                            ? "border-muted hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
-                            : "border-muted opacity-50 cursor-not-allowed"
-                        ]}
-                        target={regata.documents.istruzioni ? "_blank" : undefined}
-                        rel={regata.documents.istruzioni ? "noopener noreferrer" : undefined}
-                        aria-disabled={!regata.documents.istruzioni}
-                      >
-                        <span class="text-2xl">📖</span>
-                        <span class="text-sm font-medium">{t(content.documents.istruzioni)}</span>
-                        <span class="text-xs text-muted">
-                          {regata.documents.istruzioni ? t(content.documents.download) : t(content.documents.notAvailable)}
-                        </span>
-                      </a>
-                      
-                      <a
-                        href={regata.documents.classifica || '#'}
-                        class:list={[
-                          "flex flex-col items-center gap-2 p-4 rounded-lg border transition-colors touch-target text-center",
-                          regata.documents.classifica 
-                            ? "border-muted hover:border-[var(--color-accent-secondary)] dark:hover:border-[var(--color-accent-secondary-dark)] hover:bg-[var(--color-accent-secondary)]/5"
-                            : "border-muted opacity-50 cursor-not-allowed"
-                        ]}
-                        target={regata.documents.classifica ? "_blank" : undefined}
-                        rel={regata.documents.classifica ? "noopener noreferrer" : undefined}
-                        aria-disabled={!regata.documents.classifica}
-                      >
-                        <span class="text-2xl">🏅</span>
-                        <span class="text-sm font-medium">{t(content.documents.classifica)}</span>
-                        <span class="text-xs text-muted">
-                          {regata.documents.classifica ? t(content.documents.download) : t(content.documents.afterRace)}
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      ) : (
-        <div class="text-center py-12 bg-secondary rounded-xl">
-          <span class="text-4xl mb-4 block">🏆</span>
-          <p class="text-muted">
-            {t(content.noRegattas.title)}
-          </p>
-          <p class="text-sm text-muted mt-2">
-            {t(content.noRegattas.subtitle)}
-          </p>
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- Bank Details -->
   <section class="py-12 md:py-16 bg-secondary">
     <div class="max-w-4xl mx-auto px-4 lg:px-6">
       <h2 class="text-2xl font-black mb-4" style="font-size: var(--text-2xl);">
@@ -269,88 +105,101 @@ function formatShortDate(dateStr: string): string {
     </div>
   </section>
 
-  <!-- Past Results -->
-  {pastRegattas.length > 0 && (
-    <section class="py-12 md:py-16">
-      <div class="max-w-6xl mx-auto px-4 lg:px-6">
-        <h2 class="text-2xl font-black mb-8" style="font-size: var(--text-2xl);">
-          {t(content.pastResults.title)}
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <h2 class="text-2xl font-black" style="font-size: var(--text-2xl);">
+          {t(content.calendar.title)}
         </h2>
-        
-        <div class="space-y-8">
-          {pastRegattas.map((regata) => (
-            <article class="bg-secondary rounded-xl border border-muted overflow-hidden">
-              <div class="p-4 md:p-6 border-b border-muted">
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <p class="text-sm text-muted">
-                      {formatDate(regata.date)}
-                    </p>
-                    <h3 class="text-lg font-bold mt-1">{regata.title[locale] || regata.title.it}</h3>
-                    {regata.subtitle?.[locale] && (
-                      <p class="text-sm text-muted">
-                        {regata.subtitle[locale] || regata.subtitle.it}
-                      </p>
-                    )}
-                  </div>
-                  {regata.documents?.classifica && (
-                    <a
-                      href={regata.documents.classifica}
-                      class="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] text-white text-sm font-bold rounded-lg hover:opacity-90 transition-opacity"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      📄 {t(content.documents.downloadPdf)}
-                    </a>
-                  )}
-                </div>
+        <a 
+          href="https://www.federvela.it/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+          {t(content.calendar.fivLink)}
+        </a>
+      </div>
+      
+      {years.length > 0 ? (
+        <div class="space-y-10">
+          {years.map((year) => (
+            <div>
+              <h3 class="text-xl font-bold mb-4 text-muted">{year}</h3>
+              <div class="space-y-6">
+                {(regattasByYear.get(year) ?? []).map((regata) => {
+                  const availableDocs = getAvailableDocuments(regata, locale, documentLabels);
+                  return (
+                    <article class="bg-secondary rounded-xl border border-muted overflow-hidden">
+                      <div class="p-6">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                          <div class="flex-shrink-0">
+                            <div class="w-20 h-20 bg-[var(--color-accent-secondary)] dark:bg-[var(--color-accent-secondary-dark)] rounded-xl flex flex-col items-center justify-center text-white">
+                              <span class="text-2xl" aria-hidden="true">🏆</span>
+                              <span class="text-sm font-bold mt-1">{formatShortDate(regata.date)}</span>
+                            </div>
+                          </div>
+                          
+                          <div class="flex-1">
+                            <span class="inline-block px-3 py-1 bg-[var(--color-accent-secondary)]/10 dark:bg-[var(--color-accent-secondary-dark)]/20 text-[var(--color-accent-secondary)] dark:text-[var(--color-accent-secondary-dark)] text-xs font-bold uppercase tracking-wide rounded-full mb-2">
+                              {t(content.labels.regata)}
+                            </span>
+                            
+                            <h4 class="text-xl font-bold mb-1">{regata.title[locale] || regata.title.it}</h4>
+                            {regata.subtitle?.[locale] && (
+                              <p class="text-muted mb-2">
+                                {regata.subtitle[locale] || regata.subtitle.it}
+                              </p>
+                            )}
+                            
+                            <p class="text-sm text-muted">
+                              <time datetime={regata.date}>{formatDate(regata.date)}</time>
+                              {regata.time && ` • ${t(content.labels.startTime)} ${regata.time}`}
+                            </p>
+                            
+                            <p class="text-sm text-muted mt-2">
+                              {regata.description[locale] || regata.description.it}
+                            </p>
+
+                            {availableDocs.length > 0 && (
+                              <div class="flex flex-wrap gap-2 mt-4">
+                                {availableDocs.map((doc) => (
+                                  <a
+                                    href={doc.url}
+                                    class="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm rounded-lg hover:bg-[var(--color-bg-secondary)] dark:hover:bg-[var(--color-bg-accent-dark)] transition-colors touch-target"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    📄 {doc.label}
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
-              
-              {regata.results && regata.results.length > 0 && (
-                <div class="overflow-x-auto">
-                  <table class="w-full text-sm">
-                    <thead class="bg-[var(--color-bg-primary)] dark:bg-[var(--color-bg-primary-dark)]">
-                      <tr>
-                        <th class="px-4 py-3 text-left font-bold">{t(content.table.pos)}</th>
-                        <th class="px-4 py-3 text-left font-bold">{t(content.table.boat)}</th>
-                        <th class="px-4 py-3 text-left font-bold hidden sm:table-cell">{t(content.table.skipper)}</th>
-                        <th class="px-4 py-3 text-left font-bold hidden md:table-cell">{t(content.table.club)}</th>
-                        <th class="px-4 py-3 text-left font-bold hidden lg:table-cell">{t(content.table.model)}</th>
-                        <th class="px-4 py-3 text-left font-bold">{t(content.table.time)}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {regata.results.map((result, idx) => (
-                        <tr class:list={[
-                          "border-t border-muted",
-                          { "bg-[var(--color-accent-secondary)]/10": idx === 0 }
-                        ]}>
-                          <td class="px-4 py-3">
-                            {idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : result.pos}
-                          </td>
-                          <td class="px-4 py-3 font-semibold">{result.boat}</td>
-                          <td class="px-4 py-3 hidden sm:table-cell">{result.skipper}</td>
-                          <td class="px-4 py-3 hidden md:table-cell">{result.club}</td>
-                          <td class="px-4 py-3 hidden lg:table-cell text-muted">{result.model}</td>
-                          <td class="px-4 py-3 font-mono">{result.time}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-              
-              {(!regata.results || regata.results.length === 0) && !regata.documents?.classifica && (
-                <div class="p-4 text-center text-muted">
-                  {t(content.noResults)}
-                </div>
-              )}
-            </article>
+            </div>
           ))}
         </div>
-      </div>
-    </section>
-  )}
+      ) : (
+        <div class="text-center py-12 bg-secondary rounded-xl">
+          <span class="text-4xl mb-4 block">🏆</span>
+          <p class="text-muted">
+            {t(content.noRegattas.title)}
+          </p>
+          <p class="text-sm text-muted mt-2">
+            {t(content.noRegattas.subtitle)}
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
   </div>
 </BaseLayout>
-

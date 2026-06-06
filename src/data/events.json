@@ -140,9 +140,25 @@
         "de": "Zonenregatta offen für alle Jollen. Zone XV - Andere Regatten."
       },
       "status": "open",
-      "documents": {
-        "bando": "/documenti/eventi/events/5/documents/bando.pdf"
-      }
+      "documents": {},
+      "additionalDocuments": [
+        {
+          "label": {
+            "it": "Regolamento CVD 2026",
+            "en": "CVD Regulations 2026",
+            "de": "CVD-Reglement 2026"
+          },
+          "url": "/documenti/eventi/events/5/documents/regolamento-cvd-2026.pdf"
+        },
+        {
+          "label": {
+            "it": "Modulo affido atleti minori",
+            "en": "Minor athletes custody form",
+            "de": "Formular Betreuung minderjähriger Athleten"
+          },
+          "url": "/documenti/eventi/events/5/documents/modulo-affido-atleti-minori.pdf"
+        }
+      ]
     },
     {
       "id": "veleggiata-sociale-luglio-2026",

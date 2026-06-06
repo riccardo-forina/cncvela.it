@@ -1,5 +1,7 @@
 ---
 import { generateGoogleCalendarUrl } from '../utils/ics';
+import { getAvailableDocuments } from '../utils/eventDocuments';
+import regateContent from '../data/regate-content.json';
 import type { Locale } from '../i18n';
 import type { Event, LocalizedText } from '../types/event';
 
@@ -66,6 +68,9 @@ const config = typeConfig[event.type as keyof typeof typeConfig] || typeConfig.e
 const dateDisplay = event.endDate 
   ? `${formatDate(event.date)} - ${formatDate(event.endDate)}`
   : formatDate(event.date);
+const availableDocs = event.type === 'regata'
+  ? getAvailableDocuments(event, locale, regateContent.documents)
+  : [];
 ---
 
 <article class:list={[
@@ -143,28 +148,18 @@ const dateDisplay = event.endDate
               📅 Salva in Agenda
             </a>
             
-            {event.type === 'regata' && event.documents && (
+            {availableDocs.length > 0 && (
               <div class="flex flex-wrap gap-2">
-                {event.documents.bando && (
+                {availableDocs.map((doc) => (
                   <a
-                    href={event.documents.bando}
+                    href={doc.url}
                     class="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm rounded-lg hover:bg-[var(--color-bg-secondary)] dark:hover:bg-[var(--color-bg-accent-dark)] transition-colors touch-target"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    📄 Bando
+                    📄 {doc.label}
                   </a>
-                )}
-                {event.documents.iscrizione && (
-                  <a
-                    href={event.documents.iscrizione}
-                    class="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-sm rounded-lg hover:bg-[var(--color-bg-secondary)] dark:hover:bg-[var(--color-bg-accent-dark)] transition-colors touch-target"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    📝 Iscrizione
-                  </a>
-                )}
+                ))}
               </div>
             )}
           </div>

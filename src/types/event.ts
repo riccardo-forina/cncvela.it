@@ -30,6 +30,10 @@ export interface Event {
     istruzioni?: string | null;
     classifica?: string | null;
   };
+  additionalDocuments?: Array<{
+    label: LocalizedText;
+    url: string;
+  }>;
   results?: EventResult[];
   status: string; // 'open' | 'closed' | 'completed' - permissivo per JSON
 }

@@ -18,9 +18,9 @@
   },
   "calendar": {
     "title": {
-      "it": "Calendario Regate 2026",
-      "en": "Regatta Calendar 2026",
-      "de": "Regattakalender 2026"
+      "it": "Calendario regate",
+      "en": "Regatta calendar",
+      "de": "Regattakalender"
     },
     "fivLink": {
       "it": "Calendario FIV Nazionale",
@@ -62,13 +62,6 @@
       "de": "Regattaanmeldung [Regattaname] - [Teilnehmername]"
     }
   },
-  "pastResults": {
-    "title": {
-      "it": "Classifiche 2025",
-      "en": "Results 2025",
-      "de": "Ergebnisse 2025"
-    }
-  },
   "documents": {
     "bando": {
       "it": "Bando",
@@ -89,64 +82,7 @@
       "it": "Classifica",
       "en": "Results",
       "de": "Ergebnisse"
-    },
-    "download": {
-      "it": "Scarica",
-      "en": "Download",
-      "de": "Herunterladen"
-    },
-    "notAvailable": {
-      "it": "Non disponibile",
-      "en": "Not available",
-      "de": "Nicht verfügbar"
-    },
-    "afterRace": {
-      "it": "Dopo la gara",
-      "en": "After the race",
-      "de": "Nach dem Rennen"
-    },
-    "downloadPdf": {
-      "it": "Scarica PDF",
-      "en": "Download PDF",
-      "de": "PDF herunterladen"
     }
-  },
-  "table": {
-    "pos": {
-      "it": "Pos",
-      "en": "Pos",
-      "de": "Pl."
-    },
-    "boat": {
-      "it": "Barca",
-      "en": "Boat",
-      "de": "Boot"
-    },
-    "skipper": {
-      "it": "Skipper",
-      "en": "Skipper",
-      "de": "Skipper"
-    },
-    "club": {
-      "it": "Circolo",
-      "en": "Club",
-      "de": "Verein"
-    },
-    "model": {
-      "it": "Modello",
-      "en": "Model",
-      "de": "Modell"
-    },
-    "time": {
-      "it": "Tempo",
-      "en": "Time",
-      "de": "Zeit"
-    }
-  },
-  "noResults": {
-    "it": "Classifica non ancora disponibile",
-    "en": "Results not yet available",
-    "de": "Ergebnisse noch nicht verfügbar"
   },
   "labels": {
     "regata": {

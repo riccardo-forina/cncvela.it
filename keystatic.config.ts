@@ -127,6 +127,16 @@ export default config({
                 publicPath: '/documenti/eventi/',
               }),
             }, { label: 'Documenti (carica PDF)' }),
+            additionalDocuments: fields.array(
+              fields.object({
+                label: localizedText('Etichetta documento'),
+                url: fields.text({
+                  label: 'URL PDF',
+                  description: 'Percorso pubblico, es: /documenti/eventi/events/5/documents/nome.pdf',
+                }),
+              }),
+              { label: 'Altri documenti' }
+            ),
           }),
           { 
             label: 'Eventi',
