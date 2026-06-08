@@ -22,7 +22,8 @@
         "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
       },
       "status": "open",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "scuola-vela-luglio-2-2026",
@@ -46,7 +47,8 @@
         "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
       },
       "status": "open",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "scuola-vela-agosto-1-2026",
@@ -70,7 +72,8 @@
         "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
       },
       "status": "open",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "scuola-vela-agosto-2-2026",
@@ -94,7 +97,8 @@
         "de": "Segelkurs Montag bis Freitag mit zertifizierten Bundeslehrern. Von 8:30 bis 17:00 Uhr."
       },
       "status": "open",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "veleggiata-sociale-giugno-2026",
@@ -117,7 +121,8 @@
         "de": "Gesellschaftssegeln offen für alle Jollen. Zone XV - Fahrtensegeln."
       },
       "status": "open",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "trofeo-sass-gallet-2026",
@@ -133,14 +138,16 @@
         "de": "Eraldo Capra Gedenkregatta - Alle Jollen"
       },
       "date": "2026-06-28",
-      "time": "10:00",
+      "time": "08:00",
       "description": {
         "it": "Regata zonale aperta a tutte le derive. Zona XV - Altre Regate.",
         "en": "Zonal regatta open to all dinghies. Zone XV - Other Regattas.",
         "de": "Zonenregatta offen für alle Jollen. Zone XV - Andere Regatten."
       },
       "status": "open",
-      "documents": {},
+      "documents": {
+        "bando": "/documenti/eventi/events/5/documents/bando.pdf"
+      },
       "additionalDocuments": [
         {
           "label": {
@@ -181,7 +188,8 @@
         "de": "Gesellschaftssegeln offen für alle Jollen. Zone XV - Fahrtensegeln."
       },
       "status": "open",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "regata-iom-2026",
@@ -204,7 +212,8 @@
         "de": "Zonenregatta für die IOM Modellsegelklasse. Zone XV - Andere Regatten. Ort: Porto Valtravaglia - Lido."
       },
       "status": "open",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "regata-derive-2025",
@@ -227,7 +236,8 @@
         "de": "Vom CNC organisierte Jollenregatten 2025."
       },
       "status": "completed",
-      "documents": {}
+      "documents": {},
+      "additionalDocuments": []
     },
     {
       "id": "regata-iom-2025",
@@ -252,7 +262,8 @@
       "status": "completed",
       "documents": {
         "classifica": "/documenti/eventi/events/9/documents/classifica.pdf"
-      }
+      },
+      "additionalDocuments": []
     }
   ]
 }
