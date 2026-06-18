@@ -155,7 +155,7 @@
             "en": "CVD Regulations 2026",
             "de": "CVD-Reglement 2026"
           },
-          "url": "/documenti/eventi/events/5/documents/regolamento-cvd-2026.pdf"
+          "url": "/documenti/eventi/events/5/additionalDocuments/0/url.pdf"
         },
         {
           "label": {
@@ -163,7 +163,7 @@
             "en": "Minor athletes custody form",
             "de": "Formular Betreuung minderjähriger Athleten"
           },
-          "url": "/documenti/eventi/events/5/documents/modulo-affido-atleti-minori.pdf"
+          "url": "/documenti/eventi/events/5/additionalDocuments/1/url.pdf"
         }
       ]
     },
@@ -293,7 +293,8 @@
             "it": "Volantino",
             "en": "Flyer",
             "de": "Flyer"
-          }
+          },
+          "url": "/documenti/eventi/events/10/additionalDocuments/0/url.pdf"
         }
       ]
     }
