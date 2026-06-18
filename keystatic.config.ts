@@ -130,12 +130,13 @@ export default config({
             additionalDocuments: fields.array(
               fields.object({
                 label: localizedText('Etichetta documento'),
-                url: fields.text({
-                  label: 'URL PDF',
-                  description: 'Percorso pubblico, es: /documenti/eventi/events/5/documents/nome.pdf',
+                url: fields.file({
+                  label: 'PDF (Altro)',
+                  directory: 'public/documenti/eventi',
+                  publicPath: '/documenti/eventi/',
                 }),
               }),
-              { label: 'Altri documenti' }
+              { label: 'Altro / documenti aggiuntivi' }
             ),
           }),
           { 
