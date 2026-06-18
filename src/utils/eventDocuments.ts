@@ -20,26 +20,30 @@ function localize(field: LocalizedText, locale: Locale): string {
 export function getAvailableDocuments(
   event: Event,
   locale: Locale,
-  labels: StandardDocumentLabels
+  labels?: StandardDocumentLabels
 ): EventDocumentLink[] {
   const docs: EventDocumentLink[] = [];
 
-  const standardEntries: Array<{ key: keyof StandardDocumentLabels; label: LocalizedText }> = [
-    { key: 'bando', label: labels.bando },
-    { key: 'iscrizione', label: labels.iscrizione },
-    { key: 'istruzioni', label: labels.istruzioni },
-    { key: 'classifica', label: labels.classifica },
-  ];
+  if (labels) {
+    const standardEntries: Array<{ key: keyof StandardDocumentLabels; label: LocalizedText }> = [
+      { key: 'bando', label: labels.bando },
+      { key: 'iscrizione', label: labels.iscrizione },
+      { key: 'istruzioni', label: labels.istruzioni },
+      { key: 'classifica', label: labels.classifica },
+    ];
 
-  for (const { key, label } of standardEntries) {
-    const url = event.documents?.[key];
-    if (url) {
-      docs.push({ label: localize(label, locale), url });
+    for (const { key, label } of standardEntries) {
+      const url = event.documents?.[key];
+      if (url) {
+        docs.push({ label: localize(label, locale), url });
+      }
     }
   }
 
   for (const doc of event.additionalDocuments ?? []) {
-    docs.push({ label: localize(doc.label, locale), url: doc.url });
+    if (doc.url) {
+      docs.push({ label: localize(doc.label, locale), url: doc.url });
+    }
   }
 
   return docs;

@@ -65,12 +65,14 @@ const typeConfig = {
 };
 
 const config = typeConfig[event.type as keyof typeof typeConfig] || typeConfig.evento_sociale;
-const dateDisplay = event.endDate 
+const dateDisplay = event.endDate && event.endDate !== event.date
   ? `${formatDate(event.date)} - ${formatDate(event.endDate)}`
   : formatDate(event.date);
-const availableDocs = event.type === 'regata'
-  ? getAvailableDocuments(event, locale, regateContent.documents)
-  : [];
+const availableDocs = getAvailableDocuments(
+  event,
+  locale,
+  event.type === 'regata' ? regateContent.documents : undefined
+);
 ---
 
 <article class:list={[
