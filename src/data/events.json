@@ -114,7 +114,7 @@
         "de": "Alle Jollen, Fahrtensegeln"
       },
       "date": "2026-06-27",
-      "time": "10:00",
+      "time": "16:00",
       "description": {
         "it": "Veleggiata sociale aperta a tutte le derive. Zona XV - Veleggiata/Diporto.",
         "en": "Social sailing open to all dinghies. Zone XV - Cruising.",
@@ -264,6 +264,38 @@
         "classifica": "/documenti/eventi/events/9/documents/classifica.pdf"
       },
       "additionalDocuments": []
+    },
+    {
+      "id": "festa-estate",
+      "type": "evento_sociale",
+      "title": {
+        "it": "Festa d'Estate",
+        "en": "Summer Party",
+        "de": "Sommerparty"
+      },
+      "subtitle": {
+        "it": "Relax e grigliate",
+        "en": "Relax and BBQs",
+        "de": "Relaxen und Grillen"
+      },
+      "date": "2026-07-04",
+      "endDate": "2026-07-04",
+      "description": {
+        "it": "Sabato 4 luglio, vi aspettiamo per una giornata di relax e divertimento insieme. Si parte dal pomeriggio in spiaggia e si continua dalle 19:30 con la nostra grande grigliata a offerta libera. A seguire, la serata si accende con giochi musicali, balli e il torneo di calciobalilla con fantastici premi! Non mancate! Info e iscrizioni: Roberto (+39 3351019210).",
+        "en": "On Saturday, July 4th, join us for a day of relaxation and fun together. Kick off the day at the beach in the afternoon, followed by our big BBQ from 7:30 PM (free donation). The evening continues with musical games, dancing, and a foosball tournament with awesome prizes! See you there! Info: Roberto (+39 3351019210).",
+        "de": "Am Samstag, den 4. Juli, erwartet euch ein gemeinsamer Tag voller Entspannung und Spaß. Los geht's am Nachmittag am Strand, gefolgt von unserem großen Grillfest ab 19:30 Uhr (freiwillige Spende). Danach geht es weiter mit Musikspielen, Tanzen und dem Kicker-Turnier mit tollen Preisen! Kommt zahlreich vorbei! Infos: Roberto (+39 3351019210)."
+      },
+      "status": "open",
+      "documents": {},
+      "additionalDocuments": [
+        {
+          "label": {
+            "it": "Volantino",
+            "en": "Flyer",
+            "de": "Flyer"
+          }
+        }
+      ]
     }
   ]
 }
