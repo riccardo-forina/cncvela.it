@@ -98,7 +98,7 @@ const formatDate = (dateStr: string): string => {
         return (
           <a 
             href={event.registrationUrl || 'bacheca'}
-            class="group flex items-center gap-4 p-4 bg-white dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-primary)] dark:hover:border-[var(--color-accent-primary-dark)] hover:shadow-md transition-all"
+            class="group flex items-center gap-4 p-4 bg-white dark:bg-[var(--color-bg-secondary-dark)] rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[var(--color-accent-primary)] dark:hover:border-[#7CB3F0] hover:shadow-md transition-all"
           >
             <!-- Date badge -->
             <div class="flex-shrink-0 w-14 h-14 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] rounded-xl flex flex-col items-center justify-center text-white">
@@ -117,7 +117,7 @@ const formatDate = (dateStr: string): string => {
                   {t(config.label)}
                 </span>
               </div>
-              <h4 class="font-bold text-sm truncate group-hover:text-[var(--color-accent-primary)] transition-colors">
+              <h4 class="font-bold text-sm truncate group-hover:text-[var(--color-accent-primary)] dark:group-hover:text-[#7CB3F0] transition-colors">
                 {t(event.title)}
               </h4>
               {event.subtitle && (
@@ -126,7 +126,7 @@ const formatDate = (dateStr: string): string => {
             </div>
             
             <!-- Arrow -->
-            <svg class="w-5 h-5 text-muted group-hover:text-[var(--color-accent-primary)] group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-muted group-hover:text-[var(--color-accent-primary)] dark:group-hover:text-[#7CB3F0] group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
           </a>
