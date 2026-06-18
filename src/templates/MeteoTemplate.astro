@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LakeWindMap from '../components/LakeWindMap.astro';
+import DailyForecastCard from '../components/DailyForecastCard.astro';
 import type { Locale } from '../i18n';
 import content from '../data/meteo-content.json';
+import { fetchForecast } from '../utils/weather';
 
 interface Props {
   locale: Locale;
@@ -28,266 +30,11 @@ const formatHour = (hour: number): string => {
   return String(hour);
 };
 
-// Format date based on locale (IT: dd/mm, EN: mm/dd, DE: dd.mm)
-const formatDate = (dateStr: string): string => {
-  const parts = dateStr.split('-'); // YYYY-MM-DD
-  const day = parts[2];
-  const month = parts[1];
-  
-  if (locale === 'en') {
-    return `${month}/${day}`; // MM/DD
-  } else if (locale === 'de') {
-    return `${day}.${month}`; // DD.MM
-  }
-  return `${day}/${month}`; // DD/MM (IT default)
-};
-
-// Caldè coordinates (CNC - Via Maggiore 36)
-const LAT = 45.9448;
-const LON = 8.6612;
-
-// ============================================
-// CACHE STRATEGY: 5 minute TTL
-// ============================================
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
-
-// Simple in-memory cache (works for SSR)
-declare global {
-  var weatherCache: { data: any; timestamp: number } | undefined;
-}
-
-// ============================================
-// ONE-CALL API STRATEGY: Server-Side Fetch
-// ============================================
-interface HourlyData {
-  time: string;
-  hour: number;
-  windSpeed: number;
-  windDirection: number;
-  isPast: boolean;
-  isNow: boolean;
-}
-
-interface DailyData {
-  date: string;
-  dayName: string;
-  weatherCode: number;
-  weatherDesc: string;
-  weatherIcon: string;
-  tempMax: number;
-  tempMin: number;
-  windMax: number;
-  windDirection: string;
-}
-
-interface CurrentData {
-  windSpeed: number;
-  windDirection: string;
-  windDirectionDeg: number;
-  temperature: number;
-  humidity: number;
-}
-
-interface ForecastData {
-  current: CurrentData;
-  hourly: HourlyData[];
-  daily: DailyData[];
-  fetchTime: string;
-}
-
-// Wind direction to compass
-function degToCompass(deg: number): string {
-  const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
-  const index = Math.round(deg / 45) % 8;
-  return directions[index];
-}
-
-// Weather code to description and icon
-function getWeatherInfo(code: number) {
-  const weatherMap: Record<number, { key: string; icon: string }> = {
-    0: { key: 'clear', icon: '☀️' },
-    1: { key: 'partlyCloudy', icon: '🌤️' },
-    2: { key: 'partlyCloudy', icon: '⛅' },
-    3: { key: 'cloudy', icon: '☁️' },
-    45: { key: 'fog', icon: '🌫️' },
-    48: { key: 'fog', icon: '🌫️' },
-    51: { key: 'drizzle', icon: '🌧️' },
-    53: { key: 'drizzle', icon: '🌧️' },
-    55: { key: 'drizzle', icon: '🌧️' },
-    61: { key: 'lightRain', icon: '🌧️' },
-    63: { key: 'rain', icon: '🌧️' },
-    65: { key: 'heavyRain', icon: '🌧️' },
-    71: { key: 'snow', icon: '🌨️' },
-    73: { key: 'snow', icon: '🌨️' },
-    75: { key: 'snow', icon: '🌨️' },
-    80: { key: 'showers', icon: '🌦️' },
-    81: { key: 'showers', icon: '🌦️' },
-    82: { key: 'showers', icon: '🌦️' },
-    95: { key: 'thunderstorm', icon: '⛈️' },
-    96: { key: 'thunderstorm', icon: '⛈️' },
-    99: { key: 'thunderstorm', icon: '⛈️' },
-  };
-  
-  const info = weatherMap[code] || { key: 'clear', icon: '❓' };
-  const weatherContent = content.weather as Record<string, { it: string; en?: string; de?: string }>;
-  const desc = weatherContent[info.key] ? t(weatherContent[info.key]) : 'N/A';
-  return { desc, icon: info.icon };
-}
-
-// Format day name
-function getDayName(dateStr: string, loc: Locale): string {
-  const date = new Date(dateStr);
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  
-  if (date.toDateString() === today.toDateString()) return t(content.days.today);
-  if (date.toDateString() === tomorrow.toDateString()) return t(content.days.tomorrow);
-  
-  return date.toLocaleDateString(loc === 'de' ? 'de-DE' : loc === 'en' ? 'en-US' : 'it-IT', { 
-    weekday: 'short', 
-    day: 'numeric' 
-  });
-}
-
-// Get wind color class based on knots (matching map's 5-level system)
-function getWindColorClass(speed: number): { bg: string; text: string; bar: string; border: string; glow: string } {
-  if (speed < 3) {
-    // Principianti - sky/cyan
-    return { bg: 'bg-sky-400/10', text: 'text-sky-400', bar: 'bg-sky-400', border: 'border-sky-400/40', glow: 'rgba(56, 189, 248, 0.3)' };
-  } else if (speed < 7) {
-    // Tutti - emerald
-    return { bg: 'bg-emerald-400/10', text: 'text-emerald-400', bar: 'bg-emerald-400', border: 'border-emerald-400/40', glow: 'rgba(52, 211, 153, 0.3)' };
-  } else if (speed < 11) {
-    // Esperti - amber
-    return { bg: 'bg-amber-400/10', text: 'text-amber-400', bar: 'bg-amber-400', border: 'border-amber-400/40', glow: 'rgba(251, 191, 36, 0.3)' };
-  } else if (speed < 16) {
-    // Attenzione - orange
-    return { bg: 'bg-orange-400/10', text: 'text-orange-400', bar: 'bg-orange-400', border: 'border-orange-400/40', glow: 'rgba(251, 146, 60, 0.3)' };
-  } else {
-    // Sconsigliato - red
-    return { bg: 'bg-red-400/10', text: 'text-red-400', bar: 'bg-red-400', border: 'border-red-400/40', glow: 'rgba(248, 113, 113, 0.3)' };
-  }
-}
-
-// Get wind status and recommendation
-// SERVER-SIDE API CALL - One request for all data (with 5-min cache)
-let forecastData: ForecastData | null = null;
-let fetchError = false;
-
-// Check cache first (with validation for new data structure)
-const now = Date.now();
-const isCacheValid = globalThis.weatherCache && 
-  (now - globalThis.weatherCache.timestamp) < CACHE_TTL_MS &&
-  globalThis.weatherCache.data?.hourly?.[0]?.hasOwnProperty('isPast'); // Check for new interface
-
-if (isCacheValid && globalThis.weatherCache) {
-  // Use cached data
-  forecastData = globalThis.weatherCache.data;
-} else {
-  // Fetch fresh data
-  try {
-    const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?` +
-      `latitude=${LAT}&longitude=${LON}` +
-      `&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_direction_10m` +
-      `&hourly=wind_speed_10m,wind_direction_10m` +
-      `&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant` +
-      `&wind_speed_unit=kn` +
-      `&timezone=Europe/Rome` +
-      `&forecast_days=7`
-    );
-    
-    if (!response.ok) throw new Error('Weather API fetch failed');
-    
-    const data = await response.json();
-    
-    // Process current data
-    const currentTime = new Date();
-    const currentHour = currentTime.getHours();
-    const todayStr = currentTime.toISOString().split('T')[0];
-    
-    const currentData: CurrentData = {
-      windSpeed: Math.round(data.current.wind_speed_10m),
-      windDirection: degToCompass(data.current.wind_direction_10m),
-      windDirectionDeg: data.current.wind_direction_10m,
-      temperature: Math.round(data.current.temperature_2m),
-      humidity: Math.round(data.current.relative_humidity_2m),
-    };
-    
-    // Process hourly data: ALL 24 HOURS of today (fixed positions)
-    const hourlyData: HourlyData[] = [];
-    for (let targetHour = 0; targetHour < 24; targetHour++) {
-      // Find the index in the API data for this hour today
-      const targetTimeStr = `${todayStr}T${String(targetHour).padStart(2, '0')}`;
-      const idx = data.hourly.time.findIndex((t: string) => t.startsWith(targetTimeStr));
-      
-      if (idx !== -1) {
-        hourlyData.push({
-          time: String(targetHour).padStart(2, '0') + ':00',
-          hour: targetHour,
-          windSpeed: Math.round(data.hourly.wind_speed_10m[idx]),
-          windDirection: data.hourly.wind_direction_10m[idx],
-          isPast: targetHour < currentHour,
-          isNow: targetHour === currentHour,
-        });
-      } else {
-        // If no data for this hour, add placeholder (shouldn't happen with fresh data)
-        hourlyData.push({
-          time: String(targetHour).padStart(2, '0') + ':00',
-          hour: targetHour,
-          windSpeed: 0,
-          windDirection: 0,
-          isPast: targetHour < currentHour,
-          isNow: targetHour === currentHour,
-        });
-      }
-    }
-    
-    // Process daily data (7 days - today + 6 future days)
-    const dailyData: DailyData[] = data.daily.time.slice(0, 7).map((dateStr: string, i: number) => {
-      const weatherInfo = getWeatherInfo(data.daily.weather_code[i]);
-      return {
-        date: dateStr,
-        dayName: getDayName(dateStr, locale),
-        weatherCode: data.daily.weather_code[i],
-        weatherDesc: weatherInfo.desc,
-        weatherIcon: weatherInfo.icon,
-        tempMax: Math.round(data.daily.temperature_2m_max[i]),
-        tempMin: Math.round(data.daily.temperature_2m_min[i]),
-        windMax: Math.round(data.daily.wind_speed_10m_max[i]),
-        windDirection: degToCompass(data.daily.wind_direction_10m_dominant[i]),
-      };
-    });
-    
-    forecastData = {
-      current: currentData,
-      hourly: hourlyData,
-      daily: dailyData,
-      fetchTime: new Date().toLocaleTimeString(locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-US' : 'it-IT', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
-      }),
-    };
-    
-    // Store in cache
-    globalThis.weatherCache = {
-      data: forecastData,
-      timestamp: Date.now(),
-    };
-    
-  } catch (error) {
-    console.error('Error fetching forecast data:', error);
-    fetchError = true;
-  }
-}
+const forecastData = await fetchForecast(locale);
+const fetchError = !forecastData;
 
 // Pre-compute values for templates
-// Wind status and colors are calculated inline where needed
 const maxWindScale = 20; // Max knots for bar chart scaling
-
-// Compass direction to degrees for arrow rotation
-const dirMap: Record<string, number> = { 'N': 0, 'NE': 45, 'E': 90, 'SE': 135, 'S': 180, 'SW': 225, 'W': 270, 'NW': 315 };
 ---
 
 <BaseLayout title={t(content.page.title)} description={t(content.page.description)} locale={locale}>
@@ -442,64 +189,17 @@ const dirMap: Record<string, number> = { 'N': 0, 'NE': 45, 'E': 90, 'SE': 135, '
             <!-- Horizontal Row of Day Cards (Map Style - Arrow + Box) -->
             <div class="flex flex-wrap justify-between gap-y-4">
               {forecastData.daily.slice(1, 7).map((day, index, arr) => {
-                const colors = getWindColorClass(day.windMax);
-                const arrowRotation = (dirMap[day.windDirection] || 0) + 180;
-                // Format date based on locale
-                const dateFormatted = formatDate(day.date);
                 const isLast = index === arr.length - 1;
-                
                 return (
                   <>
-                    <div class="flex flex-col items-start gap-1.5">
-                      <!-- Date -->
-                      <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">
-                        {dateFormatted}
-                      </p>
-                      
-                      <!-- Box + Arrow (Map Style - box left, arrow right) -->
-                      <div class="flex items-center gap-2">
-                        <!-- Speed Box (glassmorphism like map) -->
-                        <div 
-                          class={`px-2.5 py-1.5 rounded-lg backdrop-blur-md font-mono font-black text-base leading-none 
-                            bg-white/90 dark:bg-slate-900/85 
-                            border ${colors.border}
-                            shadow-sm dark:shadow-[0_0_15px_var(--glow-color)]`}
-                          style={`--glow-color: ${colors.glow}`}
-                        >
-                          <span class={colors.text}>{day.windMax}</span>
-                          <span class={`text-xs ml-0.5 font-bold opacity-60 ${colors.text}`}>kn</span>
-        </div>
-        
-                        <!-- Arrow (exact map style: circle + line + double arrow) -->
-                        <svg 
-                          width="28" 
-                          height="28" 
-                          viewBox="0 0 36 36" 
-                          fill="none" 
-                          class={`${colors.text} drop-shadow-lg flex-shrink-0`}
-                          style={`transform: rotate(${arrowRotation}deg)`}
-                        >
-                          <circle cx="18" cy="8" r="5" fill="transparent" stroke="currentColor" stroke-width="2.5"/>
-                          <line x1="18" y1="13" x2="18" y2="30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                          <path d="M18 30 L12 23 M18 30 L24 23" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-      </div>
-
-                      <!-- Weather Icon + Temp -->
-                      <div class="flex items-center gap-1.5 mt-1">
-                        <span class="text-lg">{day.weatherIcon}</span>
-                        <span class="text-xs font-mono text-slate-500 dark:text-slate-400">
-                          {day.tempMax}° / {day.tempMin}°
-                        </span>
-                      </div>
-                    </div>
+                    <DailyForecastCard day={day} locale={locale} showDate={true} />
                     {!isLast && (
                       <div class="hidden md:block w-px h-12 bg-slate-300/50 dark:bg-slate-700/50 self-center"></div>
                     )}
                   </>
                 );
               })}
-        </div>
+            </div>
       </div>
         </>
       )}

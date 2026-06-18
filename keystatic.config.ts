@@ -562,6 +562,7 @@ export default config({
           disclaimer: localizedText('Disclaimer'),
           loading: localizedText('Caricamento'),
           error: localizedText('Errore'),
+          eventForecast: localizedText('Previsione giorno evento'),
         }, { label: 'Previsioni' }),
         windStatus: fields.object({
           calm: localizedText('Bonaccia'),

@@ -1,0 +1,87 @@
+---
+import type { Locale } from '../i18n';
+import type { DailyData } from '../utils/weather';
+import {
+  formatForecastDate,
+  getDailyForecastAriaLabel,
+  getWindArrowRotation,
+  getWindColorClass,
+} from '../utils/weather';
+
+interface Props {
+  day: DailyData;
+  locale: Locale;
+  showDate?: boolean;
+  compact?: boolean;
+  label?: string;
+}
+
+const {
+  day,
+  locale,
+  showDate = true,
+  compact = false,
+  label,
+} = Astro.props;
+
+const colors = getWindColorClass(day.windMax);
+const arrowRotation = getWindArrowRotation(day.windDirection);
+const dateFormatted = formatForecastDate(day.date, locale);
+const ariaLabel = getDailyForecastAriaLabel(day, locale);
+---
+
+<div
+  class:list={[
+    'daily-forecast-card flex flex-col',
+    compact ? 'items-end gap-1 shrink-0' : 'items-start gap-1.5',
+  ]}
+  role="group"
+  aria-label={ariaLabel}
+>
+  {label && (
+    <p class="text-xs font-semibold text-muted uppercase tracking-wide">
+      {label}
+    </p>
+  )}
+
+  {showDate && (
+    <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">
+      {dateFormatted}
+    </p>
+  )}
+
+  <div class="flex items-center gap-2">
+    <div
+      class:list={[
+        'rounded-lg backdrop-blur-md font-mono font-black leading-none bg-white/90 dark:bg-slate-900/85 border shadow-sm dark:shadow-[0_0_15px_var(--glow-color)]',
+        colors.border,
+        compact ? 'px-2 py-1 text-sm' : 'px-2.5 py-1.5 text-base',
+      ]}
+      style={`--glow-color: ${colors.glow}`}
+    >
+      <span class={colors.text}>{day.windMax}</span>
+      <span class={`text-xs ml-0.5 font-bold opacity-60 ${colors.text}`}>kn</span>
+    </div>
+
+    <svg
+      width={compact ? 24 : 28}
+      height={compact ? 24 : 28}
+      viewBox="0 0 36 36"
+      fill="none"
+      class={`${colors.text} drop-shadow-lg flex-shrink-0`}
+      style={`transform: rotate(${arrowRotation}deg)`}
+      aria-hidden="true"
+    >
+      <circle cx="18" cy="8" r="5" fill="transparent" stroke="currentColor" stroke-width="2.5"/>
+      <line x1="18" y1="13" x2="18" y2="30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M18 30 L12 23 M18 30 L24 23" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class:list={['flex items-center gap-1.5', compact ? '' : 'mt-1']}>
+    <span class={compact ? 'text-base' : 'text-lg'} aria-hidden="true">{day.weatherIcon}</span>
+    <span class="text-xs font-mono text-slate-500 dark:text-slate-400">
+      {day.tempMax}° / {day.tempMin}°
+    </span>
+  </div>
+</div>

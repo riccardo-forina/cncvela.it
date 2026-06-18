@@ -9,6 +9,9 @@ import type { Event } from '../types/event';
 // Import data
 import content from '../data/bacheca-content.json';
 import eventsData from '../data/events.json';
+import meteoContent from '../data/meteo-content.json';
+import { buildForecastMap, fetchDailyForecast } from '../utils/weather';
+import { createMeteoPreviewBundle, isMeteoPreviewEnabled } from '../utils/weatherPreview';
 
 // Import image
 import heroImage from '../assets/images/galleria/chiusura-corso.jpg';
@@ -34,12 +37,23 @@ const allEvents = (eventsData.events as Event[])
 const upcomingEvents = allEvents.filter(event => new Date(event.date) >= now);
 const pastEvents = allEvents.filter(event => new Date(event.date) < now).reverse().slice(0, 6);
 
+const dailyForecast = await fetchDailyForecast(locale);
+const forecastMap = buildForecastMap(dailyForecast ?? []);
+const forecastLabel = t(meteoContent.forecast.eventForecast);
+
+const meteoPreview = isMeteoPreviewEnabled() ? createMeteoPreviewBundle(locale) : null;
+const displayEvents = meteoPreview ? [meteoPreview.event, ...upcomingEvents] : upcomingEvents;
+const displayForecastMap = new Map(forecastMap);
+if (meteoPreview) {
+  displayForecastMap.set(meteoPreview.event.date, meteoPreview.forecast);
+}
+
 // Count by type
 const counts = {
-  all: upcomingEvents.length,
-  corso: upcomingEvents.filter(e => e.type === 'corso').length,
-  regata: upcomingEvents.filter(e => e.type === 'regata').length,
-  evento_sociale: upcomingEvents.filter(e => e.type === 'evento_sociale').length,
+  all: displayEvents.length,
+  corso: displayEvents.filter(e => e.type === 'corso').length,
+  regata: displayEvents.filter(e => e.type === 'regata').length,
+  evento_sociale: displayEvents.filter(e => e.type === 'evento_sociale').length,
 };
 ---
 
@@ -108,13 +122,24 @@ const counts = {
         </div>
       </div>
 
+      {meteoPreview && (
+        <div class="mb-6 rounded-lg border border-amber-400/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200">
+          Modalità anteprima meteo attiva (solo <code class="font-mono">npm run dev</code>): il primo evento è finto e non va committato.
+        </div>
+      )}
+
       <!-- Events List -->
       <div id="events-list" role="tabpanel">
-        {upcomingEvents.length > 0 ? (
+        {displayEvents.length > 0 ? (
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-            {upcomingEvents.map((event) => (
+            {displayEvents.map((event) => (
               <div class="event-card" data-type={event.type}>
-                <EventCard event={event} locale={locale} />
+                <EventCard
+                  event={event}
+                  locale={locale}
+                  weatherDay={displayForecastMap.get(event.date)}
+                  forecastLabel={forecastLabel}
+                />
               </div>
             ))}
           </div>

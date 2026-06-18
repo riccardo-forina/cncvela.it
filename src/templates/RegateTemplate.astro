@@ -9,10 +9,13 @@ import {
   getRegattaYears,
   groupRegattasByYear,
 } from '../utils/eventDocuments';
+import { buildForecastMap, fetchDailyForecast } from '../utils/weather';
+import DailyForecastCard from '../components/DailyForecastCard.astro';
 
 import content from '../data/regate-content.json';
 import eventsData from '../data/events.json';
 import bankDetails from '../data/bank-details.json';
+import meteoContent from '../data/meteo-content.json';
 
 import heroImage from '../assets/images/galleria/vela-azione-1.jpg';
 
@@ -31,6 +34,10 @@ const events = eventsData.events as Event[];
 const regattasByYear = groupRegattasByYear(events);
 const years = getRegattaYears(regattasByYear);
 const documentLabels = content.documents;
+
+const dailyForecast = await fetchDailyForecast(locale);
+const forecastMap = buildForecastMap(dailyForecast ?? []);
+const forecastLabel = t(meteoContent.forecast.eventForecast);
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -132,6 +139,7 @@ function formatShortDate(dateStr: string): string {
               <div class="space-y-6">
                 {(regattasByYear.get(year) ?? []).map((regata) => {
                   const availableDocs = getAvailableDocuments(regata, locale, documentLabels);
+                  const weatherDay = forecastMap.get(regata.date);
                   return (
                     <article class="bg-secondary rounded-xl border border-muted overflow-hidden">
                       <div class="p-6">
@@ -163,6 +171,17 @@ function formatShortDate(dateStr: string): string {
                             <p class="text-sm text-muted mt-2">
                               {regata.description[locale] || regata.description.it}
                             </p>
+
+                            {weatherDay && (
+                              <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                                <DailyForecastCard
+                                  day={weatherDay}
+                                  locale={locale}
+                                  showDate={false}
+                                  label={forecastLabel}
+                                />
+                              </div>
+                            )}
 
                             {availableDocs.length > 0 && (
                               <div class="flex flex-wrap gap-2 mt-4">

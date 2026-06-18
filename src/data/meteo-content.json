@@ -98,7 +98,8 @@
     "daily": { "it": "Previsioni Prossimi Giorni", "en": "Next Days Forecast", "de": "Vorhersage nächste Tage" },
     "disclaimer": { "it": "Indicazioni generali. Verifica sempre le condizioni reali prima di uscire.", "en": "General indications. Always check real conditions before going out.", "de": "Allgemeine Hinweise. Überprüfen Sie immer die tatsächlichen Bedingungen, bevor Sie losfahren." },
     "loading": { "it": "Caricamento...", "en": "Loading...", "de": "Wird geladen..." },
-    "error": { "it": "Errore nel caricamento dei dati meteo", "en": "Error loading weather data", "de": "Fehler beim Laden der Wetterdaten" }
+    "error": { "it": "Errore nel caricamento dei dati meteo", "en": "Error loading weather data", "de": "Fehler beim Laden der Wetterdaten" },
+    "eventForecast": { "it": "Previsione per il giorno dell'evento", "en": "Forecast for event day", "de": "Vorhersage für den Veranstaltungstag" }
   },
   "windStatus": {
     "calm": { "it": "Bonaccia", "en": "Calm", "de": "Flaute" },

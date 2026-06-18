@@ -6,6 +6,9 @@
  */
 import type { Locale } from '../i18n';
 import eventsJson from '../data/events.json';
+import meteoContent from '../data/meteo-content.json';
+import DailyForecastCard from './DailyForecastCard.astro';
+import { buildForecastMap, fetchDailyForecast } from '../utils/weather';
 
 interface Props {
   locale: Locale;
@@ -60,6 +63,10 @@ const allFutureEvents = events
 const totalEventsCount = allFutureEvents.length;
 const futureEvents = allFutureEvents.slice(0, maxEvents);
 
+const dailyForecast = await fetchDailyForecast(locale);
+const forecastMap = buildForecastMap(dailyForecast ?? []);
+const forecastLabel = t(meteoContent.forecast.eventForecast);
+
 // Format date
 const formatDate = (dateStr: string): string => {
   const date = new Date(dateStr);
@@ -95,6 +102,7 @@ const formatDate = (dateStr: string): string => {
     <div class="space-y-3">
       {futureEvents.map((event) => {
         const config = typeConfig[event.type] || typeConfig.evento_sociale;
+        const weatherDay = forecastMap.get(event.date);
         return (
           <a 
             href={event.registrationUrl || 'bacheca'}
@@ -124,6 +132,16 @@ const formatDate = (dateStr: string): string => {
                 <p class="text-xs text-muted truncate">{t(event.subtitle)}</p>
               )}
             </div>
+
+            {weatherDay && (
+              <DailyForecastCard
+                day={weatherDay}
+                locale={locale}
+                showDate={false}
+                compact={true}
+                label={forecastLabel}
+              />
+            )}
             
             <!-- Arrow -->
             <svg class="w-5 h-5 text-muted group-hover:text-[var(--color-accent-primary)] dark:group-hover:text-[#7CB3F0] group-hover:translate-x-1 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
