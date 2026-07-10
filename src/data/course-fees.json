@@ -11,7 +11,7 @@
         "en": "Dinghies - Day Week",
         "de": "Jollen - Tageskurs Woche"
       },
-      "price": 175.00,
+      "price": 175,
       "note": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
@@ -24,7 +24,7 @@
         "en": "Dinghies - Short Course (2 weekends)",
         "de": "Jollen - Kurzkurs (2 Wochenenden)"
       },
-      "price": 150.00,
+      "price": 150,
       "note": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
@@ -37,7 +37,7 @@
         "en": "Keelboats - Short Course (2 weekends)",
         "de": "Kielboote - Kurzkurs (2 Wochenenden)"
       },
-      "price": 200.00,
+      "price": 200,
       "note": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
@@ -69,9 +69,14 @@
         "en": "10% each",
         "de": "je 10%"
       }
+    },
+    {
+      "description": {
+        "it": "Sconti non cumulabili",
+        "en": "No double discounts",
+        "de": "Nicht kombinierbar"
+      },
+      "discount": {}
     }
   ]
 }
-
-
-
