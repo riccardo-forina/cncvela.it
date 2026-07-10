@@ -72,14 +72,14 @@
     },
     {
       "description": {
-        "it": "Sconti non cumulabili",
-        "en": "No double discounts",
-        "de": "Nicht kombinierbar"
+        "it": "Nota",
+        "en": "Please note",
+        "de": "Hinweis"
       },
       "discount": {
-        "it": ".",
-        "en": ".",
-        "de": "."
+        "it": "Le promozioni non sono cumulabili (si applica un solo sconto per iscrizione)",
+        "en": "Discounts are not cumulative (only one discount applies per registration)",
+        "de": "Rabatte sind non-kumulativ (nur un Rabatt pro Buchung anwendbar)"
       }
     }
   ]
