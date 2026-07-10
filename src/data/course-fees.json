@@ -76,7 +76,11 @@
         "en": "No double discounts",
         "de": "Nicht kombinierbar"
       },
-      "discount": {}
+      "discount": {
+        "it": ".",
+        "en": ".",
+        "de": "."
+      }
     }
   ]
 }
