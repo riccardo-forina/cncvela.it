@@ -70,7 +70,7 @@
       "sourceId": "http://www.marlis-zanetti.com/cam/picture.jpg",
       "attributionUrl": "http://www.marlis-zanetti.com/cam/picture.jpg",
       "dataType": "photo",
-      "active": true
+      "active": false
     },
     {
       "name": { "it": "Boa CNR-IRSA (Pallanza)", "en": "CNR-IRSA Buoy (Pallanza)", "de": "CNR-IRSA-Boje (Pallanza)" },
@@ -134,6 +134,33 @@
       "attributionUrl": "http://www.nauticalavazza.com/",
       "dataType": "photo",
       "active": false
+    },
+    {
+      "name": { "it": "Lakeview Cannobio (Windy)", "en": "Lakeview Cannobio (Windy)", "de": "Lakeview Cannobio (Windy)" },
+      "lat": 46.062,
+      "lon": 8.697,
+      "sourceId": "https://webcams.windy.com/webcams/public/embed/player/1706687563/day",
+      "attributionUrl": "https://www.windy.com/webcams/1706687563",
+      "dataType": "iframe",
+      "active": true
+    },
+    {
+      "name": { "it": "Locarno da Cardada (Windy)", "en": "Locarno from Cardada (Windy)", "de": "Locarno von Cardada (Windy)" },
+      "lat": 46.1857,
+      "lon": 8.7963,
+      "sourceId": "https://webcams.windy.com/webcams/public/embed/player/1222691180/day",
+      "attributionUrl": "https://www.windy.com/webcams/1222691180",
+      "dataType": "iframe",
+      "active": true
+    },
+    {
+      "name": { "it": "Ascona da Ronco (Windy)", "en": "Ascona from Ronco (Windy)", "de": "Ascona von Ronco (Windy)" },
+      "lat": 46.1758,
+      "lon": 8.7508,
+      "sourceId": "https://webcams.windy.com/webcams/public/embed/player/1464530709/day",
+      "attributionUrl": "https://www.windy.com/webcams/1464530709",
+      "dataType": "iframe",
+      "active": true
     }
   ]
 }

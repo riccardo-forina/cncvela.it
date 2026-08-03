@@ -338,6 +338,7 @@ function formatLastUpdated(iso: string): string {
 const ocrStations = getActiveStations().filter((s) => s.dataType === 'ocr');
 const jsonStations = getActiveStations().filter((s) => s.dataType === 'json');
 const webcamStations = getActiveStations().filter((s) => s.dataType === 'photo');
+const iframeStations = getActiveStations().filter((s) => s.dataType === 'iframe');
 
 // JSON stations, webcams and Föhn are all independent of each other and of
 // the (now client-side) station OCR, so they're fetched concurrently — each
@@ -411,6 +412,26 @@ function labelTopFor(id: string, side: LabelSide): number {
 const CALDE_LABEL_TOP = labelTopFor('calde', CALDE_LABEL_SIDE);
 
 const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !== null);
+
+// Iframe stations (e.g. Windy's webcam widget) are third-party embeds —
+// no image to fetch/freshness-gate ourselves, the provider handles that.
+// Kept as a separate card kind ('img' vs 'iframe') in the same carousel.
+type WebcamCard =
+  | { kind: 'img'; id: string; name: string; attributionUrl: string }
+  | { kind: 'iframe'; id: string; name: string; attributionUrl: string; embedUrl: string };
+
+const webcamCards: WebcamCard[] = [
+  ...liveWebcams.map((w): WebcamCard => ({ kind: 'img', ...w })),
+  ...iframeStations.map(
+    (station): WebcamCard => ({
+      kind: 'iframe',
+      id: station.id,
+      name: localizeStationName(station, locale),
+      attributionUrl: station.attributionUrl,
+      embedUrl: station.sourceId,
+    })
+  ),
+];
 
 // Translations are now passed as props from MeteoTemplate
 ---
@@ -698,7 +719,7 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
 <!-- Real station data: Föhn indicator, temp/pressure/rain table, live webcam.
      Kept as its own section below the hero (not crammed into the hero's
      console panel) so the fixed-height map above keeps its full height. -->
-{(foehnStatus || ocrStations.length > 0 || jsonStations.length > 0 || liveWebcams.length > 0) && (
+{(foehnStatus || ocrStations.length > 0 || jsonStations.length > 0 || webcamCards.length > 0) && (
   <section class="bg-slate-950 py-6 space-y-4">
   <div class="max-w-6xl mx-auto px-4 lg:px-6">
     {(foehnStatus || ocrStations.length > 0 || jsonStations.length > 0) && (
@@ -751,7 +772,7 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
         </div>
       )}
 
-      {liveWebcams.length > 0 && (
+      {webcamCards.length > 0 && (
         <div class="mt-5">
           <p class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">
             {t.webcamsTitle}
@@ -760,34 +781,47 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
             id="webcam-carousel"
             class:list={[
               'flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory -mx-4 px-4 lg:mx-0 lg:px-0',
-              { 'justify-center': liveWebcams.length === 1 },
+              { 'justify-center': webcamCards.length === 1 },
             ]}
           >
-            {liveWebcams.map((cam) => (
-              <a
-                href={cam.attributionUrl}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                class="group flex-shrink-0 w-[85vw] sm:w-72 md:w-80 snap-start"
-              >
+            {webcamCards.map((cam) => (
+              <div class="group flex-shrink-0 w-[85vw] sm:w-72 md:w-80 snap-start">
                 <div class="aspect-[4/3] rounded-lg overflow-hidden bg-black/20">
-                  <img
-                    src={`/api/webcam/${cam.id}`}
-                    alt={cam.name}
-                    loading="lazy"
-                    class="w-full h-full object-cover"
-                  />
+                  {cam.kind === 'img' ? (
+                    <img
+                      src={`/api/webcam/${cam.id}`}
+                      alt={cam.name}
+                      loading="lazy"
+                      class="w-full h-full object-cover"
+                    />
+                  ) : (
+                    // Third-party embedded player (e.g. Windy) — not
+                    // interactive content nested inside an <a>, so the
+                    // whole-card link below is separate instead of wrapping.
+                    <iframe
+                      src={cam.embedUrl}
+                      title={cam.name}
+                      loading="lazy"
+                      class="w-full h-full border-0"
+                      allowfullscreen
+                    />
+                  )}
                 </div>
-                <p class="mt-2 text-sm font-semibold text-white/90 group-hover:text-white transition-colors truncate">
+                <a
+                  href={cam.attributionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  class="mt-2 block text-sm font-semibold text-white/90 group-hover:text-white transition-colors truncate"
+                >
                   {cam.name}
-                </p>
-              </a>
+                </a>
+              </div>
             ))}
           </div>
 
-          {liveWebcams.length > 1 && (
+          {webcamCards.length > 1 && (
             <div id="webcam-carousel-dots" class="flex items-center justify-center gap-1.5 mt-3">
-              {liveWebcams.map((_, i) => (
+              {webcamCards.map((_, i) => (
                 <span class="webcam-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-colors" data-index={i}></span>
               ))}
             </div>

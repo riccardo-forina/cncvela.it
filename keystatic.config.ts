@@ -609,15 +609,16 @@ export default config({
             name: localizedText('Nome stazione', { required: true }),
             lat: fields.number({ label: 'Latitudine', validation: { isRequired: true } }),
             lon: fields.number({ label: 'Longitudine', validation: { isRequired: true } }),
-            sourceId: fields.text({ label: 'URL sorgente', description: 'Immagine ticker (OCR), URL API JSON, o foto webcam — a seconda del Tipo dato scelto sotto.', validation: { isRequired: true } }),
+            sourceId: fields.text({ label: 'URL sorgente', description: 'Immagine ticker (OCR), URL API JSON, foto webcam, o URL player embed — a seconda del Tipo dato scelto sotto.', validation: { isRequired: true } }),
             attributionUrl: fields.url({ label: 'Link alla pagina originale' }),
             dataType: fields.select({
               label: 'Tipo dato',
-              description: 'OCR: legge i valori da un\'immagine ticker. JSON: legge i valori da un\'API. Foto: nessun valore, solo webcam.',
+              description: 'OCR: legge i valori da un\'immagine ticker. JSON: legge i valori da un\'API. Foto: nessun valore, solo webcam. Iframe: player embedded di terzi (es. Windy).',
               options: [
                 { label: 'OCR (immagine ticker)', value: 'ocr' },
                 { label: 'JSON (API)', value: 'json' },
                 { label: 'Foto (solo webcam)', value: 'photo' },
+                { label: 'Iframe (player embedded)', value: 'iframe' },
               ],
               defaultValue: 'photo',
             }),

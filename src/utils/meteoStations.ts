@@ -7,7 +7,11 @@ import stationsData from '../data/meteo-stations.json';
 //   needed (see liveVcoStation.ts). Resolved server-side, like Föhn.
 // 'photo': sourceId is a plain webcam image, no wind reading — proxied
 //   as-is (see /api/webcam/[id] and webcams.ts).
-export type StationDataType = 'ocr' | 'json' | 'photo';
+// 'iframe': sourceId is a third-party embeddable player URL (e.g. Windy's
+//   webcam widget), no wind reading. Rendered directly as an <iframe>,
+//   not proxied — the third party serves and freshness-checks it
+//   themselves, we just point at their embed.
+export type StationDataType = 'ocr' | 'json' | 'photo' | 'iframe';
 
 export interface MeteoStation {
   id: string;
