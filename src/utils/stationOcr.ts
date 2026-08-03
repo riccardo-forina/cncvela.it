@@ -83,12 +83,34 @@ function parseFlexibleDecimal(raw: string): number {
 
 const kmhToKnots = (kmh: number): number => Math.round(kmh * 0.5399);
 
+// tesseract.js's WASM core is a local npm dependency (require()'d, no
+// network involved), but the English language data is NOT bundled — by
+// default it's downloaded from the jsdelivr CDN on every worker init, and
+// that download never persists: Vercel's /tmp is empty on every fresh
+// serverless invocation, so it's a ~5MB CDN fetch on every cold start. A
+// slow/rate-limited path to jsdelivr from Vercel's network was almost
+// certainly what hung the whole page in production. Fixed by bundling the
+// exact same file (public/tessdata/eng.traineddata, fetched from jsdelivr
+// once during development) and pointing tesseract.js at our own domain
+// instead — same mechanism (still an HTTP fetch), but to infrastructure
+// that's actually reliable from inside a Vercel function.
+const SITE_URL =
+  process.env.VERCEL_ENV === 'production'
+    ? 'https://www.cncvela.it'
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:4321';
+
 let workerPromise: Promise<Worker> | null = null;
 async function getWorker(): Promise<Worker> {
   if (!workerPromise) {
     // Vercel's serverless functions have a read-only filesystem except /tmp
     // — tesseract.js needs somewhere writable to cache the language data.
-    workerPromise = createWorker('eng', 1, { cachePath: '/tmp' }).then(async (worker) => {
+    workerPromise = createWorker('eng', 1, {
+      cachePath: '/tmp',
+      langPath: `${SITE_URL}/tessdata`,
+      gzip: false,
+    }).then(async (worker) => {
       await worker.setParameters({
         tessedit_pageseg_mode: '7' as any, // single text line
         tessedit_char_whitelist: '0123456789.,°CNSEWkmh/PahT% ',
