@@ -705,25 +705,22 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
         <div class="rounded-xl border border-white/10 bg-black/20 px-4 py-2 divide-y divide-white/10">
           <FoehnIndicator status={foehnStatus} labels={t.foehn} />
 
-          <!-- JSON stations' rows are resolved server-side and rendered
-               directly below; OCR stations' rows are appended by the client
-               script once OCR succeeds (see the script below) — same
-               #station-rows container either way. Starts visible if there's
-               already at least one server-rendered row, otherwise hidden
-               until the client script finds something to show. -->
+          <!-- Every active station gets a row, always — including OCR/JSON
+               sources with nothing live right now (stale, unreachable, OCR
+               failed this round), so members can still click through to the
+               source and check by hand. JSON stations' pressure/rain are
+               resolved server-side; OCR stations start as "—" and the
+               client script fills them in place if OCR succeeds (see
+               applyReading below) — same rows either way, nothing appended
+               or removed. -->
           {(ocrStations.length > 0 || jsonStations.length > 0) && (
-            <div
-              class="pt-2"
-              id="station-table"
-              data-source-label={t.sourceLabel}
-              style={jsonSlots.some((s) => s.reading !== null) ? '' : 'display: none;'}
-            >
+            <div class="pt-2" id="station-table">
               <p class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">
                 {t.stationsTitle}
               </p>
               <div id="station-rows">
-                {jsonSlots.filter((s) => s.reading !== null).map((slot) => (
-                  <div class="flex items-center justify-between gap-3 py-1.5 text-sm text-white/90">
+                {stationSlots.map((slot) => (
+                  <div class="flex items-center justify-between gap-3 py-1.5 text-sm text-white/90" data-row-id={slot.id}>
                     <a
                       href={slot.attributionUrl}
                       target="_blank"
@@ -738,12 +735,12 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
                       </svg>
                     </a>
                     <div class="flex items-center gap-3 font-mono text-white/80 flex-shrink-0">
-                      <span>{slot.reading!.pressureHpa.toFixed(1)}hPa</span>
+                      <span data-row-pressure>{slot.reading ? `${slot.reading.pressureHpa.toFixed(1)}hPa` : '—'}</span>
                       <span class="flex items-center gap-1 text-white/50">
                         <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path d="M12 2c-.3 0-.6.14-.78.4C9.6 5.3 6 10.7 6 14.5A6 6 0 0018 14.5C18 10.7 14.4 5.3 12.78 2.4A.94.94 0 0012 2z" />
                         </svg>
-                        {slot.reading!.rainMm.toFixed(1)}mm
+                        <span data-row-rain>{slot.reading ? `${slot.reading.rainMm.toFixed(1)}mm` : '—'}</span>
                       </span>
                     </div>
                   </div>
@@ -912,32 +909,16 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
     return workerPromise;
   }
 
-  const RAIN_ICON_SVG =
-    '<svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-.3 0-.6.14-.78.4C9.6 5.3 6 10.7 6 14.5A6 6 0 0018 14.5C18 10.7 14.4 5.3 12.78 2.4A.94.94 0 0012 2z" /></svg>';
-  const LINK_ICON_SVG =
-    '<svg class="w-3 h-3 text-white/40 group-hover:text-white/80 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>';
-
-  // Mirrors what used to be StationReadingRow.astro — that component was
-  // removed since Astro server components can't be invoked from client JS;
-  // this is the one place that markup exists now.
-  function addTableRow(
-    container: Element,
-    sourceLabel: string,
-    row: { name: string; attributionUrl: string; pressureHpa: number; rainMm: number }
-  ) {
-    const el = document.createElement('div');
-    el.className = 'flex items-center justify-between gap-3 py-1.5 text-sm text-white/90';
-    el.innerHTML = `
-      <a href="${row.attributionUrl}" target="_blank" rel="noopener noreferrer nofollow" class="group flex items-center gap-1 min-w-0 font-semibold truncate" aria-label="${sourceLabel}" title="${sourceLabel}">
-        <span class="truncate group-hover:text-white transition-colors">${row.name}</span>
-        ${LINK_ICON_SVG}
-      </a>
-      <div class="flex items-center gap-3 font-mono text-white/80 flex-shrink-0">
-        <span>${row.pressureHpa.toFixed(1)}hPa</span>
-        <span class="flex items-center gap-1 text-white/50">${RAIN_ICON_SVG}${row.rainMm.toFixed(1)}mm</span>
-      </div>
-    `;
-    container.appendChild(el);
+  // The row for every active station is always server-rendered (see the
+  // template above) — including ones with nothing live yet, so members can
+  // still click through to the source. This just fills in the numbers in
+  // place once OCR succeeds; nothing is created or removed.
+  function updateTableRow(id: string, row: { pressureHpa: number; rainMm: number }) {
+    const rowEl = document.querySelector(`[data-row-id="${id}"]`);
+    const pressureEl = rowEl?.querySelector('[data-row-pressure]');
+    const rainEl = rowEl?.querySelector('[data-row-rain]');
+    if (pressureEl) pressureEl.textContent = `${row.pressureHpa.toFixed(1)}hPa`;
+    if (rainEl) rainEl.textContent = `${row.rainMm.toFixed(1)}mm`;
   }
 
   // Stops the placeholder's "fetching" pulse once a station has settled into
@@ -995,17 +976,7 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
     liveLabel.style.display = 'flex';
     placeholderLabel.style.display = 'none';
 
-    const tableContainer = document.getElementById('station-table');
-    const rowsContainer = document.getElementById('station-rows');
-    if (tableContainer && rowsContainer) {
-      addTableRow(rowsContainer, tableContainer.dataset.sourceLabel || '', {
-        name: liveLabel.dataset.name || id,
-        attributionUrl: liveLabel.dataset.attribution || '#',
-        pressureHpa: reading.pressureHpa,
-        rainMm: reading.rainMm,
-      });
-      tableContainer.style.display = '';
-    }
+    updateTableRow(id, { pressureHpa: reading.pressureHpa, rainMm: reading.rainMm });
   }
 
   async function upgradeStation(id: string) {
