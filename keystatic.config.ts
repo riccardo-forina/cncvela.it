@@ -609,12 +609,17 @@ export default config({
             name: localizedText('Nome stazione', { required: true }),
             lat: fields.number({ label: 'Latitudine', validation: { isRequired: true } }),
             lon: fields.number({ label: 'Longitudine', validation: { isRequired: true } }),
-            sourceId: fields.text({ label: 'URL immagine sorgente', validation: { isRequired: true } }),
+            sourceId: fields.text({ label: 'URL sorgente', description: 'Immagine ticker (OCR), URL API JSON, o foto webcam — a seconda del Tipo dato scelto sotto.', validation: { isRequired: true } }),
             attributionUrl: fields.url({ label: 'Link alla pagina originale' }),
-            hasOcrReading: fields.checkbox({
-              label: 'Ha lettura numerica (OCR)',
-              description: 'Se attivo, il sistema legge i valori (vento, temperatura, pressione, pioggia) dall\'immagine sorgente invece di mostrarla come foto.',
-              defaultValue: false,
+            dataType: fields.select({
+              label: 'Tipo dato',
+              description: 'OCR: legge i valori da un\'immagine ticker. JSON: legge i valori da un\'API. Foto: nessun valore, solo webcam.',
+              options: [
+                { label: 'OCR (immagine ticker)', value: 'ocr' },
+                { label: 'JSON (API)', value: 'json' },
+                { label: 'Foto (solo webcam)', value: 'photo' },
+              ],
+              defaultValue: 'photo',
             }),
             active: fields.checkbox({
               label: 'Attiva',

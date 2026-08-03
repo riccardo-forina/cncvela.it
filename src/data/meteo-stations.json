@@ -6,7 +6,7 @@
       "lon": 8.738,
       "sourceId": "http://rete.centrometeolombardo.com/Varese/maccagno/immagini/v.png",
       "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=2158&ContentType=Stazioni",
-      "hasOcrReading": true,
+      "dataType": "ocr",
       "active": true
     },
     {
@@ -15,7 +15,25 @@
       "lon": 8.737,
       "sourceId": "http://rete.centrometeolombardo.com/Varese/tronzano/immagini/v.png",
       "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=3397&ContentType=Stazioni",
-      "hasOcrReading": true,
+      "dataType": "ocr",
+      "active": true
+    },
+    {
+      "name": { "it": "Baveno", "en": "Baveno", "de": "Baveno" },
+      "lat": 45.9089,
+      "lon": 8.5050,
+      "sourceId": "https://www.meteolivevco.it/api/baveno.php",
+      "attributionUrl": "https://www.meteolivevco.it/osservatorio-meteorologico-di-baveno-200-m-s-l-m/",
+      "dataType": "json",
+      "active": true
+    },
+    {
+      "name": { "it": "Belgirate", "en": "Belgirate", "de": "Belgirate" },
+      "lat": 45.8389,
+      "lon": 8.5714,
+      "sourceId": "https://www.meteolivevco.it/api/belgirate.php",
+      "attributionUrl": "https://www.meteolivevco.it/osservatorio-meteorologico-di-belgirate-200-mt-s-l-m/",
+      "dataType": "json",
       "active": true
     },
     {
@@ -24,7 +42,16 @@
       "lon": 8.539,
       "sourceId": "http://rete.centrometeolombardo.com/Novara/meina/immagini/v.png",
       "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=6198&ContentType=Stazioni",
-      "hasOcrReading": true,
+      "dataType": "ocr",
+      "active": true
+    },
+    {
+      "name": { "it": "Arona", "en": "Arona", "de": "Arona" },
+      "lat": 45.7598,
+      "lon": 8.5604,
+      "sourceId": "https://www.meteolivevco.it/api/arona.php",
+      "attributionUrl": "https://www.meteolivevco.it/osservatorio-meteorologico-di-arona-265-mt/",
+      "dataType": "json",
       "active": true
     },
     {
@@ -33,7 +60,7 @@
       "lon": 8.646,
       "sourceId": "http://rete.centrometeolombardo.com/Varese/brebbia/immagini/v.png",
       "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=746&ContentType=Stazioni",
-      "hasOcrReading": true,
+      "dataType": "ocr",
       "active": false
     },
     {
@@ -42,7 +69,7 @@
       "lon": 8.679,
       "sourceId": "http://www.marlis-zanetti.com/cam/picture.jpg",
       "attributionUrl": "http://www.marlis-zanetti.com/cam/picture.jpg",
-      "hasOcrReading": false,
+      "dataType": "photo",
       "active": true
     },
     {
@@ -51,7 +78,7 @@
       "lon": 8.630,
       "sourceId": "http://www.cerrometeo.com/public/gftp0000.jpg",
       "attributionUrl": "http://www.cerrometeo.com/meteo.asp",
-      "hasOcrReading": false,
+      "dataType": "photo",
       "active": false
     },
     {
@@ -60,7 +87,7 @@
       "lon": 8.610,
       "sourceId": "https://www.velaispra.it/webcam/circolo-vela-ispra-webcam.php",
       "attributionUrl": "https://www.velaispra.it/webcam/circolo-vela-ispra-webcam.php",
-      "hasOcrReading": false,
+      "dataType": "photo",
       "active": false
     },
     {
@@ -69,7 +96,7 @@
       "lon": 8.735,
       "sourceId": "http://www.swisstecnocams.ch/cam_fixed/brissago_fabbrica_2007/image1.jpg",
       "attributionUrl": "http://www.swisstecnocams.ch/cam_fixed/brissago_fabbrica_2007/image1.jpg",
-      "hasOcrReading": false,
+      "dataType": "photo",
       "active": false
     },
     {
@@ -78,7 +105,7 @@
       "lon": 8.694,
       "sourceId": "https://www.cannobio.net/webcam/current.jpg",
       "attributionUrl": "https://www.cannobio.net/webcam/current.jpg",
-      "hasOcrReading": false,
+      "dataType": "photo",
       "active": false
     },
     {
@@ -87,7 +114,7 @@
       "lon": 8.692,
       "sourceId": "http://www.campinglagomaggiore.it/resize.asp?tipo=B&immagine=current1.jpg",
       "attributionUrl": "http://www.campinglagomaggiore.it/",
-      "hasOcrReading": false,
+      "dataType": "photo",
       "active": false
     },
     {
@@ -96,7 +123,7 @@
       "lon": 8.646,
       "sourceId": "http://www.nauticalavazza.com/porto.jpg",
       "attributionUrl": "http://www.nauticalavazza.com/",
-      "hasOcrReading": false,
+      "dataType": "photo",
       "active": false
     }
   ]

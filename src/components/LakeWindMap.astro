@@ -30,6 +30,8 @@ import type { Locale } from '../i18n';
 import { getActiveStations, localizeStationName } from '../utils/meteoStations';
 import { getProxiedImage } from '../utils/webcams';
 import { getFoehnStatus } from '../utils/foehn';
+import { getLiveVcoReading } from '../utils/liveVcoStation';
+import { getWindColor } from '../utils/windColor';
 import FoehnIndicator from './FoehnIndicator.astro';
 
 interface MapTranslations {
@@ -135,7 +137,10 @@ function formatPosition(top: number, left: number): { top: string; left: string 
 const POSITION_OVERRIDES: Record<string, { top: number; left: number }> = {
   'pino-tronzano': { top: 19.4, left: 69.1 },
   maccagno: { top: 27.6, left: 63.5 },
+  baveno: { top: 52.4, left: 14.7 },
+  belgirate: { top: 67.8, left: 29.7 },
   meina: { top: 80.6, left: 24.2 },
+  arona: { top: 88.7, left: 30.2 },
 };
 
 function latLonToPosition(id: string, lat: number, lon: number): { top: string; left: string } {
@@ -159,7 +164,7 @@ const CALDE_LABEL_SIDE: LabelSide = 'right';
 // gutters (left or right edge of the map) at the same vertical position,
 // entirely decoupled from the arrow's own layout.
 type LabelSide = 'left' | 'right';
-const LEFT_GUTTER_STATIONS = new Set(['meina', 'pino-tronzano']);
+const LEFT_GUTTER_STATIONS = new Set(['meina', 'pino-tronzano', 'baveno', 'belgirate', 'arona']);
 const labelSideFor = (id: string): LabelSide => (LEFT_GUTTER_STATIONS.has(id) ? 'left' : 'right');
 
 // Gutters for labels, as a percentage of the map box — this same constant
@@ -189,37 +194,54 @@ function connectorStyle(position: { top: string; left: string }, side: LabelSide
   return `top: ${top}%; left: ${x1}%; width: ${x2 - x1}%; background: linear-gradient(${gradient});`;
 }
 
-// Station markers: OCR now runs client-side (see the <script> below — the
-// WASM OCR engine was too slow under Vercel's serverless CPU allocation to
-// run server-side reliably, see git history for the investigation). The
-// server only computes each station's position/name and renders it as a
-// placeholder; the client script fetches+OCRs the ticker image itself and
-// upgrades the placeholder to a live marker in place. Every active OCR
-// station starts as a placeholder — there's no "server tried and failed"
-// state anymore, just "not upgraded yet".
+// Station markers, two data sources:
+// - 'ocr' stations: OCR runs client-side (see the <script> below — the WASM
+//   OCR engine was too slow under Vercel's serverless CPU allocation to run
+//   server-side reliably, see git history). The server only computes
+//   position/name and renders a placeholder; the client script fetches+OCRs
+//   the ticker image and upgrades the placeholder to a live marker in place.
+// - 'json' stations (Meteo Live VCO network): a real JSON API, resolved
+//   server-side like Föhn — no OCR, no client upgrade, renders live
+//   immediately or falls back to a plain (non-pulsing — nothing will ever
+//   retry it client-side) placeholder if the API's unreachable/stale.
+// Both render through the same marker/label markup below, parametrized by
+// whether `reading` is already known and whether it `needsClientUpgrade`.
 interface StationSlot {
   id: string;
   name: string;
   position: { top: string; left: string };
   labelSide: LabelSide;
   attributionUrl: string;
+  needsClientUpgrade: boolean;
+  reading: {
+    windKn: number;
+    windDirDeg: number;
+    pressureHpa: number;
+    rainMm: number;
+    lastModifiedLabel: string;
+  } | null;
 }
 
-const ocrStations = getActiveStations().filter((s) => s.hasOcrReading);
-const webcamStations = getActiveStations().filter((s) => !s.hasOcrReading);
+function formatLastUpdated(iso: string): string {
+  const minutes = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+  if (minutes < 60) return `agg. ${minutes}m fa`;
+  return `agg. ${Math.round(minutes / 60)}h fa`;
+}
 
-const stationSlots: StationSlot[] = ocrStations.map((station) => ({
-  id: station.id,
-  name: localizeStationName(station, locale).toUpperCase(),
-  position: latLonToPosition(station.id, station.lat, station.lon),
-  labelSide: labelSideFor(station.id),
-  attributionUrl: station.attributionUrl,
-}));
+const ocrStations = getActiveStations().filter((s) => s.dataType === 'ocr');
+const jsonStations = getActiveStations().filter((s) => s.dataType === 'json');
+const webcamStations = getActiveStations().filter((s) => s.dataType === 'photo');
 
-// Webcams and Föhn are independent of each other and of the (now
-// client-side) station OCR, so they're fetched concurrently — each is
-// already timeout-bounded internally (see webcams.ts/foehn.ts).
-const [webcamResults, foehnStatus] = await Promise.all([
+// JSON stations, webcams and Föhn are all independent of each other and of
+// the (now client-side) station OCR, so they're fetched concurrently — each
+// is already timeout-bounded internally (see liveVcoStation.ts/webcams.ts/foehn.ts).
+const [jsonResults, webcamResults, foehnStatus] = await Promise.all([
+  Promise.all(
+    jsonStations.map(async (station) => {
+      const reading = await getLiveVcoReading(station.id, station.sourceId);
+      return { station, reading };
+    })
+  ),
   Promise.all(
     // Webcam-only stations (e.g. Cannero): no wind reading, just a live
     // photo. Checked server-side (freshness-gated, same cache the proxy
@@ -233,6 +255,36 @@ const [webcamResults, foehnStatus] = await Promise.all([
   ),
   getFoehnStatus(),
 ]);
+
+const ocrSlots: StationSlot[] = ocrStations.map((station) => ({
+  id: station.id,
+  name: localizeStationName(station, locale).toUpperCase(),
+  position: latLonToPosition(station.id, station.lat, station.lon),
+  labelSide: labelSideFor(station.id),
+  attributionUrl: station.attributionUrl,
+  needsClientUpgrade: true,
+  reading: null,
+}));
+
+const jsonSlots: StationSlot[] = jsonResults.map(({ station, reading }) => ({
+  id: station.id,
+  name: localizeStationName(station, locale).toUpperCase(),
+  position: latLonToPosition(station.id, station.lat, station.lon),
+  labelSide: labelSideFor(station.id),
+  attributionUrl: station.attributionUrl,
+  needsClientUpgrade: false,
+  reading: reading
+    ? {
+        windKn: reading.windKn,
+        windDirDeg: reading.windDirDeg,
+        pressureHpa: reading.pressureHpa,
+        rainMm: reading.rainMm,
+        lastModifiedLabel: formatLastUpdated(reading.lastModified),
+      }
+    : null,
+}));
+
+const stationSlots: StationSlot[] = [...ocrSlots, ...jsonSlots];
 
 const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !== null);
 
@@ -316,38 +368,44 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
            arrow's SVG/rotation markup in one place (here) instead of also
            having to build it in JS. -->
       <div class="absolute inset-0 z-10">
-        {stationSlots.map((slot) => (
-          <Fragment>
-            <!-- Live marker (hidden until the client script confirms a
-                 reading). The circle (cx=18, cy=8 of a 36x36 viewBox) is the
-                 actual "here" point — see the rotation-pivot note below. -->
-            <div
-              class="absolute transition-transform duration-300 ease-out"
-              style={`top: ${slot.position.top}; left: ${slot.position.left}; transform: translate(-50%, -22.222%); display: none;`}
-              data-live-marker={slot.id}
-            >
-              <div data-rotate-wrap style="transform-origin: 50% 22.222%;">
-                <svg width="22" height="22" viewBox="0 0 36 36" fill="none" class="drop-shadow-lg">
-                  <circle data-arrow-stroke cx="18" cy="8" r="5" fill="transparent" stroke-width="2.5"/>
-                  <line data-arrow-stroke x1="18" y1="13" x2="18" y2="30" stroke-width="3" stroke-linecap="round"/>
-                  <path data-arrow-stroke d="M18 30 L12 23 M18 30 L24 23" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        {stationSlots.map((slot) => {
+          const colors = slot.reading ? getWindColor(slot.reading.windKn) : null;
+          return (
+            <Fragment>
+              <!-- Live marker: visible immediately if the server already
+                   resolved a reading (JSON stations); otherwise hidden until
+                   the client script confirms one (OCR stations). The circle
+                   (cx=18, cy=8 of a 36x36 viewBox) is the actual "here"
+                   point — see the rotation-pivot note below. -->
+              <div
+                class="absolute transition-transform duration-300 ease-out"
+                style={`top: ${slot.position.top}; left: ${slot.position.left}; transform: translate(-50%, -22.222%); ${slot.reading ? '' : 'display: none;'}`}
+                data-live-marker={slot.needsClientUpgrade ? slot.id : undefined}
+              >
+                <div data-rotate-wrap style={`transform-origin: 50% 22.222%;${slot.reading ? ` transform: rotate(${slot.reading.windDirDeg}deg);` : ''}`}>
+                  <svg width="22" height="22" viewBox="0 0 36 36" fill="none" class="drop-shadow-lg">
+                    <circle data-arrow-stroke cx="18" cy="8" r="5" fill="transparent" stroke-width="2.5" stroke={colors?.arrow}/>
+                    <line data-arrow-stroke x1="18" y1="13" x2="18" y2="30" stroke-width="3" stroke-linecap="round" stroke={colors?.arrow}/>
+                    <path data-arrow-stroke d="M18 30 L12 23 M18 30 L24 23" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke={colors?.arrow}/>
+                  </svg>
+                </div>
               </div>
-            </div>
 
-            <!-- Placeholder marker: visible until the client script upgrades
-                 it. Pulses by default (data-loading) — reads as "fetching",
-                 not "dead" — until the script settles on a definitive state
-                 (live, stale, or unreachable), then the pulse stops. -->
-            <div
-              class="absolute transform -translate-x-1/2 -translate-y-1/2 opacity-50"
-              style={`top: ${slot.position.top}; left: ${slot.position.left};`}
-              data-placeholder-marker={slot.id}
-            >
-              <span data-loading-pulse class="block w-2.5 h-2.5 rounded-full border-2 border-white/60 animate-pulse"></span>
-            </div>
-          </Fragment>
-        ))}
+              <!-- Placeholder marker: visible until a reading is known.
+                   Pulses only for OCR stations still waiting on the client
+                   script (data-loading — "fetching", not "dead"); a JSON
+                   station that failed has nothing left to try, so it just
+                   sits static. -->
+              <div
+                class="absolute transform -translate-x-1/2 -translate-y-1/2 opacity-50"
+                style={`top: ${slot.position.top}; left: ${slot.position.left}; ${slot.reading ? 'display: none;' : ''}`}
+                data-placeholder-marker={slot.needsClientUpgrade ? slot.id : undefined}
+              >
+                <span data-loading-pulse class:list={['block w-2.5 h-2.5 rounded-full border-2 border-white/60', { 'animate-pulse': slot.needsClientUpgrade }]}></span>
+              </div>
+            </Fragment>
+          );
+        })}
 
         <!-- Caldè landmark (club location): just the logo — no wind badge,
              no real instrument here. -->
@@ -381,49 +439,55 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
            positioned. Live/placeholder pair, same pattern as the markers
            above. -->
       <div class="absolute inset-0 z-20">
-        {stationSlots.map((slot) => (
-          <Fragment>
-            <!-- Live label (hidden until upgraded) -->
-            <div
-              class:list={['absolute transform -translate-y-1/2 flex-col', slot.labelSide === 'left' ? 'items-start' : 'items-end']}
-              style={`top: ${slot.position.top}; ${gutterStyle(slot.labelSide)} display: none;`}
-              data-live-label={slot.id}
-              data-attribution={slot.attributionUrl}
-              data-name={slot.name}
-            >
-              <div class="speed-badge relative flex flex-col items-center">
-                <span data-pulse class="absolute -inset-1 rounded-lg opacity-25 animate-ping" style="animation-duration: 2.5s;"></span>
-                <div
-                  data-badge-box
-                  class="badge-box relative px-2 py-1 rounded-lg backdrop-blur-md font-mono font-black text-base leading-none bg-slate-900/85 border border-white/10"
-                >
-                  <span data-speed-value>--</span>
-                  <span data-speed-unit class="text-xs ml-1 font-bold opacity-60">kn</span>
+        {stationSlots.map((slot) => {
+          const colors = slot.reading ? getWindColor(slot.reading.windKn) : null;
+          return (
+            <Fragment>
+              <!-- Live label: visible immediately for a server-resolved
+                   reading (JSON stations), hidden until upgraded otherwise
+                   (OCR stations). -->
+              <div
+                class:list={['absolute transform -translate-y-1/2 flex-col', slot.labelSide === 'left' ? 'items-start' : 'items-end']}
+                style={`top: ${slot.position.top}; ${gutterStyle(slot.labelSide)} ${slot.reading ? '' : 'display: none;'}`}
+                data-live-label={slot.needsClientUpgrade ? slot.id : undefined}
+                data-attribution={slot.attributionUrl}
+                data-name={slot.name}
+              >
+                <div class="speed-badge relative flex flex-col items-center">
+                  <span data-pulse class:list={['absolute -inset-1 rounded-lg opacity-25 animate-ping', colors?.pulse]} style="animation-duration: 2.5s;"></span>
+                  <div
+                    data-badge-box
+                    class="badge-box relative px-2 py-1 rounded-lg backdrop-blur-md font-mono font-black text-base leading-none bg-slate-900/85 border border-white/10"
+                    style={colors ? `box-shadow: 0 0 25px ${colors.glow}, 0 4px 15px rgba(0,0,0,0.6); border-color: ${colors.border};` : ''}
+                  >
+                    <span data-speed-value style={colors ? `color: ${colors.text};` : ''}>{slot.reading ? slot.reading.windKn : '--'}</span>
+                    <span data-speed-unit class="text-xs ml-1 font-bold opacity-60" style={colors ? `color: ${colors.text};` : ''}>kn</span>
+                  </div>
                 </div>
-              </div>
-              <span class="text-[10px] font-bold tracking-wider mt-1 uppercase whitespace-nowrap text-center flex items-center gap-1" data-name-color style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
-                <span class="relative flex h-1.5 w-1.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+                <span class="text-[10px] font-bold tracking-wider mt-1 uppercase whitespace-nowrap text-center flex items-center gap-1" data-name-color style={`text-shadow: 0 2px 6px rgba(0,0,0,0.9);${colors ? ` color: ${colors.text};` : ''}`}>
+                  <span class="relative flex h-1.5 w-1.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+                  </span>
+                  {slot.name}
                 </span>
-                {slot.name}
-              </span>
-              <span data-timestamp-live class="text-[9px] font-mono text-white/80 whitespace-nowrap" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);"></span>
-            </div>
+                <span data-timestamp-live class="text-[9px] font-mono text-white/80 whitespace-nowrap" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">{slot.reading?.lastModifiedLabel}</span>
+              </div>
 
-            <!-- Placeholder label: visible until upgraded. -->
-            <div
-              class:list={['absolute transform -translate-y-1/2 flex flex-col opacity-50', slot.labelSide === 'left' ? 'items-start' : 'items-end']}
-              style={`top: ${slot.position.top}; ${gutterStyle(slot.labelSide)}`}
-              data-placeholder-label={slot.id}
-            >
-              <span class="text-[10px] font-bold tracking-wider uppercase whitespace-nowrap text-white/70" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
-                {slot.name}
-              </span>
-              <span data-timestamp-placeholder class="text-[9px] font-mono text-white/80 whitespace-nowrap" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9); display: none;"></span>
-            </div>
-          </Fragment>
-        ))}
+              <!-- Placeholder label: visible until a reading is known. -->
+              <div
+                class:list={['absolute transform -translate-y-1/2 flex flex-col opacity-50', slot.labelSide === 'left' ? 'items-start' : 'items-end']}
+                style={`top: ${slot.position.top}; ${gutterStyle(slot.labelSide)} ${slot.reading ? 'display: none;' : ''}`}
+                data-placeholder-label={slot.needsClientUpgrade ? slot.id : undefined}
+              >
+                <span class="text-[10px] font-bold tracking-wider uppercase whitespace-nowrap text-white/70" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
+                  {slot.name}
+                </span>
+                <span data-timestamp-placeholder class="text-[9px] font-mono text-white/80 whitespace-nowrap" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9); display: none;"></span>
+              </div>
+            </Fragment>
+          );
+        })}
 
         <div class="absolute transform -translate-y-1/2" style={`top: ${CALDE_POSITION.top}; ${gutterStyle(CALDE_LABEL_SIDE)}`}>
           <span class="text-xs font-bold tracking-wider uppercase whitespace-nowrap text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
@@ -509,22 +573,57 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
 <!-- Real station data: Föhn indicator, temp/pressure/rain table, live webcam.
      Kept as its own section below the hero (not crammed into the hero's
      console panel) so the fixed-height map above keeps its full height. -->
-{(foehnStatus || ocrStations.length > 0 || liveWebcams.length > 0) && (
+{(foehnStatus || ocrStations.length > 0 || jsonStations.length > 0 || liveWebcams.length > 0) && (
   <section class="bg-slate-950 py-6 space-y-4">
   <div class="max-w-6xl mx-auto px-4 lg:px-6">
-    {(foehnStatus || ocrStations.length > 0) && (
+    {(foehnStatus || ocrStations.length > 0 || jsonStations.length > 0) && (
         <div class="rounded-xl border border-white/10 bg-black/20 px-4 py-2 divide-y divide-white/10">
           <FoehnIndicator status={foehnStatus} labels={t.foehn} />
 
-          <!-- Populated by the client script once a station's OCR succeeds;
-               starts empty/hidden and only shows once it has at least one
-               row (see the script below). -->
-          {ocrStations.length > 0 && (
-            <div class="pt-2" id="station-table" data-source-label={t.sourceLabel} style="display: none;">
+          <!-- JSON stations' rows are resolved server-side and rendered
+               directly below; OCR stations' rows are appended by the client
+               script once OCR succeeds (see the script below) — same
+               #station-rows container either way. Starts visible if there's
+               already at least one server-rendered row, otherwise hidden
+               until the client script finds something to show. -->
+          {(ocrStations.length > 0 || jsonStations.length > 0) && (
+            <div
+              class="pt-2"
+              id="station-table"
+              data-source-label={t.sourceLabel}
+              style={jsonSlots.some((s) => s.reading !== null) ? '' : 'display: none;'}
+            >
               <p class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">
                 {t.stationsTitle}
               </p>
-              <div id="station-rows"></div>
+              <div id="station-rows">
+                {jsonSlots.filter((s) => s.reading !== null).map((slot) => (
+                  <div class="flex items-center justify-between gap-3 py-1.5 text-sm text-white/90">
+                    <a
+                      href={slot.attributionUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      class="group flex items-center gap-1 min-w-0 font-semibold truncate"
+                      aria-label={t.sourceLabel}
+                      title={t.sourceLabel}
+                    >
+                      <span class="truncate group-hover:text-white transition-colors">{slot.name}</span>
+                      <svg class="w-3 h-3 text-white/40 group-hover:text-white/80 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                    <div class="flex items-center gap-3 font-mono text-white/80 flex-shrink-0">
+                      <span>{slot.reading!.pressureHpa.toFixed(1)}hPa</span>
+                      <span class="flex items-center gap-1 text-white/50">
+                        <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M12 2c-.3 0-.6.14-.78.4C9.6 5.3 6 10.7 6 14.5A6 6 0 0018 14.5C18 10.7 14.4 5.3 12.78 2.4A.94.94 0 0012 2z" />
+                        </svg>
+                        {slot.reading!.rainMm.toFixed(1)}mm
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>

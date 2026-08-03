@@ -1,6 +1,14 @@
 import type { Locale } from '../i18n';
 import stationsData from '../data/meteo-stations.json';
 
+// 'ocr': sourceId is a ticker image, read via client-side OCR (see
+//   LakeWindMap.astro's client script and tickerParser.ts).
+// 'json': sourceId is a JSON API URL returning a reading directly — no OCR
+//   needed (see liveVcoStation.ts). Resolved server-side, like Föhn.
+// 'photo': sourceId is a plain webcam image, no wind reading — proxied
+//   as-is (see /api/webcam/[id] and webcams.ts).
+export type StationDataType = 'ocr' | 'json' | 'photo';
+
 export interface MeteoStation {
   id: string;
   name: { it: string; en?: string; de?: string };
@@ -8,7 +16,7 @@ export interface MeteoStation {
   lon: number;
   sourceId: string;
   attributionUrl: string;
-  hasOcrReading: boolean;
+  dataType: StationDataType;
   active: boolean;
 }
 
