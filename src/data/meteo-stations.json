@@ -73,6 +73,15 @@
       "active": true
     },
     {
+      "name": { "it": "Boa CNR-IRSA (Pallanza)", "en": "CNR-IRSA Buoy (Pallanza)", "de": "CNR-IRSA-Boje (Pallanza)" },
+      "lat": 45.943,
+      "lon": 8.485,
+      "sourceId": "https://embed.skylinewebcams.com/img/1764.jpg",
+      "attributionUrl": "https://www.meteolivevco.it/boa-limnologica-sul-lago-maggiore/",
+      "dataType": "photo",
+      "active": true
+    },
+    {
       "name": { "it": "Cerro (Laveno)", "en": "Cerro (Laveno)", "de": "Cerro (Laveno)" },
       "lat": 45.910,
       "lon": 8.630,
