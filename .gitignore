@@ -26,4 +26,9 @@ pnpm-debug.log*
 
 # Old website backup (not needed in repo)
 www.cncvela.it/
-scripts
+
+# tesseract.js language data cache (downloaded at runtime)
+eng.traineddata
+
+# debug output from scripts/compute-station-positions.mjs
+debug-station-positions.png

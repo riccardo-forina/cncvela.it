@@ -6,13 +6,21 @@ export const CALDE_LON = 8.6612;
 
 export const WIND_DIR_DEGREES: Record<string, number> = {
   N: 0,
+  NNE: 22.5,
   NE: 45,
+  ENE: 67.5,
   E: 90,
+  ESE: 112.5,
   SE: 135,
+  SSE: 157.5,
   S: 180,
+  SSW: 202.5,
   SW: 225,
+  WSW: 247.5,
   W: 270,
+  WNW: 292.5,
   NW: 315,
+  NNW: 337.5,
 };
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
@@ -112,11 +120,14 @@ export function getWindColorClass(speed: number): WindColorClasses {
   }
   if (speed < 11) {
     return {
-      bg: 'bg-amber-400/10',
-      text: 'text-amber-400',
-      bar: 'bg-amber-400',
-      border: 'border-amber-400/40',
-      glow: 'rgba(251, 191, 36, 0.3)',
+      // Yellow, not amber: amber (#fbbf24) and the orange tier below it
+      // (#fb923c) read as basically the same color — yellow gives real
+      // hue separation between "esperti" and "attenzione".
+      bg: 'bg-yellow-400/10',
+      text: 'text-yellow-400',
+      bar: 'bg-yellow-400',
+      border: 'border-yellow-400/40',
+      glow: 'rgba(250, 204, 21, 0.3)',
     };
   }
   if (speed < 16) {

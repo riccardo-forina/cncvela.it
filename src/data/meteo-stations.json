@@ -1,0 +1,103 @@
+{
+  "items": [
+    {
+      "name": { "it": "Maccagno", "en": "Maccagno", "de": "Maccagno" },
+      "lat": 46.043,
+      "lon": 8.738,
+      "sourceId": "http://rete.centrometeolombardo.com/Varese/maccagno/immagini/v.png",
+      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=2158&ContentType=Stazioni",
+      "hasOcrReading": true,
+      "active": true
+    },
+    {
+      "name": { "it": "Pino Tronzano", "en": "Pino Tronzano", "de": "Pino Tronzano" },
+      "lat": 46.099,
+      "lon": 8.737,
+      "sourceId": "http://rete.centrometeolombardo.com/Varese/tronzano/immagini/v.png",
+      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=3397&ContentType=Stazioni",
+      "hasOcrReading": true,
+      "active": true
+    },
+    {
+      "name": { "it": "Meina", "en": "Meina", "de": "Meina" },
+      "lat": 45.789,
+      "lon": 8.539,
+      "sourceId": "http://rete.centrometeolombardo.com/Novara/meina/immagini/v.png",
+      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=6198&ContentType=Stazioni",
+      "hasOcrReading": true,
+      "active": true
+    },
+    {
+      "name": { "it": "Nautica Lavazza (Brebbia)", "en": "Nautica Lavazza (Brebbia)", "de": "Nautica Lavazza (Brebbia)" },
+      "lat": 45.821,
+      "lon": 8.646,
+      "sourceId": "http://rete.centrometeolombardo.com/Varese/brebbia/immagini/v.png",
+      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=746&ContentType=Stazioni",
+      "hasOcrReading": true,
+      "active": false
+    },
+    {
+      "name": { "it": "Cannero Riviera", "en": "Cannero Riviera", "de": "Cannero Riviera" },
+      "lat": 46.022,
+      "lon": 8.679,
+      "sourceId": "http://www.marlis-zanetti.com/cam/picture.jpg",
+      "attributionUrl": "http://www.marlis-zanetti.com/cam/picture.jpg",
+      "hasOcrReading": false,
+      "active": true
+    },
+    {
+      "name": { "it": "Cerro (Laveno)", "en": "Cerro (Laveno)", "de": "Cerro (Laveno)" },
+      "lat": 45.910,
+      "lon": 8.630,
+      "sourceId": "http://www.cerrometeo.com/public/gftp0000.jpg",
+      "attributionUrl": "http://www.cerrometeo.com/meteo.asp",
+      "hasOcrReading": false,
+      "active": false
+    },
+    {
+      "name": { "it": "Ispra", "en": "Ispra", "de": "Ispra" },
+      "lat": 45.813,
+      "lon": 8.610,
+      "sourceId": "https://www.velaispra.it/webcam/circolo-vela-ispra-webcam.php",
+      "attributionUrl": "https://www.velaispra.it/webcam/circolo-vela-ispra-webcam.php",
+      "hasOcrReading": false,
+      "active": false
+    },
+    {
+      "name": { "it": "Brissago", "en": "Brissago", "de": "Brissago" },
+      "lat": 46.128,
+      "lon": 8.735,
+      "sourceId": "http://www.swisstecnocams.ch/cam_fixed/brissago_fabbrica_2007/image1.jpg",
+      "attributionUrl": "http://www.swisstecnocams.ch/cam_fixed/brissago_fabbrica_2007/image1.jpg",
+      "hasOcrReading": false,
+      "active": false
+    },
+    {
+      "name": { "it": "Cannobio", "en": "Cannobio", "de": "Cannobio" },
+      "lat": 46.058,
+      "lon": 8.694,
+      "sourceId": "https://www.cannobio.net/webcam/current.jpg",
+      "attributionUrl": "https://www.cannobio.net/webcam/current.jpg",
+      "hasOcrReading": false,
+      "active": false
+    },
+    {
+      "name": { "it": "Camping Lago Maggiore (Cannobio)", "en": "Camping Lago Maggiore (Cannobio)", "de": "Camping Lago Maggiore (Cannobio)" },
+      "lat": 46.052,
+      "lon": 8.692,
+      "sourceId": "http://www.campinglagomaggiore.it/resize.asp?tipo=B&immagine=current1.jpg",
+      "attributionUrl": "http://www.campinglagomaggiore.it/",
+      "hasOcrReading": false,
+      "active": false
+    },
+    {
+      "name": { "it": "Nautica Lavazza (webcam porto)", "en": "Nautica Lavazza (harbor cam)", "de": "Nautica Lavazza (Hafenkamera)" },
+      "lat": 45.821,
+      "lon": 8.646,
+      "sourceId": "http://www.nauticalavazza.com/porto.jpg",
+      "attributionUrl": "http://www.nauticalavazza.com/",
+      "hasOcrReading": false,
+      "active": false
+    }
+  ]
+}

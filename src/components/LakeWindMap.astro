@@ -1,63 +1,157 @@
 ---
 /**
  * LakeWindMap.astro - Premium Tactical Wind Map for Lake Maggiore
- * 
- * Full-viewport hero with holographic lake visualization and live wind data.
- * Uses ICON-D2 model for high-resolution Alpine weather forecasts.
+ *
+ * Full-viewport hero with holographic lake visualization. Maccagno, Pino
+ * Tronzano and Meina show real OCR'd shore-station readings.
+ *
+ * LAYOUT RULE — read before adding content to this component:
+ * The `.lake-wind-hero` div (below) is HEIGHT-LOCKED to the viewport
+ * (`h-[calc(100svh-...)]`) so the map fills the screen on load. Title
+ * ("Meteo Live" + live dot, top-left), the wind-speed legend (bottom-right)
+ * and the safety disclaimer (bottom-left) are three separate, independent
+ * map overlays — not stacked/grouped with each other, and not separate rows
+ * below the map. Every row added below the map eats into the map's own
+ * height and squeezes the SVG and its markers into a smaller box (this
+ * happened once already: adding the Föhn indicator/station table/webcam
+ * there made the map "not full height" with arrows too cramped to see).
+ * What's left below the map — the `console-panel`, just the centered
+ * scroll-hint now — must stay minimal for the same reason. Any new data/UI
+ * belongs in the separate <section> rendered AFTER `.lake-wind-hero`
+ * closes, in normal page flow below the fold — not inside the hero. The
+ * title/legend/disclaimer overlays are anchored to the map `<section>`
+ * itself, not the aspect-ratio container inside it — that container can
+ * render taller than the section and gets top/bottom-clipped by its own
+ * overflow-hidden, which would clip a bottom/top-anchored overlay along
+ * with it.
  */
 
 import type { Locale } from '../i18n';
+import { getActiveStations, localizeStationName } from '../utils/meteoStations';
+import { getStationReading, type StationTableRow, type StationReading } from '../utils/stationOcr';
+import { getProxiedWebcam } from '../utils/webcams';
+import { getFoehnStatus } from '../utils/foehn';
+import FoehnIndicator from './FoehnIndicator.astro';
+import StationReadingRow from './StationReadingRow.astro';
 
 interface MapTranslations {
   title: string;
   seoTitle: string;
   ariaLabel: string;
   mapAlt: string;
-  legend: string;
-  model: string;
   scroll: string;
   disclaimer: string;
+  sourceLabel: string;
+  forecastLabel: string;
+  stationsTitle: string;
+  webcamsTitle: string;
+  foehn: {
+    title: string;
+    bassa: string;
+    moderata: string;
+    alta: string;
+    disclaimer: string;
+  };
 }
 
 interface Props {
   locale?: Locale;
   translations: MapTranslations;
-  todayWeather?: {
-    icon: string;
-    tempMax: number;
-    tempMin: number;
-  };
 }
 
-const { locale = 'it', translations: t, todayWeather } = Astro.props;
+const { locale = 'it', translations: t } = Astro.props;
 
-// Strategic coordinates for Lake Maggiore
-const LOCATIONS = [
-  { 
-    id: 'maccagno', 
-    name: 'MACCAGNO', 
-    lat: 46.043, 
-    lon: 8.738,
-    position: { top: '24%', left: '72%' } 
-  },
-  { 
-    id: 'calde', 
-    name: 'CALDÈ', 
-    lat: 45.947, 
-    lon: 8.649,
-    position: { top: '48%', left: '62%' } 
-  },
-  { 
-    id: 'ispra', 
-    name: 'ISPRA', 
-    lat: 45.813, 
-    lon: 8.610,
-    position: { top: '78%', left: '44%' } 
-  },
-] as const;
+// Caldè: club home, plain landmark pin — no wind badge, since there's no real
+// instrument there (dropped the old forecast-only badge: misleading to show
+// a model guess right next to real station readings).
+const CALDE_LATLON = { lat: 45.947, lon: 8.649 };
 
-// Convert km/h to knots
-const kmhToKnots = (kmh: number): number => Math.round(kmh * 0.5399);
+// The map's SVG below is hand-drawn, not a true geographic projection. These
+// 3 points (Maccagno, Caldè, Ispra) were the original hand-placed marker
+// positions (in the tight, unpadded 0-100 coordinate space the SVG viewBox
+// used before the zoom-out margin below was added) — Ispra itself is no
+// longer shown on the map, but its anchor point is kept here purely as
+// calibration data for the affine fallback below. Solving the lat/lon ->
+// %position transform they imply lets us place any other station's real
+// coordinates on the same map without re-eyeballing by hand — see the plan
+// doc for the derivation and caveats (weaker across the lake's width, since
+// all 3 anchors sit on the east shore).
+const MAP_ANCHORS = [
+  { lat: 46.043, lon: 8.738, top: 24, left: 72 }, // Maccagno
+  { lat: CALDE_LATLON.lat, lon: CALDE_LATLON.lon, top: 48, left: 62 }, // Caldè
+  { lat: 45.813, lon: 8.610, top: 78, left: 44 }, // Ispra (calibration only)
+];
+
+function det3(m: number[][]): number {
+  return (
+    m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
+    m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
+    m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0])
+  );
+}
+
+function solveAffine(rows: { lat: number; lon: number; value: number }[]): [number, number, number] {
+  const A = rows.map((r) => [r.lat, r.lon, 1]);
+  const b = rows.map((r) => r.value);
+  const D = det3(A);
+  const solveFor = (col: number) => {
+    const Ai = A.map((row) => [...row]);
+    for (let r = 0; r < 3; r++) Ai[r][col] = b[r];
+    return det3(Ai) / D;
+  };
+  return [solveFor(0), solveFor(1), solveFor(2)];
+}
+
+const topCoef = solveAffine(MAP_ANCHORS.map((a) => ({ lat: a.lat, lon: a.lon, value: a.top })));
+const leftCoef = solveAffine(MAP_ANCHORS.map((a) => ({ lat: a.lat, lon: a.lon, value: a.left })));
+
+// "Zoom out": the affine transform above places markers tight against the
+// map's edges (e.g. Pino Tronzano at top:12%, Meina at bottom:86%), which on
+// a mobile-height viewport left them cramped against the weather-widget/
+// scroll-hint overlays and hard to notice. Pad every position toward the
+// center by this margin (applied to both the SVG viewBox and every marker's
+// %, so the lake shape and the markers stay in sync).
+const ZOOM_OUT_MARGIN_PCT = 15;
+const zoomOut = (pct: number): number => ZOOM_OUT_MARGIN_PCT + pct * (1 - (2 * ZOOM_OUT_MARGIN_PCT) / 100);
+
+function formatPosition(top: number, left: number): { top: string; left: string } {
+  return { top: `${zoomOut(top).toFixed(1)}%`, left: `${zoomOut(left).toFixed(1)}%` };
+}
+
+// The affine transform below is a fallback ONLY — it's not reliable enough
+// to trust directly (confirmed: even the 3 *original* hand-placed anchors
+// it was built from landed off the actual lake shape when checked against
+// real rendered pixels, and extrapolating from already-wrong anchors
+// compounded the error for everything else).
+//
+// Every station actually in use has an explicit override below, computed by
+// `scripts/compute-station-positions.mjs`: it walks the real drawn
+// shoreline polygon and places each station by real latitude, proportional
+// arc-length along the correct shore chain — the result is on the
+// shoreline *by construction*, not a guess that gets checked afterward.
+// That script also runs two automated checks (north-south order matches
+// real latitude; every point samples as lake-colored on the actual
+// rasterized SVG) and writes a debug render to look at before trusting the
+// output. Adding or moving a station: edit the STATIONS list in that
+// script, re-run it, paste the printed values in here — don't hand-tune
+// these numbers directly.
+const POSITION_OVERRIDES: Record<string, { top: number; left: number }> = {
+  'pino-tronzano': { top: 19.4, left: 69.1 },
+  maccagno: { top: 27.6, left: 63.5 },
+  meina: { top: 80.6, left: 24.2 },
+};
+
+function latLonToPosition(id: string, lat: number, lon: number): { top: string; left: string } {
+  const override = POSITION_OVERRIDES[id];
+  if (override) return formatPosition(override.top, override.left);
+  const top = topCoef[0] * lat + topCoef[1] * lon + topCoef[2];
+  const left = leftCoef[0] * lat + leftCoef[1] * lon + leftCoef[2];
+  return formatPosition(top, left);
+}
+
+// Computed by scripts/compute-station-positions.mjs — see POSITION_OVERRIDES comment above.
+const CALDE_POSITION = formatPosition(50.2, 49.3);
+const CALDE_LABEL_SIDE: LabelSide = 'right';
 
 // Get wind color based on knots
 const getWindColor = (knots: number) => {
@@ -80,13 +174,15 @@ const getWindColor = (knots: number) => {
       pulse: 'bg-emerald-400',
     };
   } else if (knots < 11) {
+    // Yellow, not amber: amber and the orange tier right below it read as
+    // basically the same color — yellow gives real hue separation.
     return {
-      arrow: '#fbbf24',
-      badge: 'rgba(251, 191, 36, 0.15)',
-      border: 'rgba(251, 191, 36, 0.5)',
-      text: '#fcd34d',
-      glow: 'rgba(251, 191, 36, 0.4)',
-      pulse: 'bg-amber-400',
+      arrow: '#facc15',
+      badge: 'rgba(250, 204, 21, 0.15)',
+      border: 'rgba(250, 204, 21, 0.5)',
+      text: '#fde047',
+      glow: 'rgba(250, 204, 21, 0.4)',
+      pulse: 'bg-yellow-400',
     };
   } else if (knots < 16) {
     return {
@@ -109,68 +205,156 @@ const getWindColor = (knots: number) => {
   }
 };
 
+// Labels are deliberately NOT laid out next to their arrow via flexbox —
+// a label's rendered width depends on the browser/OS/font/user font-size
+// preference, none of which we control, so "centering" a mixed arrow+label
+// group on a coordinate is inherently unreliable (this is exactly what kept
+// going wrong). Instead: arrows sit at the *precise* computed position (a
+// fixed-size SVG we fully control), and labels live in one of two fixed
+// gutters (left or right edge of the map) at the same vertical position,
+// entirely decoupled from the arrow's own layout.
+type LabelSide = 'left' | 'right';
+const LEFT_GUTTER_STATIONS = new Set(['meina', 'pino-tronzano']);
+const labelSideFor = (id: string): LabelSide => (LEFT_GUTTER_STATIONS.has(id) ? 'left' : 'right');
+
+// Gutters for labels, as a percentage of the map box — this same constant
+// drives both the label's own position (below) and the connector-line math,
+// so they can't drift apart the way a separate Tailwind `left-2`/`right-2`
+// (rem-based) and a percentage-based line calculation previously could.
+// Pulled in from the very edge (was 3/97) now that icon positions are
+// precise and trustworthy — shorter connector lines read as more clearly
+// "this label belongs to that icon" than a wire spanning the whole map.
+const GUTTER_LEFT_PCT = 12;
+const GUTTER_RIGHT_PCT = 88;
+function gutterStyle(side: LabelSide): string {
+  return side === 'left' ? `left: ${GUTTER_LEFT_PCT}%;` : `right: ${100 - GUTTER_RIGHT_PCT}%;`;
+}
+function connectorStyle(position: { top: string; left: string }, side: LabelSide, opacity = 0.28): string {
+  const top = parseFloat(position.top);
+  const iconLeft = parseFloat(position.left);
+  const gutterLeft = side === 'left' ? GUTTER_LEFT_PCT : GUTTER_RIGHT_PCT;
+  const x1 = Math.min(iconLeft, gutterLeft);
+  const x2 = Math.max(iconLeft, gutterLeft);
+  // Fade toward the icon end, solid toward the label end — draws the eye to
+  // the readable text rather than reading as a flat wire laid over the map.
+  const fadesLeftToRight = side === 'left'; // left-gutter label sits at x1 (left side)
+  const gradient = fadesLeftToRight
+    ? `to right, rgba(255,255,255,${opacity}), rgba(255,255,255,0)`
+    : `to right, rgba(255,255,255,0), rgba(255,255,255,${opacity})`;
+  return `top: ${top}%; left: ${x1}%; width: ${x2 - x1}%; background: linear-gradient(${gradient});`;
+}
+
 // Fetch wind data
 interface WindData {
   id: string;
   name: string;
   position: { top: string; left: string };
+  labelSide: LabelSide;
   windSpeed: number;
   windDirection: number;
   colors: ReturnType<typeof getWindColor>;
+  isLive: boolean;
+  /** "agg. Xm fa" / "agg. Xh fa" — only set for real (isLive) readings. */
+  lastUpdatedLabel?: string;
 }
 
-let windData: WindData[] = [];
-let fetchError = false;
-
-try {
-  const responses = await Promise.all(
-    LOCATIONS.map(loc =>
-      fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${loc.lat}&longitude=${loc.lon}&current=wind_speed_10m,wind_direction_10m&models=icon_d2&timezone=Europe/Rome`
-      ).then(res => {
-        if (!res.ok) throw new Error(`Failed to fetch data for ${loc.name}`);
-        return res.json();
-      })
-    )
-  );
-
-  windData = responses.map((data, index) => {
-    const loc = LOCATIONS[index];
-    const windSpeedKmh = data.current?.wind_speed_10m ?? 0;
-    const windSpeedKn = kmhToKnots(windSpeedKmh);
-    const windDirection = data.current?.wind_direction_10m ?? 0;
-    
-    return {
-      id: loc.id,
-      name: loc.name,
-      position: loc.position,
-      windSpeed: windSpeedKn,
-      windDirection,
-      colors: getWindColor(windSpeedKn),
-    };
-  });
-} catch (error) {
-  console.error('Error fetching wind data:', error);
-  fetchError = true;
-  
-  windData = LOCATIONS.map(loc => ({
-    id: loc.id,
-    name: loc.name,
-    position: loc.position,
-    windSpeed: 0,
-    windDirection: 0,
-    colors: getWindColor(0),
-  }));
+function formatLastUpdated(iso: string): string {
+  const minutes = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 60000));
+  if (minutes < 60) return `agg. ${minutes}m fa`;
+  return `agg. ${Math.round(minutes / 60)}h fa`;
 }
+
+interface PlaceholderMarker {
+  id: string;
+  name: string;
+  position: { top: string; left: string };
+  labelSide: LabelSide;
+  /** "agg. Xh fa" if we know when the source last updated, even though it's too stale to show as live. */
+  lastUpdatedLabel?: string;
+}
+
+const windData: WindData[] = [];
+const stationRows: StationTableRow[] = [];
+// Stations whose OCR/freshness-gate failed this round still get a location
+// marker (no arrow/number, since we have nothing real to show) instead of
+// vanishing outright — easier to tell "no data right now" from "not a real
+// station" while OCR reliability is still being worked on. May revisit once
+// it's solid enough that omitting failures entirely reads as clearly dead
+// rather than confusing.
+const placeholderMarkers: PlaceholderMarker[] = [];
+
+const ocrStations = getActiveStations().filter((s) => s.hasOcrReading);
+const realResults = await Promise.all(
+  ocrStations.map(async (station) => {
+    const name = localizeStationName(station, locale);
+    const position = latLonToPosition(station.id, station.lat, station.lon);
+    let result: { reading: StationReading | null; lastKnownUpdate: string | null } = { reading: null, lastKnownUpdate: null };
+    try {
+      result = await getStationReading(station.id, station.sourceId);
+    } catch (error) {
+      console.error(`Error reading station ${station.id}:`, error);
+    }
+    return { station, name, position, reading: result.reading, lastKnownUpdate: result.lastKnownUpdate };
+  })
+);
+for (const { station, name, position, reading, lastKnownUpdate } of realResults) {
+  if (reading) {
+    windData.push({
+      id: station.id,
+      name: name.toUpperCase(),
+      position,
+      labelSide: labelSideFor(station.id),
+      windSpeed: reading.windKn,
+      windDirection: reading.windDirDeg,
+      colors: getWindColor(reading.windKn),
+      isLive: true,
+      lastUpdatedLabel: formatLastUpdated(reading.lastModified),
+    });
+    stationRows.push({
+      id: station.id,
+      name,
+      attributionUrl: station.attributionUrl,
+      pressureHpa: reading.pressureHpa,
+      rainMm: reading.rainMm,
+    });
+  } else {
+    placeholderMarkers.push({
+      id: station.id,
+      name: name.toUpperCase(),
+      position,
+      labelSide: labelSideFor(station.id),
+      lastUpdatedLabel: lastKnownUpdate ? formatLastUpdated(lastKnownUpdate) : undefined,
+    });
+  }
+}
+
+// Webcam-only stations (e.g. Cannero): no wind reading, just a live photo.
+// Checked server-side (freshness-gated, same cache the proxy endpoint hits)
+// so we only render an <img> for sources we know will actually resolve.
+const webcamStations = getActiveStations().filter((s) => !s.hasOcrReading);
+const webcamResults = await Promise.all(
+  webcamStations.map(async (station) => {
+    const webcam = await getProxiedWebcam(station.id, station.sourceId);
+    if (!webcam) return null;
+    return { id: station.id, name: localizeStationName(station, locale), attributionUrl: station.attributionUrl };
+  })
+);
+const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !== null);
+
+const foehnStatus = await getFoehnStatus();
+
+// Only a true full outage (zero markers at all) blanks the map — partial
+// availability is the normal state here, not an error.
+const fetchError = windData.length === 0;
 
 // Translations are now passed as props from MeteoTemplate
 ---
 
 <!-- Full viewport hero -->
 <div class="lake-wind-hero h-[calc(100svh-4rem-4rem)] md:h-[calc(100svh-5rem)] md:min-h-[850px] flex flex-col relative z-10 shadow-[0_10px_40px_-5px_rgba(0,0,0,0.5)]">
-  
+
   <!-- Map Section -->
-  <section 
+  <section
     class="tactical-bg relative flex-1 min-h-0 overflow-hidden flex items-center justify-center"
     role="region"
     aria-label={t.ariaLabel}
@@ -183,9 +367,14 @@ try {
     <div class="relative mx-auto w-full max-w-[400px] aspect-[885/1406]">
       
       <!-- SVG Map -->
-      <svg 
-        viewBox="0 0 885 1406" 
-        xmlns="http://www.w3.org/2000/svg" 
+      <!-- viewBox padded 15% on every side (ZOOM_OUT_MARGIN_PCT above) so
+           markers near the frame edges (e.g. Meina, Pino Tronzano) have
+           breathing room instead of sitting flush against the hero's
+           weather-widget/scroll-hint overlays. Keep in sync with that
+           constant if either changes. -->
+      <svg
+        viewBox="-132.8 -210.9 1150.5 1827.8"
+        xmlns="http://www.w3.org/2000/svg"
         class="lake-svg absolute inset-0 w-full h-full"
         fill="none"
         preserveAspectRatio="xMidYMid meet"
@@ -229,52 +418,132 @@ try {
         </g>
       </svg>
       
-      <!-- Wind Markers -->
+      <!-- Icons: precise, fixed-size, nothing but arrows/dots/logo on the
+           lake itself. Deliberately NOT paired with their label in the same
+           flex box — see the label layer below for why. -->
       <div class="absolute inset-0 z-10">
         {windData.map((data) => (
-          <div 
-            class="wind-marker absolute transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-2 transition-all duration-300 ease-out hover:scale-110 hover:z-50"
-            style={`top: ${data.position.top}; left: ${data.position.left};`}
+          // The circle in the SVG below (cx=18, cy=8 of a 36x36 viewBox) is
+          // the actual "here" point — it sits near the TOP of the icon, not
+          // its bounding-box center. Centering/rotating the whole box (the
+          // old `-translate-x-1/2 -translate-y-1/2` + default rotate-origin)
+          // put the anchor point in empty space between the circle and the
+          // tail, so the circle itself swung in an arc around the true
+          // position as wind direction changed. Fix: anchor and rotate
+          // around the circle's own position (50% across, 8/36=22.222% down)
+          // instead of the box center, so the circle stays exactly pinned
+          // to the computed coordinate regardless of rotation.
+          <div
+            class="absolute transition-transform duration-300 ease-out"
+            style={`top: ${data.position.top}; left: ${data.position.left}; transform: translate(-50%, -22.222%);`}
           >
-            <!-- Arrow -->
-            <div class="wind-arrow" style={`transform: rotate(${data.windDirection}deg);`}>
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" class="drop-shadow-lg">
+            <div style={`transform-origin: 50% 22.222%; transform: rotate(${data.windDirection}deg);`}>
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" class="drop-shadow-lg">
                 <circle cx="18" cy="8" r="5" fill="transparent" stroke={data.colors.arrow} stroke-width="2.5"/>
                 <line x1="18" y1="13" x2="18" y2="30" stroke={data.colors.arrow} stroke-width="3" stroke-linecap="round"/>
                 <path d="M18 30 L12 23 M18 30 L24 23" stroke={data.colors.arrow} stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
-            
-            <!-- Badge -->
+          </div>
+        ))}
+
+        <!-- Placeholder markers: stations whose OCR failed this round. -->
+        {placeholderMarkers.map((marker) => (
+          <div
+            class="absolute transform -translate-x-1/2 -translate-y-1/2 opacity-50"
+            style={`top: ${marker.position.top}; left: ${marker.position.left};`}
+          >
+            <span class="block w-2.5 h-2.5 rounded-full border-2 border-white/60"></span>
+          </div>
+        ))}
+
+        <!-- Caldè landmark (club location): just the logo — no wind badge,
+             no real instrument here. -->
+        <div
+          class="absolute transform -translate-x-1/2 -translate-y-1/2"
+          style={`top: ${CALDE_POSITION.top}; left: ${CALDE_POSITION.left};`}
+        >
+          <img src="/images/logo-round.svg" alt="CNC" class="w-9 h-9 drop-shadow-lg" />
+        </div>
+      </div>
+
+      <!-- Connector lines: icon to its (possibly far-off) gutter label, so
+           the relationship reads clearly even when they're not close. -->
+      <div class="absolute inset-0 z-[15] pointer-events-none">
+        {windData.map((data) => (
+          <div class="absolute h-px" style={connectorStyle(data.position, data.labelSide, 0.3)}></div>
+        ))}
+        {placeholderMarkers.map((marker) => (
+          <div class="absolute h-px" style={connectorStyle(marker.position, marker.labelSide, 0.14)}></div>
+        ))}
+        <div class="absolute h-px" style={connectorStyle(CALDE_POSITION, CALDE_LABEL_SIDE, 0.3)}></div>
+      </div>
+
+      <!-- Labels: fixed left/right gutter, own vertical position only.
+           Deliberately decoupled from the icon layer above — a label's
+           rendered width depends on the browser/OS/font/user font-size
+           preference, none of which we control, so trying to keep an
+           arrow+label centered together as one flex group is inherently
+           unreliable (confirmed: this kept drifting). A label only needs a
+           fixed edge anchor (left or right) and to sit roughly level with
+           its icon — it never needs to know its own width to be correctly
+           positioned. -->
+      <div class="absolute inset-0 z-20">
+        {windData.map((data) => (
+          <div
+            class={`absolute transform -translate-y-1/2 flex flex-col ${data.labelSide === 'left' ? 'items-start' : 'items-end'}`}
+            style={`top: ${data.position.top}; ${gutterStyle(data.labelSide)}`}
+          >
             <div class="speed-badge relative flex flex-col items-center">
               <span class={`absolute -inset-1 rounded-lg opacity-25 animate-ping ${data.colors.pulse}`} style="animation-duration: 2.5s;"></span>
-              <div 
-                class="badge-box relative px-3 py-1.5 rounded-lg backdrop-blur-md font-mono font-black text-xl leading-none bg-slate-900/85 border border-white/10"
+              <div
+                class="badge-box relative px-2 py-1 rounded-lg backdrop-blur-md font-mono font-black text-base leading-none bg-slate-900/85 border border-white/10"
                 style={`box-shadow: 0 0 25px ${data.colors.glow}, 0 4px 15px rgba(0,0,0,0.6); border-color: ${data.colors.border};`}
               >
                 <span style={`color: ${data.colors.text};`}>{fetchError ? '--' : data.windSpeed}</span>
-                <span class="text-sm ml-1 font-bold opacity-60" style={`color: ${data.colors.text};`}>kn</span>
+                <span class="text-xs ml-1 font-bold opacity-60" style={`color: ${data.colors.text};`}>kn</span>
               </div>
-              <span class="text-xs font-bold tracking-wider mt-1.5 uppercase whitespace-nowrap text-center" style={`color: ${data.colors.text}; text-shadow: 0 2px 6px rgba(0,0,0,0.9);`}>
-                {data.name}
-              </span>
-              {data.id === 'calde' && <img src="/images/logo-round.svg" alt="CNC" class="w-8 h-8 mt-1.5" />}
             </div>
+            <span class="text-[10px] font-bold tracking-wider mt-1 uppercase whitespace-nowrap text-center flex items-center gap-1" style={`color: ${data.colors.text}; text-shadow: 0 2px 6px rgba(0,0,0,0.9);`}>
+              {data.isLive && (
+                <span class="relative flex h-1.5 w-1.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+                </span>
+              )}
+              {data.name}
+            </span>
+            {(data.lastUpdatedLabel || !data.isLive) && (
+              <span class="text-[9px] font-mono text-white/80 whitespace-nowrap" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
+                {data.lastUpdatedLabel ?? t.forecastLabel}
+              </span>
+            )}
           </div>
         ))}
-      </div>
-      
-      <!-- Weather Widget (Top Left) -->
-      {todayWeather && (
-        <div class="absolute top-8 md:top-4 left-4 z-20 flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.4)]">
-          <span class="text-2xl">{todayWeather.icon}</span>
-          <div class="flex flex-col">
-            <span class="text-white font-mono font-bold text-sm leading-tight">{todayWeather.tempMax}°</span>
-            <span class="text-slate-400 font-mono text-xs leading-tight">{todayWeather.tempMin}°</span>
+
+        {placeholderMarkers.map((marker) => (
+          <div
+            class={`absolute transform -translate-y-1/2 flex flex-col opacity-50 ${marker.labelSide === 'left' ? 'items-start' : 'items-end'}`}
+            style={`top: ${marker.position.top}; ${gutterStyle(marker.labelSide)}`}
+          >
+            <span class="text-[10px] font-bold tracking-wider uppercase whitespace-nowrap text-white/70" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
+              {marker.name}
+            </span>
+            {marker.lastUpdatedLabel && (
+              <span class="text-[9px] font-mono text-white/80 whitespace-nowrap" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
+                {marker.lastUpdatedLabel}
+              </span>
+            )}
           </div>
+        ))}
+
+        <div class="absolute transform -translate-y-1/2" style={`top: ${CALDE_POSITION.top}; ${gutterStyle(CALDE_LABEL_SIDE)}`}>
+          <span class="text-xs font-bold tracking-wider uppercase whitespace-nowrap text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
+            CALDÈ
+          </span>
         </div>
-      )}
-      
+      </div>
+
       {fetchError && (
         <div class="absolute inset-0 flex items-center justify-center bg-slate-950/70 backdrop-blur-sm z-30 rounded-lg">
           <div class="bg-red-500/20 border border-red-500/40 rounded-lg px-5 py-3 text-center backdrop-blur-md">
@@ -283,116 +552,189 @@ try {
         </div>
       )}
     </div>
-    
-    <!-- Scroll hint -->
-    <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center text-slate-400 z-10">
-      <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+
+    <!-- Title (Top Left): bare floating text, no card — a map overlay in its
+         own right, not visually grouped into a "widget". Anchored to the
+         section itself, not the aspect-ratio container above (see legend
+         comment below for why: that container can render taller than the
+         section and gets top/bottom-clipped by its own overflow-hidden). -->
+    <div class="absolute top-8 md:top-4 left-4 z-20 flex items-center gap-2">
+      <h1 class="text-lg md:text-xl font-black text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
+        {t.title}
+        <span class="sr-only">{t.seoTitle}</span>
+      </h1>
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+      </span>
+    </div>
+
+    <!-- Wind speed legend overlay (Bottom Right), single column. Anchored to
+         the section itself (not the aspect-ratio container above, which can
+         render taller than the section and get clipped by its
+         overflow-hidden) so it always stays inside the visible map area,
+         above the console panel below. -->
+    <div class="absolute bottom-3 right-3 z-20 flex flex-col items-end gap-1">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.5)]"></span>
+        <span class="text-[10px] font-mono text-white/90" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">&lt;3kn</span>
+        <span class="text-[10px] text-white/70" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">Principianti</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.5)]"></span>
+        <span class="text-[10px] font-mono text-white/90" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">3-7kn</span>
+        <span class="text-[10px] text-white/70" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">Tutti</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(250,204,21,0.5)]"></span>
+        <span class="text-[10px] font-mono text-white/90" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">7-11kn</span>
+        <span class="text-[10px] text-white/70" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">Esperti</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_6px_rgba(251,146,60,0.5)]"></span>
+        <span class="text-[10px] font-mono text-white/90" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">11-16kn</span>
+        <span class="text-[10px] text-white/70" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">Attenzione</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-red-400 shadow-[0_0_6px_rgba(248,113,113,0.5)]"></span>
+        <span class="text-[10px] font-mono text-white/90" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">&gt;16kn</span>
+        <span class="text-[10px] text-white/70" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">Sconsigliato</span>
+      </div>
+    </div>
+
+    <!-- Safety disclaimer (Bottom Left): its own overlay, bare text like the
+         title and legend, not sharing a group with either. -->
+    <div class="absolute bottom-3 left-3 z-20 flex items-start gap-1.5 max-w-[65%]">
+      <svg class="w-3.5 h-3.5 text-amber-400/90 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
       </svg>
-      <p class="text-sm mt-1">{t.scroll}</p>
+      <span class="text-[10px] text-white/70" style="text-shadow: 0 1px 4px rgba(0,0,0,0.9);">{t.disclaimer}</span>
     </div>
   </section>
-  
-  <!-- Control Console (Bottom Panel) -->
-  <section class="console-panel bg-[var(--color-accent-primary)] dark:bg-slate-900/95 backdrop-blur-md border-t border-white/20 dark:border-slate-700/50 shrink-0">
-    <div class="max-w-6xl mx-auto px-4 lg:px-6 py-4">
-      
-      <!-- Vertical Stack Layout -->
-      <div class="flex flex-col gap-3">
-        
-        <!-- Title with Live indicator + Legend toggle (mobile) -->
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-          <h1 class="text-2xl md:text-3xl font-black text-white">
-            {t.title}
-            <span class="sr-only">{t.seoTitle}</span>
-          </h1>
-            <span class="relative flex h-3 w-3">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-            </span>
-          </div>
-          <!-- Toggle button - mobile only -->
-          <button 
-            id="legend-toggle" 
-            class="md:hidden flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
-            aria-expanded="false"
-            aria-controls="legend-content"
-          >
-            <span>{t.legend}</span>
-            <svg id="legend-chevron" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
-        </div>
-        
-        <!-- Legend: Hidden on mobile by default, always visible on desktop -->
-        <div id="legend-content" class="hidden md:block">
-          <div class="grid grid-cols-2 gap-x-6 gap-y-2 md:flex md:flex-row md:gap-6">
-            <!-- Level 1 -->
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.5)]"></span>
-              <span class="text-sm text-white/90"><span class="font-semibold text-sky-300">&lt;3kn</span> <span class="text-white/60">Principianti</span></span>
-            </div>
-            <!-- Level 2 -->
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span>
-              <span class="text-sm text-white/90"><span class="font-semibold text-emerald-300">3-7kn</span> <span class="text-white/60">Tutti</span></span>
-            </div>
-            <!-- Level 3 -->
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.5)]"></span>
-              <span class="text-sm text-white/90"><span class="font-semibold text-amber-300">7-11kn</span> <span class="text-white/60">Esperti</span></span>
-            </div>
-            <!-- Level 4 -->
-            <div class="flex items-center gap-2">
-              <span class="w-3 h-3 rounded-full bg-orange-400 shadow-[0_0_8px_rgba(251,146,60,0.5)]"></span>
-              <span class="text-sm text-white/90"><span class="font-semibold text-orange-300">11-16kn</span> <span class="text-white/60">Attenzione</span></span>
-            </div>
-            <!-- Level 5 -->
-            <div class="flex items-center gap-2 col-span-2 md:col-span-1">
-              <span class="w-3 h-3 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,0.5)]"></span>
-              <span class="text-sm text-white/90"><span class="font-semibold text-red-300">&gt;16kn</span> <span class="text-white/60">Sconsigliato</span></span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Disclaimer - always below -->
-        <div class="flex items-center gap-2 text-white/50 pt-2 border-t border-white/10">
-          <svg class="w-4 h-4 text-amber-500/70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-          </svg>
-          <p class="text-sm">
-            {t.model} · {t.disclaimer}
-          </p>
-        </div>
+
+  <!-- Control Console (Bottom Panel): just the scroll hint now — the
+       disclaimer moved up into the legend overlay on the map. -->
+  <section class="console-panel bg-slate-950 backdrop-blur-md border-t border-white/20 dark:border-slate-700/50 shrink-0">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6 py-3">
+      <div class="flex items-center justify-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-white/40 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+        <p class="text-xs text-white/40">{t.scroll}</p>
       </div>
     </div>
   </section>
-  
-  <script>
-    // Legend toggle for mobile
-    const toggleBtn = document.getElementById('legend-toggle');
-    const legendContent = document.getElementById('legend-content');
-    const chevron = document.getElementById('legend-chevron');
-    
-    if (toggleBtn && legendContent && chevron) {
-      toggleBtn.addEventListener('click', () => {
-        const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-        
-        toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
-        legendContent.classList.toggle('hidden');
-        chevron.classList.toggle('rotate-180');
-      });
-    }
-  </script>
 </div>
+
+<!-- Real station data: Föhn indicator, temp/pressure/rain table, live webcam.
+     Kept as its own section below the hero (not crammed into the hero's
+     console panel) so the fixed-height map above keeps its full height. -->
+{(foehnStatus || stationRows.length > 0 || liveWebcams.length > 0) && (
+  <section class="bg-slate-950 py-6 space-y-4">
+  <div class="max-w-6xl mx-auto px-4 lg:px-6">
+    {(foehnStatus || stationRows.length > 0) && (
+        <div class="rounded-xl border border-white/10 bg-black/20 px-4 py-2 divide-y divide-white/10">
+          <FoehnIndicator status={foehnStatus} labels={t.foehn} />
+
+          {stationRows.length > 0 && (
+            <div class="pt-2">
+              <p class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">
+                {t.stationsTitle}
+              </p>
+              {stationRows.map((station) => (
+                <StationReadingRow station={station} sourceLabel={t.sourceLabel} />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {liveWebcams.length > 0 && (
+        <div class="mt-5">
+          <p class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-2">
+            {t.webcamsTitle}
+          </p>
+          <div
+            id="webcam-carousel"
+            class:list={[
+              'flex gap-3 overflow-x-auto hide-scrollbar snap-x snap-mandatory -mx-4 px-4 lg:mx-0 lg:px-0',
+              { 'justify-center': liveWebcams.length === 1 },
+            ]}
+          >
+            {liveWebcams.map((cam) => (
+              <a
+                href={cam.attributionUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                class="group flex-shrink-0 w-[85vw] sm:w-72 md:w-80 snap-start"
+              >
+                <div class="aspect-[4/3] rounded-lg overflow-hidden bg-black/20">
+                  <img
+                    src={`/api/webcam/${cam.id}`}
+                    alt={cam.name}
+                    loading="lazy"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <p class="mt-2 text-sm font-semibold text-white/90 group-hover:text-white transition-colors truncate">
+                  {cam.name}
+                </p>
+              </a>
+            ))}
+          </div>
+
+          {liveWebcams.length > 1 && (
+            <div id="webcam-carousel-dots" class="flex items-center justify-center gap-1.5 mt-3">
+              {liveWebcams.map((_, i) => (
+                <span class="webcam-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-colors" data-index={i}></span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+  </div>
+  </section>
+)}
+
+<script>
+  // Highlight the current webcam carousel dot as the user scrolls/swipes.
+  function initWebcamCarousel() {
+    const track = document.getElementById('webcam-carousel');
+    const dots = document.querySelectorAll('.webcam-dot');
+    if (!track || dots.length === 0) return;
+
+    const updateActiveDot = () => {
+      const cards = Array.from(track.children) as HTMLElement[];
+      if (cards.length < 2) return;
+      const cardWidth = cards[1].offsetLeft - cards[0].offsetLeft;
+      const index = cardWidth > 0 ? Math.round(track.scrollLeft / cardWidth) : 0;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-white', i === index);
+        dot.classList.toggle('bg-white/30', i !== index);
+      });
+    };
+
+    track.addEventListener('scroll', updateActiveDot, { passive: true });
+    updateActiveDot();
+  }
+
+  initWebcamCarousel();
+</script>
 
 <style>
   .lake-wind-hero {
     font-family: 'DM Sans', system-ui, sans-serif;
   }
-  
+
+  /* Hide scrollbar but allow scroll — used by the webcam carousel below */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   .tactical-bg {
     background: radial-gradient(ellipse at center, 
       rgba(15, 23, 42, 1) 0%, 
@@ -412,26 +754,14 @@ try {
     filter: drop-shadow(0 0 25px rgba(6, 182, 212, 0.3));
   }
   
-  .wind-marker:hover {
-    filter: brightness(1.15);
-  }
-  
-  .wind-arrow {
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  
   .badge-box {
     font-variant-numeric: tabular-nums;
   }
-  
+
   .speed-badge {
     animation: fadeSlideIn 0.6s ease-out backwards;
   }
-  
-  .wind-marker:nth-child(1) .speed-badge { animation-delay: 0.1s; }
-  .wind-marker:nth-child(2) .speed-badge { animation-delay: 0.25s; }
-  .wind-marker:nth-child(3) .speed-badge { animation-delay: 0.4s; }
-  
+
   @keyframes fadeSlideIn {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }

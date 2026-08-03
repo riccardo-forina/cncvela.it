@@ -51,11 +51,12 @@ export default config({
         'regateContent', 
         'bachecaContent', 
         'galleriaContent', 
-        'circoloContent', 
-        'meteoContent', 
-        'privacyContent', 
+        'circoloContent',
+        'meteoContent',
+        'privacyContent',
         'safeguardingContent'
       ],
+      '🌤️ Meteo': ['meteoStations'],
     },
   },
 
@@ -595,6 +596,37 @@ export default config({
           showers: localizedText('Rovesci'),
           thunderstorm: localizedText('Temporale'),
         }, { label: 'Condizioni meteo' }),
+      },
+    }),
+
+    meteoStations: singleton({
+      label: 'Stazioni Meteo Lago',
+      path: 'src/data/meteo-stations',
+      format: { data: 'json' },
+      schema: {
+        items: fields.array(
+          fields.object({
+            name: localizedText('Nome stazione', { required: true }),
+            lat: fields.number({ label: 'Latitudine', validation: { isRequired: true } }),
+            lon: fields.number({ label: 'Longitudine', validation: { isRequired: true } }),
+            sourceId: fields.text({ label: 'URL immagine sorgente', validation: { isRequired: true } }),
+            attributionUrl: fields.url({ label: 'Link alla pagina originale' }),
+            hasOcrReading: fields.checkbox({
+              label: 'Ha lettura numerica (OCR)',
+              description: 'Se attivo, il sistema legge i valori (vento, temperatura, pressione, pioggia) dall\'immagine sorgente invece di mostrarla come foto.',
+              defaultValue: false,
+            }),
+            active: fields.checkbox({
+              label: 'Attiva',
+              description: 'Se disattivata, la stazione non viene mai mostrata (anche se la fonte torna online, va riattivata qui).',
+              defaultValue: true,
+            }),
+          }),
+          {
+            label: 'Stazioni',
+            itemLabel: (props) => props.fields.name.fields.it.value || 'Nuova stazione',
+          }
+        ),
       },
     }),
 

@@ -46,22 +46,38 @@ const maxWindScale = 20; // Max knots for bar chart scaling
       seoTitle: t(content.map.seoTitle),
       ariaLabel: t(content.map.ariaLabel),
       mapAlt: t(content.map.mapAlt),
-      legend: t(content.map.legend),
-      model: t(content.map.model),
       scroll: t(content.map.scroll),
       disclaimer: t(content.map.disclaimer),
+      sourceLabel: t(content.map.sourceLabel),
+      forecastLabel: t(content.map.forecastLabel),
+      stationsTitle: t(content.map.stationsTitle),
+      webcamsTitle: t(content.map.webcamsTitle),
+      foehn: {
+        title: t(content.map.foehn.title),
+        bassa: t(content.map.foehn.bassa),
+        moderata: t(content.map.foehn.moderata),
+        alta: t(content.map.foehn.alta),
+        disclaimer: t(content.map.foehn.disclaimer),
+      },
     }}
-    todayWeather={forecastData?.daily?.[0] ? {
-      icon: forecastData.daily[0].weatherIcon,
-      tempMax: forecastData.daily[0].tempMax,
-      tempMin: forecastData.daily[0].tempMin,
-    } : undefined}
   />
 
-  <!-- Tactical Instrument Dashboard -->
-  <section class="tactical-dashboard bg-slate-200 dark:bg-slate-950 py-8 md:py-12">
+  <!-- Tactical Instrument Dashboard. This is the last section on the page —
+       BaseLayout's <main> reserves pb-20 (mobile only) below the slot so
+       content isn't hidden under the fixed BottomNav, but that reserved
+       space is main's own white background, not this section's, so it
+       showed up as a stray white band between here and the Footer. Extend
+       this section's own bottom padding by that same amount and cancel
+       main's reservation with a matching negative margin, so the section's
+       background (not white) fills the reserved space instead — the actual
+       amount of safe non-content space above the Footer is unchanged. -->
+  <section class="tactical-dashboard bg-slate-200 dark:bg-slate-950 py-8 pb-28 -mb-20 md:py-12 md:mb-0">
     <div class="max-w-6xl mx-auto px-4 lg:px-6 space-y-6">
-      
+
+      <h2 class="text-xl md:text-2xl font-black text-slate-800 dark:text-white">
+        {t(content.forecast.sectionTitle)}
+      </h2>
+
       {fetchError ? (
         <!-- Error State -->
         <div class="cyber-panel p-8 text-center">
@@ -102,7 +118,7 @@ const maxWindScale = 20; // Max knots for bar chart scaling
                     // Wind-based color for future hours (matching map legend)
                     if (hour.windSpeed < 3) barColor = "bg-sky-400";        // Principianti
                     else if (hour.windSpeed < 7) barColor = "bg-emerald-400"; // Tutti
-                    else if (hour.windSpeed < 11) barColor = "bg-amber-400";  // Esperti
+                    else if (hour.windSpeed < 11) barColor = "bg-yellow-400";  // Esperti
                     else if (hour.windSpeed < 16) barColor = "bg-orange-400"; // Attenzione
                     else barColor = "bg-red-400";                            // Sconsigliato
                   }
@@ -114,7 +130,7 @@ const maxWindScale = 20; // Max knots for bar chart scaling
                       id={hour.isNow ? "current-hour-bar" : undefined}
                     >
                       <!-- Bar -->
-                      <div class="w-full flex items-end h-72 rounded-t-sm relative transition-colors bg-slate-100 dark:bg-slate-800/30">
+                      <div class="w-full flex items-end h-36 rounded-t-sm relative transition-colors bg-slate-100 dark:bg-slate-800/30">
                         <div 
                           class={`w-full rounded-t-sm transition-all duration-300 ${barColor} ${hour.isPast ? 'opacity-50' : ''}`}
                           style={`height: ${heightPct}%; min-height: 2px;`}
@@ -158,7 +174,7 @@ const maxWindScale = 20; // Max knots for bar chart scaling
                   <span class="text-sm text-slate-600 dark:text-slate-400">3-7 kn</span>
                 </div>
                 <div class="flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
                   <span class="text-sm text-slate-600 dark:text-slate-400">7-11 kn</span>
                 </div>
                 <div class="flex items-center gap-1.5">

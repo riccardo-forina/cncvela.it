@@ -37,11 +37,6 @@
       "en": "Wind map of Lake Maggiore",
       "de": "Windkarte Lago Maggiore"
     },
-    "legend": {
-      "it": "Legenda",
-      "en": "Legend",
-      "de": "Legende"
-    },
     "model": {
       "it": "Modello ICON-D2 (High Res)",
       "en": "ICON-D2 Model (High Res)",
@@ -56,6 +51,53 @@
       "it": "Osservare sempre il lago prima di uscire",
       "en": "Always check the lake before going out",
       "de": "Überprüfen Sie immer den See, bevor Sie losfahren"
+    },
+    "sourceLabel": {
+      "it": "Fonte",
+      "en": "Source",
+      "de": "Quelle"
+    },
+    "forecastLabel": {
+      "it": "Previsione",
+      "en": "Forecast",
+      "de": "Vorhersage"
+    },
+    "stationsTitle": {
+      "it": "Stazioni meteo",
+      "en": "Weather stations",
+      "de": "Wetterstationen"
+    },
+    "webcamsTitle": {
+      "it": "Webcam",
+      "en": "Webcams",
+      "de": "Webcams"
+    },
+    "foehn": {
+      "title": {
+        "it": "Probabilità favonio",
+        "en": "Föhn probability",
+        "de": "Föhn-Wahrscheinlichkeit"
+      },
+      "bassa": {
+        "it": "Bassa",
+        "en": "Low",
+        "de": "Niedrig"
+      },
+      "moderata": {
+        "it": "Moderata",
+        "en": "Moderate",
+        "de": "Mäßig"
+      },
+      "alta": {
+        "it": "Alta",
+        "en": "High",
+        "de": "Hoch"
+      },
+      "disclaimer": {
+        "it": "indicazione approssimativa (differenza pressione Lugano-Zurigo)",
+        "en": "approximate indicator (Lugano-Zurich pressure difference)",
+        "de": "ungefährer Hinweis (Druckdifferenz Lugano-Zürich)"
+      }
     }
   },
   "legend": {
@@ -94,6 +136,7 @@
     "updated": { "it": "Aggiornato", "en": "Updated", "de": "Aktualisiert" }
   },
   "forecast": {
+    "sectionTitle": { "it": "Previsioni meteo", "en": "Weather forecast", "de": "Wettervorhersage" },
     "hourly": { "it": "Previsione Vento Oggi", "en": "Today's Wind Forecast", "de": "Windvorhersage heute" },
     "daily": { "it": "Previsioni Prossimi Giorni", "en": "Next Days Forecast", "de": "Vorhersage nächste Tage" },
     "disclaimer": { "it": "Indicazioni generali. Verifica sempre le condizioni reali prima di uscire.", "en": "General indications. Always check real conditions before going out.", "de": "Allgemeine Hinweise. Überprüfen Sie immer die tatsächlichen Bedingungen, bevor Sie losfahren." },

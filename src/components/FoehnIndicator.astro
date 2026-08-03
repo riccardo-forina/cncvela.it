@@ -1,0 +1,40 @@
+---
+import type { FoehnStatus } from '../utils/foehn';
+
+interface Props {
+  status: FoehnStatus | null;
+  labels: {
+    title: string;
+    bassa: string;
+    moderata: string;
+    alta: string;
+    disclaimer: string;
+  };
+}
+
+const { status, labels } = Astro.props;
+
+const LEVEL_STYLES = {
+  bassa: { text: 'text-emerald-300', dot: 'bg-emerald-400' },
+  moderata: { text: 'text-amber-300', dot: 'bg-amber-400' },
+  alta: { text: 'text-red-300', dot: 'bg-red-400' },
+} as const;
+
+const style = status ? LEVEL_STYLES[status.level] : null;
+const levelLabel = status ? labels[status.level] : '';
+const trendIcon = status?.trend === 'up' ? '↑' : status?.trend === 'down' ? '↓' : '→';
+---
+
+{status && style && (
+  <div class="flex items-center gap-2.5 text-white/90 py-2.5 border-t border-white/10">
+    <span class={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${style.dot} shadow-[0_0_8px_rgba(255,255,255,0.3)]`}></span>
+    <p class="text-sm">
+      <span class="font-semibold">{labels.title}:</span>{' '}
+      <span class={`font-semibold ${style.text}`}>{levelLabel}</span>
+      <span class="text-white/50 font-mono text-xs ml-1">
+        ({status.differentialHpa > 0 ? '+' : ''}{status.differentialHpa} hPa {trendIcon})
+      </span>
+      <span class="text-white/50 block sm:inline sm:ml-1">{labels.disclaimer}</span>
+    </p>
+  </div>
+)}
