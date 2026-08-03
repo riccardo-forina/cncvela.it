@@ -61,5 +61,14 @@
       "destination": "/circolo#documenti",
       "permanent": true
     }
+  ],
+  "headers": [
+    {
+      "comment": "Tesseract client-OCR assets are version-namespaced (public/tesseract/{version}/), so a future tesseract.js bump ships under a new path — safe to cache forever, nothing to invalidate.",
+      "source": "/tesseract/:version/:file*",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
   ]
 }

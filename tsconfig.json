@@ -1,5 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "www.cncvela.it", "node_modules"]
+  "exclude": ["dist", "www.cncvela.it", "node_modules", "public"]
 }

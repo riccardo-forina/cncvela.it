@@ -69,28 +69,51 @@ export async function fetchFreshImage(url: string): Promise<ImageFetchResult | n
   return result;
 }
 
-export interface CachedWebcam {
-  buffer: Buffer;
-  contentType: string;
+export interface ProxiedImage {
+  status: 'fresh' | 'stale' | 'unavailable';
+  buffer?: Buffer;
+  contentType?: string;
+  /** ISO string. Present whenever the source itself was reachable, even if stale — lets a caller show "last seen X ago" instead of nothing. */
+  lastModified?: string;
 }
 
 declare global {
-  var webcamCache: Record<string, { data: CachedWebcam | null; timestamp: number }> | undefined;
+  var proxiedImageCache: Record<string, { data: ProxiedImage; timestamp: number }> | undefined;
 }
 
-/** Fetch + freshness-gate + cache a plain webcam/station image, keyed by station id. */
-export async function getProxiedWebcam(id: string, sourceUrl: string): Promise<CachedWebcam | null> {
+/**
+ * Fetch + freshness-gate + cache any station's source image (webcam photo or
+ * OCR ticker), keyed by station id. Used by /api/webcam/[id] — the name
+ * stuck from when this only served webcams, it now proxies both, since the
+ * fetch/cache/freshness logic is identical either way. `status: 'stale'`
+ * (as opposed to 'unavailable') is what lets a client-side caller still show
+ * a "last seen" timestamp for a station that's reachable but too old to
+ * trust — see the OCR station script in LakeWindMap.astro.
+ */
+export async function getProxiedImage(id: string, sourceUrl: string): Promise<ProxiedImage> {
   const now = Date.now();
-  const cached = globalThis.webcamCache?.[id];
+  const cached = globalThis.proxiedImageCache?.[id];
   if (cached && now - cached.timestamp < CACHE_TTL_MS) {
     return cached.data;
   }
 
-  const fresh = await fetchFreshImage(sourceUrl);
-  const data: CachedWebcam | null = fresh ? { buffer: fresh.buffer, contentType: fresh.contentType } : null;
+  const fetched = await fetchImage(sourceUrl);
+  let data: ProxiedImage;
+  if (!fetched) {
+    data = { status: 'unavailable' };
+  } else if (!isWithinFreshnessThreshold(fetched.lastModified)) {
+    data = { status: 'stale', lastModified: fetched.lastModified.toISOString() };
+  } else {
+    data = {
+      status: 'fresh',
+      buffer: fetched.buffer,
+      contentType: fetched.contentType,
+      lastModified: fetched.lastModified.toISOString(),
+    };
+  }
 
-  globalThis.webcamCache = {
-    ...globalThis.webcamCache,
+  globalThis.proxiedImageCache = {
+    ...globalThis.proxiedImageCache,
     [id]: { data, timestamp: now },
   };
 
