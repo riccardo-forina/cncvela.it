@@ -7,7 +7,7 @@
       "sourceId": "http://rete.centrometeolombardo.com/Varese/maccagno/immagini/v.png",
       "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=2158&ContentType=Stazioni",
       "dataType": "ocr",
-      "active": true
+      "active": false
     },
     {
       "name": { "it": "Pino Tronzano", "en": "Pino Tronzano", "de": "Pino Tronzano" },

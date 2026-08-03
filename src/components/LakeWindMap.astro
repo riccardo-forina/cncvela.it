@@ -135,9 +135,16 @@ function formatPosition(top: number, left: number): { top: string; left: string 
 // script, re-run it, paste the printed values in here — don't hand-tune
 // these numbers directly.
 const POSITION_OVERRIDES: Record<string, { top: number; left: number }> = {
-  'pino-tronzano': { top: 19.4, left: 69.1 },
+  // left nudged from the script's on-shore output (69.1) to sit visibly on/in
+  // the water rather than right at the shoreline edge, which read as "off
+  // the lake" at this zoom level — a perpendicular nudge, unlike
+  // fractionNudge in the script (which only moves along the shore). Nudged
+  // back right slightly to give the arrow icon more breathing room.
+  'pino-tronzano': { top: 19.4, left: 68.5 },
   maccagno: { top: 27.6, left: 63.5 },
-  baveno: { top: 52.4, left: 14.7 },
+  // left nudged further west (from the script's on-shore output, 14.7) for
+  // more clearance around the arrow icon.
+  baveno: { top: 52.4, left: 11 },
   belgirate: { top: 67.8, left: 29.7 },
   meina: { top: 80.6, left: 24.2 },
   arona: { top: 88.7, left: 30.2 },
@@ -163,8 +170,17 @@ const CALDE_LABEL_SIDE: LabelSide = 'right';
 // fixed-size SVG we fully control), and labels live in one of two fixed
 // gutters (left or right edge of the map) at the same vertical position,
 // entirely decoupled from the arrow's own layout.
+//
+// Gutter side is a LAYOUT choice, not a geography one — with 5 west-shore
+// stations now, all-on-the-left is geographically tidy but leaves the left
+// gutter overcrowded and the right one empty. Belgirate and Arona are
+// deliberately assigned to the right gutter despite being on the west
+// shore, and Pino Tronzano likewise despite being east shore; the diagonal
+// connector line (connectorStyle) is what makes this readable, drawing a
+// line across the lake back to the real icon instead of implying the label
+// sits next to it.
 type LabelSide = 'left' | 'right';
-const LEFT_GUTTER_STATIONS = new Set(['meina', 'pino-tronzano', 'baveno', 'belgirate', 'arona']);
+const LEFT_GUTTER_STATIONS = new Set(['meina', 'baveno']);
 const labelSideFor = (id: string): LabelSide => (LEFT_GUTTER_STATIONS.has(id) ? 'left' : 'right');
 
 // Gutters for labels, as a percentage of the map box — this same constant
@@ -176,22 +192,113 @@ const labelSideFor = (id: string): LabelSide => (LEFT_GUTTER_STATIONS.has(id) ? 
 // "this label belongs to that icon" than a wire spanning the whole map.
 const GUTTER_LEFT_PCT = 12;
 const GUTTER_RIGHT_PCT = 88;
-function gutterStyle(side: LabelSide): string {
+
+// Per-station label position overrides, replacing the standard edge gutter.
+// `fromLeft` anchors the label's left edge and grows the text rightward
+// (safe for open-canvas positions, like Belgirate/Arona sitting over the
+// small ponds south-east of the main channel — picked from those <path>
+// elements' own bounding boxes in the SVG below). `fromRight` anchors the
+// right edge and grows leftward instead (safe for a label pushed further
+// toward the right edge than the standard gutter, like Pino Tronzano here —
+// growing rightward would run it off-canvas). Nudge these by eye against a
+// screenshot if they don't land cleanly.
+type LabelOverride = { fromLeft: number } | { fromRight: number };
+const LABEL_POSITION_OVERRIDES: Record<string, LabelOverride> = {
+  belgirate: { fromLeft: 42 },
+  arona: { fromLeft: 40 },
+  baveno: { fromLeft: 5 },
+  'pino-tronzano': { fromRight: 8 },
+};
+function labelXFor(id: string, side: LabelSide): number {
+  const override = LABEL_POSITION_OVERRIDES[id];
+  if (override) return 'fromLeft' in override ? override.fromLeft : 100 - override.fromRight;
+  return side === 'left' ? GUTTER_LEFT_PCT : GUTTER_RIGHT_PCT;
+}
+function gutterStyle(id: string, side: LabelSide): string {
+  const override = LABEL_POSITION_OVERRIDES[id];
+  if (override) return 'fromLeft' in override ? `left: ${override.fromLeft}%;` : `right: ${override.fromRight}%;`;
   return side === 'left' ? `left: ${GUTTER_LEFT_PCT}%;` : `right: ${100 - GUTTER_RIGHT_PCT}%;`;
 }
-function connectorStyle(position: { top: string; left: string }, side: LabelSide, opacity = 0.28): string {
-  const top = parseFloat(position.top);
-  const iconLeft = parseFloat(position.left);
-  const gutterLeft = side === 'left' ? GUTTER_LEFT_PCT : GUTTER_RIGHT_PCT;
-  const x1 = Math.min(iconLeft, gutterLeft);
-  const x2 = Math.max(iconLeft, gutterLeft);
-  // Fade toward the icon end, solid toward the label end — draws the eye to
-  // the readable text rather than reading as a flat wire laid over the map.
-  const fadesLeftToRight = side === 'left'; // left-gutter label sits at x1 (left side)
-  const gradient = fadesLeftToRight
-    ? `to right, rgba(255,255,255,${opacity}), rgba(255,255,255,0)`
-    : `to right, rgba(255,255,255,0), rgba(255,255,255,${opacity})`;
-  return `top: ${top}%; left: ${x1}%; width: ${x2 - x1}%; background: linear-gradient(${gradient});`;
+// Labels anchored from the right (edge gutter or a right-anchored override)
+// grow leftward (items-end) so their text doesn't run off-canvas;
+// left-anchored labels (edge gutter or a left-anchored override) grow
+// rightward (items-start) instead.
+function labelAlignClass(id: string, side: LabelSide): string {
+  const override = LABEL_POSITION_OVERRIDES[id];
+  if (override) return 'fromLeft' in override ? 'items-start' : 'items-end';
+  return side === 'left' ? 'items-start' : 'items-end';
+}
+
+// Multiple stations can sit close together vertically on the same gutter
+// side (e.g. Baveno/Belgirate/Meina/Arona, all on the west shore, packed
+// into a ~35% vertical band) — placing every label at exactly its icon's
+// row, as before, made them overlap. Spread same-side labels apart to a
+// minimum gap, preserving order, then re-center the adjusted run on the
+// original cluster's midpoint so it doesn't just drift toward one edge.
+// The label's own vertical position moves; the icon never does — the
+// connector line (see connectorStyle below) is what keeps the moved label
+// visually tied back to its real icon, drawn as a diagonal when the two no
+// longer share a row.
+const MIN_LABEL_GAP_PCT = 13;
+const LABEL_BAND_MIN_PCT = 6;
+const LABEL_BAND_MAX_PCT = 94;
+function spreadLabelTops(items: { id: string; top: number }[]): Map<string, number> {
+  const sorted = [...items].sort((a, b) => a.top - b.top);
+  const adjusted = sorted.map((s) => s.top);
+  for (let i = 1; i < adjusted.length; i++) {
+    adjusted[i] = Math.max(adjusted[i], adjusted[i - 1] + MIN_LABEL_GAP_PCT);
+  }
+  if (adjusted.length > 0) {
+    const naturalMid = (sorted[0].top + sorted[sorted.length - 1].top) / 2;
+    const adjustedMid = (adjusted[0] + adjusted[adjusted.length - 1]) / 2;
+    const shift = naturalMid - adjustedMid;
+    for (let i = 0; i < adjusted.length; i++) adjusted[i] += shift;
+    // Keep the whole run on-canvas even if re-centering pushed an edge past it.
+    if (adjusted[0] < LABEL_BAND_MIN_PCT) {
+      const delta = LABEL_BAND_MIN_PCT - adjusted[0];
+      for (let i = 0; i < adjusted.length; i++) adjusted[i] += delta;
+    }
+    if (adjusted[adjusted.length - 1] > LABEL_BAND_MAX_PCT) {
+      const delta = adjusted[adjusted.length - 1] - LABEL_BAND_MAX_PCT;
+      for (let i = 0; i < adjusted.length; i++) adjusted[i] -= delta;
+    }
+  }
+  const result = new Map<string, number>();
+  sorted.forEach((s, i) => result.set(s.id, adjusted[i]));
+  return result;
+}
+
+// The map's aspect-ratio-locked container (below) is 885:1406 — same ratio
+// as the lake SVG's own viewBox, deliberately undistorted (1 unit is the
+// same real distance on both axes). A 1%-of-width step and a 1%-of-height
+// step therefore do NOT correspond to the same real distance — converting
+// through these first is what makes the connector line's computed angle
+// and length geometrically correct instead of skewed toward whichever axis
+// the container happens to be longer on.
+const ASPECT_W = 885;
+const ASPECT_H = 1406;
+function connectorStyle(
+  iconPosition: { top: string; left: string },
+  labelTopPct: number,
+  labelXPct: number,
+  opacity = 0.28
+): string {
+  const x1 = parseFloat(iconPosition.left);
+  const y1 = parseFloat(iconPosition.top);
+  const x2 = labelXPct;
+  const y2 = labelTopPct;
+
+  const dxUnits = ((x2 - x1) / 100) * ASPECT_W;
+  const dyUnits = ((y2 - y1) / 100) * ASPECT_H;
+  const lengthUnits = Math.hypot(dxUnits, dyUnits);
+  const widthPct = (lengthUnits / ASPECT_W) * 100;
+  const angleDeg = Math.atan2(dyUnits, dxUnits) * (180 / Math.PI);
+
+  // Transparent at the icon (start), solid at the label (end) — draws the
+  // eye toward the readable text rather than reading as a flat wire laid
+  // over the map. Works at any angle since the div itself is what rotates;
+  // the gradient direction ("to right") rotates along with its own box.
+  return `top: ${y1}%; left: ${x1}%; width: ${widthPct}%; transform-origin: 0 50%; transform: rotate(${angleDeg}deg); background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,${opacity}));`;
 }
 
 // Station markers, two data sources:
@@ -285,6 +392,23 @@ const jsonSlots: StationSlot[] = jsonResults.map(({ station, reading }) => ({
 }));
 
 const stationSlots: StationSlot[] = [...ocrSlots, ...jsonSlots];
+
+// Label vertical positions, decluttered per gutter side — see
+// spreadLabelTops above. Icons keep their real (possibly close-together)
+// positions; only where the LABEL renders is adjusted.
+const leftLabelTops = spreadLabelTops(
+  stationSlots.filter((s) => s.labelSide === 'left').map((s) => ({ id: s.id, top: parseFloat(s.position.top) }))
+);
+const rightLabelTops = spreadLabelTops([
+  ...stationSlots.filter((s) => s.labelSide === 'right').map((s) => ({ id: s.id, top: parseFloat(s.position.top) })),
+  { id: 'calde', top: parseFloat(CALDE_POSITION.top) },
+]);
+function labelTopFor(id: string, side: LabelSide): number {
+  const top = (side === 'left' ? leftLabelTops : rightLabelTops).get(id);
+  if (top === undefined) throw new Error(`labelTopFor: no computed label top for station "${id}"`);
+  return top;
+}
+const CALDE_LABEL_TOP = labelTopFor('calde', CALDE_LABEL_SIDE);
 
 const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !== null);
 
@@ -423,9 +547,9 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
            gutter side don't change on upgrade, only the marker/label do. -->
       <div class="absolute inset-0 z-[15] pointer-events-none">
         {stationSlots.map((slot) => (
-          <div class="absolute h-px" style={connectorStyle(slot.position, slot.labelSide, 0.22)}></div>
+          <div class="absolute h-px" style={connectorStyle(slot.position, labelTopFor(slot.id, slot.labelSide), labelXFor(slot.id, slot.labelSide), 0.22)}></div>
         ))}
-        <div class="absolute h-px" style={connectorStyle(CALDE_POSITION, CALDE_LABEL_SIDE, 0.3)}></div>
+        <div class="absolute h-px" style={connectorStyle(CALDE_POSITION, CALDE_LABEL_TOP, labelXFor('calde', CALDE_LABEL_SIDE), 0.3)}></div>
       </div>
 
       <!-- Labels: fixed left/right gutter, own vertical position only.
@@ -441,14 +565,15 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
       <div class="absolute inset-0 z-20">
         {stationSlots.map((slot) => {
           const colors = slot.reading ? getWindColor(slot.reading.windKn) : null;
+          const labelTop = labelTopFor(slot.id, slot.labelSide);
           return (
             <Fragment>
               <!-- Live label: visible immediately for a server-resolved
                    reading (JSON stations), hidden until upgraded otherwise
                    (OCR stations). -->
               <div
-                class:list={['absolute transform -translate-y-1/2 flex-col', slot.labelSide === 'left' ? 'items-start' : 'items-end']}
-                style={`top: ${slot.position.top}; ${gutterStyle(slot.labelSide)} ${slot.reading ? '' : 'display: none;'}`}
+                class:list={['absolute transform -translate-y-1/2 flex flex-col', labelAlignClass(slot.id, slot.labelSide)]}
+                style={`top: ${labelTop}%; ${gutterStyle(slot.id, slot.labelSide)} ${slot.reading ? '' : 'display: none;'}`}
                 data-live-label={slot.needsClientUpgrade ? slot.id : undefined}
                 data-attribution={slot.attributionUrl}
                 data-name={slot.name}
@@ -476,8 +601,8 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
 
               <!-- Placeholder label: visible until a reading is known. -->
               <div
-                class:list={['absolute transform -translate-y-1/2 flex flex-col opacity-50', slot.labelSide === 'left' ? 'items-start' : 'items-end']}
-                style={`top: ${slot.position.top}; ${gutterStyle(slot.labelSide)} ${slot.reading ? 'display: none;' : ''}`}
+                class:list={['absolute transform -translate-y-1/2 flex flex-col opacity-50', labelAlignClass(slot.id, slot.labelSide)]}
+                style={`top: ${labelTop}%; ${gutterStyle(slot.id, slot.labelSide)} ${slot.reading ? 'display: none;' : ''}`}
                 data-placeholder-label={slot.needsClientUpgrade ? slot.id : undefined}
               >
                 <span class="text-[10px] font-bold tracking-wider uppercase whitespace-nowrap text-white/70" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
@@ -489,7 +614,7 @@ const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !=
           );
         })}
 
-        <div class="absolute transform -translate-y-1/2" style={`top: ${CALDE_POSITION.top}; ${gutterStyle(CALDE_LABEL_SIDE)}`}>
+        <div class="absolute transform -translate-y-1/2" style={`top: ${CALDE_LABEL_TOP}%; ${gutterStyle('calde', CALDE_LABEL_SIDE)}`}>
           <span class="text-xs font-bold tracking-wider uppercase whitespace-nowrap text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
             CALDÈ
           </span>
