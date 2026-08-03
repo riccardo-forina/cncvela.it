@@ -79,7 +79,7 @@
       "sourceId": "https://embed.skylinewebcams.com/img/1764.jpg",
       "attributionUrl": "https://www.meteolivevco.it/boa-limnologica-sul-lago-maggiore/",
       "dataType": "photo",
-      "active": true
+      "active": false
     },
     {
       "name": { "it": "Cerro (Laveno)", "en": "Cerro (Laveno)", "de": "Cerro (Laveno)" },
