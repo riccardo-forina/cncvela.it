@@ -4,6 +4,28 @@ import { fetchImage, isWithinFreshnessThreshold } from './webcams';
 import { WIND_DIR_DEGREES } from './weather';
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
+// tesseract.js spins up a worker thread and, on a cold serverless instance,
+// downloads its core/wasm/language files — none of which respects an
+// AbortSignal. A hang here (seen in production, unlike this session's local
+// testing) would otherwise block the whole page's SSR render forever, since
+// every station is awaited before any HTML is emitted.
+const OCR_TIMEOUT_MS = 10000;
+
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms);
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (error) => {
+        clearTimeout(timer);
+        reject(error);
+      }
+    );
+  });
+}
 
 export interface StationReading {
   tempC: number;
@@ -129,7 +151,11 @@ export async function getStationReading(id: string, sourceUrl: string): Promise<
     result.lastKnownUpdate = fetched.lastModified.toISOString();
     if (isWithinFreshnessThreshold(fetched.lastModified)) {
       try {
-        result.reading = await ocrTickerImage(fetched.buffer, fetched.lastModified);
+        result.reading = await withTimeout(
+          ocrTickerImage(fetched.buffer, fetched.lastModified),
+          OCR_TIMEOUT_MS,
+          `OCR for station ${id}`
+        );
       } catch (error) {
         console.error(`OCR failed for station ${id}:`, error);
       }

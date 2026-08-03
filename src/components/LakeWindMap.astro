@@ -283,20 +283,44 @@ const stationRows: StationTableRow[] = [];
 // rather than confusing.
 const placeholderMarkers: PlaceholderMarker[] = [];
 
+// These three groups (stations, webcams, Föhn) are independent of each
+// other, so all their network calls are kicked off together and awaited
+// together below — each individual fetch is already timeout-bounded (see
+// webcams.ts/stationOcr.ts/foehn.ts), but running the groups sequentially
+// would still stack those timeouts on top of each other in a bad-upstream
+// day. Concurrent means the worst case is the slowest single group, not
+// the sum of all three.
 const ocrStations = getActiveStations().filter((s) => s.hasOcrReading);
-const realResults = await Promise.all(
-  ocrStations.map(async (station) => {
-    const name = localizeStationName(station, locale);
-    const position = latLonToPosition(station.id, station.lat, station.lon);
-    let result: { reading: StationReading | null; lastKnownUpdate: string | null } = { reading: null, lastKnownUpdate: null };
-    try {
-      result = await getStationReading(station.id, station.sourceId);
-    } catch (error) {
-      console.error(`Error reading station ${station.id}:`, error);
-    }
-    return { station, name, position, reading: result.reading, lastKnownUpdate: result.lastKnownUpdate };
-  })
-);
+const webcamStations = getActiveStations().filter((s) => !s.hasOcrReading);
+
+const [realResults, webcamResults, foehnStatus] = await Promise.all([
+  Promise.all(
+    ocrStations.map(async (station) => {
+      const name = localizeStationName(station, locale);
+      const position = latLonToPosition(station.id, station.lat, station.lon);
+      let result: { reading: StationReading | null; lastKnownUpdate: string | null } = { reading: null, lastKnownUpdate: null };
+      try {
+        result = await getStationReading(station.id, station.sourceId);
+      } catch (error) {
+        console.error(`Error reading station ${station.id}:`, error);
+      }
+      return { station, name, position, reading: result.reading, lastKnownUpdate: result.lastKnownUpdate };
+    })
+  ),
+  Promise.all(
+    // Webcam-only stations (e.g. Cannero): no wind reading, just a live
+    // photo. Checked server-side (freshness-gated, same cache the proxy
+    // endpoint hits) so we only render an <img> for sources we know will
+    // actually resolve.
+    webcamStations.map(async (station) => {
+      const webcam = await getProxiedWebcam(station.id, station.sourceId);
+      if (!webcam) return null;
+      return { id: station.id, name: localizeStationName(station, locale), attributionUrl: station.attributionUrl };
+    })
+  ),
+  getFoehnStatus(),
+]);
+
 for (const { station, name, position, reading, lastKnownUpdate } of realResults) {
   if (reading) {
     windData.push({
@@ -328,20 +352,7 @@ for (const { station, name, position, reading, lastKnownUpdate } of realResults)
   }
 }
 
-// Webcam-only stations (e.g. Cannero): no wind reading, just a live photo.
-// Checked server-side (freshness-gated, same cache the proxy endpoint hits)
-// so we only render an <img> for sources we know will actually resolve.
-const webcamStations = getActiveStations().filter((s) => !s.hasOcrReading);
-const webcamResults = await Promise.all(
-  webcamStations.map(async (station) => {
-    const webcam = await getProxiedWebcam(station.id, station.sourceId);
-    if (!webcam) return null;
-    return { id: station.id, name: localizeStationName(station, locale), attributionUrl: station.attributionUrl };
-  })
-);
 const liveWebcams = webcamResults.filter((w): w is NonNullable<typeof w> => w !== null);
-
-const foehnStatus = await getFoehnStatus();
 
 // Only a true full outage (zero markers at all) blanks the map — partial
 // availability is the normal state here, not an error.

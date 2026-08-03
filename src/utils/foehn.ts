@@ -10,6 +10,7 @@ const ZURICH = { lat: 47.377, lon: 8.542 };
 const LUGANO = { lat: 46.004, lon: 8.951 };
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
+const FETCH_TIMEOUT_MS = 8000;
 
 export type FoehnLevel = 'bassa' | 'moderata' | 'alta';
 export type FoehnTrend = 'up' | 'down' | 'stable';
@@ -35,7 +36,8 @@ async function fetchPressureSeries(lat: number, lon: number): Promise<{ current:
     `https://api.open-meteo.com/v1/forecast?` +
       `latitude=${lat}&longitude=${lon}` +
       `&current=pressure_msl&hourly=pressure_msl` +
-      `&timezone=Europe/Rome&forecast_days=3`
+      `&timezone=Europe/Rome&forecast_days=3`,
+    { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) }
   );
   if (!res.ok) return null;
   const data = await res.json();

@@ -24,6 +24,7 @@ export const WIND_DIR_DEGREES: Record<string, number> = {
 };
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
+const FETCH_TIMEOUT_MS = 8000;
 
 declare global {
   var weatherCache: Record<string, { data: ForecastData; timestamp: number }> | undefined;
@@ -254,7 +255,8 @@ export async function fetchForecast(
         `&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_direction_10m_dominant` +
         `&wind_speed_unit=kn` +
         `&timezone=Europe/Rome` +
-        `&forecast_days=${forecastDays}`
+        `&forecast_days=${forecastDays}`,
+      { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) }
     );
 
     if (!response.ok) throw new Error('Weather API fetch failed');

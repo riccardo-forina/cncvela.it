@@ -1,4 +1,9 @@
 const USER_AGENT = 'cncvela.it/1.0 (+https://www.cncvela.it; stazioni meteo lago)';
+// These are unmonitored third-party hobbyist servers — one of them being slow
+// or hung must not take the whole page down with it (it did: a hung fetch
+// here blocked the entire SSR render, since every station is awaited before
+// any HTML is emitted).
+const FETCH_TIMEOUT_MS = 8000;
 // 3h — dead/stale sources must not render (see plan). Started at 2h; bumped
 // after observing Meina's real reporting cadence swing up to ~2h40m between
 // updates on its own — 2h was flagging a station that wasn't actually dead,
@@ -28,7 +33,10 @@ export function isWithinFreshnessThreshold(lastModified: Date): boolean {
  */
 export async function fetchImage(url: string): Promise<ImageFetchResult | null> {
   try {
-    const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    const res = await fetch(url, {
+      headers: { 'User-Agent': USER_AGENT },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
     if (!res.ok) return null;
 
     const lastModifiedHeader = res.headers.get('last-modified');
