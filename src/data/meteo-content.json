@@ -3,95 +3,113 @@
     "title": {
       "it": "Meteo Caldè",
       "en": "Caldè Weather",
-      "de": "Wetter Caldè"
+      "de": "Wetter Caldè",
+      "fr": "Météo Caldè"
     },
     "description": {
       "it": "Vento e previsioni meteo per Caldè, Lago Maggiore. Condizioni live, temperatura e forecast per la vela sul lago.",
       "en": "Wind and weather forecast for Caldè, Lake Maggiore. Live conditions, temperature and sailing forecast.",
-      "de": "Wind und Wettervorhersage für Caldè, Lago Maggiore. Live-Bedingungen, Temperatur und Segelvorhersage."
+      "de": "Wind und Wettervorhersage für Caldè, Lago Maggiore. Live-Bedingungen, Temperatur und Segelvorhersage.",
+      "fr": "Vent et prévisions météo pour Caldè, Lac Majeur. Conditions en direct, température et prévisions pour la voile sur le lac."
     },
     "subtitle": {
       "it": "Previsioni per il Lago Maggiore",
       "en": "Forecast for Lake Maggiore",
-      "de": "Vorhersage für den Lago Maggiore"
+      "de": "Vorhersage für den Lago Maggiore",
+      "fr": "Prévisions pour le Lac Majeur"
     }
   },
   "map": {
     "title": {
       "it": "Meteo Live",
       "en": "Live Weather",
-      "de": "Live Wetter"
+      "de": "Live Wetter",
+      "fr": "Météo en Direct"
     },
     "seoTitle": {
       "it": "Vento e Previsioni Caldè Lago Maggiore",
       "en": "Wind and Weather Forecast Caldè Lake Maggiore",
-      "de": "Wind und Wettervorhersage Caldè Lago Maggiore"
+      "de": "Wind und Wettervorhersage Caldè Lago Maggiore",
+      "fr": "Vent et Prévisions Caldè Lac Majeur"
     },
     "ariaLabel": {
       "it": "Mappa Vento in Tempo Reale: Lago Maggiore e Caldè",
       "en": "Real-Time Wind Map: Lake Maggiore and Caldè",
-      "de": "Echtzeit-Windkarte: Lago Maggiore und Caldè"
+      "de": "Echtzeit-Windkarte: Lago Maggiore und Caldè",
+      "fr": "Carte du Vent en Temps Réel : Lac Majeur et Caldè"
     },
     "mapAlt": {
       "it": "Mappa del vento Lago Maggiore",
       "en": "Wind map of Lake Maggiore",
-      "de": "Windkarte Lago Maggiore"
+      "de": "Windkarte Lago Maggiore",
+      "fr": "Carte du vent du Lac Majeur"
     },
     "model": {
       "it": "Modello ICON-D2 (High Res)",
       "en": "ICON-D2 Model (High Res)",
-      "de": "ICON-D2-Modell (High Res)"
+      "de": "ICON-D2-Modell (High Res)",
+      "fr": "Modèle ICON-D2 (Haute Résolution)"
     },
     "scroll": {
       "it": "Scorri per dettagli",
       "en": "Scroll for details",
-      "de": "Scrollen für Details"
+      "de": "Scrollen für Details",
+      "fr": "Faites défiler pour plus de détails"
     },
     "disclaimer": {
       "it": "Osservare sempre il lago prima di uscire",
       "en": "Always check the lake before going out",
-      "de": "Überprüfen Sie immer den See, bevor Sie losfahren"
+      "de": "Überprüfen Sie immer den See, bevor Sie losfahren",
+      "fr": "Observez toujours le lac avant de sortir"
     },
     "sourceLabel": {
       "it": "Fonte",
       "en": "Source",
-      "de": "Quelle"
+      "de": "Quelle",
+      "fr": "Source"
     },
     "stationsTitle": {
       "it": "Stazioni meteo",
       "en": "Weather stations",
-      "de": "Wetterstationen"
+      "de": "Wetterstationen",
+      "fr": "Stations météo"
     },
     "webcamsTitle": {
       "it": "Webcam",
       "en": "Webcams",
-      "de": "Webcams"
+      "de": "Webcams",
+      "fr": "Webcams"
     },
     "foehn": {
       "title": {
         "it": "Probabilità favonio",
         "en": "Föhn probability",
-        "de": "Föhn-Wahrscheinlichkeit"
+        "de": "Föhn-Wahrscheinlichkeit",
+        "fr": "Probabilité de foehn"
       },
       "bassa": {
         "it": "Bassa",
         "en": "Low",
-        "de": "Niedrig"
+        "de": "Niedrig",
+        "fr": "Faible"
       },
       "moderata": {
         "it": "Moderata",
         "en": "Moderate",
-        "de": "Mäßig"
+        "de": "Mäßig",
+        "fr": "Modérée"
       },
       "alta": {
         "it": "Alta",
         "en": "High",
-        "de": "Hoch"
+        "de": "Hoch",
+        "fr": "Élevée"
       },
       "disclaimer": {
         "it": "indicazione approssimativa (differenza pressione Lugano-Zurigo)",
         "en": "approximate indicator (Lugano-Zurich pressure difference)",
-        "de": "ungefährer Hinweis (Druckdifferenz Lugano-Zürich)"
+        "de": "ungefährer Hinweis (Druckdifferenz Lugano-Zürich)",
+        "fr": "indication approximative (différence de pression Lugano-Zurich)"
       }
     }
   },
@@ -99,76 +117,79 @@
     "title": {
       "it": "Legenda intensità vento",
       "en": "Wind intensity legend",
-      "de": "Windstärke-Legende"
+      "de": "Windstärke-Legende",
+      "fr": "Légende intensité du vent"
     },
     "description": {
       "it": "Il colore indica lo sfondo usato nelle previsioni",
       "en": "The color indicates the background used in forecasts",
-      "de": "Die Farbe zeigt den Hintergrund in den Vorhersagen"
+      "de": "Die Farbe zeigt den Hintergrund in den Vorhersagen",
+      "fr": "La couleur indique le fond utilisé dans les prévisions"
     },
     "levels": {
-      "calm": { "it": "<3 kn Bonaccia", "en": "<3 kn Calm", "de": "<3 kn Flaute" },
-      "light": { "it": "3-7 kn Leggero", "en": "3-7 kn Light", "de": "3-7 kn Leicht" },
-      "moderate": { "it": "7-11 kn Moderato", "en": "7-11 kn Moderate", "de": "7-11 kn Mäßig" },
-      "strong": { "it": "11-16 kn Forte", "en": "11-16 kn Strong", "de": "11-16 kn Stark" },
-      "veryStrong": { "it": ">16 kn Molto forte", "en": ">16 kn Very strong", "de": ">16 kn Sehr stark" }
-    }
+      "calm": { "it": "<3 kn Bonaccia", "en": "<3 kn Calm", "de": "<3 kn Flaute", "fr": "<3 kn Calme" },
+      "light": { "it": "3-7 kn Leggero", "en": "3-7 kn Light", "de": "3-7 kn Leicht", "fr": "3-7 kn Léger" },
+      "moderate": { "it": "7-11 kn Moderato", "en": "7-11 kn Moderate", "de": "7-11 kn Mäßig", "fr": "7-11 kn Modéré" },
+      "strong": { "it": "11-16 kn Forte", "en": "11-16 kn Strong", "de": "11-16 kn Stark", "fr": "11-16 kn Fort" },
+      "veryStrong": { "it": ">16 kn Molto forte", "en": ">16 kn Very strong", "de": ">16 kn Sehr stark", "fr": ">16 kn Très fort" }
+    },
+    "past": { "it": "Passato", "en": "Past", "de": "Vergangen", "fr": "Passé" }
   },
   "source": {
-    "title": { "it": "Fonte dati", "en": "Data source", "de": "Datenquelle" },
-    "position": { "it": "Posizione", "en": "Position", "de": "Position" },
-    "model": { "it": "Modello", "en": "Model", "de": "Modell" }
+    "title": { "it": "Fonte dati", "en": "Data source", "de": "Datenquelle", "fr": "Source des données" },
+    "position": { "it": "Posizione", "en": "Position", "de": "Position", "fr": "Position" },
+    "model": { "it": "Modello", "en": "Model", "de": "Modell", "fr": "Modèle" }
   },
   "sailing": {
-    "title": { "it": "Condizioni per la Vela", "en": "Sailing Conditions", "de": "Segelbedingungen" },
-    "recommendedFor": { "it": "Consigliato per", "en": "Recommended for", "de": "Empfohlen für" }
+    "title": { "it": "Condizioni per la Vela", "en": "Sailing Conditions", "de": "Segelbedingungen", "fr": "Conditions pour la Voile" },
+    "recommendedFor": { "it": "Consigliato per", "en": "Recommended for", "de": "Empfohlen für", "fr": "Recommandé pour" }
   },
   "current": {
-    "wind": { "it": "vento", "en": "wind", "de": "Wind" },
-    "direction": { "it": "direzione", "en": "direction", "de": "Richtung" },
-    "temperature": { "it": "temperatura", "en": "temperature", "de": "Temperatur" },
-    "humidity": { "it": "umidità", "en": "humidity", "de": "Luftfeuchtigkeit" },
-    "updated": { "it": "Aggiornato", "en": "Updated", "de": "Aktualisiert" }
+    "wind": { "it": "vento", "en": "wind", "de": "Wind", "fr": "vent" },
+    "direction": { "it": "direzione", "en": "direction", "de": "Richtung", "fr": "direction" },
+    "temperature": { "it": "temperatura", "en": "temperature", "de": "Temperatur", "fr": "température" },
+    "humidity": { "it": "umidità", "en": "humidity", "de": "Luftfeuchtigkeit", "fr": "humidité" },
+    "updated": { "it": "Aggiornato", "en": "Updated", "de": "Aktualisiert", "fr": "Mis à jour" }
   },
   "forecast": {
-    "sectionTitle": { "it": "Previsioni meteo", "en": "Weather forecast", "de": "Wettervorhersage" },
-    "hourly": { "it": "Previsione Vento Oggi", "en": "Today's Wind Forecast", "de": "Windvorhersage heute" },
-    "daily": { "it": "Previsioni Prossimi Giorni", "en": "Next Days Forecast", "de": "Vorhersage nächste Tage" },
-    "disclaimer": { "it": "Indicazioni generali. Verifica sempre le condizioni reali prima di uscire.", "en": "General indications. Always check real conditions before going out.", "de": "Allgemeine Hinweise. Überprüfen Sie immer die tatsächlichen Bedingungen, bevor Sie losfahren." },
-    "loading": { "it": "Caricamento...", "en": "Loading...", "de": "Wird geladen..." },
-    "error": { "it": "Errore nel caricamento dei dati meteo", "en": "Error loading weather data", "de": "Fehler beim Laden der Wetterdaten" },
-    "eventForecast": { "it": "Previsione per il giorno dell'evento", "en": "Forecast for event day", "de": "Vorhersage für den Veranstaltungstag" }
+    "sectionTitle": { "it": "Previsioni meteo", "en": "Weather forecast", "de": "Wettervorhersage", "fr": "Prévisions météo" },
+    "hourly": { "it": "Previsione Vento Oggi", "en": "Today's Wind Forecast", "de": "Windvorhersage heute", "fr": "Prévision du Vent Aujourd'hui" },
+    "daily": { "it": "Previsioni Prossimi Giorni", "en": "Next Days Forecast", "de": "Vorhersage nächste Tage", "fr": "Prévisions Prochains Jours" },
+    "disclaimer": { "it": "Indicazioni generali. Verifica sempre le condizioni reali prima di uscire.", "en": "General indications. Always check real conditions before going out.", "de": "Allgemeine Hinweise. Überprüfen Sie immer die tatsächlichen Bedingungen, bevor Sie losfahren.", "fr": "Indications générales. Vérifiez toujours les conditions réelles avant de sortir." },
+    "loading": { "it": "Caricamento...", "en": "Loading...", "de": "Wird geladen...", "fr": "Chargement..." },
+    "error": { "it": "Errore nel caricamento dei dati meteo", "en": "Error loading weather data", "de": "Fehler beim Laden der Wetterdaten", "fr": "Erreur lors du chargement des données météo" },
+    "eventForecast": { "it": "Previsione per il giorno dell'evento", "en": "Forecast for event day", "de": "Vorhersage für den Veranstaltungstag", "fr": "Prévision pour le jour de l'événement" }
   },
   "windStatus": {
-    "calm": { "it": "Bonaccia", "en": "Calm", "de": "Flaute" },
-    "light": { "it": "Vento Leggero", "en": "Light Wind", "de": "Leichter Wind" },
-    "moderate": { "it": "Vento Moderato", "en": "Moderate Wind", "de": "Mäßiger Wind" },
-    "strong": { "it": "Vento Forte", "en": "Strong Wind", "de": "Starker Wind" },
-    "veryStrong": { "it": "Vento Molto Forte", "en": "Very Strong Wind", "de": "Sehr starker Wind" }
+    "calm": { "it": "Bonaccia", "en": "Calm", "de": "Flaute", "fr": "Calme" },
+    "light": { "it": "Vento Leggero", "en": "Light Wind", "de": "Leichter Wind", "fr": "Vent Léger" },
+    "moderate": { "it": "Vento Moderato", "en": "Moderate Wind", "de": "Mäßiger Wind", "fr": "Vent Modéré" },
+    "strong": { "it": "Vento Forte", "en": "Strong Wind", "de": "Starker Wind", "fr": "Vent Fort" },
+    "veryStrong": { "it": "Vento Molto Forte", "en": "Very Strong Wind", "de": "Sehr starker Wind", "fr": "Vent Très Fort" }
   },
   "recommendations": {
-    "calm": { "it": "Principianti, SUP", "en": "Beginners, SUP", "de": "Anfänger, SUP" },
-    "light": { "it": "Tutti i livelli", "en": "All levels", "de": "Alle Niveaus" },
-    "moderate": { "it": "Velisti esperti", "en": "Experienced sailors", "de": "Erfahrene Segler" },
-    "strong": { "it": "Solo esperti", "en": "Experts only", "de": "Nur Experten" },
-    "veryStrong": { "it": "Sconsigliato uscire", "en": "Not recommended", "de": "Nicht empfohlen" }
+    "calm": { "it": "Principianti, SUP", "en": "Beginners, SUP", "de": "Anfänger, SUP", "fr": "Débutants, SUP" },
+    "light": { "it": "Tutti i livelli", "en": "All levels", "de": "Alle Niveaus", "fr": "Tous niveaux" },
+    "moderate": { "it": "Velisti esperti", "en": "Experienced sailors", "de": "Erfahrene Segler", "fr": "Marins expérimentés" },
+    "strong": { "it": "Solo esperti", "en": "Experts only", "de": "Nur Experten", "fr": "Experts uniquement" },
+    "veryStrong": { "it": "Sconsigliato uscire", "en": "Not recommended", "de": "Nicht empfohlen", "fr": "Sortie déconseillée" }
   },
   "days": {
-    "today": { "it": "Oggi", "en": "Today", "de": "Heute" },
-    "tomorrow": { "it": "Domani", "en": "Tomorrow", "de": "Morgen" }
+    "today": { "it": "Oggi", "en": "Today", "de": "Heute", "fr": "Aujourd'hui" },
+    "tomorrow": { "it": "Domani", "en": "Tomorrow", "de": "Morgen", "fr": "Demain" }
   },
   "weather": {
-    "clear": { "it": "Sereno", "en": "Clear", "de": "Klar" },
-    "partlyCloudy": { "it": "Poco nuvoloso", "en": "Partly cloudy", "de": "Teilweise bewölkt" },
-    "cloudy": { "it": "Nuvoloso", "en": "Cloudy", "de": "Bewölkt" },
-    "fog": { "it": "Nebbia", "en": "Fog", "de": "Nebel" },
-    "drizzle": { "it": "Pioggerella", "en": "Drizzle", "de": "Nieselregen" },
-    "lightRain": { "it": "Pioggia leggera", "en": "Light rain", "de": "Leichter Regen" },
-    "rain": { "it": "Pioggia", "en": "Rain", "de": "Regen" },
-    "heavyRain": { "it": "Pioggia forte", "en": "Heavy rain", "de": "Starker Regen" },
-    "snow": { "it": "Neve", "en": "Snow", "de": "Schnee" },
-    "showers": { "it": "Rovesci", "en": "Showers", "de": "Schauer" },
-    "thunderstorm": { "it": "Temporale", "en": "Thunderstorm", "de": "Gewitter" }
+    "clear": { "it": "Sereno", "en": "Clear", "de": "Klar", "fr": "Dégagé" },
+    "partlyCloudy": { "it": "Poco nuvoloso", "en": "Partly cloudy", "de": "Teilweise bewölkt", "fr": "Partiellement nuageux" },
+    "cloudy": { "it": "Nuvoloso", "en": "Cloudy", "de": "Bewölkt", "fr": "Nuageux" },
+    "fog": { "it": "Nebbia", "en": "Fog", "de": "Nebel", "fr": "Brouillard" },
+    "drizzle": { "it": "Pioggerella", "en": "Drizzle", "de": "Nieselregen", "fr": "Bruine" },
+    "lightRain": { "it": "Pioggia leggera", "en": "Light rain", "de": "Leichter Regen", "fr": "Pluie légère" },
+    "rain": { "it": "Pioggia", "en": "Rain", "de": "Regen", "fr": "Pluie" },
+    "heavyRain": { "it": "Pioggia forte", "en": "Heavy rain", "de": "Starker Regen", "fr": "Forte pluie" },
+    "snow": { "it": "Neve", "en": "Snow", "de": "Schnee", "fr": "Neige" },
+    "showers": { "it": "Rovesci", "en": "Showers", "de": "Schauer", "fr": "Averses" },
+    "thunderstorm": { "it": "Temporale", "en": "Thunderstorm", "de": "Gewitter", "fr": "Orage" }
   }
 }
 

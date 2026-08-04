@@ -15,7 +15,7 @@ export type StationDataType = 'ocr' | 'json' | 'photo' | 'iframe';
 
 export interface MeteoStation {
   id: string;
-  name: { it: string; en?: string; de?: string };
+  name: { it: string; en?: string; de?: string; fr?: string };
   lat: number;
   lon: number;
   sourceId: string;

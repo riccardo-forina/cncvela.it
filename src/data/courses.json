@@ -5,49 +5,58 @@
       "title": {
         "it": "Corso Derive Settimanale",
         "en": "Weekly Dinghy Course",
-        "de": "Jolle Wochenkurs"
+        "de": "Jolle Wochenkurs",
+        "fr": "Cours Dériveur Semaine"
       },
       "subtitle": {
         "it": "Età 6-99",
         "en": "Ages 6-99",
-        "de": "Alter 6-99"
+        "de": "Alter 6-99",
+        "fr": "Âge 6-99"
       },
       "icon": "sailboat",
       "duration": {
         "it": "5 giorni",
         "en": "5 days",
-        "de": "5 Tage"
+        "de": "5 Tage",
+        "fr": "5 jours"
       },
       "period": {
         "it": "Giugno - Agosto",
         "en": "June - August",
-        "de": "Juni - August"
+        "de": "Juni - August",
+        "fr": "Juin - Août"
       },
       "boatType": {
         "it": "Derive",
         "en": "Dinghies",
-        "de": "Jollen"
+        "de": "Jollen",
+        "fr": "Dériveurs"
       },
       "price": 175.00,
       "priceNote": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
-        "de": "+ Mitgliedschaft + FIV"
+        "de": "+ Mitgliedschaft + FIV",
+        "fr": "+ cotisation + FIV"
       },
       "description": {
         "it": "Corso intensivo di vela su derive. Una settimana dal lunedì al venerdì per imparare le basi della navigazione a vela.",
         "en": "Intensive sailing course on dinghies. A week from Monday to Friday to learn the basics of sailing.",
-        "de": "Intensiver Segelkurs auf Jollen. Eine Woche von Montag bis Freitag, um die Grundlagen des Segelns zu erlernen."
+        "de": "Intensiver Segelkurs auf Jollen. Eine Woche von Montag bis Freitag, um die Grundlagen des Segelns zu erlernen.",
+        "fr": "Cours de voile intensif sur dériveur. Une semaine du lundi au vendredi pour apprendre les bases de la navigation à voile."
       },
       "includes": {
         "it": ["Istruttori FIV qualificati", "Attrezzatura completa", "Assicurazione"],
         "en": ["Qualified FIV instructors", "Complete equipment", "Insurance"],
-        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"]
+        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"],
+        "fr": ["Moniteurs FIV qualifiés", "Équipement complet", "Assurance"]
       },
       "accommodation": {
         "it": "È possibile pernottare presso la foresteria del Circolo, prezzo da concordare.",
         "en": "Accommodation available at the Club guesthouse, price to be agreed.",
-        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung."
+        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung.",
+        "fr": "Hébergement possible à la maison d'hôtes du Club, prix à convenir."
       },
       "order": 1
     },
@@ -56,49 +65,58 @@
       "title": {
         "it": "Corso Derive Weekend",
         "en": "Weekend Dinghy Course",
-        "de": "Jolle Wochenendkurs"
+        "de": "Jolle Wochenendkurs",
+        "fr": "Cours Dériveur Week-end"
       },
       "subtitle": {
         "it": "Età 6-99",
         "en": "Ages 6-99",
-        "de": "Alter 6-99"
+        "de": "Alter 6-99",
+        "fr": "Âge 6-99"
       },
       "icon": "sailboat",
       "duration": {
         "it": "2 weekend",
         "en": "2 weekends",
-        "de": "2 Wochenenden"
+        "de": "2 Wochenenden",
+        "fr": "2 week-ends"
       },
       "period": {
         "it": "Maggio - Settembre",
         "en": "May - September",
-        "de": "Mai - September"
+        "de": "Mai - September",
+        "fr": "Mai - Septembre"
       },
       "boatType": {
         "it": "Derive",
         "en": "Dinghies",
-        "de": "Jollen"
+        "de": "Jollen",
+        "fr": "Dériveurs"
       },
       "price": 150.00,
       "priceNote": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
-        "de": "+ Mitgliedschaft + FIV"
+        "de": "+ Mitgliedschaft + FIV",
+        "fr": "+ cotisation + FIV"
       },
       "description": {
         "it": "Corso di vela su derive distribuito su due fine settimana. Ideale per chi non può frequentare il corso settimanale.",
         "en": "Sailing course on dinghies spread over two weekends. Ideal for those who cannot attend the weekly course.",
-        "de": "Segelkurs auf Jollen über zwei Wochenenden verteilt. Ideal für alle, die den Wochenkurs nicht besuchen können."
+        "de": "Segelkurs auf Jollen über zwei Wochenenden verteilt. Ideal für alle, die den Wochenkurs nicht besuchen können.",
+        "fr": "Cours de voile sur dériveur réparti sur deux week-ends. Idéal pour ceux qui ne peuvent pas suivre le cours de la semaine."
       },
       "includes": {
         "it": ["Istruttori FIV qualificati", "Attrezzatura completa", "Assicurazione"],
         "en": ["Qualified FIV instructors", "Complete equipment", "Insurance"],
-        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"]
+        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"],
+        "fr": ["Moniteurs FIV qualifiés", "Équipement complet", "Assurance"]
       },
       "accommodation": {
         "it": "È possibile pernottare presso la foresteria del Circolo, prezzo da concordare.",
         "en": "Accommodation available at the Club guesthouse, price to be agreed.",
-        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung."
+        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung.",
+        "fr": "Hébergement possible à la maison d'hôtes du Club, prix à convenir."
       },
       "order": 2
     },
@@ -107,49 +125,58 @@
       "title": {
         "it": "Corso Cabinati",
         "en": "Keelboat Course",
-        "de": "Kielbootkurs"
+        "de": "Kielbootkurs",
+        "fr": "Cours Habitable"
       },
       "subtitle": {
         "it": "Età 6-99",
         "en": "Ages 6-99",
-        "de": "Alter 6-99"
+        "de": "Alter 6-99",
+        "fr": "Âge 6-99"
       },
       "icon": "yacht",
       "duration": {
         "it": "2 weekend",
         "en": "2 weekends",
-        "de": "2 Wochenenden"
+        "de": "2 Wochenenden",
+        "fr": "2 week-ends"
       },
       "period": {
         "it": "Maggio - Settembre",
         "en": "May - September",
-        "de": "Mai - September"
+        "de": "Mai - September",
+        "fr": "Mai - Septembre"
       },
       "boatType": {
         "it": "Cabinati",
         "en": "Keelboats",
-        "de": "Kielboote"
+        "de": "Kielboote",
+        "fr": "Habitables"
       },
       "price": 200.00,
       "priceNote": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
-        "de": "+ Mitgliedschaft + FIV"
+        "de": "+ Mitgliedschaft + FIV",
+        "fr": "+ cotisation + FIV"
       },
       "description": {
         "it": "Corso di vela su cabinati. Due fine settimana in date da concordare per imparare la navigazione su barche più grandi.",
         "en": "Sailing course on keelboats. Two weekends on dates to be agreed to learn sailing on larger boats.",
-        "de": "Segelkurs auf Kielbooten. Zwei Wochenenden an zu vereinbarenden Terminen, um das Segeln auf größeren Booten zu erlernen."
+        "de": "Segelkurs auf Kielbooten. Zwei Wochenenden an zu vereinbarenden Terminen, um das Segeln auf größeren Booten zu erlernen.",
+        "fr": "Cours de voile sur habitable. Deux week-ends à des dates à convenir pour apprendre la navigation sur des bateaux plus grands."
       },
       "includes": {
         "it": ["Istruttori FIV qualificati", "Attrezzatura completa", "Assicurazione"],
         "en": ["Qualified FIV instructors", "Complete equipment", "Insurance"],
-        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"]
+        "de": ["Qualifizierte FIV-Ausbilder", "Komplette Ausrüstung", "Versicherung"],
+        "fr": ["Moniteurs FIV qualifiés", "Équipement complet", "Assurance"]
       },
       "accommodation": {
         "it": "È possibile pernottare presso la foresteria del Circolo, prezzo da concordare.",
         "en": "Accommodation available at the Club guesthouse, price to be agreed.",
-        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung."
+        "de": "Unterkunft im Gästehaus des Clubs möglich, Preis nach Vereinbarung.",
+        "fr": "Hébergement possible à la maison d'hôtes du Club, prix à convenir."
       },
       "order": 3
     }
@@ -158,12 +185,14 @@
     "whatIncludes": {
       "it": "Cosa include",
       "en": "What's included",
-      "de": "Was enthalten ist"
+      "de": "Was enthalten ist",
+      "fr": "Ce qui est inclus"
     },
     "accommodation": {
       "it": "Foresteria",
       "en": "Accommodation",
-      "de": "Unterkunft"
+      "de": "Unterkunft",
+      "fr": "Hébergement"
     }
   }
 }

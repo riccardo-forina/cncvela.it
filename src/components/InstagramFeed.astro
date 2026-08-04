@@ -3,6 +3,7 @@
  * Instagram Feed Component
  * Fetches posts from Behold.so feed and displays as a text list
  */
+import { localeTags } from '../i18n';
 import type { Locale } from '../i18n';
 import feedConfig from '../data/instagram-feed.json';
 
@@ -30,6 +31,7 @@ const fallbackLabels = {
     it: 'Seguici su Instagram per restare aggiornato sulle attività del circolo.',
     en: 'Follow us on Instagram to stay updated on club activities.',
     de: 'Folgen Sie uns auf Instagram, um über Clubaktivitäten informiert zu bleiben.',
+    fr: 'Suivez-nous sur Instagram pour rester informé des activités du club.',
   },
 };
 
@@ -50,8 +52,7 @@ if (BEHOLD_FEED_URL) {
 const formatPostDate = (timestamp: string | undefined): string => {
   if (!timestamp) return '';
   const date = new Date(timestamp);
-  const localeMap: Record<Locale, string> = { it: 'it-IT', en: 'en-GB', de: 'de-DE' };
-  return date.toLocaleDateString(localeMap[locale], { day: 'numeric', month: 'short', year: 'numeric' });
+  return date.toLocaleDateString(localeTags[locale], { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
 const getCaption = (post: BeholdPost): string =>

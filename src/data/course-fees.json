@@ -2,46 +2,53 @@
   "title": {
     "it": "Quote Scuola Vela 2026",
     "en": "Sailing School Fees 2026",
-    "de": "Segelschulgebühren 2026"
+    "de": "Segelschulgebühren 2026",
+    "fr": "Tarifs École de Voile 2026"
   },
   "items": [
     {
       "name": {
         "it": "Derive - Settimana diurno",
         "en": "Dinghies - Day Week",
-        "de": "Jollen - Tageskurs Woche"
+        "de": "Jollen - Tageskurs Woche",
+        "fr": "Dériveurs - Semaine en journée"
       },
       "price": 175,
       "note": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
-        "de": "+ Mitgliedschaft + FIV"
+        "de": "+ Mitgliedschaft + FIV",
+        "fr": "+ cotisation + FIV"
       }
     },
     {
       "name": {
         "it": "Derive - Corso breve (2 weekend)",
         "en": "Dinghies - Short Course (2 weekends)",
-        "de": "Jollen - Kurzkurs (2 Wochenenden)"
+        "de": "Jollen - Kurzkurs (2 Wochenenden)",
+        "fr": "Dériveurs - Cours court (2 week-ends)"
       },
       "price": 150,
       "note": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
-        "de": "+ Mitgliedschaft + FIV"
+        "de": "+ Mitgliedschaft + FIV",
+        "fr": "+ cotisation + FIV"
       }
     },
     {
       "name": {
         "it": "Cabinati - Corso breve (2 weekend)",
         "en": "Keelboats - Short Course (2 weekends)",
-        "de": "Kielboote - Kurzkurs (2 Wochenenden)"
+        "de": "Kielboote - Kurzkurs (2 Wochenenden)",
+        "fr": "Habitables - Cours court (2 week-ends)"
       },
       "price": 200,
       "note": {
         "it": "+ quota ass. + FIV",
         "en": "+ membership + FIV",
-        "de": "+ Mitgliedschaft + FIV"
+        "de": "+ Mitgliedschaft + FIV",
+        "fr": "+ cotisation + FIV"
       }
     }
   ],
@@ -50,36 +57,42 @@
       "description": {
         "it": "Corsi successivi al primo nella stessa stagione",
         "en": "Subsequent courses in the same season",
-        "de": "Folgekurse in der gleichen Saison"
+        "de": "Folgekurse in der gleichen Saison",
+        "fr": "Cours suivants au cours de la même saison"
       },
       "discount": {
         "it": "15%",
         "en": "15%",
-        "de": "15%"
+        "de": "15%",
+        "fr": "15%"
       }
     },
     {
       "description": {
         "it": "Iscrizione contemporanea di più allievi dello stesso stato di famiglia",
         "en": "Simultaneous registration of multiple students from the same family",
-        "de": "Gleichzeitige Anmeldung mehrerer Schüler aus derselben Familie"
+        "de": "Gleichzeitige Anmeldung mehrerer Schüler aus derselben Familie",
+        "fr": "Inscription simultanée de plusieurs élèves de la même famille"
       },
       "discount": {
         "it": "10% ciascuno",
         "en": "10% each",
-        "de": "je 10%"
+        "de": "je 10%",
+        "fr": "10% chacun"
       }
     },
     {
       "description": {
         "it": "Nota",
         "en": "Please note",
-        "de": "Hinweis"
+        "de": "Hinweis",
+        "fr": "Remarque"
       },
       "discount": {
         "it": "Le promozioni non sono cumulabili (si applica un solo sconto per iscrizione)",
         "en": "Discounts are not cumulative (only one discount applies per registration)",
-        "de": "Rabatte sind non-kumulativ (nur un Rabatt pro Buchung anwendbar)"
+        "de": "Rabatte sind non-kumulativ (nur un Rabatt pro Buchung anwendbar)",
+        "fr": "Les promotions ne sont pas cumulables (une seule réduction s'applique par inscription)"
       }
     }
   ]

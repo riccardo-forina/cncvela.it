@@ -2,104 +2,122 @@
   "pageTitle": {
     "it": "Il Circolo",
     "en": "The Association",
-    "de": "Der Verein"
+    "de": "Der Verein",
+    "fr": "Le Club"
   },
   "pageDescription": {
     "it": "Scopri il Circolo Nautico Caldè: le nostre strutture, la storia, il consiglio direttivo e come diventare socio.",
     "en": "Discover Circolo Nautico Caldè: our facilities, history, board members, and how to become a member.",
-    "de": "Entdecken Sie den Circolo Nautico Caldè: unsere Einrichtungen, Geschichte, Vorstand und wie Sie Mitglied werden."
+    "de": "Entdecken Sie den Circolo Nautico Caldè: unsere Einrichtungen, Geschichte, Vorstand und wie Sie Mitglied werden.",
+    "fr": "Découvrez le Circolo Nautico Caldè : nos installations, notre histoire, le conseil d'administration et comment devenir membre."
   },
   "whoWeAre": {
     "title": {
       "it": "Chi Siamo",
       "en": "About Us",
-      "de": "Über uns"
+      "de": "Über uns",
+      "fr": "Qui Sommes-Nous"
     },
     "content": {
       "it": "Il <strong>Circolo Nautico Caldè</strong> è una Associazione Sportiva Dilettantistica (ASD) fondata il 24 giugno 1965. Dal 1975 siamo affiliati alla Federazione Italiana Vela (FIV), codice 439 – XV Zona.<br/><br/>Come associazione senza scopo di lucro, il nostro obiettivo è promuovere la cultura della vela e gli sport acquatici sul Lago Maggiore, offrendo ai soci un ambiente accogliente e strutture per la pratica della navigazione a vela.",
       "en": "<strong>Circolo Nautico Caldè</strong> is an Amateur Sports Association (ASD) founded on June 24, 1965. Since 1975 we have been affiliated with the Italian Sailing Federation (FIV), code 439 – XV Zone.<br/><br/>As a non-profit association, our goal is to promote sailing culture and water sports on Lake Maggiore, offering members a welcoming environment and facilities for sailing practice.",
-      "de": "Der <strong>Circolo Nautico Caldè</strong> ist ein Amateursportverein (ASD), der am 24. Juni 1965 gegründet wurde. Seit 1975 sind wir dem Italienischen Segelverband (FIV) angeschlossen, Code 439 – XV Zone.<br/><br/>Als gemeinnütziger Verein ist es unser Ziel, die Segelkultur und den Wassersport am Lago Maggiore zu fördern und den Mitgliedern eine einladende Umgebung und Einrichtungen zum Segeln zu bieten."
+      "de": "Der <strong>Circolo Nautico Caldè</strong> ist ein Amateursportverein (ASD), der am 24. Juni 1965 gegründet wurde. Seit 1975 sind wir dem Italienischen Segelverband (FIV) angeschlossen, Code 439 – XV Zone.<br/><br/>Als gemeinnütziger Verein ist es unser Ziel, die Segelkultur und den Wassersport am Lago Maggiore zu fördern und den Mitgliedern eine einladende Umgebung und Einrichtungen zum Segeln zu bieten.",
+      "fr": "Le <strong>Circolo Nautico Caldè</strong> est une Association Sportive Amateur (ASD) fondée le 24 juin 1965. Depuis 1975, nous sommes affiliés à la Fédération Italienne de Voile (FIV), code 439 – XV Zone.<br/><br/>En tant qu'association à but non lucratif, notre objectif est de promouvoir la culture de la voile et les sports nautiques sur le Lac Majeur, en offrant aux membres un environnement accueillant et des installations pour la pratique de la navigation à voile."
     }
   },
   "facilities": {
     "title": {
       "it": "Le Nostre Strutture",
       "en": "Our Facilities",
-      "de": "Unsere Einrichtungen"
+      "de": "Unsere Einrichtungen",
+      "fr": "Nos Installations"
     },
     "beach": {
       "title": {
         "it": "Spiaggia in Concessione",
         "en": "Licensed Beach",
-        "de": "Konzessionierter Strand"
+        "de": "Konzessionierter Strand",
+        "fr": "Plage en Concession"
       },
       "shortDesc": {
         "it": "Accesso diretto al Lago Maggiore",
         "en": "Direct access to Lake Maggiore",
-        "de": "Direkter Zugang zum Lago Maggiore"
+        "de": "Direkter Zugang zum Lago Maggiore",
+        "fr": "Accès direct au Lac Majeur"
       },
       "longDesc": {
         "it": "Un accesso diretto al lago con spiaggia riservata ai soci, ideale per il varo delle derive, il relax tra una regata e l'altra, e per godersi il panorama unico del Lago Maggiore.",
         "en": "Direct lake access with a beach reserved for members, ideal for launching dinghies, relaxing between regattas, and enjoying the unique panorama of Lake Maggiore.",
-        "de": "Direkter Seezugang mit einem Strand für Mitglieder, ideal zum Slippen von Jollen, Entspannen zwischen Regatten und Genießen des einzigartigen Panoramas des Lago Maggiore."
+        "de": "Direkter Seezugang mit einem Strand für Mitglieder, ideal zum Slippen von Jollen, Entspannen zwischen Regatten und Genießen des einzigartigen Panoramas des Lago Maggiore.",
+        "fr": "Un accès direct au lac avec une plage réservée aux membres, idéale pour la mise à l'eau des dériveurs, pour se détendre entre deux régates et pour profiter du panorama unique du Lac Majeur."
       }
     },
     "pontile": {
       "title": {
         "it": "Pontile Privato",
         "en": "Private Dock",
-        "de": "Privater Steg"
+        "de": "Privater Steg",
+        "fr": "Ponton Privé"
       },
       "shortDesc": {
         "it": "Imbarco e sbarco comodo",
         "en": "Easy boarding and disembarking",
-        "de": "Bequemes Ein- und Aussteigen"
+        "de": "Bequemes Ein- und Aussteigen",
+        "fr": "Embarquement et débarquement faciles"
       },
       "longDesc": {
         "it": "Il nostro pontile permette l'imbarco e lo sbarco passeggeri in totale comodità, facilitando le operazioni di varo e alaggio delle imbarcazioni.",
         "en": "Our dock allows easy boarding and disembarking, facilitating launching and hauling operations.",
-        "de": "Unser Steg ermöglicht bequemes Ein- und Aussteigen und erleichtert das Slippen und Bergen von Booten."
+        "de": "Unser Steg ermöglicht bequemes Ein- und Aussteigen und erleichtert das Slippen und Bergen von Booten.",
+        "fr": "Notre ponton permet l'embarquement et le débarquement des passagers en toute simplicité, facilitant les opérations de mise à l'eau et de halage des bateaux."
       }
     },
     "sede": {
       "title": {
         "it": "Sede Sociale",
         "en": "Clubhouse",
-        "de": "Vereinshaus"
+        "de": "Vereinshaus",
+        "fr": "Siège du Club"
       },
       "shortDesc": {
         "it": "Sale attività e alloggi istruttori",
         "en": "Activity rooms and instructor lodging",
-        "de": "Aktivitätsräume und Unterkunft für Ausbilder"
+        "de": "Aktivitätsräume und Unterkunft für Ausbilder",
+        "fr": "Salles d'activités et logements moniteurs"
       },
       "longDesc": {
         "it": "Il cuore pulsante della nostra comunità: sale per attività e corsi teorici, foresteria per allievi e istruttori, cucina e bagni per tutte le esigenze del circolo.",
         "en": "The heart of our community: rooms for activities and theoretical courses, guest house for students and instructors, kitchen and bathrooms for all club needs.",
-        "de": "Das Herz unserer Gemeinschaft: Räume für Aktivitäten und Theoriekurse, Gästehaus für Schüler und Ausbilder, Küche und Bäder für alle Vereinsbedürfnisse."
+        "de": "Das Herz unserer Gemeinschaft: Räume für Aktivitäten und Theoriekurse, Gästehaus für Schüler und Ausbilder, Küche und Bäder für alle Vereinsbedürfnisse.",
+        "fr": "Le cœur battant de notre communauté : salles pour les activités et cours théoriques, maison d'hôtes pour élèves et moniteurs, cuisine et sanitaires pour tous les besoins du club."
       }
     },
     "boatStorage": {
       "title": {
         "it": "Ricovero Imbarcazioni",
         "en": "Boat Storage",
-        "de": "Bootsunterstand"
+        "de": "Bootsunterstand",
+        "fr": "Abri à Bateaux"
       },
       "desc": {
         "it": "Spazio nel prato per il ricovero di derive e canoe, con rastrelliera dedicata. I soci possono lasciare le proprie imbarcazioni in sicurezza presso il circolo.",
         "en": "Space in the lawn for storing dinghies and canoes, with dedicated rack. Members can safely leave their boats at the club.",
-        "de": "Platz auf der Wiese zur Lagerung von Jollen und Kanus, mit speziellem Ständer. Mitglieder können ihre Boote sicher im Verein lassen."
+        "de": "Platz auf der Wiese zur Lagerung von Jollen und Kanus, mit speziellem Ständer. Mitglieder können ihre Boote sicher im Verein lassen.",
+        "fr": "Espace sur la pelouse pour le rangement des dériveurs et canoës, avec râtelier dédié. Les membres peuvent laisser leur bateau en toute sécurité au club."
       }
     },
     "buoys": {
       "title": {
         "it": "Boe per i Soci",
         "en": "Moorings for Members",
-        "de": "Bojen für Mitglieder"
+        "de": "Bojen für Mitglieder",
+        "fr": "Bouées pour les Membres"
       },
       "desc": {
         "it": "Campo boe antistante il circolo per l'ormeggio delle imbarcazioni dei soci, con diverse tipologie in base alle dimensioni della barca.",
         "en": "Mooring field in front of the club for members' boats, with different types based on boat size.",
-        "de": "Liegefeld vor dem Verein für Boote der Mitglieder, mit verschiedenen Typen je nach Bootsgröße."
+        "de": "Liegefeld vor dem Verein für Boote der Mitglieder, mit verschiedenen Typen je nach Bootsgröße.",
+        "fr": "Champ de bouées devant le club pour le mouillage des bateaux des membres, avec différents types selon la taille du bateau."
       }
     }
   },
@@ -107,136 +125,160 @@
     "title": {
       "it": "Diventa Socio",
       "en": "Become a Member",
-      "de": "Mitglied werden"
+      "de": "Mitglied werden",
+      "fr": "Devenir Membre"
     },
     "intro": {
       "it": "Entra a far parte della nostra comunità velica. L'iscrizione al circolo ti dà accesso a:",
       "en": "Join our sailing community. Club membership gives you access to:",
-      "de": "Werden Sie Teil unserer Segelgemeinschaft. Die Vereinsmitgliedschaft gibt Ihnen Zugang zu:"
+      "de": "Werden Sie Teil unserer Segelgemeinschaft. Die Vereinsmitgliedschaft gibt Ihnen Zugang zu:",
+      "fr": "Rejoignez notre communauté de voile. L'adhésion au club vous donne accès à :"
     },
     "benefits": [
       {
         "it": "Utilizzo della spiaggia in concessione e del pontile",
         "en": "Use of the licensed beach and dock",
-        "de": "Nutzung des konzessionierten Strandes und Stegs"
+        "de": "Nutzung des konzessionierten Strandes und Stegs",
+        "fr": "Utilisation de la plage en concession et du ponton"
       },
       {
         "it": "Partecipazione alle attività sociali e regate",
         "en": "Participation in social activities and regattas",
-        "de": "Teilnahme an gesellschaftlichen Aktivitäten und Regatten"
+        "de": "Teilnahme an gesellschaftlichen Aktivitäten und Regatten",
+        "fr": "Participation aux activités conviviales et aux régates"
       },
       {
         "it": "Partecipazione ai corsi di vela",
         "en": "Participation in sailing courses",
-        "de": "Teilnahme an Segelkursen"
+        "de": "Teilnahme an Segelkursen",
+        "fr": "Participation aux cours de voile"
       },
       {
         "it": "Utilizzo delle strutture del circolo",
         "en": "Use of club facilities",
-        "de": "Nutzung der Vereinseinrichtungen"
+        "de": "Nutzung der Vereinseinrichtungen",
+        "fr": "Utilisation des installations du club"
       },
       {
         "it": "Possibilità di ormeggio per la tua imbarcazione",
         "en": "Mooring possibility for your boat",
-        "de": "Liegemöglichkeit für Ihr Boot"
+        "de": "Liegemöglichkeit für Ihr Boot",
+        "fr": "Possibilité de mouillage pour votre bateau"
       }
     ],
     "viewFeesButton": {
       "it": "Vedi Quote Associative",
       "en": "View Membership Fees",
-      "de": "Mitgliedsbeiträge ansehen"
+      "de": "Mitgliedsbeiträge ansehen",
+      "fr": "Voir les Cotisations"
     }
   },
   "fees": {
     "title": {
       "it": "Quote Associative",
       "en": "Membership Fees",
-      "de": "Mitgliedsbeiträge"
+      "de": "Mitgliedsbeiträge",
+      "fr": "Cotisations d'Adhésion"
     }
   },
   "bankDetailsLabels": {
     "title": {
       "it": "Coordinate Bancarie",
       "en": "Bank Details",
-      "de": "Bankverbindung"
+      "de": "Bankverbindung",
+      "fr": "Coordonnées Bancaires"
     },
     "accountHolder": {
       "it": "Intestatario",
       "en": "Account Holder",
-      "de": "Kontoinhaber"
+      "de": "Kontoinhaber",
+      "fr": "Titulaire du compte"
     },
     "bank": {
       "it": "Banca",
       "en": "Bank",
-      "de": "Bank"
+      "de": "Bank",
+      "fr": "Banque"
     }
   },
   "documentsLabels": {
     "title": {
       "it": "Documenti",
       "en": "Documents",
-      "de": "Dokumente"
+      "de": "Dokumente",
+      "fr": "Documents"
     },
     "downloadPdf": {
       "it": "Scarica PDF",
       "en": "Download PDF",
-      "de": "PDF herunterladen"
+      "de": "PDF herunterladen",
+      "fr": "Télécharger le PDF"
     }
   },
   "registration": {
     "title": {
       "it": "Modulo di Iscrizione",
       "en": "Registration Form",
-      "de": "Anmeldeformular"
+      "de": "Anmeldeformular",
+      "fr": "Formulaire d'Inscription"
     },
     "steps": [
       {
         "it": "<strong>Scarica</strong> il modulo di iscrizione cliccando il bottone qui sotto",
         "en": "<strong>Download</strong> the registration form by clicking the button below",
-        "de": "<strong>Laden</strong> Sie das Anmeldeformular herunter, indem Sie auf die Schaltfläche unten klicken"
+        "de": "<strong>Laden</strong> Sie das Anmeldeformular herunter, indem Sie auf die Schaltfläche unten klicken",
+        "fr": "<strong>Téléchargez</strong> le formulaire d'inscription en cliquant sur le bouton ci-dessous"
       },
       {
         "it": "<strong>Compila</strong> tutti i campi richiesti e <strong>firma</strong> il modulo",
         "en": "<strong>Fill in</strong> all required fields and <strong>sign</strong> the form",
-        "de": "<strong>Füllen</strong> Sie alle erforderlichen Felder aus und <strong>unterschreiben</strong> Sie das Formular"
+        "de": "<strong>Füllen</strong> Sie alle erforderlichen Felder aus und <strong>unterschreiben</strong> Sie das Formular",
+        "fr": "<strong>Remplissez</strong> tous les champs requis et <strong>signez</strong> le formulaire"
       },
       {
         "it": "<strong>Invia</strong> il modulo compilato e firmato via email alla segreteria",
         "en": "<strong>Send</strong> the completed and signed form via email to the secretary",
-        "de": "<strong>Senden</strong> Sie das ausgefüllte und unterschriebene Formular per E-Mail an das Sekretariat"
+        "de": "<strong>Senden</strong> Sie das ausgefüllte und unterschriebene Formular per E-Mail an das Sekretariat",
+        "fr": "<strong>Envoyez</strong> le formulaire complété et signé par e-mail au secrétariat"
       }
     ],
     "downloadButton": {
       "it": "Scarica Modulo",
       "en": "Download Form",
-      "de": "Formular herunterladen"
+      "de": "Formular herunterladen",
+      "fr": "Télécharger le Formulaire"
     },
     "sendButton": {
       "it": "Invia alla Segreteria",
       "en": "Send to Secretary",
-      "de": "An Sekretariat senden"
+      "de": "An Sekretariat senden",
+      "fr": "Envoyer au Secrétariat"
     }
   },
   "contactLabels": {
     "title": {
       "it": "Contatti e Come Raggiungerci",
       "en": "Contact & How to Reach Us",
-      "de": "Kontakt & Anfahrt"
+      "de": "Kontakt & Anfahrt",
+      "fr": "Contact et Comment Nous Rejoindre"
     },
     "clubAddress": {
       "it": "Sede del Circolo",
       "en": "Club Address",
-      "de": "Vereinsadresse"
+      "de": "Vereinsadresse",
+      "fr": "Adresse du Club"
     },
     "fiscalData": {
       "it": "Dati Fiscali",
       "en": "Fiscal Data",
-      "de": "Steuerdaten"
+      "de": "Steuerdaten",
+      "fr": "Données Fiscales"
     },
     "loadMap": {
       "it": "Clicca per caricare la mappa",
       "en": "Click to load the map",
-      "de": "Klicken um die Karte zu laden"
+      "de": "Klicken um die Karte zu laden",
+      "fr": "Cliquez pour charger la carte"
     }
   }
 }

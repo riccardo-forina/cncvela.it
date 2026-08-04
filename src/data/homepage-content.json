@@ -3,44 +3,52 @@
     "title": {
       "it": "Scuola Vela FIV sul Lago Maggiore",
       "en": "FIV Sailing School on Lake Maggiore",
-      "de": "FIV Segelschule am Lago Maggiore"
+      "de": "FIV Segelschule am Lago Maggiore",
+      "fr": "École de Voile FIV sur le Lac Majeur"
     },
     "description": {
       "it": "Circolo Nautico Caldè - Scuola Vela FIV e Regate sul Lago Maggiore dal 1970. Corsi di vela per giovani e adulti a Castelveccana.",
       "en": "Circolo Nautico Caldè - FIV Sailing School and Regattas on Lake Maggiore since 1970. Sailing courses for youth and adults in Castelveccana.",
-      "de": "Circolo Nautico Caldè - FIV Segelschule und Regatten am Lago Maggiore seit 1970. Segelkurse für Jugendliche und Erwachsene in Castelveccana."
+      "de": "Circolo Nautico Caldè - FIV Segelschule und Regatten am Lago Maggiore seit 1970. Segelkurse für Jugendliche und Erwachsene in Castelveccana.",
+      "fr": "Circolo Nautico Caldè - École de Voile FIV et Régates sur le Lac Majeur depuis 1970. Cours de voile pour jeunes et adultes à Castelveccana."
     }
   },
   "hero": {
     "title": {
       "it": "Vivi la Vela",
       "en": "Experience Sailing",
-      "de": "Erlebe Segeln"
+      "de": "Erlebe Segeln",
+      "fr": "Vivez la Voile"
     },
     "titleAccent": {
       "it": "sul Lago Maggiore",
       "en": "on Lake Maggiore",
-      "de": "am Lago Maggiore"
+      "de": "am Lago Maggiore",
+      "fr": "sur le Lac Majeur"
     },
     "subtitle": {
       "it": "Associazione Sportiva dal 1965 · Passione per la vela",
       "en": "Sports Association since 1965 · Passion for sailing",
-      "de": "Sportverein seit 1965 · Leidenschaft für Segeln"
+      "de": "Sportverein seit 1965 · Leidenschaft für Segeln",
+      "fr": "Association Sportive depuis 1965 · Passion pour la voile"
     },
     "cta": {
       "it": "Unisciti a Noi",
       "en": "Join Us",
-      "de": "Mach Mit"
+      "de": "Mach Mit",
+      "fr": "Rejoignez-nous"
     },
     "videoAria": {
       "it": "Vista aerea della baia di Caldè sul Lago Maggiore",
       "en": "Aerial view of Caldè bay on Lake Maggiore",
-      "de": "Luftaufnahme der Bucht von Caldè am Lago Maggiore"
+      "de": "Luftaufnahme der Bucht von Caldè am Lago Maggiore",
+      "fr": "Vue aérienne de la baie de Caldè sur le Lac Majeur"
     },
     "playVideo": {
       "it": "Riproduci video",
       "en": "Play video",
-      "de": "Video abspielen"
+      "de": "Video abspielen",
+      "fr": "Lire la vidéo"
     }
   },
   "stats": [
@@ -49,7 +57,8 @@
       "label": {
         "it": "Anni di storia",
         "en": "Years of history",
-        "de": "Jahre Geschichte"
+        "de": "Jahre Geschichte",
+        "fr": "Années d'histoire"
       }
     },
     {
@@ -57,7 +66,8 @@
       "label": {
         "it": "Affiliati dal 1975",
         "en": "Affiliated since 1975",
-        "de": "Mitglied seit 1975"
+        "de": "Mitglied seit 1975",
+        "fr": "Affilié depuis 1975"
       }
     },
     {
@@ -65,7 +75,8 @@
       "label": {
         "it": "Soci di ogni età",
         "en": "Members of all ages",
-        "de": "Mitglieder jeden Alters"
+        "de": "Mitglieder jeden Alters",
+        "fr": "Membres de tout âge"
       }
     }
   ],
@@ -73,12 +84,14 @@
     "title": {
       "it": "Corsi per i Soci",
       "en": "Courses for Members",
-      "de": "Kurse für Mitglieder"
+      "de": "Kurse für Mitglieder",
+      "fr": "Cours pour les Membres"
     },
     "subtitle": {
       "it": "Scuola Vela riconosciuta FIV. Tre tipologie di corso per tutte le esigenze.",
       "en": "FIV recognized Sailing School. Three types of courses for all needs.",
-      "de": "FIV anerkannte Segelschule. Drei Kurstypen für alle Bedürfnisse."
+      "de": "FIV anerkannte Segelschule. Drei Kurstypen für alle Bedürfnisse.",
+      "fr": "École de Voile agréée FIV. Trois types de cours pour tous les besoins."
     },
     "items": [
       {
@@ -86,17 +99,20 @@
         "badge": {
           "it": "5 GIORNI",
           "en": "5 DAYS",
-          "de": "5 TAGE"
+          "de": "5 TAGE",
+          "fr": "5 JOURS"
         },
         "title": {
           "it": "Derive Settimanale",
           "en": "Weekly Dinghy",
-          "de": "Jolle Wochenkurs"
+          "de": "Jolle Wochenkurs",
+          "fr": "Dériveur Semaine"
         },
         "description": {
           "it": "Corso intensivo dal lunedì al venerdì. Aperto a tutti, dai 6 ai 99 anni.",
           "en": "Intensive course from Monday to Friday. Open to everyone, ages 6 to 99.",
-          "de": "Intensivkurs von Montag bis Freitag. Offen für alle, von 6 bis 99 Jahre."
+          "de": "Intensivkurs von Montag bis Freitag. Offen für alle, von 6 bis 99 Jahre.",
+          "fr": "Cours intensif du lundi au vendredi. Ouvert à tous, de 6 à 99 ans."
         }
       },
       {
@@ -104,17 +120,20 @@
         "badge": {
           "it": "2 WEEKEND",
           "en": "2 WEEKENDS",
-          "de": "2 WOCHENENDEN"
+          "de": "2 WOCHENENDEN",
+          "fr": "2 WEEK-ENDS"
         },
         "title": {
           "it": "Derive Weekend",
           "en": "Weekend Dinghy",
-          "de": "Jolle Wochenende"
+          "de": "Jolle Wochenende",
+          "fr": "Dériveur Week-end"
         },
         "description": {
           "it": "Due fine settimana per chi non può frequentare il corso settimanale. Età 6-99.",
           "en": "Two weekends for those who can't attend the weekly course. Ages 6-99.",
-          "de": "Zwei Wochenenden für alle, die den Wochenkurs nicht besuchen können. Alter 6-99."
+          "de": "Zwei Wochenenden für alle, die den Wochenkurs nicht besuchen können. Alter 6-99.",
+          "fr": "Deux week-ends pour ceux qui ne peuvent pas suivre le cours de la semaine. Âge 6-99."
         }
       },
       {
@@ -122,78 +141,92 @@
         "badge": {
           "it": "2 WEEKEND",
           "en": "2 WEEKENDS",
-          "de": "2 WOCHENENDEN"
+          "de": "2 WOCHENENDEN",
+          "fr": "2 WEEK-ENDS"
         },
         "title": {
           "it": "Cabinati",
           "en": "Keelboat",
-          "de": "Kielboot"
+          "de": "Kielboot",
+          "fr": "Habitable"
         },
         "description": {
           "it": "Navigazione su barche più grandi. Date da concordare. Età 6-99.",
           "en": "Sailing on larger boats. Dates to be agreed. Ages 6-99.",
-          "de": "Segeln auf größeren Booten. Termine nach Vereinbarung. Alter 6-99."
+          "de": "Segeln auf größeren Booten. Termine nach Vereinbarung. Alter 6-99.",
+          "fr": "Navigation sur des bateaux plus grands. Dates à convenir. Âge 6-99."
         }
       }
     ],
     "learnMore": {
       "it": "Scopri di più →",
       "en": "Learn more →",
-      "de": "Mehr erfahren →"
+      "de": "Mehr erfahren →",
+      "fr": "En savoir plus →"
     }
   },
   "location": {
     "title": {
       "it": "Dove Siamo",
       "en": "Where We Are",
-      "de": "Wo wir sind"
+      "de": "Wo wir sind",
+      "fr": "Où Nous Trouver"
     },
     "description": {
       "it": "Il Circolo Nautico Caldè si trova nella splendida baia di Caldè, frazione di Castelveccana, sulla sponda lombarda del Lago Maggiore. Una location unica, protetta dai venti e ideale per imparare a navigare.",
       "en": "Circolo Nautico Caldè is located in the beautiful bay of Caldè, a hamlet of Castelveccana, on the Lombard shore of Lake Maggiore. A unique location, sheltered from winds and ideal for learning to sail.",
-      "de": "Der Circolo Nautico Caldè befindet sich in der wunderschönen Bucht von Caldè, einem Ortsteil von Castelveccana, am lombardischen Ufer des Lago Maggiore. Ein einzigartiger Ort, windgeschützt und ideal zum Segellernen."
+      "de": "Der Circolo Nautico Caldè befindet sich in der wunderschönen Bucht von Caldè, einem Ortsteil von Castelveccana, am lombardischen Ufer des Lago Maggiore. Ein einzigartiger Ort, windgeschützt und ideal zum Segellernen.",
+      "fr": "Le Circolo Nautico Caldè se trouve dans la magnifique baie de Caldè, un hameau de Castelveccana, sur la rive lombarde du Lac Majeur. Un lieu unique, abrité des vents et idéal pour apprendre à naviguer."
     },
     "addressLabel": {
       "it": "Indirizzo",
       "en": "Address",
-      "de": "Adresse"
+      "de": "Adresse",
+      "fr": "Adresse"
     },
     "phoneLabel": {
       "it": "Telefono",
       "en": "Phone",
-      "de": "Telefon"
+      "de": "Telefon",
+      "fr": "Téléphone"
     },
     "emailLabel": {
       "it": "Email",
       "en": "Email",
-      "de": "E-Mail"
+      "de": "E-Mail",
+      "fr": "E-mail"
     },
     "loadMap": {
       "it": "Clicca per caricare la mappa",
       "en": "Click to load the map",
-      "de": "Klicken um die Karte zu laden"
+      "de": "Klicken um die Karte zu laden",
+      "fr": "Cliquez pour charger la carte"
     }
   },
   "cta": {
     "title": {
       "it": "Unisciti a Noi",
       "en": "Join Us",
-      "de": "Mach Mit"
+      "de": "Mach Mit",
+      "fr": "Rejoignez-nous"
     },
     "description": {
       "it": "Entra a far parte della nostra comunità velica. La baia di Caldè ti aspetta.",
       "en": "Join our sailing community. The bay of Caldè awaits you.",
-      "de": "Werde Teil unserer Segelgemeinschaft. Die Bucht von Caldè erwartet dich."
+      "de": "Werde Teil unserer Segelgemeinschaft. Die Bucht von Caldè erwartet dich.",
+      "fr": "Rejoignez notre communauté de voile. La baie de Caldè vous attend."
     },
     "primaryButton": {
       "it": "Diventa Socio",
       "en": "Become a Member",
-      "de": "Mitglied werden"
+      "de": "Mitglied werden",
+      "fr": "Devenir Membre"
     },
     "secondaryButton": {
       "it": "Scrivici",
       "en": "Write Us",
-      "de": "Schreib uns"
+      "de": "Schreib uns",
+      "fr": "Écrivez-nous"
     }
   }
 }

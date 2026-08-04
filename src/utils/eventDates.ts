@@ -1,10 +1,5 @@
+import { localeTags as LOCALE_TAGS } from '../i18n';
 import type { Locale } from '../i18n';
-
-const LOCALE_TAGS: Record<Locale, string> = {
-  it: 'it-IT',
-  en: 'en-GB',
-  de: 'de-DE',
-};
 
 function parseDate(dateStr: string): Date {
   return new Date(`${dateStr}T12:00:00`);

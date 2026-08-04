@@ -2,6 +2,7 @@ export interface LocalizedText {
   it: string;
   en?: string;
   de?: string;
+  fr?: string;
 }
 
 export interface EventResult {

@@ -4,6 +4,7 @@
  * Shows next events starting from a configurable date (CMS controlled)
  * Hidden by default, shown via client-side JS if startDate has passed
  */
+import { localeTags } from '../i18n';
 import type { Locale } from '../i18n';
 import eventsJson from '../data/events.json';
 import meteoContent from '../data/meteo-content.json';
@@ -22,37 +23,37 @@ const { locale, maxEvents = 3, startDate, class: className } = Astro.props;
 const events = (eventsJson as { events: any[] }).events;
 
 // Helper to get localized text
-const t = (obj: { it: string; en?: string; de?: string } | string | undefined, fallback = ''): string => {
+const t = (obj: { it: string; en?: string; de?: string; fr?: string } | string | undefined, fallback = ''): string => {
   if (!obj) return fallback;
   if (typeof obj === 'string') return obj;
   return obj[locale] || obj.it || fallback;
 };
 
 // Type colors
-const typeConfig: Record<string, { bg: string; text: string; label: { it: string; en: string; de: string } }> = {
-  corso: { 
-    bg: 'bg-[var(--color-accent-primary)]', 
+const typeConfig: Record<string, { bg: string; text: string; label: { it: string; en: string; de: string; fr: string } }> = {
+  corso: {
+    bg: 'bg-[var(--color-accent-primary)]',
     text: 'text-white',
-    label: { it: 'Corso', en: 'Course', de: 'Kurs' }
+    label: { it: 'Corso', en: 'Course', de: 'Kurs', fr: 'Cours' }
   },
-  regata: { 
-    bg: 'bg-[var(--color-accent-secondary)]', 
+  regata: {
+    bg: 'bg-[var(--color-accent-secondary)]',
     text: 'text-[var(--color-accent-primary)]',
-    label: { it: 'Regata', en: 'Regatta', de: 'Regatta' }
+    label: { it: 'Regata', en: 'Regatta', de: 'Regatta', fr: 'Régate' }
   },
-  evento_sociale: { 
-    bg: 'bg-[var(--color-accent-tertiary)]', 
+  evento_sociale: {
+    bg: 'bg-[var(--color-accent-tertiary)]',
     text: 'text-white',
-    label: { it: 'Evento', en: 'Event', de: 'Event' }
+    label: { it: 'Evento', en: 'Event', de: 'Event', fr: 'Événement' }
   },
 };
 
 // Labels
 const labels = {
-  title: { it: 'Prossimi Eventi', en: 'Upcoming Events', de: 'Kommende Veranstaltungen' },
-  viewAll: { it: 'Vedi tutti gli eventi', en: 'View all events', de: 'Alle Veranstaltungen' },
-  register: { it: 'Iscriviti', en: 'Register', de: 'Anmelden' },
-  noEvents: { it: 'La stagione riprende in primavera', en: 'Season starts in spring', de: 'Die Saison beginnt im Frühjahr' },
+  title: { it: 'Prossimi Eventi', en: 'Upcoming Events', de: 'Kommende Veranstaltungen', fr: 'Prochains Événements' },
+  viewAll: { it: 'Vedi tutti gli eventi', en: 'View all events', de: 'Alle Veranstaltungen', fr: 'Voir tous les événements' },
+  register: { it: 'Iscriviti', en: 'Register', de: 'Anmelden', fr: "S'inscrire" },
+  noEvents: { it: 'La stagione riprende in primavera', en: 'Season starts in spring', de: 'Die Saison beginnt im Frühjahr', fr: 'La saison reprend au printemps' },
 };
 
 // Filter future events and sort by date
@@ -74,8 +75,7 @@ const formatDate = (dateStr: string): string => {
     day: 'numeric', 
     month: 'short',
   };
-  const localeMap: Record<Locale, string> = { it: 'it-IT', en: 'en-GB', de: 'de-DE' };
-  return date.toLocaleDateString(localeMap[locale], options);
+  return date.toLocaleDateString(localeTags[locale], options);
 };
 ---
 

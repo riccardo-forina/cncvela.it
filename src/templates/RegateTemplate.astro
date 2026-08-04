@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { localeTags } from '../i18n';
 import type { Locale } from '../i18n';
 import type { Event } from '../types/event';
 import {
@@ -25,7 +26,7 @@ interface Props {
 
 const { locale } = Astro.props;
 
-const t = (obj: { it: string; en?: string; de?: string } | undefined, fallback = ''): string => {
+const t = (obj: { it: string; en?: string; de?: string; fr?: string } | undefined, fallback = ''): string => {
   if (!obj) return fallback;
   return obj[locale] || obj.it || fallback;
 };
@@ -41,8 +42,7 @@ const forecastLabel = t(meteoContent.forecast.eventForecast);
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
-  const localeStr = locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-GB' : 'it-IT';
-  return date.toLocaleDateString(localeStr, {
+  return date.toLocaleDateString(localeTags[locale], {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
@@ -52,8 +52,7 @@ function formatDate(dateStr: string): string {
 
 function formatShortDate(dateStr: string): string {
   const date = new Date(dateStr);
-  const localeStr = locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-GB' : 'it-IT';
-  return date.toLocaleDateString(localeStr, {
+  return date.toLocaleDateString(localeTags[locale], {
     day: 'numeric',
     month: 'short',
   });

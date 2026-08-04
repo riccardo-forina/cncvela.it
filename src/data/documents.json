@@ -4,7 +4,8 @@
       "name": {
         "it": "Statuto",
         "en": "Statute",
-        "de": "Satzung"
+        "de": "Satzung",
+        "fr": "Statuts"
       },
       "url": "documenti/statuto.pdf",
       "icon": "document"
@@ -13,7 +14,8 @@
       "name": {
         "it": "Regolamento",
         "en": "Regulations",
-        "de": "Ordnung"
+        "de": "Ordnung",
+        "fr": "Règlement"
       },
       "url": "documenti/regolamento.pdf",
       "icon": "document"
@@ -22,7 +24,8 @@
       "name": {
         "it": "Modulo Ospiti",
         "en": "Guest Form",
-        "de": "Gästeformular"
+        "de": "Gästeformular",
+        "fr": "Formulaire Invités"
       },
       "url": "documenti/moduloospiti.pdf",
       "icon": "users"
@@ -31,7 +34,8 @@
       "name": {
         "it": "Attestato FIV",
         "en": "FIV Certificate",
-        "de": "FIV-Zertifikat"
+        "de": "FIV-Zertifikat",
+        "fr": "Attestation FIV"
       },
       "url": "documenti/attestato-fiv.pdf",
       "icon": "certificate"

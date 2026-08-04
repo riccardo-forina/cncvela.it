@@ -1,5 +1,16 @@
+import { localeTagsUS } from '../i18n';
 import type { Locale } from '../i18n';
 import meteoContent from '../data/meteo-content.json';
+
+// Date-part order per locale for compact numeric dates (day/month strings
+// already zero-padded). en = month-first, de = dot-separated day-first,
+// it/fr = slash-separated day-first.
+const FORECAST_DATE_FORMATTERS: Record<Locale, (day: string, month: string) => string> = {
+  it: (day, month) => `${day}/${month}`,
+  fr: (day, month) => `${day}/${month}`,
+  en: (day, month) => `${month}/${day}`,
+  de: (day, month) => `${day}.${month}`,
+};
 
 export const CALDE_LAT = 45.9448;
 export const CALDE_LON = 8.6612;
@@ -74,7 +85,7 @@ export interface WindColorClasses {
   glow: string;
 }
 
-type LocalizedText = { it: string; en?: string; de?: string };
+type LocalizedText = { it: string; en?: string; de?: string; fr?: string };
 
 function localize(obj: LocalizedText | undefined, locale: Locale, fallback = ''): string {
   if (!obj) return fallback;
@@ -95,9 +106,7 @@ export function formatForecastDate(dateStr: string, locale: Locale): string {
   const day = parts[2];
   const month = parts[1];
 
-  if (locale === 'en') return `${month}/${day}`;
-  if (locale === 'de') return `${day}.${month}`;
-  return `${day}/${month}`;
+  return FORECAST_DATE_FORMATTERS[locale](day, month);
 }
 
 export function getWindColorClass(speed: number): WindColorClasses {
@@ -196,10 +205,7 @@ function getDayName(dateStr: string, locale: Locale): string {
     return localize(meteoContent.days.tomorrow, locale);
   }
 
-  return date.toLocaleDateString(
-    locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-US' : 'it-IT',
-    { weekday: 'short', day: 'numeric' }
-  );
+  return date.toLocaleDateString(localeTagsUS[locale], { weekday: 'short', day: 'numeric' });
 }
 
 function mapDailyData(data: any, locale: Locale, forecastDays: number): DailyData[] {
@@ -314,10 +320,7 @@ export async function fetchForecast(
       current: currentData,
       hourly: hourlyData,
       daily: mapDailyData(data, locale, forecastDays),
-      fetchTime: new Date().toLocaleTimeString(
-        locale === 'de' ? 'de-DE' : locale === 'en' ? 'en-US' : 'it-IT',
-        { hour: '2-digit', minute: '2-digit' }
-      ),
+      fetchTime: new Date().toLocaleTimeString(localeTagsUS[locale], { hour: '2-digit', minute: '2-digit' }),
     };
 
     globalThis.weatherCache = {
@@ -348,6 +351,7 @@ export function getDailyForecastAriaLabel(day: DailyData, locale: Locale): strin
     it: `${day.weatherDesc}, vento ${day.windMax} nodi da ${day.windDirection}, massima ${day.tempMax} gradi, minima ${day.tempMin} gradi`,
     en: `${day.weatherDesc}, wind ${day.windMax} knots from ${day.windDirection}, high ${day.tempMax} degrees, low ${day.tempMin} degrees`,
     de: `${day.weatherDesc}, Wind ${day.windMax} Knoten aus ${day.windDirection}, Höchsttemperatur ${day.tempMax} Grad, Tiefsttemperatur ${day.tempMin} Grad`,
+    fr: `${day.weatherDesc}, vent ${day.windMax} nœuds de ${day.windDirection}, maximale ${day.tempMax} degrés, minimale ${day.tempMin} degrés`,
   };
   return labels[locale];
 }

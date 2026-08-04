@@ -3,71 +3,84 @@
     "title": {
       "it": "Bacheca Eventi",
       "en": "Events Board",
-      "de": "Veranstaltungstafel"
+      "de": "Veranstaltungstafel",
+      "fr": "Tableau des Événements"
     },
     "description": {
       "it": "Tutti gli eventi del Circolo Nautico Caldè - corsi di vela, regate e eventi sociali.",
       "en": "All events at Circolo Nautico Caldè - sailing courses, regattas and social events.",
-      "de": "Alle Veranstaltungen des Circolo Nautico Caldè - Segelkurse, Regatten und gesellschaftliche Events."
+      "de": "Alle Veranstaltungen des Circolo Nautico Caldè - Segelkurse, Regatten und gesellschaftliche Events.",
+      "fr": "Tous les événements du Circolo Nautico Caldè - cours de voile, régates et événements conviviaux."
     },
     "subtitle": {
       "it": "Tutti gli appuntamenti del circolo - corsi, regate e momenti conviviali.",
       "en": "All club events - courses, regattas and social moments.",
-      "de": "Alle Clubtermine - Kurse, Regatten und gesellige Momente."
+      "de": "Alle Clubtermine - Kurse, Regatten und gesellige Momente.",
+      "fr": "Tous les rendez-vous du club - cours, régates et moments conviviaux."
     }
   },
   "filters": {
     "all": {
       "it": "Tutto",
       "en": "All",
-      "de": "Alle"
+      "de": "Alle",
+      "fr": "Tout"
     },
     "corso": {
       "it": "Corsi",
       "en": "Courses",
-      "de": "Kurse"
+      "de": "Kurse",
+      "fr": "Cours"
     },
     "regata": {
       "it": "Regate",
       "en": "Regattas",
-      "de": "Regatten"
+      "de": "Regatten",
+      "fr": "Régates"
     },
     "evento_sociale": {
       "it": "Eventi",
       "en": "Events",
-      "de": "Events"
+      "de": "Events",
+      "fr": "Événements"
     }
   },
   "labels": {
     "noEvents": {
       "it": "Nessun evento in programma al momento.",
       "en": "No events scheduled at the moment.",
-      "de": "Derzeit keine Veranstaltungen geplant."
+      "de": "Derzeit keine Veranstaltungen geplant.",
+      "fr": "Aucun événement prévu pour le moment."
     },
     "noFilterResults": {
       "it": "Nessun evento di questo tipo in programma.",
       "en": "No events of this type scheduled.",
-      "de": "Keine Veranstaltungen dieser Art geplant."
+      "de": "Keine Veranstaltungen dieser Art geplant.",
+      "fr": "Aucun événement de ce type prévu."
     },
     "pastEvents": {
       "it": "Eventi Passati",
       "en": "Past Events",
-      "de": "Vergangene Veranstaltungen"
+      "de": "Vergangene Veranstaltungen",
+      "fr": "Événements Passés"
     },
     "stayUpdated": {
       "it": "Non Perdere Nessun Evento",
       "en": "Don't Miss Any Event",
-      "de": "Verpassen Sie kein Event"
+      "de": "Verpassen Sie kein Event",
+      "fr": "Ne Manquez Aucun Événement"
     },
     "stayUpdatedDescription": {
       "it": "Resta aggiornato sulle attività del circolo. Contattaci per ricevere informazioni sui prossimi eventi.",
       "en": "Stay updated on club activities. Contact us for information about upcoming events.",
-      "de": "Bleiben Sie über die Clubaktivitäten auf dem Laufenden. Kontaktieren Sie uns für Informationen über kommende Veranstaltungen."
+      "de": "Bleiben Sie über die Clubaktivitäten auf dem Laufenden. Kontaktieren Sie uns für Informationen über kommende Veranstaltungen.",
+      "fr": "Restez informé des activités du club. Contactez-nous pour recevoir des informations sur les prochains événements."
     },
     "contactUs": {
       "it": "Contattaci",
       "en": "Contact Us",
-      "de": "Kontakt"
+      "de": "Kontakt",
+      "fr": "Contactez-nous"
     }
   }
 }

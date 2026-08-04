@@ -4,6 +4,9 @@
  * Allows users to switch between Light, Dark, and System theme
  * Uses vanilla JavaScript (same pattern as LanguageSwitcher)
  */
+import { getLocaleFromUrl, t } from '../i18n';
+
+const currentLocale = getLocaleFromUrl(Astro.url);
 ---
 
 <div class="theme-switcher relative">
@@ -12,7 +15,7 @@
            text-gray-700 dark:text-gray-200
            hover:bg-gray-100 dark:hover:bg-gray-700
            transition-colors"
-    aria-label="Cambia tema"
+    aria-label={t('common.switchTheme', currentLocale)}
     aria-expanded="false"
     aria-haspopup="true"
   >

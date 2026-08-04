@@ -2,19 +2,22 @@
   "title": {
     "it": "Tessera FIV",
     "en": "FIV Card",
-    "de": "FIV-Karte"
+    "de": "FIV-Karte",
+    "fr": "Carte FIV"
   },
   "note": {
     "it": "Obbligatoria",
     "en": "Mandatory",
-    "de": "Pflicht"
+    "de": "Pflicht",
+    "fr": "Obligatoire"
   },
   "items": [
     {
       "name": {
         "it": "Socio Ordinario",
         "en": "Regular Member",
-        "de": "Ordentliches Mitglied"
+        "de": "Ordentliches Mitglied",
+        "fr": "Membre Ordinaire"
       },
       "price": 26.00
     },
@@ -22,33 +25,38 @@
       "name": {
         "it": "Socio Juniores",
         "en": "Junior Member",
-        "de": "Juniormitglied"
+        "de": "Juniormitglied",
+        "fr": "Membre Junior"
       },
       "price": 21.00,
       "note": {
         "it": "dall'anno in cui compie i 12 anni all'anno in cui compie i 18",
         "en": "from the year they turn 12 to the year they turn 18",
-        "de": "vom Jahr des 12. Geburtstags bis zum Jahr des 18. Geburtstags"
+        "de": "vom Jahr des 12. Geburtstags bis zum Jahr des 18. Geburtstags",
+        "fr": "de l'année des 12 ans à l'année des 18 ans"
       }
     },
     {
       "name": {
         "it": "Socio Cadetto",
         "en": "Cadet Member",
-        "de": "Kadettenmitglied"
+        "de": "Kadettenmitglied",
+        "fr": "Membre Cadet"
       },
       "price": 16.00,
       "note": {
         "it": "dal compimento del 6° anno all'anno in cui compie gli 11",
         "en": "from turning 6 to the year they turn 11",
-        "de": "ab dem 6. Lebensjahr bis zum Jahr des 11. Geburtstags"
+        "de": "ab dem 6. Lebensjahr bis zum Jahr des 11. Geburtstags",
+        "fr": "à partir de 6 ans jusqu'à l'année des 11 ans"
       }
     },
     {
       "name": {
         "it": "Scuola Vela Seniores",
         "en": "Sailing School Seniors",
-        "de": "Segelschule Senioren"
+        "de": "Segelschule Senioren",
+        "fr": "École de Voile Seniors"
       },
       "price": 15.00
     },
@@ -56,7 +64,8 @@
       "name": {
         "it": "Scuola Vela Cadetto/Juniores",
         "en": "Sailing School Cadet/Junior",
-        "de": "Segelschule Kadett/Junior"
+        "de": "Segelschule Kadett/Junior",
+        "fr": "École de Voile Cadet/Junior"
       },
       "price": 10.00
     },
@@ -64,13 +73,15 @@
       "name": {
         "it": "Tessera Plus (assicurazione barca)",
         "en": "Plus Card (boat insurance)",
-        "de": "Plus-Karte (Bootsversicherung)"
+        "de": "Plus-Karte (Bootsversicherung)",
+        "fr": "Carte Plus (assurance bateau)"
       },
       "price": 30.00,
       "note": {
         "it": "aggiuntiva",
         "en": "additional",
-        "de": "zusätzlich"
+        "de": "zusätzlich",
+        "fr": "supplémentaire"
       }
     }
   ]

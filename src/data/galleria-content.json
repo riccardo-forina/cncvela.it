@@ -3,76 +3,88 @@
     "title": {
       "it": "Archivio Storico",
       "en": "Historical Archive",
-      "de": "Historisches Archiv"
+      "de": "Historisches Archiv",
+      "fr": "Archives Historiques"
     },
     "description": {
       "it": "L'archivio fotografico del Circolo Nautico Caldè - Ricordi di corsi, regate e momenti vissuti insieme dal 1965",
       "en": "Photo archive of Circolo Nautico Caldè - Memories of courses, regattas and moments shared together since 1965",
-      "de": "Fotoarchiv des Circolo Nautico Caldè - Erinnerungen an Kurse, Regatten und gemeinsame Momente seit 1965"
+      "de": "Fotoarchiv des Circolo Nautico Caldè - Erinnerungen an Kurse, Regatten und gemeinsame Momente seit 1965",
+      "fr": "Les archives photographiques du Circolo Nautico Caldè - Souvenirs de cours, régates et moments partagés depuis 1965"
     },
     "subtitle": {
       "it": "I ricordi del nostro circolo sul Lago Maggiore",
       "en": "Memories from our club on Lake Maggiore",
-      "de": "Erinnerungen aus unserem Club am Lago Maggiore"
+      "de": "Erinnerungen aus unserem Club am Lago Maggiore",
+      "fr": "Les souvenirs de notre club sur le Lac Majeur"
     }
   },
   "categories": {
     "all": {
       "it": "Tutte",
       "en": "All",
-      "de": "Alle"
+      "de": "Alle",
+      "fr": "Toutes"
     },
     "corsi": {
       "it": "Scuola Vela",
       "en": "Sailing School",
-      "de": "Segelschule"
+      "de": "Segelschule",
+      "fr": "École de Voile"
     },
     "regate": {
       "it": "Regate",
       "en": "Regattas",
-      "de": "Regatten"
+      "de": "Regatten",
+      "fr": "Régates"
     },
     "hero": {
       "it": "Panorami",
       "en": "Panoramas",
-      "de": "Panoramen"
+      "de": "Panoramen",
+      "fr": "Panoramas"
     }
   },
   "sections": {
     "scuolaVela": {
       "it": "Scuola Vela",
       "en": "Sailing School",
-      "de": "Segelschule"
+      "de": "Segelschule",
+      "fr": "École de Voile"
     },
     "regate": {
       "it": "Regate e Premiazioni",
       "en": "Regattas and Awards",
-      "de": "Regatten und Preisverleihungen"
+      "de": "Regatten und Preisverleihungen",
+      "fr": "Régates et Remises de Prix"
     },
     "panorami": {
       "it": "Panorami e Atmosfere",
       "en": "Panoramas and Atmospheres",
-      "de": "Panoramen und Atmosphären"
+      "de": "Panoramen und Atmosphären",
+      "fr": "Panoramas et Ambiances"
     }
   },
   "lightbox": {
     "close": {
       "it": "Chiudi",
       "en": "Close",
-      "de": "Schließen"
+      "de": "Schließen",
+      "fr": "Fermer"
     },
     "prev": {
       "it": "Precedente",
       "en": "Previous",
-      "de": "Zurück"
+      "de": "Zurück",
+      "fr": "Précédent"
     },
     "next": {
       "it": "Successiva",
       "en": "Next",
-      "de": "Weiter"
+      "de": "Weiter",
+      "fr": "Suivant"
     }
   }
 }
-
 
 

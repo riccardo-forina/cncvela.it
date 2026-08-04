@@ -2,7 +2,8 @@
   "title": {
     "it": "Consiglio Direttivo",
     "en": "Board of Directors",
-    "de": "Vorstand"
+    "de": "Vorstand",
+    "fr": "Conseil d'Administration"
   },
   "members": [
     {
@@ -10,7 +11,8 @@
       "role": {
         "it": "Presidente",
         "en": "President",
-        "de": "Präsident"
+        "de": "Präsident",
+        "fr": "Président"
       }
     },
     {
@@ -18,7 +20,8 @@
       "role": {
         "it": "Vice Presidente",
         "en": "Vice President",
-        "de": "Vizepräsident"
+        "de": "Vizepräsident",
+        "fr": "Vice-Présidente"
       }
     },
     {
@@ -26,7 +29,8 @@
       "role": {
         "it": "Tesoriere",
         "en": "Treasurer",
-        "de": "Schatzmeister"
+        "de": "Schatzmeister",
+        "fr": "Trésorier"
       }
     },
     {
@@ -34,7 +38,8 @@
       "role": {
         "it": "Segretaria",
         "en": "Secretary",
-        "de": "Sekretär"
+        "de": "Sekretär",
+        "fr": "Secrétaire"
       }
     },
     {
@@ -42,7 +47,8 @@
       "role": {
         "it": "Direttore Sportivo",
         "en": "Sports Director",
-        "de": "Sportdirektor"
+        "de": "Sportdirektor",
+        "fr": "Directeur Sportif"
       }
     },
     {
@@ -50,7 +56,8 @@
       "role": {
         "it": "Responsabile Scuole Vela",
         "en": "Sailing School Director",
-        "de": "Leiter Segelschule"
+        "de": "Leiter Segelschule",
+        "fr": "Directeur École de Voile"
       }
     },
     {
@@ -58,7 +65,8 @@
       "role": {
         "it": "Referente Comunicazione",
         "en": "Communications Officer",
-        "de": "Referent für Kommunikation"
+        "de": "Referent für Kommunikation",
+        "fr": "Responsable Communication"
       }
     },
     {
@@ -66,7 +74,8 @@
       "role": {
         "it": "Consigliere",
         "en": "Board Member",
-        "de": "Vorstandsmitglied"
+        "de": "Vorstandsmitglied",
+        "fr": "Membre du Conseil"
       }
     },
     {
@@ -74,7 +83,8 @@
       "role": {
         "it": "Consigliere",
         "en": "Board Member",
-        "de": "Vorstandsmitglied"
+        "de": "Vorstandsmitglied",
+        "fr": "Membre du Conseil"
       }
     },
     {
@@ -82,7 +92,8 @@
       "role": {
         "it": "Consigliere",
         "en": "Board Member",
-        "de": "Vorstandsmitglied"
+        "de": "Vorstandsmitglied",
+        "fr": "Membre du Conseil"
       }
     }
   ],
@@ -91,14 +102,16 @@
     "role": {
       "it": "Revisore dei Conti",
       "en": "Auditor",
-      "de": "Rechnungsprüfer"
+      "de": "Rechnungsprüfer",
+      "fr": "Commissaire aux Comptes"
     }
   },
   "probiviri": {
     "title": {
       "it": "Collegio dei Probiviri",
       "en": "Board of Arbitrators",
-      "de": "Schiedsgericht"
+      "de": "Schiedsgericht",
+      "fr": "Conseil des Sages"
     },
     "members": [
       {

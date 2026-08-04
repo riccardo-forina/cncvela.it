@@ -1,12 +1,16 @@
-export { 
-  translations, 
-  t, 
-  locales, 
-  defaultLocale, 
+export {
+  translations,
+  t,
+  locales,
+  defaultLocale,
   localeNames,
+  localeFlags,
+  localeTags,
+  localeTagsUS,
+  ogLocaleTags,
   getLocaleFromUrl,
   getLocalizedPath,
-  type Locale 
+  type Locale
 } from './translations';
 
 

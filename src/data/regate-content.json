@@ -3,107 +3,126 @@
     "title": {
       "it": "Regate",
       "en": "Regattas",
-      "de": "Regatten"
+      "de": "Regatten",
+      "fr": "Régates"
     },
     "subtitle": {
       "it": "Calendario delle regate organizzate dal CNC sul Lago Maggiore. Scopri le prossime competizioni e scarica i documenti.",
       "en": "Calendar of regattas organized by CNC on Lake Maggiore. Discover upcoming competitions and download documents.",
-      "de": "Kalender der vom CNC am Lago Maggiore organisierten Regatten. Entdecken Sie kommende Wettbewerbe und laden Sie Dokumente herunter."
+      "de": "Kalender der vom CNC am Lago Maggiore organisierten Regatten. Entdecken Sie kommende Wettbewerbe und laden Sie Dokumente herunter.",
+      "fr": "Calendrier des régates organisées par le CNC sur le Lac Majeur. Découvrez les prochaines compétitions et téléchargez les documents."
     },
     "description": {
       "it": "Regate veliche sul Lago Maggiore organizzate dal Circolo Nautico Caldè. Calendario, bandi, iscrizioni e classifiche.",
       "en": "Sailing regattas on Lake Maggiore organized by Circolo Nautico Caldè. Calendar, notices, registrations and results.",
-      "de": "Segelregatten am Lago Maggiore, organisiert vom Circolo Nautico Caldè. Kalender, Ausschreibungen, Anmeldungen und Ergebnisse."
+      "de": "Segelregatten am Lago Maggiore, organisiert vom Circolo Nautico Caldè. Kalender, Ausschreibungen, Anmeldungen und Ergebnisse.",
+      "fr": "Régates de voile sur le Lac Majeur organisées par le Circolo Nautico Caldè. Calendrier, avis de course, inscriptions et classements."
     }
   },
   "calendar": {
     "title": {
       "it": "Calendario regate",
       "en": "Regatta calendar",
-      "de": "Regattakalender"
+      "de": "Regattakalender",
+      "fr": "Calendrier des régates"
     },
     "fivLink": {
       "it": "Calendario FIV Nazionale",
       "en": "National FIV Calendar",
-      "de": "Nationaler FIV Kalender"
+      "de": "Nationaler FIV Kalender",
+      "fr": "Calendrier National FIV"
     }
   },
   "noRegattas": {
     "title": {
       "it": "Nessuna regata in programma al momento.",
       "en": "No regattas scheduled at this time.",
-      "de": "Derzeit keine Regatten geplant."
+      "de": "Derzeit keine Regatten geplant.",
+      "fr": "Aucune régate prévue pour le moment."
     },
     "subtitle": {
       "it": "Torna a trovarci per il prossimo calendario!",
       "en": "Check back for the next calendar!",
-      "de": "Schauen Sie für den nächsten Kalender wieder vorbei!"
+      "de": "Schauen Sie für den nächsten Kalender wieder vorbei!",
+      "fr": "Revenez bientôt pour le prochain calendrier !"
     }
   },
   "payment": {
     "title": {
       "it": "Pagamento Iscrizione",
       "en": "Registration Payment",
-      "de": "Anmeldezahlung"
+      "de": "Anmeldezahlung",
+      "fr": "Paiement de l'Inscription"
     },
     "description": {
       "it": "Per completare l'iscrizione alla regata, effettuare il bonifico alle seguenti coordinate bancarie.",
       "en": "To complete the regatta registration, make a bank transfer to the following account.",
-      "de": "Um die Regattaanmeldung abzuschließen, überweisen Sie auf folgendes Konto."
+      "de": "Um die Regattaanmeldung abzuschließen, überweisen Sie auf folgendes Konto.",
+      "fr": "Pour finaliser l'inscription à la régate, effectuez un virement aux coordonnées bancaires suivantes."
     },
     "causale": {
       "it": "Indicare nella causale:",
       "en": "Reference:",
-      "de": "Verwendungszweck:"
+      "de": "Verwendungszweck:",
+      "fr": "Indiquer en référence :"
     },
     "causaleExample": {
       "it": "Iscrizione regata [nome regata] - [nome partecipante]",
       "en": "Regatta registration [regatta name] - [participant name]",
-      "de": "Regattaanmeldung [Regattaname] - [Teilnehmername]"
+      "de": "Regattaanmeldung [Regattaname] - [Teilnehmername]",
+      "fr": "Inscription régate [nom de la régate] - [nom du participant]"
     }
   },
   "documents": {
     "bando": {
       "it": "Bando",
       "en": "Notice",
-      "de": "Ausschreibung"
+      "de": "Ausschreibung",
+      "fr": "Avis de course"
     },
     "iscrizione": {
       "it": "Iscrizione",
       "en": "Registration",
-      "de": "Anmeldung"
+      "de": "Anmeldung",
+      "fr": "Inscription"
     },
     "istruzioni": {
       "it": "Istruzioni",
       "en": "Instructions",
-      "de": "Anweisungen"
+      "de": "Anweisungen",
+      "fr": "Instructions"
     },
     "classifica": {
       "it": "Classifica",
       "en": "Results",
-      "de": "Ergebnisse"
+      "de": "Ergebnisse",
+      "fr": "Classement"
     }
   },
   "labels": {
     "regata": {
       "it": "Regata",
       "en": "Regatta",
-      "de": "Regatta"
+      "de": "Regatta",
+      "fr": "Régate"
     },
     "startTime": {
       "it": "Partenza ore",
       "en": "Start at",
-      "de": "Start um"
+      "de": "Start um",
+      "fr": "Départ à"
     },
     "accountHolder": {
       "it": "Intestatario",
       "en": "Account Holder",
-      "de": "Kontoinhaber"
+      "de": "Kontoinhaber",
+      "fr": "Titulaire du compte"
     },
     "bank": {
       "it": "Banca",
       "en": "Bank",
-      "de": "Bank"
+      "de": "Bank",
+      "fr": "Banque"
     }
   }
 }

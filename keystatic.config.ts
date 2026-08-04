@@ -3,15 +3,16 @@ import { config, fields, singleton } from '@keystatic/core';
 // =============================================================================
 // HELPER - Campi multilingua
 // =============================================================================
-const localizedText = (label: string, options?: { multiline?: boolean; required?: boolean }) => 
+const localizedText = (label: string, options?: { multiline?: boolean; required?: boolean }) =>
   fields.object({
-    it: fields.text({ 
-      label: `🇮🇹 ${label}`, 
+    it: fields.text({
+      label: `🇮🇹 ${label}`,
       multiline: options?.multiline,
       validation: options?.required ? { isRequired: true } : undefined
     }),
     en: fields.text({ label: `🇬🇧 ${label}`, multiline: options?.multiline }),
     de: fields.text({ label: `🇩🇪 ${label}`, multiline: options?.multiline }),
+    fr: fields.text({ label: `🇫🇷 ${label}`, multiline: options?.multiline }),
   }, { label });
 
 // =============================================================================
@@ -540,6 +541,7 @@ export default config({
             strong: localizedText('Forte'),
             veryStrong: localizedText('Molto forte'),
           }, { label: 'Livelli' }),
+          past: localizedText('Passato'),
         }, { label: 'Legenda vento' }),
         source: fields.object({
           title: localizedText('Titolo'),
@@ -739,6 +741,7 @@ export default config({
               it: fields.array(fields.text({ label: 'Voce' }), { label: '🇮🇹 Include' }),
               en: fields.array(fields.text({ label: 'Item' }), { label: '🇬🇧 Includes' }),
               de: fields.array(fields.text({ label: 'Punkt' }), { label: '🇩🇪 Enthält' }),
+              fr: fields.array(fields.text({ label: 'Élément' }), { label: '🇫🇷 Inclut' }),
             }, { label: 'Cosa include' }),
             accommodation: localizedText('Foresteria'),
             order: fields.number({ label: 'Ordine visualizzazione' }),

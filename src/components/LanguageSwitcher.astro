@@ -1,5 +1,5 @@
 ---
-import { locales, localeNames, getLocaleFromUrl, getLocalizedPath } from '../i18n';
+import { locales, localeNames, localeFlags, getLocaleFromUrl, getLocalizedPath, t } from '../i18n';
 
 const currentLocale = getLocaleFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
@@ -11,7 +11,7 @@ const currentPath = Astro.url.pathname;
            text-gray-700 dark:text-gray-200 
            hover:bg-gray-100 dark:hover:bg-gray-700
            transition-colors"
-    aria-label="Seleziona lingua"
+    aria-label={t('common.selectLanguage', currentLocale)}
     aria-expanded="false"
     aria-haspopup="true"
   >
@@ -45,7 +45,7 @@ const currentPath = Astro.url.pathname;
         aria-current={locale === currentLocale ? "page" : undefined}
       >
         <span class="flex items-center gap-2">
-          <span class="text-base">{locale === 'it' ? '🇮🇹' : locale === 'en' ? '🇬🇧' : '🇩🇪'}</span>
+          <span class="text-base">{localeFlags[locale]}</span>
           <span>{localeNames[locale]}</span>
         </span>
       </a>

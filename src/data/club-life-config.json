@@ -3,45 +3,53 @@
   "title": {
     "it": "Vita al Circolo",
     "en": "Club Life",
-    "de": "Clubleben"
+    "de": "Clubleben",
+    "fr": "Vie du Club"
   },
   "subtitle": {
     "it": "Eventi, corsi e momenti insieme nella nostra comunità velica",
     "en": "Events, courses and moments together in our sailing community",
-    "de": "Veranstaltungen, Kurse und gemeinsame Momente in unserer Segelgemeinschaft"
+    "de": "Veranstaltungen, Kurse und gemeinsame Momente in unserer Segelgemeinschaft",
+    "fr": "Événements, cours et moments partagés au sein de notre communauté de voile"
   },
   "offSeason": {
     "title": {
       "it": "La stagione riprende in primavera",
       "en": "Season starts in spring",
-      "de": "Saison beginnt im Frühjahr"
+      "de": "Saison beginnt im Frühjahr",
+      "fr": "La saison reprend au printemps"
     },
     "description": {
       "it": "Segui i nostri social per restare aggiornato sulle prossime attività",
       "en": "Follow our social media to stay updated on upcoming activities",
-      "de": "Folge unseren Social Media für Updates zu kommenden Aktivitäten"
+      "de": "Folge unseren Social Media für Updates zu kommenden Aktivitäten",
+      "fr": "Suivez nos réseaux sociaux pour rester informé des prochaines activités"
     },
     "cta": {
       "it": "Vedi il calendario completo",
       "en": "See full calendar",
-      "de": "Vollständigen Kalender ansehen"
+      "de": "Vollständigen Kalender ansehen",
+      "fr": "Voir le calendrier complet"
     }
   },
   "galleryLink": {
     "it": "Sfoglia l'album storico del circolo",
     "en": "Browse the club's historical album",
-    "de": "Das historische Album des Clubs durchblättern"
+    "de": "Das historische Album des Clubs durchblättern",
+    "fr": "Parcourir l'album historique du club"
   },
   "instagram": {
     "title": {
       "it": "Seguici su Instagram",
       "en": "Follow us on Instagram",
-      "de": "Folge uns auf Instagram"
+      "de": "Folge uns auf Instagram",
+      "fr": "Suivez-nous sur Instagram"
     },
     "cta": {
       "it": "Vedi tutti i post",
       "en": "See all posts",
-      "de": "Alle Beiträge ansehen"
+      "de": "Alle Beiträge ansehen",
+      "fr": "Voir toutes les publications"
     },
     "profileUrl": "https://www.instagram.com/circolo_nautico_calde"
   }

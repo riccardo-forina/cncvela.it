@@ -3,34 +3,40 @@
     "title": {
       "it": "Safeguarding",
       "en": "Safeguarding",
-      "de": "Safeguarding"
+      "de": "Safeguarding",
+      "fr": "Protection des Mineurs"
     },
     "description": {
       "it": "Tutela dei minori e prevenzione della violenza di genere - Circolo Nautico Caldè",
       "en": "Protection of minors and prevention of gender-based violence - Circolo Nautico Caldè",
-      "de": "Schutz von Minderjährigen und Prävention geschlechtsspezifischer Gewalt - Circolo Nautico Caldè"
+      "de": "Schutz von Minderjährigen und Prävention geschlechtsspezifischer Gewalt - Circolo Nautico Caldè",
+      "fr": "Protection des mineurs et prévention de la violence de genre - Circolo Nautico Caldè"
     },
     "subtitle": {
       "it": "Tutela dei minori e prevenzione della violenza di genere",
       "en": "Protection of minors and prevention of gender-based violence",
-      "de": "Schutz von Minderjährigen und Prävention geschlechtsspezifischer Gewalt"
+      "de": "Schutz von Minderjährigen und Prävention geschlechtsspezifischer Gewalt",
+      "fr": "Protection des mineurs et prévention de la violence de genre"
     },
     "lastUpdated": {
       "it": "Dicembre 2025",
       "en": "December 2025",
-      "de": "Dezember 2025"
+      "de": "Dezember 2025",
+      "fr": "Décembre 2025"
     }
   },
   "content": {
     "intro": {
       "it": "Il Circolo Nautico Caldè ha adottato un modello organizzativo e di controllo dell'attività sportiva a tutela dei minori e per la prevenzione delle molestie, della violenza di genere e di ogni altra condizione di discriminazione.",
       "en": "Circolo Nautico Caldè has adopted an organizational and control model for sports activities to protect minors and prevent harassment, gender-based violence and any other form of discrimination.",
-      "de": "Der Circolo Nautico Caldè hat ein Organisations- und Kontrollmodell für Sportaktivitäten zum Schutz von Minderjährigen und zur Prävention von Belästigung, geschlechtsspezifischer Gewalt und jeder anderen Form von Diskriminierung eingeführt."
+      "de": "Der Circolo Nautico Caldè hat ein Organisations- und Kontrollmodell für Sportaktivitäten zum Schutz von Minderjährigen und zur Prävention von Belästigung, geschlechtsspezifischer Gewalt und jeder anderen Form von Diskriminierung eingeführt.",
+      "fr": "Le Circolo Nautico Caldè a adopté un modèle organisationnel et de contrôle de l'activité sportive pour protéger les mineurs et prévenir le harcèlement, la violence de genre et toute autre forme de discrimination."
     },
     "commitment": {
       "it": "Questo impegno riflette la nostra dedizione a creare un ambiente sicuro e inclusivo per tutti i nostri atleti, in particolare per i più giovani.",
       "en": "This commitment reflects our dedication to creating a safe and inclusive environment for all our athletes, especially the youngest.",
-      "de": "Dieses Engagement spiegelt unser Bestreben wider, eine sichere und integrative Umgebung für alle unsere Athleten zu schaffen, insbesondere für die Jüngsten."
+      "de": "Dieses Engagement spiegelt unser Bestreben wider, eine sichere und integrative Umgebung für alle unsere Athleten zu schaffen, insbesondere für die Jüngsten.",
+      "fr": "Cet engagement reflète notre volonté de créer un environnement sûr et inclusif pour tous nos athlètes, en particulier les plus jeunes."
     }
   },
   "sections": {
@@ -38,24 +44,28 @@
       "title": {
         "it": "Riferimenti Normativi",
         "en": "Regulatory References",
-        "de": "Rechtliche Grundlagen"
+        "de": "Rechtliche Grundlagen",
+        "fr": "Références Réglementaires"
       },
       "content": {
         "it": "Questo modello è stato redatto come previsto dall'Art.16 comma 2 del decreto legislativo n.39 del 28 Febbraio 2021 e rispecchia le linee guida pubblicate dalla Federazione Italiana Vela.",
         "en": "This model has been drafted as required by Art.16 paragraph 2 of Legislative Decree no.39 of February 28, 2021 and reflects the guidelines published by the Italian Sailing Federation.",
-        "de": "Dieses Modell wurde gemäß Art.16 Absatz 2 des Gesetzesdekrets Nr.39 vom 28. Februar 2021 erstellt und entspricht den von der Italienischen Segelverband veröffentlichten Richtlinien."
+        "de": "Dieses Modell wurde gemäß Art.16 Absatz 2 des Gesetzesdekrets Nr.39 vom 28. Februar 2021 erstellt und entspricht den von der Italienischen Segelverband veröffentlichten Richtlinien.",
+        "fr": "Ce modèle a été rédigé conformément à l'Art.16 alinéa 2 du décret législatif n°39 du 28 février 2021 et reflète les lignes directrices publiées par la Fédération Italienne de Voile."
       }
     },
     "contact": {
       "title": {
         "it": "Hai domande o segnalazioni?",
         "en": "Questions or reports?",
-        "de": "Fragen oder Meldungen?"
+        "de": "Fragen oder Meldungen?",
+        "fr": "Des questions ou un signalement ?"
       },
       "content": {
         "it": "Contatta il nostro Responsabile Safeguarding per qualsiasi informazione o per effettuare una segnalazione in totale riservatezza.",
         "en": "Contact our Safeguarding Officer for any information or to make a report in complete confidentiality.",
-        "de": "Wenden Sie sich an unseren Safeguarding-Beauftragten für Informationen oder um eine Meldung in völliger Vertraulichkeit zu machen."
+        "de": "Wenden Sie sich an unseren Safeguarding-Beauftragten für Informationen oder um eine Meldung in völliger Vertraulichkeit zu machen.",
+        "fr": "Contactez notre Responsable Protection des Mineurs pour toute information ou pour effectuer un signalement en toute confidentialité."
       }
     }
   },
@@ -63,12 +73,14 @@
     "safeguardingOfficer": {
       "it": "Responsabile Safeguarding",
       "en": "Safeguarding Officer",
-      "de": "Safeguarding-Beauftragter"
+      "de": "Safeguarding-Beauftragter",
+      "fr": "Responsable Protection des Mineurs"
     },
     "downloadDocument": {
       "it": "Scarica il Modello Organizzativo",
       "en": "Download Organizational Model",
-      "de": "Organisationsmodell herunterladen"
+      "de": "Organisationsmodell herunterladen",
+      "fr": "Télécharger le Modèle Organisationnel"
     }
   }
 }

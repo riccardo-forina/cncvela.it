@@ -13,7 +13,7 @@ const pages = [
   { path: 'cookie-policy', changefreq: 'yearly', priority: '0.3' },
 ];
 
-const locales = ['it', 'en', 'de'] as const;
+const locales = ['it', 'en', 'de', 'fr'] as const;
 const defaultLocale = 'it';
 
 export const GET: APIRoute = ({ site }) => {

@@ -3,153 +3,180 @@
     "title": {
       "it": "Scuola Vela sul Lago Maggiore",
       "en": "Sailing School on Lake Maggiore",
-      "de": "Segelschule am Lago Maggiore"
+      "de": "Segelschule am Lago Maggiore",
+      "fr": "École de Voile sur le Lac Majeur"
     },
     "subtitle": {
       "it": "Corsi di vela per tutte le età riconosciuti dalla Federazione Italiana Vela. Dal 1975 formiamo nuovi velisti sul Lago Maggiore.",
       "en": "Sailing courses for all ages recognized by the Italian Sailing Federation. Since 1975 we have been training new sailors on Lake Maggiore.",
-      "de": "Segelkurse für alle Altersgruppen, anerkannt vom Italienischen Segelverband. Seit 1975 bilden wir neue Segler am Lago Maggiore aus."
+      "de": "Segelkurse für alle Altersgruppen, anerkannt vom Italienischen Segelverband. Seit 1975 bilden wir neue Segler am Lago Maggiore aus.",
+      "fr": "Cours de voile pour tous les âges, reconnus par la Fédération Italienne de Voile. Depuis 1975, nous formons de nouveaux marins sur le Lac Majeur."
     },
     "description": {
       "it": "Scuola Vela FIV del Circolo Nautico Caldè. Corsi di vela per giovani e adulti sul Lago Maggiore.",
       "en": "FIV Sailing School of Circolo Nautico Caldè. Sailing courses for young people and adults on Lake Maggiore.",
-      "de": "FIV Segelschule des Circolo Nautico Caldè. Segelkurse für Jugendliche und Erwachsene am Lago Maggiore."
+      "de": "FIV Segelschule des Circolo Nautico Caldè. Segelkurse für Jugendliche und Erwachsene am Lago Maggiore.",
+      "fr": "École de Voile FIV du Circolo Nautico Caldè. Cours de voile pour jeunes et adultes sur le Lac Majeur."
     }
   },
   "note": {
     "title": {
       "it": "I corsi sono riservati ai soci del Circolo",
       "en": "Courses are reserved for Club members",
-      "de": "Kurse sind Vereinsmitgliedern vorbehalten"
+      "de": "Kurse sind Vereinsmitgliedern vorbehalten",
+      "fr": "Les cours sont réservés aux membres du Club"
     },
     "description": {
       "it": "Per partecipare ai corsi è necessario essere soci del Circolo Nautico Caldè.",
       "en": "To participate in courses, you must be a member of Circolo Nautico Caldè.",
-      "de": "Um an Kursen teilzunehmen, müssen Sie Mitglied des Circolo Nautico Caldè sein."
+      "de": "Um an Kursen teilzunehmen, müssen Sie Mitglied des Circolo Nautico Caldè sein.",
+      "fr": "Pour participer aux cours, il est nécessaire d'être membre du Circolo Nautico Caldè."
     },
     "link": {
       "it": "Scopri come diventare socio →",
       "en": "Find out how to become a member →",
-      "de": "Erfahren Sie, wie Sie Mitglied werden →"
+      "de": "Erfahren Sie, wie Sie Mitglied werden →",
+      "fr": "Découvrez comment devenir membre →"
     }
   },
   "ourCourses": {
     "it": "I Nostri Corsi",
     "en": "Our Courses",
-    "de": "Unsere Kurse"
+    "de": "Unsere Kurse",
+    "fr": "Nos Cours"
   },
   "upcomingCourses": {
     "title": {
       "it": "Prossimi Corsi",
       "en": "Upcoming Courses",
-      "de": "Kommende Kurse"
+      "de": "Kommende Kurse",
+      "fr": "Prochains Cours"
     },
     "empty": {
       "it": "Al momento non ci sono corsi in programma. Le date dei prossimi corsi saranno pubblicate nella Bacheca.",
       "en": "There are currently no scheduled courses. Dates for upcoming courses will be published on the Events board.",
-      "de": "Derzeit sind keine Kurse geplant. Die Termine für kommende Kurse werden auf der Pinnwand veröffentlicht."
+      "de": "Derzeit sind keine Kurse geplant. Die Termine für kommende Kurse werden auf der Pinnwand veröffentlicht.",
+      "fr": "Aucun cours n'est actuellement prévu. Les dates des prochains cours seront publiées sur le Tableau des Événements."
     },
     "goToEvents": {
       "it": "Vai alla Bacheca",
       "en": "Go to Events",
-      "de": "Zum Veranstaltungen"
+      "de": "Zum Veranstaltungen",
+      "fr": "Voir le Tableau des Événements"
     }
   },
   "pricing": {
     "title": {
       "it": "Quote e Tariffe",
       "en": "Fees and Prices",
-      "de": "Gebühren und Preise"
+      "de": "Gebühren und Preise",
+      "fr": "Cotisations et Tarifs"
     }
   },
   "registration": {
     "title": {
       "it": "Iscriviti ai Corsi",
       "en": "Register for Courses",
-      "de": "Kursanmeldung"
+      "de": "Kursanmeldung",
+      "fr": "Inscrivez-vous aux Cours"
     },
     "subtitle": {
       "it": "Segui questi semplici passaggi per iscriverti a uno dei nostri corsi.",
       "en": "Follow these simple steps to register for one of our courses.",
-      "de": "Befolgen Sie diese einfachen Schritte, um sich für einen unserer Kurse anzumelden."
+      "de": "Befolgen Sie diese einfachen Schritte, um sich für einen unserer Kurse anzumelden.",
+      "fr": "Suivez ces étapes simples pour vous inscrire à l'un de nos cours."
     },
     "formTitle": {
       "it": "Modulo di Iscrizione",
       "en": "Registration Form",
-      "de": "Anmeldeformular"
+      "de": "Anmeldeformular",
+      "fr": "Formulaire d'Inscription"
     },
     "steps": [
       {
         "it": "<strong>Scarica</strong> il modulo di iscrizione cliccando il bottone qui sotto",
         "en": "<strong>Download</strong> the registration form by clicking the button below",
-        "de": "<strong>Laden</strong> Sie das Anmeldeformular herunter"
+        "de": "<strong>Laden</strong> Sie das Anmeldeformular herunter",
+        "fr": "<strong>Téléchargez</strong> le formulaire d'inscription en cliquant sur le bouton ci-dessous"
       },
       {
         "it": "<strong>Compila</strong> tutti i campi richiesti e <strong>firma</strong> il modulo",
         "en": "<strong>Fill in</strong> all required fields and <strong>sign</strong> the form",
-        "de": "<strong>Füllen</strong> Sie alle Felder aus und <strong>unterschreiben</strong> Sie"
+        "de": "<strong>Füllen</strong> Sie alle Felder aus und <strong>unterschreiben</strong> Sie",
+        "fr": "<strong>Remplissez</strong> tous les champs requis et <strong>signez</strong> le formulaire"
       },
       {
         "it": "<strong>Invia</strong> il modulo compilato e firmato via email alla Scuola Vela",
         "en": "<strong>Send</strong> the completed form via email to the Sailing School",
-        "de": "<strong>Senden</strong> Sie das Formular per E-Mail an die Segelschule"
+        "de": "<strong>Senden</strong> Sie das Formular per E-Mail an die Segelschule",
+        "fr": "<strong>Envoyez</strong> le formulaire complété et signé par e-mail à l'École de Voile"
       }
     ],
     "downloadButton": {
       "it": "Scarica Modulo",
       "en": "Download Form",
-      "de": "Formular herunterladen"
+      "de": "Formular herunterladen",
+      "fr": "Télécharger le Formulaire"
     },
     "sendButton": {
       "it": "Invia alla Scuola Vela",
       "en": "Send to Sailing School",
-      "de": "An Segelschule senden"
+      "de": "An Segelschule senden",
+      "fr": "Envoyer à l'École de Voile"
     }
   },
   "bankDetails": {
     "title": {
       "it": "Coordinate Bancarie per Bonifico",
       "en": "Bank Details for Transfer",
-      "de": "Bankverbindung für Überweisung"
+      "de": "Bankverbindung für Überweisung",
+      "fr": "Coordonnées Bancaires pour Virement"
     },
     "accountHolder": {
       "it": "Intestatario",
       "en": "Account Holder",
-      "de": "Kontoinhaber"
+      "de": "Kontoinhaber",
+      "fr": "Titulaire du compte"
     },
     "bank": {
       "it": "Banca",
       "en": "Bank",
-      "de": "Bank"
+      "de": "Bank",
+      "fr": "Banque"
     }
   },
   "safeguarding": {
     "title": {
       "it": "Safeguarding - Tutela dei Minori",
       "en": "Safeguarding - Child Protection",
-      "de": "Safeguarding - Kinderschutz"
+      "de": "Safeguarding - Kinderschutz",
+      "fr": "Protection des Mineurs"
     },
     "description": {
       "it": "Il CNC ha implementato un modello organizzativo a tutela dei minori come previsto dalla legge.",
       "en": "CNC has implemented an organizational model for child protection as required by law.",
-      "de": "Der CNC hat ein Organisationsmodell zum Kinderschutz gemäß den gesetzlichen Vorgaben implementiert."
+      "de": "Der CNC hat ein Organisationsmodell zum Kinderschutz gemäß den gesetzlichen Vorgaben implementiert.",
+      "fr": "Le CNC a mis en place un modèle organisationnel pour la protection des mineurs conformément à la loi."
     }
   },
   "labels": {
     "duration": {
       "it": "Durata",
       "en": "Duration",
-      "de": "Dauer"
+      "de": "Dauer",
+      "fr": "Durée"
     },
     "period": {
       "it": "Periodo",
       "en": "Period",
-      "de": "Zeitraum"
+      "de": "Zeitraum",
+      "fr": "Période"
     },
     "boat": {
       "it": "Imbarcazione",
       "en": "Boat",
-      "de": "Boot"
+      "de": "Boot",
+      "fr": "Bateau"
     }
   }
 }

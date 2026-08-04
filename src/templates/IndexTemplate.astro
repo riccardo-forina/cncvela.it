@@ -24,7 +24,7 @@ interface Props {
 const { locale } = Astro.props;
 
 // Helper to get localized text
-const t = (obj: { it: string; en?: string; de?: string } | undefined, fallback = ''): string => {
+const t = (obj: { it: string; en?: string; de?: string; fr?: string } | undefined, fallback = ''): string => {
   if (!obj) return fallback;
   return obj[locale] || obj.it || fallback;
 };
