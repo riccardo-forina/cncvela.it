@@ -263,8 +263,18 @@ export async function fetchForecast(
 
     const data = await response.json();
     const currentTime = new Date();
-    const currentHour = currentTime.getHours();
-    const todayStr = currentTime.toISOString().split('T')[0];
+    const romeParts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Rome',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      hour12: false,
+    }).formatToParts(currentTime);
+    const romePart = (type: string) =>
+      romeParts.find((p) => p.type === type)?.value ?? '';
+    const currentHour = Number(romePart('hour')) % 24;
+    const todayStr = `${romePart('year')}-${romePart('month')}-${romePart('day')}`;
 
     const currentData: CurrentData = {
       windSpeed: Math.round(data.current.wind_speed_10m),

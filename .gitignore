@@ -24,6 +24,10 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# local-only, points into Riccardo's personal vault — not relevant to
+# any other contributor
+CLAUDE.md
+
 # Old website backup (not needed in repo)
 www.cncvela.it/
 
