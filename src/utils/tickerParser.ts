@@ -63,23 +63,56 @@ function parseFlexibleDecimal(raw: string): number {
 
 const kmhToKnots = (kmh: number): number => Math.round(kmh * 0.5399);
 
-/** Parse raw OCR text into a structured reading, or null if the ticker's fixed shape wasn't found. */
+// Plausibility bounds for this lake region. These don't fix bad OCR (no
+// amount of decimal-reconstruction logic can recover from tesseract
+// misreading the digit glyphs themselves — the "0" and "3" or "9" and
+// "8"/"1" shapes are visually confusable at this ticker's resolution), but
+// they stop a hallucinated reading like "10189.0hPa" (real value was
+// 979.2 — OCR fabricated different digits, not just a dropped separator)
+// from ever reaching the page. A rejected reading falls back to the
+// existing "stale/last seen" UI, same as a regex non-match.
+const PLAUSIBLE_RANGES = {
+  tempC: [-25, 50],
+  windKmh: [0, 200],
+  pressureHpa: [900, 1100],
+  rainMm: [0, 500],
+  rainRateMmh: [0, 300],
+} as const;
+
+const isPlausible = (value: number, [min, max]: readonly [number, number]): boolean =>
+  Number.isFinite(value) && value >= min && value <= max;
+
+/** Parse raw OCR text into a structured reading, or null if the ticker's fixed shape wasn't found or the values are implausible. */
 export function parseTickerText(text: string, lastModified: string): StationReading | null {
   const m = text.trim().match(TICKER_RE);
   if (!m) return null;
 
+  const tempC = parseFlexibleDecimal(m[1]);
   const windKmh = parseFlexibleDecimal(m[2]);
   const windDir = m[3].toUpperCase();
+  const pressureHpa = parseFlexibleDecimal(m[4]);
+  const rainMm = parseFlexibleDecimal(m[5]);
+  const rainRateMmh = parseFlexibleDecimal(m[6]);
+
+  if (
+    !isPlausible(tempC, PLAUSIBLE_RANGES.tempC) ||
+    !isPlausible(windKmh, PLAUSIBLE_RANGES.windKmh) ||
+    !isPlausible(pressureHpa, PLAUSIBLE_RANGES.pressureHpa) ||
+    !isPlausible(rainMm, PLAUSIBLE_RANGES.rainMm) ||
+    !isPlausible(rainRateMmh, PLAUSIBLE_RANGES.rainRateMmh)
+  ) {
+    return null;
+  }
 
   return {
-    tempC: parseFlexibleDecimal(m[1]),
+    tempC,
     windKmh,
     windKn: kmhToKnots(windKmh),
     windDir,
     windDirDeg: WIND_DIR_DEGREES[windDir] ?? 0,
-    pressureHpa: parseFlexibleDecimal(m[4]),
-    rainMm: parseFlexibleDecimal(m[5]),
-    rainRateMmh: parseFlexibleDecimal(m[6]),
+    pressureHpa,
+    rainMm,
+    rainRateMmh,
     lastModified,
   };
 }

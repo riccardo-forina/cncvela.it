@@ -10,7 +10,9 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:links": "npm run build:skip-check && linkinator ./dist --recurse --skip 'maps.google.com|maps.app.goo.gl|open-meteo.com|garanteprivacy.it'",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -31,6 +33,7 @@
     "@astrojs/check": "^0.9.6",
     "is-hotkey": "^0.2.0",
     "linkinator": "^7.5.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
   }
 }
