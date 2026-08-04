@@ -19,15 +19,14 @@ const t = (obj: { it: string; en?: string; de?: string; fr?: string } | string |
   return obj[locale] || obj.it || fallback;
 };
 
-// Format hour based on locale (IT: 16, EN: 4 PM, DE: 16 Uhr)
+// Which locales use 12h clock display (IT/DE/FR: 16, EN: 4 PM).
+const USES_12H_CLOCK: Record<Locale, boolean> = { it: false, en: true, de: false, fr: false };
+
 const formatHour = (hour: number): string => {
-  if (locale === 'en') {
-    const period = hour >= 12 ? 'PM' : 'AM';
-    const h12 = hour % 12 || 12;
-    return `${h12}${period}`;
-  }
-  // IT and DE use 24h format
-  return String(hour);
+  if (!USES_12H_CLOCK[locale]) return String(hour);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const h12 = hour % 12 || 12;
+  return `${h12}${period}`;
 };
 
 const forecastData = await fetchForecast(locale);

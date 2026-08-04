@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { t, type Locale } from '../i18n';
+import { t, defaultLocale, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
@@ -50,7 +50,7 @@ const { locale } = Astro.props;
       <p class="text-[var(--color-text-secondary)] dark:text-[var(--color-text-secondary-dark)] max-w-md mx-auto mb-10 leading-relaxed" set:html={t('notFound.description', locale)} />
 
       <!-- CTA Button - standard site style -->
-      <a href={locale === 'it' ? '/' : `/${locale}/`} 
+      <a href={locale === defaultLocale ? '/' : `/${locale}/`}
          class="group inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:-translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="m12 19-7-7 7-7"/>

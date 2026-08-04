@@ -11,8 +11,9 @@
     "check": "astro check",
     "check:links": "npm run build:skip-check && linkinator ./dist --recurse --skip 'maps.google.com|maps.app.goo.gl|open-meteo.com|garanteprivacy.it'",
     "astro": "astro",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest run && npm run check:i18n",
+    "test:watch": "vitest",
+    "check:i18n": "node scripts/check-i18n-completeness.mjs && node scripts/check-no-hardcoded-locale-branches.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

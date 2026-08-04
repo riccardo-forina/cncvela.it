@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import EventCard from '../components/EventCard.astro';
+import { defaultLocale } from '../i18n';
 import type { Locale } from '../i18n';
 import type { Event } from '../types/event';
 
@@ -190,7 +191,7 @@ const counts = {
         {t(content.labels.stayUpdatedDescription)}
       </p>
       <a
-        href={locale === 'it' ? 'circolo#contatti' : `/${locale}/circolo#contatti`}
+        href={locale === defaultLocale ? 'circolo#contatti' : `/${locale}/circolo#contatti`}
         class="inline-flex items-center justify-center px-6 py-3 bg-[var(--color-accent-primary)] dark:bg-[var(--color-accent-primary-dark)] text-white font-bold uppercase tracking-wide rounded-lg hover:opacity-90 transition-opacity touch-target"
       >
         {t(content.labels.contactUs)}
