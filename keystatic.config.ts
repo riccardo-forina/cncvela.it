@@ -615,10 +615,11 @@ export default config({
             attributionUrl: fields.url({ label: 'Link alla pagina originale' }),
             dataType: fields.select({
               label: 'Tipo dato',
-              description: 'OCR: legge i valori da un\'immagine ticker. JSON: legge i valori da un\'API. Foto: nessun valore, solo webcam. Iframe: player embedded di terzi (es. Windy).',
+              description: 'OCR: legge i valori da un\'immagine ticker. JSON: legge i valori da un\'API. HTML: legge i valori da una pagina HTML statica (rete Prealpino). Foto: nessun valore, solo webcam. Iframe: player embedded di terzi (es. Windy).',
               options: [
                 { label: 'OCR (immagine ticker)', value: 'ocr' },
                 { label: 'JSON (API)', value: 'json' },
+                { label: 'HTML (pagina statica)', value: 'html' },
                 { label: 'Foto (solo webcam)', value: 'photo' },
                 { label: 'Iframe (player embedded)', value: 'iframe' },
               ],

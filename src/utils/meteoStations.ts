@@ -5,13 +5,17 @@ import stationsData from '../data/meteo-stations.json';
 //   LakeWindMap.astro's client script and tickerParser.ts).
 // 'json': sourceId is a JSON API URL returning a reading directly — no OCR
 //   needed (see liveVcoStation.ts). Resolved server-side, like Föhn.
+// 'html': sourceId is a plain server-rendered HTML station page (Centro
+//   Geofisico Prealpino's astrogeo.va.it network) — the reading is scraped
+//   from real text nodes, not OCR'd from an image (see
+//   prealpinoStation.ts). Resolved server-side, like 'json'.
 // 'photo': sourceId is a plain webcam image, no wind reading — proxied
 //   as-is (see /api/webcam/[id] and webcams.ts).
 // 'iframe': sourceId is a third-party embeddable player URL (e.g. Windy's
 //   webcam widget), no wind reading. Rendered directly as an <iframe>,
 //   not proxied — the third party serves and freshness-checks it
 //   themselves, we just point at their embed.
-export type StationDataType = 'ocr' | 'json' | 'photo' | 'iframe';
+export type StationDataType = 'ocr' | 'json' | 'html' | 'photo' | 'iframe';
 
 export interface MeteoStation {
   id: string;

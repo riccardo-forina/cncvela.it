@@ -31,6 +31,7 @@ import { getActiveStations, localizeStationName } from '../utils/meteoStations';
 import { getProxiedImage } from '../utils/webcams';
 import { getFoehnStatus } from '../utils/foehn';
 import { getLiveVcoReading } from '../utils/liveVcoStation';
+import { getPrealpinoReading } from '../utils/prealpinoStation';
 import { getWindColor } from '../utils/windColor';
 import FoehnIndicator from './FoehnIndicator.astro';
 
@@ -142,6 +143,7 @@ const POSITION_OVERRIDES: Record<string, { top: number; left: number }> = {
   // back right slightly to give the arrow icon more breathing room.
   'pino-tronzano': { top: 19.4, left: 68.5 },
   maccagno: { top: 27.6, left: 63.5 },
+  'leggiuno-quicchio': { top: 64.5, left: 36.4 },
   // left nudged further west (from the script's on-shore output, 14.7) for
   // more clearance around the arrow icon.
   baveno: { top: 52.4, left: 11 },
@@ -337,16 +339,24 @@ function formatLastUpdated(iso: string): string {
 
 const ocrStations = getActiveStations().filter((s) => s.dataType === 'ocr');
 const jsonStations = getActiveStations().filter((s) => s.dataType === 'json');
+const htmlStations = getActiveStations().filter((s) => s.dataType === 'html');
 const webcamStations = getActiveStations().filter((s) => s.dataType === 'photo');
 const iframeStations = getActiveStations().filter((s) => s.dataType === 'iframe');
 
-// JSON stations, webcams and Föhn are all independent of each other and of
-// the (now client-side) station OCR, so they're fetched concurrently — each
-// is already timeout-bounded internally (see liveVcoStation.ts/webcams.ts/foehn.ts).
-const [jsonResults, webcamResults, foehnStatus] = await Promise.all([
+// JSON/HTML stations, webcams and Föhn are all independent of each other and
+// of the (now client-side) station OCR, so they're fetched concurrently —
+// each is already timeout-bounded internally (see
+// liveVcoStation.ts/prealpinoStation.ts/webcams.ts/foehn.ts).
+const [jsonResults, htmlResults, webcamResults, foehnStatus] = await Promise.all([
   Promise.all(
     jsonStations.map(async (station) => {
       const reading = await getLiveVcoReading(station.id, station.sourceId);
+      return { station, reading };
+    })
+  ),
+  Promise.all(
+    htmlStations.map(async (station) => {
+      const reading = await getPrealpinoReading(station.id, station.sourceId);
       return { station, reading };
     })
   ),
@@ -392,7 +402,25 @@ const jsonSlots: StationSlot[] = jsonResults.map(({ station, reading }) => ({
     : null,
 }));
 
-const stationSlots: StationSlot[] = [...ocrSlots, ...jsonSlots];
+const htmlSlots: StationSlot[] = htmlResults.map(({ station, reading }) => ({
+  id: station.id,
+  name: localizeStationName(station, locale).toUpperCase(),
+  position: latLonToPosition(station.id, station.lat, station.lon),
+  labelSide: labelSideFor(station.id),
+  attributionUrl: station.attributionUrl,
+  needsClientUpgrade: false,
+  reading: reading
+    ? {
+        windKn: reading.windKn,
+        windDirDeg: reading.windDirDeg,
+        pressureHpa: reading.pressureHpa,
+        rainMm: reading.rainMm,
+        lastModifiedLabel: formatLastUpdated(reading.lastModified),
+      }
+    : null,
+}));
+
+const stationSlots: StationSlot[] = [...ocrSlots, ...jsonSlots, ...htmlSlots];
 
 // Label vertical positions, decluttered per gutter side — see
 // spreadLabelTops above. Icons keep their real (possibly close-together)

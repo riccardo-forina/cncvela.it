@@ -55,6 +55,15 @@
       "active": true
     },
     {
+      "name": { "it": "Leggiuno Quicchio", "en": "Leggiuno Quicchio", "de": "Leggiuno Quicchio", "fr": "Leggiuno Quicchio" },
+      "lat": 45.8778,
+      "lon": 8.5981,
+      "sourceId": "https://www.astrogeo.va.it/rete_meteo/stazione.php?code=legg",
+      "attributionUrl": "https://www.astrogeo.va.it/rete_meteo/stazione.php?code=legg",
+      "dataType": "html",
+      "active": true
+    },
+    {
       "name": { "it": "Nautica Lavazza (Brebbia)", "en": "Nautica Lavazza (Brebbia)", "de": "Nautica Lavazza (Brebbia)", "fr": "Nautica Lavazza (Brebbia)" },
       "lat": 45.821,
       "lon": 8.646,

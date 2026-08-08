@@ -55,6 +55,7 @@ const STATIONS = [
   { id: 'pino-tronzano', name: 'Pino Tronzano', lat: 46.099, shore: 'east', fractionNudge: 0.04 },
   { id: 'maccagno', name: 'Maccagno', lat: 46.043, shore: 'east' },
   { id: 'calde', name: 'Caldè', lat: 45.947, shore: 'east' },
+  { id: 'leggiuno-quicchio', name: 'Leggiuno Quicchio', lat: 45.8778, shore: 'east' },
   { id: 'ispra', name: 'Ispra', lat: 45.813, shore: 'east' },
   { id: 'baveno', name: 'Baveno', lat: 45.9089, shore: 'west' },
   { id: 'belgirate', name: 'Belgirate', lat: 45.8389, shore: 'west' },
