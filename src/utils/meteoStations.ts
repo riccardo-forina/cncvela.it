@@ -1,21 +1,27 @@
 import type { Locale } from '../i18n';
 import stationsData from '../data/meteo-stations.json';
 
-// 'ocr': sourceId is a ticker image, read via client-side OCR (see
-//   LakeWindMap.astro's client script and tickerParser.ts).
-// 'json': sourceId is a JSON API URL returning a reading directly — no OCR
-//   needed (see liveVcoStation.ts). Resolved server-side, like Föhn.
+// 'json': sourceId is a JSON API URL returning a reading directly (Meteo
+//   Live VCO network — see liveVcoStation.ts). Resolved server-side, like
+//   Föhn.
 // 'html': sourceId is a plain server-rendered HTML station page (Centro
 //   Geofisico Prealpino's astrogeo.va.it network) — the reading is scraped
-//   from real text nodes, not OCR'd from an image (see
-//   prealpinoStation.ts). Resolved server-side, like 'json'.
+//   from real text nodes (see prealpinoStation.ts). Resolved server-side,
+//   like 'json'.
 // 'photo': sourceId is a plain webcam image, no wind reading — proxied
 //   as-is (see /api/webcam/[id] and webcams.ts).
 // 'iframe': sourceId is a third-party embeddable player URL (e.g. Windy's
 //   webcam widget), no wind reading. Rendered directly as an <iframe>,
 //   not proxied — the third party serves and freshness-checks it
 //   themselves, we just point at their embed.
-export type StationDataType = 'ocr' | 'json' | 'html' | 'photo' | 'iframe';
+//
+// There used to be a fifth type, 'ocr' — client-side tesseract.js OCR of a
+// ticker image (centrometeolombardo.com network). Removed 2026-08-08 once
+// every station on that network had a same-quality or better replacement
+// on the html/json networks (Pino Tronzano -> Pino Lago Maggiore - Molo,
+// Meina -> Ranco Imbarcadero); no OCR-only source was left active. See git
+// history for tickerParser.ts if this ever needs resurrecting.
+export type StationDataType = 'json' | 'html' | 'photo' | 'iframe';
 
 export interface MeteoStation {
   id: string;

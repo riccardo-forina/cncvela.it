@@ -1,13 +1,13 @@
 // Meteo Live VCO (meteolivevco.it) runs a real amateur station network
-// around Lake Maggiore's west shore with a clean JSON API per station — no
-// OCR needed, unlike the centrometeolombardo.com ticker-image stations (see
-// stationOcr.ts's history / LakeWindMap.astro). Field names differ slightly
-// between stations on this network (wind_from vs wind_dir, with/without a
-// _text suffix) — confirmed by sampling several; this tolerates both.
+// around Lake Maggiore's west shore with a clean JSON API per station.
+// Field names differ slightly between stations on this network (wind_from
+// vs wind_dir, with/without a _text suffix) — confirmed by sampling
+// several; this tolerates both.
 
 const FETCH_TIMEOUT_MS = 8000;
-// Same threshold as the OCR/webcam sources (webcams.ts) — dead/stale sources
-// must not render as live, for the same reason.
+// Same threshold as the other station/webcam sources (prealpinoStation.ts,
+// webcams.ts) — dead/stale sources must not render as live, for the same
+// reason.
 const FRESHNESS_THRESHOLD_MS = 3 * 60 * 60 * 1000;
 const CACHE_TTL_MS = 5 * 60 * 1000;
 

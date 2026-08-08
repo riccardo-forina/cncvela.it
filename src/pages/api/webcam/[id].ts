@@ -19,8 +19,8 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   // Stale: source is reachable but too old to trust — no body, but the
-  // Last-Modified header still lets a client show "last seen X ago" rather
-  // than nothing (see the OCR station script in LakeWindMap.astro).
+  // Last-Modified header is still returned in case a future caller wants
+  // to show "last seen X ago" rather than nothing.
   if (image.status === 'stale') {
     return new Response(null, {
       status: 503,

@@ -12,6 +12,19 @@ interface Props {
 
 const { locale } = Astro.props;
 
+// Every station reading here is fetched fresh per request (each with its
+// own in-memory cache, but that only survives within a single warm
+// serverless instance — unreliable across cold starts on Vercel). Without
+// this header, a quiet period could still mean every single page view
+// re-fetches all 6 origin stations. With it, Vercel's edge caches the
+// whole rendered page for up to 5 minutes and serves the previous version
+// for another minute while revalidating in the background — origins get
+// hit at most once per window across ALL visitors combined, not once per
+// visitor. Safe now (was not, when this page had a client-side OCR
+// upgrade step that had to run fresh every load) since every station is
+// fully resolved server-side.
+Astro.response.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60');
+
 // Helper to get localized text
 const t = (obj: { it: string; en?: string; de?: string; fr?: string } | string | undefined, fallback = ''): string => {
   if (!obj) return fallback;

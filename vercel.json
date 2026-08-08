@@ -61,13 +61,5 @@
       "destination": "/circolo#documenti",
       "permanent": true
     }
-  ],
-  "headers": [
-    {
-      "source": "/tesseract/:version/:file*",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    }
   ]
 }

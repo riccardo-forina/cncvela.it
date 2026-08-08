@@ -1,21 +1,12 @@
 {
   "items": [
     {
-      "name": { "it": "Maccagno", "en": "Maccagno", "de": "Maccagno", "fr": "Maccagno" },
-      "lat": 46.043,
-      "lon": 8.738,
-      "sourceId": "http://rete.centrometeolombardo.com/Varese/maccagno/immagini/v.png",
-      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=2158&ContentType=Stazioni",
-      "dataType": "ocr",
-      "active": false
-    },
-    {
-      "name": { "it": "Pino Tronzano", "en": "Pino Tronzano", "de": "Pino Tronzano", "fr": "Pino Tronzano" },
-      "lat": 46.099,
-      "lon": 8.737,
-      "sourceId": "http://rete.centrometeolombardo.com/Varese/tronzano/immagini/v.png",
-      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=3397&ContentType=Stazioni",
-      "dataType": "ocr",
+      "name": { "it": "Pino Lago Maggiore - Molo", "en": "Pino Lago Maggiore - Pier", "de": "Pino Lago Maggiore - Mole", "fr": "Pino Lago Maggiore - Môle" },
+      "lat": 46.1047,
+      "lon": 8.7533,
+      "sourceId": "https://www.astrogeo.va.it/rete_meteo/stazione.php?code=plm",
+      "attributionUrl": "https://www.astrogeo.va.it/rete_meteo/stazione.php?code=plm",
+      "dataType": "html",
       "active": true
     },
     {
@@ -37,12 +28,12 @@
       "active": true
     },
     {
-      "name": { "it": "Meina", "en": "Meina", "de": "Meina", "fr": "Meina" },
-      "lat": 45.789,
-      "lon": 8.539,
-      "sourceId": "http://rete.centrometeolombardo.com/Novara/meina/immagini/v.png",
-      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=6198&ContentType=Stazioni",
-      "dataType": "ocr",
+      "name": { "it": "Ranco Imbarcadero", "en": "Ranco Landing", "de": "Ranco Anlegestelle", "fr": "Ranco Embarcadère" },
+      "lat": 45.7975,
+      "lon": 8.5694,
+      "sourceId": "https://www.astrogeo.va.it/rete_meteo/stazione.php?code=ran",
+      "attributionUrl": "https://www.astrogeo.va.it/rete_meteo/stazione.php?code=ran",
+      "dataType": "html",
       "active": true
     },
     {
@@ -62,15 +53,6 @@
       "attributionUrl": "https://www.astrogeo.va.it/rete_meteo/stazione.php?code=legg",
       "dataType": "html",
       "active": true
-    },
-    {
-      "name": { "it": "Nautica Lavazza (Brebbia)", "en": "Nautica Lavazza (Brebbia)", "de": "Nautica Lavazza (Brebbia)", "fr": "Nautica Lavazza (Brebbia)" },
-      "lat": 45.821,
-      "lon": 8.646,
-      "sourceId": "http://rete.centrometeolombardo.com/Varese/brebbia/immagini/v.png",
-      "attributionUrl": "http://www.centrometeolombardo.com/content.asp?contentid=746&ContentType=Stazioni",
-      "dataType": "ocr",
-      "active": false
     },
     {
       "name": { "it": "Cannero Riviera", "en": "Cannero Riviera", "de": "Cannero Riviera", "fr": "Cannero Riviera" },

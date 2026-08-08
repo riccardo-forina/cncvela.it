@@ -53,6 +53,7 @@ const LAKE_SOUTH_LAT = 45.7224279;
 // exact pure-latitude point.
 const STATIONS = [
   { id: 'pino-tronzano', name: 'Pino Tronzano', lat: 46.099, shore: 'east', fractionNudge: 0.04 },
+  { id: 'pino-lago-maggiore-molo', name: 'Pino Lago Maggiore - Molo', lat: 46.1047, shore: 'east' },
   { id: 'maccagno', name: 'Maccagno', lat: 46.043, shore: 'east' },
   { id: 'calde', name: 'Caldè', lat: 45.947, shore: 'east' },
   { id: 'leggiuno-quicchio', name: 'Leggiuno Quicchio', lat: 45.8778, shore: 'east' },
@@ -60,6 +61,7 @@ const STATIONS = [
   { id: 'baveno', name: 'Baveno', lat: 45.9089, shore: 'west' },
   { id: 'belgirate', name: 'Belgirate', lat: 45.8389, shore: 'west' },
   { id: 'meina', name: 'Meina', lat: 45.789, shore: 'west' },
+  { id: 'ranco-imbarcadero', name: 'Ranco Imbarcadero', lat: 45.7975, shore: 'east', fractionNudge: -0.008 },
   { id: 'arona', name: 'Arona', lat: 45.7598, shore: 'west' },
 ];
 

@@ -82,13 +82,10 @@ declare global {
 }
 
 /**
- * Fetch + freshness-gate + cache any station's source image (webcam photo or
- * OCR ticker), keyed by station id. Used by /api/webcam/[id] — the name
- * stuck from when this only served webcams, it now proxies both, since the
- * fetch/cache/freshness logic is identical either way. `status: 'stale'`
- * (as opposed to 'unavailable') is what lets a client-side caller still show
- * a "last seen" timestamp for a station that's reachable but too old to
- * trust — see the OCR station script in LakeWindMap.astro.
+ * Fetch + freshness-gate + cache a webcam station's source image, keyed by
+ * station id. Used by /api/webcam/[id]. `status: 'stale'` (as opposed to
+ * 'unavailable') is what lets a caller still show a "last seen" timestamp
+ * for a station that's reachable but too old to trust.
  */
 export async function getProxiedImage(id: string, sourceUrl: string): Promise<ProxiedImage> {
   const now = Date.now();
