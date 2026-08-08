@@ -213,7 +213,8 @@ const LABEL_POSITION_OVERRIDES: Record<string, LabelOverride> = {
   arona: { fromLeft: 6 },
   baveno: { fromLeft: 5 },
   'pino-lago-maggiore-molo': { fromLeft: 10 },
-  'ranco-imbarcadero': { fromLeft: 55 },
+  'ranco-imbarcadero': { fromLeft: 45 },
+  'leggiuno-quicchio': { fromLeft: 58 },
 };
 function labelXFor(id: string, side: LabelSide): number {
   const override = LABEL_POSITION_OVERRIDES[id];
@@ -589,7 +590,7 @@ const webcamCards: WebcamCard[] = [
 
         <div class="absolute transform -translate-y-1/2" style={`top: ${CALDE_LABEL_TOP}%; ${gutterStyle('calde', CALDE_LABEL_SIDE)}`}>
           <span class="text-xs font-bold tracking-wider uppercase whitespace-nowrap text-white" style="text-shadow: 0 2px 6px rgba(0,0,0,0.9);">
-            CALDÈ
+            Circolo Nautico Caldè
           </span>
         </div>
       </div>
