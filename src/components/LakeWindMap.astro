@@ -480,6 +480,12 @@ const webcamCards: WebcamCard[] = [
         </g>
       </svg>
       
+      <!-- Wraps the icon/connector/label layers below — id'd as a single
+           unit so the tab-refresh script (bottom of file) can swap all
+           three in one shot against a freshly-fetched copy of this same
+           page, instead of a full location.reload(). -->
+      <div id="map-live-layers">
+
       <!-- Icons: precise, fixed-size, nothing but arrows/dots/logo on the
            lake itself. Deliberately NOT paired with their label in the same
            flex box — see the label layer below for why. Every station is
@@ -595,6 +601,8 @@ const webcamCards: WebcamCard[] = [
           </span>
         </div>
       </div>
+
+      </div>
     </div>
 
     <!-- Title (Top Left): bare floating text, no card — a map overlay in its
@@ -677,7 +685,7 @@ const webcamCards: WebcamCard[] = [
   <section class="bg-slate-950 py-6 space-y-4">
   <div class="max-w-6xl mx-auto px-4 lg:px-6">
     {(foehnStatus || jsonStations.length > 0 || htmlStations.length > 0) && (
-        <div class="rounded-xl border border-white/10 bg-black/20 px-4 py-2 divide-y divide-white/10">
+        <div id="live-data-panel" class="rounded-xl border border-white/10 bg-black/20 px-4 py-2 divide-y divide-white/10">
           <FoehnIndicator status={foehnStatus} labels={t.foehn} />
 
           <!-- Every active station gets a row, always — including sources
@@ -807,6 +815,51 @@ const webcamCards: WebcamCard[] = [
   }
 
   initWebcamCarousel();
+
+  // Refresh station data when the user returns to this tab after being away
+  // for a while, without a full location.reload() (no flash, no scroll
+  // reset). Everything live on this page is SSR (no client-side fetch/patch
+  // for the actual values — see git history for why that OCR-era pattern
+  // was removed), so "refresh" here means re-fetching this same URL and
+  // swapping in the two id'd regions that hold server-rendered live data
+  // (#map-live-layers: icons/connectors/labels, #live-data-panel: Föhn +
+  // station table) — every value/color/rotation stays computed server-side,
+  // single source of truth, nothing reimplemented in JS.
+  //
+  // Skipped for short away-times (e.g. a quick alt-tab) so switching tabs
+  // for a few seconds doesn't trigger a fetch; MeteoTemplate.astro's
+  // 5-minute edge cache also means refreshing sooner than that wouldn't
+  // actually get anything newer than what's already showing.
+  const REFRESH_AFTER_MS = 60_000;
+  const SWAP_IDS = ['map-live-layers', 'live-data-panel'];
+  let lastRefreshAt = Date.now();
+  let refreshInFlight = false;
+
+  async function refreshMeteoData() {
+    if (refreshInFlight) return;
+    refreshInFlight = true;
+    try {
+      const res = await fetch(location.pathname + location.search, { cache: 'no-store' });
+      if (!res.ok) return;
+      const freshDoc = new DOMParser().parseFromString(await res.text(), 'text/html');
+      for (const id of SWAP_IDS) {
+        const current = document.getElementById(id);
+        const fresh = freshDoc.getElementById(id);
+        if (current && fresh) current.replaceWith(document.importNode(fresh, true));
+      }
+      lastRefreshAt = Date.now();
+    } catch {
+      // Network hiccup — leave the page showing what it already has.
+    } finally {
+      refreshInFlight = false;
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && Date.now() - lastRefreshAt > REFRESH_AFTER_MS) {
+      refreshMeteoData();
+    }
+  });
 </script>
 
 <style>
