@@ -816,24 +816,32 @@ const webcamCards: WebcamCard[] = [
 
   initWebcamCarousel();
 
-  // Refresh station data when the user returns to this tab after being away
-  // for a while, without a full location.reload() (no flash, no scroll
-  // reset). Everything live on this page is SSR (no client-side fetch/patch
-  // for the actual values — see git history for why that OCR-era pattern
-  // was removed), so "refresh" here means re-fetching this same URL and
-  // swapping in the two id'd regions that hold server-rendered live data
-  // (#map-live-layers: icons/connectors/labels, #live-data-panel: Föhn +
-  // station table) — every value/color/rotation stays computed server-side,
-  // single source of truth, nothing reimplemented in JS.
+  // Keep station data current while this tab is open, without a full
+  // location.reload() (no flash, no scroll reset). Everything live on this
+  // page is SSR (no client-side fetch/patch for the actual values — see git
+  // history for why that OCR-era pattern was removed), so "refresh" here
+  // means re-fetching this same URL and swapping in the two id'd regions
+  // that hold server-rendered live data (#map-live-layers: icons/
+  // connectors/labels, #live-data-panel: Föhn + station table) — every
+  // value/color/rotation stays computed server-side, single source of
+  // truth, nothing reimplemented in JS.
   //
-  // Skipped for short away-times (e.g. a quick alt-tab) so switching tabs
-  // for a few seconds doesn't trigger a fetch; MeteoTemplate.astro's
-  // 5-minute edge cache also means refreshing sooner than that wouldn't
-  // actually get anything newer than what's already showing.
-  const REFRESH_AFTER_MS = 60_000;
+  // Two triggers, same underlying refresh:
+  // - Poll every REFRESH_INTERVAL_MS while the tab is visible.
+  // - On regaining visibility after being hidden, refresh immediately if
+  //   it's been longer than that since the last one (so switching back
+  //   after a while doesn't wait for the next poll tick).
+  // Polling is paused entirely (interval cleared) while hidden — no point
+  // fetching for a tab nobody's looking at. MeteoTemplate.astro's 5-minute
+  // edge cache also means polling much faster than that wouldn't actually
+  // surface anything newer most of the time; this interval is deliberately
+  // shorter only so a cache refresh at the edge gets picked up promptly
+  // once it happens, not because every poll is expected to change anything.
+  const REFRESH_INTERVAL_MS = 60_000;
   const SWAP_IDS = ['map-live-layers', 'live-data-panel'];
   let lastRefreshAt = Date.now();
   let refreshInFlight = false;
+  let pollTimer: ReturnType<typeof setInterval> | null = null;
 
   async function refreshMeteoData() {
     if (refreshInFlight) return;
@@ -855,11 +863,27 @@ const webcamCards: WebcamCard[] = [
     }
   }
 
+  function startPolling() {
+    if (pollTimer) return;
+    pollTimer = setInterval(refreshMeteoData, REFRESH_INTERVAL_MS);
+  }
+  function stopPolling() {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
+  }
+
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && Date.now() - lastRefreshAt > REFRESH_AFTER_MS) {
-      refreshMeteoData();
+    if (document.visibilityState === 'visible') {
+      if (Date.now() - lastRefreshAt > REFRESH_INTERVAL_MS) refreshMeteoData();
+      startPolling();
+    } else {
+      stopPolling();
     }
   });
+
+  if (document.visibilityState === 'visible') startPolling();
 </script>
 
 <style>
