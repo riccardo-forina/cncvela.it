@@ -5,6 +5,7 @@ import DailyForecastCard from '../components/DailyForecastCard.astro';
 import type { Locale } from '../i18n';
 import content from '../data/meteo-content.json';
 import { fetchForecast } from '../utils/weather';
+import { getWindBarbShapes } from '../utils/windBarb';
 
 interface Props {
   locale: Locale;
@@ -156,9 +157,15 @@ const maxWindScale = 20; // Max knots for bar chart scaling
                           viewBox="0 0 36 36" 
                           fill="none"
                         >
-                          <circle cx="18" cy="8" r="5" fill="transparent" stroke="currentColor" stroke-width="2.5"/>
-                          <line x1="18" y1="13" x2="18" y2="33" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                          <path d="M18 33 L12 26 M18 33 L24 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                          {getWindBarbShapes(hour.windSpeed).map((shape) =>
+                            shape.kind === 'circle' ? (
+                              <circle cx={shape.cx} cy={shape.cy} r={shape.r} fill="transparent" stroke="currentColor" stroke-width="2.5"/>
+                            ) : shape.kind === 'line' ? (
+                              <line x1={shape.x1} y1={shape.y1} x2={shape.x2} y2={shape.y2} stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                            ) : (
+                              <polygon points={shape.points} fill="currentColor" stroke="currentColor" stroke-linejoin="round"/>
+                            )
+                          )}
                         </svg>
                         <span class={`text-base font-mono font-medium transition-colors ${hour.isPast ? 'opacity-40' : ''} ${textColor}`}>
                           {hour.windSpeed}<span class="opacity-50 text-sm">kn</span>
