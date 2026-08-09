@@ -1,10 +1,15 @@
 ---
+import type { Locale } from '../i18n';
 import type { FoehnStatus } from '../utils/foehn';
+import { getDayName } from '../utils/weather';
 
 interface Props {
   status: FoehnStatus | null;
+  locale: Locale;
   labels: {
     title: string;
+    forecastTitle: string;
+    forecastExplainer: string;
     bassa: string;
     moderata: string;
     alta: string;
@@ -12,7 +17,7 @@ interface Props {
   };
 }
 
-const { status, labels } = Astro.props;
+const { status, locale, labels } = Astro.props;
 
 const LEVEL_STYLES = {
   bassa: { text: 'text-emerald-300', dot: 'bg-emerald-400' },
@@ -26,8 +31,7 @@ const trendIcon = status?.trend === 'up' ? 'â†‘' : status?.trend === 'down' ? 'â
 ---
 
 {status && style && (
-  <div class="flex items-center gap-2.5 text-white/90 py-2.5 border-t border-white/10">
-    <span class={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${style.dot} shadow-[0_0_8px_rgba(255,255,255,0.3)]`}></span>
+  <div class="flex flex-col gap-2 text-white/90">
     <p class="text-sm">
       <span class="font-semibold">{labels.title}:</span>{' '}
       <span class={`font-semibold ${style.text}`}>{levelLabel}</span>
@@ -36,5 +40,28 @@ const trendIcon = status?.trend === 'up' ? 'â†‘' : status?.trend === 'down' ? 'â
       </span>
       <span class="text-white/50 block sm:inline sm:ml-1">{labels.disclaimer}</span>
     </p>
+
+    {status.forecast.length > 1 && (
+      <>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+          <span class="text-white/40 text-xs uppercase tracking-wide flex-shrink-0">{labels.forecastTitle}</span>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            {status.forecast.map((day, i) => {
+              const dayStyle = LEVEL_STYLES[day.level];
+              return (
+                <span class:list={['flex items-center gap-1.5 text-xs', i > 0 && 'opacity-70']}>
+                  <span class="text-white/50 font-medium">{getDayName(day.date, locale)}</span>
+                  <span class={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${dayStyle.dot}`}></span>
+                  <span class={`font-mono ${dayStyle.text}`}>
+                    {day.differentialHpa > 0 ? '+' : ''}{day.differentialHpa}
+                  </span>
+                </span>
+              );
+            })}
+          </div>
+        </div>
+        <p class="text-white/40 text-xs">{labels.forecastExplainer}</p>
+      </>
+    )}
   </div>
 )}

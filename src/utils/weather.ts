@@ -192,7 +192,7 @@ function getWeatherInfo(code: number, locale: Locale) {
   return { desc, icon: info.icon };
 }
 
-function getDayName(dateStr: string, locale: Locale): string {
+export function getDayName(dateStr: string, locale: Locale): string {
   const date = new Date(dateStr);
   const today = new Date();
   const tomorrow = new Date(today);

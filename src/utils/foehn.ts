@@ -15,10 +15,17 @@ const FETCH_TIMEOUT_MS = 8000;
 export type FoehnLevel = 'bassa' | 'moderata' | 'alta';
 export type FoehnTrend = 'up' | 'down' | 'stable';
 
+export interface FoehnForecastDay {
+  date: string; // YYYY-MM-DD, Europe/Rome
+  differentialHpa: number;
+  level: FoehnLevel;
+}
+
 export interface FoehnStatus {
   differentialHpa: number;
   level: FoehnLevel;
   trend: FoehnTrend;
+  forecast: FoehnForecastDay[];
 }
 
 declare global {
@@ -31,7 +38,10 @@ function levelForDifferential(hpa: number): FoehnLevel {
   return 'bassa';
 }
 
-async function fetchPressureSeries(lat: number, lon: number): Promise<{ current: number; hourly: number[] } | null> {
+async function fetchPressureSeries(
+  lat: number,
+  lon: number
+): Promise<{ current: number; hourly: number[]; hourlyTime: string[] } | null> {
   const res = await fetch(
     `https://api.open-meteo.com/v1/forecast?` +
       `latitude=${lat}&longitude=${lon}` +
@@ -43,8 +53,37 @@ async function fetchPressureSeries(lat: number, lon: number): Promise<{ current:
   const data = await res.json();
   const current = data.current?.pressure_msl;
   const hourly = data.hourly?.pressure_msl;
-  if (typeof current !== 'number' || !Array.isArray(hourly)) return null;
-  return { current, hourly };
+  const hourlyTime = data.hourly?.time;
+  if (typeof current !== 'number' || !Array.isArray(hourly) || !Array.isArray(hourlyTime)) return null;
+  return { current, hourly, hourlyTime };
+}
+
+function round1(n: number): number {
+  return Math.round(n * 10) / 10;
+}
+
+// Peak (not average) differential per calendar day: Föhn risk is about
+// whether the differential breaches a threshold at any point in the day,
+// not its average. Both series were requested with the same
+// timezone=Europe/Rome, so their hourly.time strings bucket into matching
+// calendar days despite Zurich/Lugano sitting in different time zones.
+function buildDailyForecast(
+  zurich: { hourly: number[]; hourlyTime: string[] },
+  lugano: { hourly: number[]; hourlyTime: string[] }
+): FoehnForecastDay[] {
+  const length = Math.min(zurich.hourly.length, lugano.hourly.length, zurich.hourlyTime.length);
+  const peakByDate = new Map<string, number>();
+  for (let i = 0; i < length; i++) {
+    const date = zurich.hourlyTime[i].slice(0, 10);
+    const diff = lugano.hourly[i] - zurich.hourly[i];
+    const peak = peakByDate.get(date);
+    if (peak === undefined || diff > peak) peakByDate.set(date, diff);
+  }
+  return Array.from(peakByDate.entries()).map(([date, differentialHpa]) => ({
+    date,
+    differentialHpa: round1(differentialHpa),
+    level: levelForDifferential(differentialHpa),
+  }));
 }
 
 async function computeFoehnStatus(): Promise<FoehnStatus | null> {
@@ -55,7 +94,7 @@ async function computeFoehnStatus(): Promise<FoehnStatus | null> {
     ]);
     if (!zurich || !lugano) return null;
 
-    const differentialHpa = Math.round((lugano.current - zurich.current) * 10) / 10;
+    const differentialHpa = round1(lugano.current - zurich.current);
 
     // Trend: compare current differential to ~24h-ahead forecast differential.
     const futureIdx = Math.min(24, zurich.hourly.length - 1, lugano.hourly.length - 1);
@@ -70,6 +109,7 @@ async function computeFoehnStatus(): Promise<FoehnStatus | null> {
       differentialHpa,
       level: levelForDifferential(differentialHpa),
       trend,
+      forecast: buildDailyForecast(zurich, lugano),
     };
   } catch (error) {
     console.error('Error computing Föhn status:', error);

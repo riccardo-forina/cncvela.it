@@ -49,6 +49,8 @@ interface MapTranslations {
   webcamsTitle: string;
   foehn: {
     title: string;
+    forecastTitle: string;
+    forecastExplainer: string;
     bassa: string;
     moderata: string;
     alta: string;
@@ -691,18 +693,21 @@ const webcamCards: WebcamCard[] = [
 {(foehnStatus || jsonStations.length > 0 || htmlStations.length > 0 || webcamCards.length > 0) && (
   <section class="bg-slate-950 py-6 space-y-4">
   <div class="max-w-6xl mx-auto px-4 lg:px-6">
-    {(foehnStatus || jsonStations.length > 0 || htmlStations.length > 0) && (
-        <div id="live-data-panel" class="rounded-xl border border-white/10 bg-black/20 px-4 py-2 divide-y divide-white/10">
-          <FoehnIndicator status={foehnStatus} labels={t.foehn} />
+    {foehnStatus && (
+      <div id="foehn-panel" class="rounded-xl border border-white/10 bg-black/20 px-4 py-3 mb-4">
+        <FoehnIndicator status={foehnStatus} locale={locale} labels={t.foehn} />
+      </div>
+    )}
 
+    {(jsonStations.length > 0 || htmlStations.length > 0) && (
+        <div id="live-data-panel" class="rounded-xl border border-white/10 bg-black/20 px-4 py-2">
           <!-- Every active station gets a row, always — including sources
                with nothing live right now (stale/unreachable this round),
                so members can still click through to the source and check
                by hand. Everything is resolved server-side (see
                toStationSlot above) — no client-side upgrade, same rows
                either way. -->
-          {(jsonStations.length > 0 || htmlStations.length > 0) && (
-            <div class="pt-2" id="station-table">
+            <div id="station-table">
               <p class="text-xs font-semibold uppercase tracking-wider text-white/40 mb-1.5">
                 {t.stationsTitle}
               </p>
@@ -735,7 +740,6 @@ const webcamCards: WebcamCard[] = [
                 ))}
               </div>
             </div>
-          )}
         </div>
       )}
 

@@ -87,6 +87,18 @@
         "de": "Föhn-Wahrscheinlichkeit",
         "fr": "Probabilité de foehn"
       },
+      "forecastTitle": {
+        "it": "Prossimi giorni",
+        "en": "Next days",
+        "de": "Nächste Tage",
+        "fr": "Prochains jours"
+      },
+      "forecastExplainer": {
+        "it": "Il numero è il picco di differenza di pressione (hPa) Lugano-Zurigo previsto per quel giorno. Se è negativo o vicino allo zero, la pressione non è impostata per il favonio: nessun rischio in vista. Sopra +4 hPa il favonio può iniziare a soffiare sul lago da nord; sopra +8 hPa è probabile un favonio pieno, spesso forte e a raffiche.",
+        "en": "The number is the peak Lugano-Zurich pressure difference (hPa) forecast for that day. If it's negative or near zero, the pressure setup isn't right for Föhn: no risk in sight. Above +4 hPa Föhn can start blowing down the lake from the north; above +8 hPa a full Föhn is likely, often strong and gusty.",
+        "de": "Die Zahl ist die für diesen Tag erwartete maximale Druckdifferenz (hPa) Lugano-Zürich. Ist sie negativ oder nahe null, ist die Druckverteilung nicht föhngünstig: kein Risiko in Sicht. Ab +4 hPa kann der Föhn auf dem See aus Norden zu wehen beginnen; ab +8 hPa ist ein ausgeprägter Föhn wahrscheinlich, oft stark und böig.",
+        "fr": "Le nombre est l'écart de pression (hPa) Lugano-Zurich maximal prévu ce jour-là. S'il est négatif ou proche de zéro, la configuration de pression n'est pas favorable au foehn : aucun risque en vue. Au-delà de +4 hPa, le foehn peut commencer à souffler sur le lac depuis le nord ; au-delà de +8 hPa, un foehn marqué est probable, souvent fort et en rafales."
+      },
       "bassa": {
         "it": "Bassa",
         "en": "Low",
