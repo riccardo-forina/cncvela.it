@@ -34,6 +34,7 @@ import { getFoehnStatus } from '../utils/foehn';
 import { getLiveVcoReading } from '../utils/liveVcoStation';
 import { getPrealpinoReading } from '../utils/prealpinoStation';
 import { getWindColor } from '../utils/windColor';
+import { getWindBarbShapes } from '../utils/windBarb';
 import FoehnIndicator from './FoehnIndicator.astro';
 
 interface MapTranslations {
@@ -505,9 +506,15 @@ const webcamCards: WebcamCard[] = [
             >
               <div style={`transform-origin: 50% 22.222%; transform: rotate(${slot.reading.windDirDeg}deg);`}>
                 <svg width="22" height="22" viewBox="0 0 36 36" fill="none" class="drop-shadow-lg">
-                  <circle cx="18" cy="8" r="5" fill="transparent" stroke-width="2.5" stroke={colors?.arrow}/>
-                  <line x1="18" y1="13" x2="18" y2="30" stroke-width="3" stroke-linecap="round" stroke={colors?.arrow}/>
-                  <path d="M18 30 L12 23 M18 30 L24 23" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke={colors?.arrow}/>
+                  {getWindBarbShapes(slot.reading.windKn).map((shape) =>
+                    shape.kind === 'circle' ? (
+                      <circle cx={shape.cx} cy={shape.cy} r={shape.r} fill="transparent" stroke-width="2.5" stroke={colors?.arrow}/>
+                    ) : shape.kind === 'line' ? (
+                      <line x1={shape.x1} y1={shape.y1} x2={shape.x2} y2={shape.y2} stroke-width="2.5" stroke-linecap="round" stroke={colors?.arrow}/>
+                    ) : (
+                      <polygon points={shape.points} fill={colors?.arrow} stroke={colors?.arrow} stroke-linejoin="round"/>
+                    )
+                  )}
                 </svg>
               </div>
             </div>
