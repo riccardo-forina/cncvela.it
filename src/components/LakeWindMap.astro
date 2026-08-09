@@ -504,7 +504,7 @@ const webcamCards: WebcamCard[] = [
               class="absolute transition-transform duration-300 ease-out"
               style={`top: ${slot.position.top}; left: ${slot.position.left}; transform: translate(-50%, -22.222%);`}
             >
-              <div style={`transform-origin: 50% 22.222%; transform: rotate(${slot.reading.windDirDeg}deg);`}>
+              <div style={`transform-origin: 50% 22.222%; transform: rotate(${slot.reading.windDirDeg + 180}deg);`}>
                 <svg width="22" height="22" viewBox="0 0 36 36" fill="none" class="drop-shadow-lg">
                   {getWindBarbShapes(slot.reading.windKn).map((shape) =>
                     shape.kind === 'circle' ? (

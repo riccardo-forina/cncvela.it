@@ -28,9 +28,28 @@ describe('getBarbUnits', () => {
 });
 
 describe('getWindBarbShapes', () => {
-  it('renders calm as just the station circle, no shaft', () => {
-    const shapes = getWindBarbShapes(1);
+  it('renders calm (exactly 0kn) as just the station circle, no shaft', () => {
+    const shapes = getWindBarbShapes(0);
     expect(shapes).toEqual([{ kind: 'circle', cx: 18, cy: 8, r: 5 }]);
+  });
+
+  it('renders 1-4kn as a bare shaft with no feathers, distinct from calm', () => {
+    const shapes = getWindBarbShapes(2);
+    expect(shapes).toHaveLength(2);
+    expect(shapes[0]).toMatchObject({ kind: 'circle' });
+    expect(shapes[1]).toMatchObject({ kind: 'line', x1: 18, x2: 18 });
+  });
+
+  it('leans each feather away from the pivot, toward the tip', () => {
+    const shapes = getWindBarbShapes(20); // two full barbs
+    const barbs = shapes.filter((s) => s.kind === 'line' && s.x1 !== s.x2) as Extract<
+      ReturnType<typeof getWindBarbShapes>[number],
+      { kind: 'line' }
+    >[];
+    expect(barbs.length).toBeGreaterThan(0);
+    for (const barb of barbs) {
+      expect(barb.y2).toBeGreaterThan(barb.y1);
+    }
   });
 
   it('renders a shaft plus one shape per barb/pennant unit for a live reading', () => {
